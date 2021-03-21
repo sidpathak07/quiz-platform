@@ -1,0 +1,81 @@
+.login-page {
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: rgb(0, 140, 255);
+}
+
+.login-page form {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	width: 90%;
+	max-width: 400px;
+	height: 400px;
+	padding: 20px;
+	border-radius: 20px;
+	box-shadow: 7px 7px 30px 10px rgba(100, 100, 100, 0.5);
+	background: rgb(255, 255, 255);
+}
+
+.login-page input {
+	padding: 10px;
+	border: none;
+	border: 1px solid lightgray;
+	border-radius: 10px;
+	background: inherit;
+	outline: none;
+}
+
+.login-page input:focus {
+	color: black;
+}
+
+input::placeholder {
+	font-size: 1em;
+	color: rgb(180, 182, 184);
+	font-weight: 500;
+}
+
+.username label,
+.password label {
+	display: flex;
+	flex-direction: column;
+	font-size: 1.1em;
+	font-weight: 600;
+	padding: 0 10px;
+}
+
+.login-page button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 40px;
+	border: none;
+	outline: none;
+	color: white;
+	background: rgb(0, 140, 255);
+	cursor: pointer;
+	padding: 10px;
+	font-size: 1.1em;
+	font-weight: 700;
+}
+
+.login-page button:hover {
+	background: white;
+	color: black;
+	border: 1px solid black;
+	border-radius: 0px;
+}
+
+.username label p,
+.password label p {
+	margin-left: 10px;
+	margin-bottom: 20px;
+}
+
+.username input::placeholder {
+	font-size: 0.8em;
+}
