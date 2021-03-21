@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { BsPencilSquare } from "react-icons/bs";
+import { IoIosTimer } from "react-icons/io";
 
 const QuizCard = (props) => {
   const { id, title, desc, duration, creator_username } = props;
@@ -15,7 +16,7 @@ const QuizCard = (props) => {
              <BsPencilSquare />
              <h2>{title}</h2>
              </div>
-            <p>duration : {duration ? duration : "N/A"}</p>
+            <p className='quiz-duration-card'> <IoIosTimer/> : {duration ? duration : "N/A"}</p>
           </div> 
           <p>{desc}</p>
         </div>

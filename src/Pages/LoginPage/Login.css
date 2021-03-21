@@ -21,7 +21,7 @@
 }
 
 .login-page input {
-	padding: 10px;
+	padding: 15px;
 	border: none;
 	border: 1px solid lightgray;
 	border-radius: 10px;
@@ -52,6 +52,7 @@ input::placeholder {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin: 20px 10px;
 	height: 40px;
 	border: none;
 	outline: none;
@@ -68,14 +69,4 @@ input::placeholder {
 	color: black;
 	border: 1px solid black;
 	border-radius: 0px;
-}
-
-.username label p,
-.password label p {
-	margin-left: 10px;
-	margin-bottom: 20px;
-}
-
-.username input::placeholder {
-	font-size: 0.8em;
 }
