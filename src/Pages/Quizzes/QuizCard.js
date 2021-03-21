@@ -1,9 +1,9 @@
-import React from "react";
 import { useHistory } from "react-router-dom";
 import { BsPencilSquare } from "react-icons/bs";
 import { IoIosTimer } from "react-icons/io";
 
 const QuizCard = (props) => {
+  console.log(props);
   const { id, title, desc, duration, creator_username } = props;
   const history = useHistory();
 
@@ -12,16 +12,16 @@ const QuizCard = (props) => {
       <div className="quiz-header">
         <div>
           <div className="quiz-title">
-             <div className="quiz-title-heading">
-             <BsPencilSquare />
-             <h2>{title}</h2>
-             </div>
-            <p className='quiz-duration-card'> <IoIosTimer/> : {duration ? duration : "N/A"}</p>
-          </div> 
+            <div className="quiz-title-heading">
+              <BsPencilSquare />
+              <h2>{title}</h2>
+            </div>
+            <p className="quiz-duration-card">
+              <IoIosTimer /> : {duration ? duration : "N/A"}
+            </p>
+          </div>
           <p>{desc}</p>
         </div>
-        
-        
       </div>
       <div className="quiz-creator">
         <p>
@@ -30,7 +30,7 @@ const QuizCard = (props) => {
       </div>
       <div className="quiz-start-button">
         <button onClick={() => history.push(`/quizpage/${id}`)}>
-          start test
+          Start test
         </button>
       </div>
     </div>

@@ -5,14 +5,14 @@ import axios from "../../axios/axios";
 import "./Quizzes.css";
 
 const Quizzes = () => {
-  const [quizzes, setQuizzes] = useState([]);
+  const [quizzes, setQuizzes] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchQuizzes = async () => {
       try {
         const { data } = await axios.get("/api/get-all-quizzes/7");
-        setQuizzes(data);
+        setQuizzes(data[1]);
         setIsLoading(false);
       } catch (err) {
         console.log(err.message);
@@ -21,17 +21,18 @@ const Quizzes = () => {
     fetchQuizzes();
   }, []);
 
+  if (isLoading) {
+    return (
+      <div className="quiz-loader">
+        <Loader />
+      </div>
+    );
+  }
+
   return (
     <div className="Quizzes-Page">
-      {isLoading && (
-        <div className="quiz-loader">
-          <Loader />
-        </div>
-      )}
       <div className="all-Quizzes">
-        {quizzes.map((quiz) => (
-          <QuizCard key={quiz.id} {...quiz} />
-        ))}
+        <QuizCard key={quizzes.id} {...quizzes} />
       </div>
     </div>
   );

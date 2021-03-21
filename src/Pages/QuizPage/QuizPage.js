@@ -59,7 +59,7 @@ const QuizPage = () => {
       }
     };
     fetchQuestion();
-  }, []);
+  }, [id]);
 
   console.log(btnarray);
   console.log(quiz);
