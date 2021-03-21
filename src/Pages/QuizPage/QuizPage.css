@@ -1,8 +1,7 @@
 .quiz-page {
-	width: 100%;
-	min-height: 100vh;
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
+	padding: 30px 50px;
 	align-items: center;
 }
 
@@ -11,8 +10,9 @@
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	margin-top: 50px;
+	margin: 50px;
 	min-height: 500px;
+	min-width: 700px;
 }
 
 .navigation-btn {
@@ -25,6 +25,7 @@
 	border: 0.5px solid lightgray;
 	padding: 30px;
 	position: relative;
+	min-width: 700px;
 }
 
 .quiz-options textarea {
@@ -37,9 +38,10 @@
 	position: absolute;
 	top: 0%;
 	left: 0%;
-	transform: translate(25%, -60%);
-	background: white;
+	transform: translate(25%, -100%);
 	padding: 10px;
+	background: white;
+
 	font-size: 1.5em;
 }
 
@@ -185,6 +187,10 @@
 		padding: 50px 20px;
 		height: auto;
 	}
+	.question-page-left {
+		width: 90%;
+		min-width: 350px;
+	}
 
 	.navigation-btn {
 		display: flex;
@@ -219,5 +225,16 @@
 	}
 	.quiz-status {
 		margin-top: 50px;
+	}
+}
+
+@media only screen and (max-width: 900px) {
+	.navigation-btn {
+		min-width: 0;
+		width: 90%;
+	}
+	.quiz-question {
+		min-width: 0;
+		width: 90%;
 	}
 }
