@@ -7,12 +7,15 @@ const FeedBack = () => {
   const {removeUser} = useContext(UserContext)
   const [submitted, setSubmitted] = useState(false);
   const [feedbackText, setFeedbackText] = useState("");
-  const [questionFeedback, setQuestionFeedback] = useState(1);
-  const [interfaceFeedback, setInterfaceFeedback] = useState(1);
+  const [learnSomething, setLearnSomething] = useState(1);
+  const [participating, setParticipating] = useState(1);
   const [difficultFeedback, setDifficultFeedback] = useState(1);
-  const [student, setStudent] = useState("");
-  const [indian, setIndian] = useState("");
-  const [intern, setIntern] = useState("");
+  const [participateAgain, setParticipateAgain] = useState("");
+  const [timeSufficient, setTimeSufficient] = useState("");
+  const [attendWebinar, setAttendWebinar] = useState("");
+  const [language, setLanguage] = useState("");
+  const [miniCourse, setMiniCourse] = useState("");
+  const [nextContest,setNextContest] = useState("");
 
 
 
@@ -42,34 +45,34 @@ const FeedBack = () => {
           <h1 className='quiz-submitted-header'>Your test has been submitted</h1>
           <h1 className='feedback-page-header'>Give Us Some Feedback</h1>
           <div className="feedback-input-sliders">
-            <div className="question-feedback">
+            <div className="learn-feedback">
               <p>
-                How was the Questions ? <span> {questionFeedback}/5</span>
+                Do you learn something new ? <span> {learnSomething}/5</span>
               </p>
               <input
                 name="question-slider"
                 type="range"
                 min={1}
                 max={5}
-                defaultValue={questionFeedback}
-                onChange={(e) => setQuestionFeedback(e.target.value)}
+                defaultValue={learnSomething}
+                onChange={(e) => setLearnSomething(e.target.value)}
               />
             </div>
-            <div className="interface-feedback">
+            <div className="participate-feedback">
               <p>
-                How was the user interface ?<span>{interfaceFeedback}/5</span>
+              To what extent did you like participating in this contest? <span>{participating}/5</span>
               </p>
               <input
                 type="range"
                 min={1}
                 max={5}
-                defaultValue={interfaceFeedback}
-                onChange={(e) => setInterfaceFeedback(e.target.value)}
+                defaultValue={participating}
+                onChange={(e) => setParticipating(e.target.value)}
               />
             </div>
             <div className="difficulty-feedback">
               <p>
-                How was the Question Difficulty ?
+              How difficult were the problems? 
                 <span>{difficultFeedback}/5</span>{" "}
               </p>
               <input
@@ -80,50 +83,98 @@ const FeedBack = () => {
                 onChange={(e) => setDifficultFeedback(e.target.value)}
               />
             </div>
+           
           </div>
 
           <div className="feedback-yes-no">
             <div>
-              <p>Are you a student</p>
+              <p>If a contest like this is organised again, will you participate?</p>
 
               <div>
-                <button value="yes" onClick={(e) => setStudent(e.target.value)}>
+                <button  value="yes" onClick={(e) => setParticipateAgain(e.target.value)}>
                   Yes
                 </button>
-                <button value="no" onClick={(e) => setStudent(e.target.value)}>
+                <button value="no" onClick={(e) => setParticipateAgain(e.target.value)}>
                   No
                 </button>
               </div>
             </div>
             <div>
-              <p>Are you Indian</p>
+              <p>Do you think time was sufficient?</p>
 
               <div>
-                <button value="yes" onClick={(e) => setIndian(e.target.value)}>
+                <button value="yes" onClick={(e) => setTimeSufficient(e.target.value)}>
                   Yes
                 </button>
-                <button value="no" onClick={(e) => setIndian(e.target.value)}>
+                <button value="no" onClick={(e) => setTimeSufficient(e.target.value)}>
                   No
                 </button>
               </div>
             </div>
             <div>
-              <p>Are you a Intern</p>
+              <p>If a webinar is organised to discuss the solutions of these problems will you attend?</p>
 
               <div>
-                <button value="yes" onClick={(e) => setIntern(e.target.value)}>
+                <button value="yes" onClick={(e) => setAttendWebinar(e.target.value)}>
                   Yes
                 </button>
-                <button value="no" onClick={(e) => setIntern(e.target.value)}>
+                <button value="no" onClick={(e) => setAttendWebinar(e.target.value)}>
                   No
                 </button>
               </div>
             </div>
+
+            <div>
+              <p>In what language will you prefer to attend the webinar</p>
+
+              <div>
+                <button value="english" onClick={(e) => setLanguage(e.target.value)}>
+                  English
+                </button>
+                <button value="hindi" onClick={(e) => setLanguage(e.target.value)}>
+                  Hindi
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <p>Would you like to see a mini course which focuses on training middle and high school students about mathematics in real life?</p>
+
+              <div>
+                <button value="yes" onClick={(e) => setMiniCourse(e.target.value)}>
+                  Yes
+                </button>
+                <button value="no" onClick={(e) => setMiniCourse(e.target.value)}>
+                  No
+                </button>
+              </div>
+            </div>
+
+            <div className='feedback-quiz'>
+              <p>Would you like to see a mini course which focuses on training middle and high school students about mathematics in real life?</p>
+
+              <div >
+                <button value="Puzzle Solving" onClick={(e) => setNextContest(e.target.value)}>
+                Puzzle Solving
+                </button>
+                <button value="Problem solving strategies" onClick={(e) => setNextContest(e.target.value)}>
+                Problem solving strategies
+                </button>
+                <button value="Mental Maths " onClick={(e) => setNextContest(e.target.value)}>
+                Mental Maths 
+              </button>
+              <button value="Mathematics to entertain your spirit" onClick={(e) => setNextContest(e.target.value)}>
+              Mathematics to entertain your spirit
+              </button>
+              </div>
+            </div>
+
           </div>
 
           <div className="feedback-text">
+          <p>Do you have any other suggestions for future competition?</p>
             <textarea
-              placeholder="Any Other Feedback / Suggestion"
+              placeholder="Feedback here..."
               onChange={(e) => setFeedbackText(e.target.value)}
             />
           </div>

@@ -84,9 +84,9 @@ const QuizPage = () => {
 
           <div className="question-page-left">
             <div className="quiz-question">
-              <h3>Question:</h3>
+              <h3>{`Question: ${index+1}`}</h3>
               <div className="question-details">
-                <h2>{`${index + 1}. ${quiz[index]?.question}`}</h2>
+                <h2>{`${quiz[index]?.question}`}</h2>
 
                 <div className="marks-distribution">
                   <p>{`Correct : ${quiz[index]?.correct_marks} marks`}</p>
