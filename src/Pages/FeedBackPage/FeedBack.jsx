@@ -28,7 +28,7 @@ const FeedBack = () => {
             
             
             <AiOutlineFileDone/>
-            <h1>Thank You for completing the survey</h1>
+            <h1>Thank You for giving the feedback</h1>
             
             
             </div> 
@@ -98,7 +98,7 @@ const FeedBack = () => {
 
             <div className='feedback-text'>
             
-            <textarea placeholder="Any Other Feedback/Suggestion" onChange={e=> setFeedbackText(e.target.value)}  />
+            <textarea placeholder="Any Other Feedback / Suggestion" onChange={e=> setFeedbackText(e.target.value)}  />
             </div>
             
             <button className='feedback-submit' type='submit' onClick={handleSubmit}>Submit Feedback</button>
