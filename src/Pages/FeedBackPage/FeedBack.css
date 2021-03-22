@@ -13,3 +13,106 @@
 	font-size: 7em;
 	color: rgb(100, 100, 100);
 }
+.feedback-page {
+	padding: 50px;
+	margin: 50px;
+	border: 1px solid lightgray;
+	min-height: 85vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.feedback-page input[type='range'] {
+	width: 50%;
+	cursor: pointer;
+	outline: none;
+}
+.feedback-input-sliders,
+.feedback-yes-no {
+	min-height: 350px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+.feedback-text {
+	min-height: 150px;
+}
+
+.feedback-text textarea {
+	height: 125px;
+	padding: 10px;
+	width: 90%;
+}
+
+.feedback-submit {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 40px;
+	width: 200px;
+	border: none;
+	outline: none;
+	color: white;
+	background: rgb(0, 140, 255);
+	cursor: pointer;
+	padding: 10px;
+	font-size: 1.1em;
+	font-weight: 700;
+	margin: 20px 0;
+}
+.feedback-submit:hover,
+.feedback-yes-no button:hover {
+	background: white;
+	border: 1px solid black;
+	color: black;
+}
+
+.feedback-yes-no button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 50px;
+	width: 100px;
+	border: none;
+	outline: none;
+	color: white;
+	background: rgb(0, 140, 255);
+	cursor: pointer;
+	padding: 10px;
+	font-size: 1.1em;
+	font-weight: 700;
+	margin: 10px;
+}
+
+.feedback-yes-no div div {
+	display: flex;
+}
+.feedback-yes-no div p {
+	margin: 10px;
+	font-size: 1.4em;
+	font-weight: 600;
+}
+.feedback-yes-no {
+	margin-bottom: 50px;
+}
+
+.feedback-input-sliders div p {
+	margin-bottom: 10px;
+	font-size: 1.4em;
+	font-weight: 500;
+}
+
+@media only screen and (max-width: 786px) {
+	.feedback-page input[type='range'] {
+		width: 100%;
+	}
+	.feedback-page {
+		padding: 20px;
+		margin: 20px;
+	}
+	.feedback-text textarea {
+		margin-top: 20px;
+		width: 100%;
+	}
+}

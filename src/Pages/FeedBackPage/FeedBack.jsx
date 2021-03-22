@@ -5,6 +5,7 @@ import{AiOutlineFileDone} from 'react-icons/ai'
 const FeedBack = () => {
 
     const[submitted,setSubmitted]=useState(false)
+    const[feedbackText,setFeedbackText] = useState("")
     const[questionFeedback,setQuestionFeedback] = useState(1)
     const[interfaceFeedback,setInterfaceFeedback] = useState(1)
     const[difficultFeedback,setDifficultFeedback] = useState(1)
@@ -39,21 +40,22 @@ const FeedBack = () => {
     
         <div className='feedback-page'>
            
-
+            <h1>Give Us Some Feedback</h1>
             <div className='feedback-input-sliders'>
             <div className='question-feedback'>
             <p>How was the Questions ?</p>
-            <input type='range' min={1} max={5} step={1} defaultValue={questionFeedback} onChange={e=>setQuestionFeedback(e.target.value)}/>
+            <input name='question-slider' type='range' min={1} max={5}  defaultValue={questionFeedback} onChange={e=>setQuestionFeedback(e.target.value)}/>
+
             
             </div>
             <div className='interface-feedback'>
             <p>How was the user interface ?</p>
-            <input type='range' min={1} max={5} step={1} defaultValue={interfaceFeedback} onChange={e=>setInterfaceFeedback(e.target.value)} />
+            <input type='range' min={1} max={5}  defaultValue={interfaceFeedback} onChange={e=>setInterfaceFeedback(e.target.value)} />
             
             </div>
             <div className='difficulty-feedback'>
             <p>How was the Question Difficulty ?</p>
-            <input type='range' min={1} max={5} step={1} defaultValue={difficultFeedback} onChange={e=>setDifficultFeedback(e.target.value)} />
+            <input type='range' min={1} max={5}  defaultValue={difficultFeedback} onChange={e=>setDifficultFeedback(e.target.value)} />
             
             </div>
             
@@ -96,10 +98,10 @@ const FeedBack = () => {
 
             <div className='feedback-text'>
             
-            <textarea placeholder="Any Other Feedback/Suggestion"  />
+            <textarea placeholder="Any Other Feedback/Suggestion" onChange={e=> setFeedbackText(e.target.value)}  />
             </div>
             
-            <button type='submit' onClick={handleSubmit}>Submit Feedback</button>
+            <button className='feedback-submit' type='submit' onClick={handleSubmit}>Submit Feedback</button>
         
            
         </div>
