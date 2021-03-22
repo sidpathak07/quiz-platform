@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState ,useContext ,useEffect} from "react";
 import "./FeedBack.css";
 import { AiOutlineFileDone } from "react-icons/ai";
+import UserContext from "../../Context/UserContext";
 
 const FeedBack = () => {
+  const {removeUser} = useContext(UserContext)
   const [submitted, setSubmitted] = useState(false);
   const [feedbackText, setFeedbackText] = useState("");
   const [questionFeedback, setQuestionFeedback] = useState(1);
@@ -16,6 +18,15 @@ const FeedBack = () => {
     console.log("submitted");
     setSubmitted(true);
   };
+
+
+  useEffect(()=>{
+
+
+
+  })
+
+
   return (
     <>
       {submitted ? (
@@ -25,7 +36,8 @@ const FeedBack = () => {
         </div>
       ) : (
         <div className="feedback-page">
-          <h1>Give Us Some Feedback</h1>
+          <h1 className='quiz-submitted-header'>Your test has been submitted</h1>
+          <h1 className='feedback-page-header'>Give Us Some Feedback</h1>
           <div className="feedback-input-sliders">
             <div className="question-feedback">
               <p>

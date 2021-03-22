@@ -132,7 +132,7 @@ const QuizPage = () => {
               <Countdown
                 className="quiz-countdown"
                 date={Date.now() + 10000}
-                onComplete={handleTestSubmit}
+                
               />
             </div>
 
