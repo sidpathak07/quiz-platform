@@ -26,7 +26,14 @@
 .feedback-page input[type='range'] {
 	width: 50%;
 	cursor: pointer;
+	-webkit-appearance: none;
+	height: 15px;
+	border-radius: 5px;
+	background: #d3d3d3;
 	outline: none;
+	opacity: 0.7;
+	-webkit-transition: 0.2s;
+	transition: opacity 0.2s;
 }
 .feedback-input-sliders,
 .feedback-yes-no {
@@ -37,6 +44,16 @@
 }
 .feedback-text {
 	min-height: 150px;
+}
+
+.feedback-input-sliders p {
+	display: flex;
+	justify-content: space-between;
+	width: 50%;
+}
+.feedback-input-sliders p span {
+	font-size: 0.8em;
+	color: rgb(99, 99, 99);
 }
 
 .feedback-text textarea {
@@ -113,6 +130,9 @@
 	}
 	.feedback-text textarea {
 		margin-top: 20px;
+		width: 100%;
+	}
+	.feedback-input-sliders p {
 		width: 100%;
 	}
 }

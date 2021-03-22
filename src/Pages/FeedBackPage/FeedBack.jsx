@@ -43,18 +43,18 @@ const FeedBack = () => {
             <h1>Give Us Some Feedback</h1>
             <div className='feedback-input-sliders'>
             <div className='question-feedback'>
-            <p>How was the Questions ?</p>
+            <p>How was the Questions ? <span> {questionFeedback}/5</span></p>
             <input name='question-slider' type='range' min={1} max={5}  defaultValue={questionFeedback} onChange={e=>setQuestionFeedback(e.target.value)}/>
 
             
             </div>
             <div className='interface-feedback'>
-            <p>How was the user interface ?</p>
+            <p>How was the user interface ?<span>{interfaceFeedback}/5</span></p>
             <input type='range' min={1} max={5}  defaultValue={interfaceFeedback} onChange={e=>setInterfaceFeedback(e.target.value)} />
             
             </div>
             <div className='difficulty-feedback'>
-            <p>How was the Question Difficulty ?</p>
+            <p>How was the Question Difficulty ?<span>{difficultFeedback}/5</span> </p>
             <input type='range' min={1} max={5}  defaultValue={difficultFeedback} onChange={e=>setDifficultFeedback(e.target.value)} />
             
             </div>
