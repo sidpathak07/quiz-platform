@@ -8,6 +8,7 @@
 
 .login-page form {
 	display: flex;
+	position: relative;
 	flex-direction: column;
 	justify-content: space-evenly;
 	align-items: stretch;
@@ -72,4 +73,10 @@ input::placeholder {
 .username label p,
 .password label p {
 	margin-bottom: 10px;
+}
+.login-loader {
+	position: absolute;
+	left: 50%;
+	bottom: 0%;
+	transform: translateX(-50%);
 }

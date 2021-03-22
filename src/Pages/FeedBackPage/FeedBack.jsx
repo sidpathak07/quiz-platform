@@ -40,7 +40,7 @@ const FeedBack = () => {
     
         <div className='feedback-page'>
            
-            <h1>Give Us Some Feedback</h1>
+            <h1 className='feedback-heading'>Give Us Some Feedback</h1>
             <div className='feedback-input-sliders'>
             <div className='question-feedback'>
             <p>How was the Questions ? <span> {questionFeedback}/5</span></p>

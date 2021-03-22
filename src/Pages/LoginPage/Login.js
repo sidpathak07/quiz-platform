@@ -1,16 +1,41 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { useHistory } from "react-router-dom";
 import Error from "../../Components/ErrorComponent/Error";
+import axios from '../../axios/axios'
 import "./Login.css";
+import LoginLoader from "../../Components/LoginLoader/LoginLoader";
+import {UserContext} from "../../Context/UserContext";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading,setLoading]=useState(false)
   const [error, setError] = useState({
     username: "",
     password: "",
   });
   const history = useHistory();
+
+  const{ userDetails, updateUser ,removeUser } = useContext(UserContext)
+
+  const fetchUser = async()=>{
+    setLoading(true)
+    try{
+        await axios.post("/api/auth/login",{
+        username: username,
+        password: password
+      })
+      .then(res=> console.log(res))
+      // console.log(userDetails)
+      setLoading(false)
+      
+    }
+    catch(err){
+      console.log(err.message)
+    }
+   
+  }
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,9 +59,11 @@ const Login = () => {
         username: "",
         password: "",
       });
-      history.push("/my-quiz");
-    }
+     }
+    fetchUser()
   };
+
+  
 
   return (
     <div className="login-page">
@@ -65,7 +92,10 @@ const Login = () => {
             {error.password && <Error msg={error.password} />}
           </label>
         </div>
-        <button type="submit">Log in</button>
+        {loading ? <div className='login-loader'><LoginLoader/></div> :
+          <button onClick={handleSubmit} type="submit">Log in</button>
+        }
+        
       </form>
     </div>
   );
