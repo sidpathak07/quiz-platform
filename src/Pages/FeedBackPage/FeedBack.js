@@ -14,17 +14,20 @@ const FeedBack = () => {
   const [indian, setIndian] = useState("");
   const [intern, setIntern] = useState("");
 
+
+
   const handleSubmit = () => {
     console.log("submitted");
     setSubmitted(true);
   };
 
 
-  useEffect(()=>{
+  if(submitted){
+    setTimeout(()=>{
+      removeUser()
+    },5000)
+  }
 
-
-
-  })
 
 
   return (
