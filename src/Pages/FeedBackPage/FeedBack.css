@@ -1,0 +1,15 @@
+.submitted-form {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.submitted-form h1 {
+	font-size: 3em;
+}
+.submitted-form svg {
+	font-size: 7em;
+	color: rgb(100, 100, 100);
+}
