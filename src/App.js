@@ -4,6 +4,7 @@ import Login from "./Pages/LoginPage/Login";
 import QuizPage from "./Pages/QuizPage/QuizPage";
 import Quizzes from "./Pages/Quizzes/Quizzes";
 import ErrorPage from "./Pages/ErrorPage/ErrorPage";
+import FeedBack from "./Pages/FeedBackPage/FeedBack";
 
 const App = () => {
   return (
@@ -18,6 +19,9 @@ const App = () => {
           </Route>
           <Route exact path="/my-quiz">
             <Quizzes />
+          </Route>
+          <Route exact path="/feedback">
+          <FeedBack />
           </Route>
           <Route path="*">
             <ErrorPage />

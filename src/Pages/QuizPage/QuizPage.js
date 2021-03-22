@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import Loader from "../../Components/Loader/LoadingBar";
 import Countdown from "react-countdown";
 import axios from "../../axios/axios";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { IoIosTimer } from "react-icons/io";
 import "./QuizPage.css";
 
@@ -22,6 +22,7 @@ const QuizPage = () => {
   const [quiz, setQuiz] = useState([]);
   const [index, setIndex] = useState(0);
   const { id } = useParams();
+  const history = useHistory();
 
   const handlePrevious = () => {
     if (index > 0) {
@@ -45,8 +46,15 @@ const QuizPage = () => {
   }
 
   const handleTestSubmit = () => {
-    console.log("submitted");
+    submitTest();
+    history.push("/feedback")
   };
+
+  const submitTest = ()=>{
+
+
+
+  }
 
   useEffect(() => {
     const fetchQuestion = async () => {
@@ -61,7 +69,7 @@ const QuizPage = () => {
     fetchQuestion();
   }, [id]);
 
-  console.log(btnarray);
+
   console.log(quiz);
 
   return (

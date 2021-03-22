@@ -34,7 +34,7 @@ const Login = () => {
         username: "",
         password: "",
       });
-      history.push("/");
+      history.push("/my-quiz");
     }
   };
 
