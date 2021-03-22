@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Loader from "../../Components/Loader/LoadingBar";
 import Countdown from "react-countdown";
 import axios from "../../axios/axios";
@@ -47,14 +47,10 @@ const QuizPage = () => {
 
   const handleTestSubmit = () => {
     submitTest();
-    history.push("/feedback")
+    history.push("/feedback");
   };
 
-  const submitTest = ()=>{
-
-
-
-  }
+  const submitTest = () => {};
 
   useEffect(() => {
     const fetchQuestion = async () => {
@@ -68,7 +64,6 @@ const QuizPage = () => {
     };
     fetchQuestion();
   }, [id]);
-
 
   console.log(quiz);
 
@@ -134,7 +129,11 @@ const QuizPage = () => {
               <p>
                 <IoIosTimer /> Time Left :{" "}
               </p>
-              <Countdown className="quiz-countdown" date={Date.now() + 10000} />
+              <Countdown
+                className="quiz-countdown"
+                date={Date.now() + 10000}
+                onComplete={handleTestSubmit}
+              />
             </div>
 
             <div className="quiz-navigation-stats">
