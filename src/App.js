@@ -1,27 +1,35 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useContext } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import Login from "./Pages/LoginPage/Login";
 import QuizPage from "./Pages/QuizPage/QuizPage";
 import Quizzes from "./Pages/Quizzes/Quizzes";
 import ErrorPage from "./Pages/ErrorPage/ErrorPage";
 import FeedBack from "./Pages/FeedBackPage/FeedBack";
+import UserContext from "./Context/UserContext";
 
 const App = () => {
+  const { userDetails } = useContext(UserContext);
+
   return (
     <div className="App">
       <Router>
         <Switch>
           <Route exact path="/">
-            <Login />
+            {userDetails ? <Quizzes /> : <Redirect to="/login" />}
+          </Route>
+          <Route exact path="/login">
+            {!userDetails ? <Login /> : <Redirect to="/" />}
           </Route>
           <Route exact path="/quizpage/:id">
-            <QuizPage />
-          </Route>
-          <Route exact path="/my-quiz">
-            <Quizzes />
+            {userDetails ? <QuizPage /> : <Redirect to="/login" />}
           </Route>
           <Route exact path="/feedback">
-          <FeedBack />
+            {userDetails ? <FeedBack /> : <Redirect to="/login" />}
           </Route>
           <Route path="*">
             <ErrorPage />

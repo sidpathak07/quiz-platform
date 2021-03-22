@@ -1,41 +1,43 @@
-import { useState,useContext } from "react";
+import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
+import UserContext from "../../Context/UserContext";
+import Loader from "../../Components/Loader/LoadingBar";
 import Error from "../../Components/ErrorComponent/Error";
-import axios from '../../axios/axios'
+import axios from "../../axios/axios";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import "./Login.css";
-import LoginLoader from "../../Components/LoginLoader/LoginLoader";
-import {UserContext} from "../../Context/UserContext";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState({
     username: "",
     password: "",
   });
   const history = useHistory();
 
-  const{ userDetails, updateUser ,removeUser } = useContext(UserContext)
+  const { updateUser } = useContext(UserContext);
 
-  const fetchUser = async()=>{
-    setLoading(true)
-    try{
-        await axios.post("/api/auth/login",{
+  const fetchUser = async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.post("/api/auth/login", {
         username: username,
-        password: password
-      })
-      .then(res=> console.log(res))
-      // console.log(userDetails)
-      setLoading(false)
-      
+        password: password,
+      });
+      updateUser(data);
+      history.push("/");
+    } catch (err) {
+      console.log(err.message);
+      setError({
+        username: "Invalid credentials",
+        password: "Invalid credentials",
+      });
     }
-    catch(err){
-      console.log(err.message)
-    }
-   
-  }
-
+    setLoading(false);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -59,14 +61,17 @@ const Login = () => {
         username: "",
         password: "",
       });
-     }
-    fetchUser()
+    }
+    fetchUser();
   };
-
-  
 
   return (
     <div className="login-page">
+      {loading && (
+        <div className="login-loader">
+          <Loader />
+        </div>
+      )}
       <form onSubmit={handleSubmit}>
         <div className="username">
           <label>
@@ -84,18 +89,20 @@ const Login = () => {
           <label>
             Password
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               value={password}
               placeholder="Enter password..."
               onChange={(e) => setPassword(e.target.value)}
             />
+            <div onClick={() => setShowPassword(!showPassword)} className="show-password">
+              {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+            </div>
             {error.password && <Error msg={error.password} />}
           </label>
         </div>
-        {loading ? <div className='login-loader'><LoginLoader/></div> :
-          <button onClick={handleSubmit} type="submit">Log in</button>
-        }
-        
+        <button onClick={handleSubmit} type="submit">
+          Log in
+        </button>
       </form>
     </div>
   );
