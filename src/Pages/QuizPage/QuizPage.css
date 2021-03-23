@@ -26,6 +26,7 @@
   padding: 30px;
   position: relative;
   min-width: 700px;
+  max-width: 700px;
 }
 
 .quiz-options textarea {
@@ -51,6 +52,10 @@
   display: flex;
   justify-content: space-between;
   margin: 10px 0 30px 0;
+}
+
+.question-details h2 {
+  width: 70%;
 }
 
 .marks-distribution > * {

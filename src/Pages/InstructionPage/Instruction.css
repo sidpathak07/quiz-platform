@@ -1,0 +1,78 @@
+.instruction-page {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  margin: 20px auto;
+}
+
+.instruction-container {
+  max-width: 1168px;
+  width: 90vw;
+  margin: auto;
+  padding: 0 30px;
+  border: 1px solid lightgray;
+}
+.instruction-page > div {
+  margin: 25px 0;
+}
+.instruction-page > div h2 {
+  margin: 10px 0;
+  font-size: 1.2em;
+}
+.instruction-timer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.instruction-timer > * {
+  margin: 10px 0;
+}
+
+.instruction-timer button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 200px;
+  border: none;
+  outline: none;
+  color: white;
+  background: rgb(0, 140, 255);
+  cursor: pointer;
+  padding: 10px;
+  font-size: 1.1em;
+  font-weight: 700;
+}
+.instruction-timer button:hover {
+  background: white;
+  color: black;
+  border: 1px solid black;
+}
+.instruction-countdown {
+  font-weight: 600;
+  font-size: 1.4em;
+}
+.marking-instruction {
+  margin: 20px 0;
+  font-weight: 700;
+}
+.marking-instruction > * {
+  margin: 10px 0;
+}
+
+.instruction-header {
+  text-align: center;
+  font-weight: 700;
+}
+.instruction-header > * {
+  margin: 10px 0;
+}
+
+@media only screen and (max-width: 786px) {
+  .instruction-page {
+    margin: 10px;
+    padding: 30px;
+    border: none;
+  }
+}

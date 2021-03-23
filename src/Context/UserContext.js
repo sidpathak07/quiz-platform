@@ -11,8 +11,18 @@ const getUserDetails = () => {
   }
 };
 
+const getUserQuiz = () => {
+  const quizId = sessionStorage.getItem("user-current-quiz");
+  if (quizId) {
+    return JSON.parse(quizId);
+  } else {
+    return null;
+  }
+};
+
 export const UserContextProvider = (props) => {
   const [userDetails, setUserDetails] = useState(getUserDetails);
+  const [userCurrentQuiz, setUserCurrentQuiz]= useState(getUserQuiz)
 
   const updateUser = (data) => {
     setUserDetails(data);
@@ -23,9 +33,13 @@ export const UserContextProvider = (props) => {
     sessionStorage.removeItem("quiz-data");
     sessionStorage.removeItem("user-details");
   };
+  const addQuiz =(id)=>{
+    setUserCurrentQuiz(id)
+    sessionStorage.setItem("user-current-quiz", JSON.stringify(id));
+  }
 
   return (
-    <UserContext.Provider value={{ userDetails, updateUser, removeUser }}>
+    <UserContext.Provider value={{ userDetails, updateUser, removeUser,addQuiz ,userCurrentQuiz}}>
       {props.children}
     </UserContext.Provider>
   );

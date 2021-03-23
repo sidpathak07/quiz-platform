@@ -19,7 +19,6 @@ const QuizPage = () => {
   const [index, setIndex] = useState(0);
   const [userId, setuserId] = useState();
   const [responses, setResponses] = useState([]);
-
   const { userDetails } = useContext(UserContext);
   const { id } = useParams();
   const history = useHistory();
@@ -41,11 +40,9 @@ const QuizPage = () => {
   };
 
   const btnarray = [];
-  useEffect(() => {
-    for (var i = 0; i < quiz?.length; i++) {
-      btnarray.push(i);
-    }
-  });
+  for (var i = 0; i < quiz?.length; i++) {
+    btnarray.push(i);
+  }
 
   const handleTestSubmit = () => {
     submitTest();
@@ -54,7 +51,6 @@ const QuizPage = () => {
 
   const handleResponse = (e) => {
     const { name } = e.target;
-
     var response = [...responses];
     response[index] = {
       key: quiz[index].id,
@@ -117,7 +113,6 @@ const QuizPage = () => {
               <h3>{`Question: ${index + 1}`}</h3>
               <div className="question-details">
                 <h2>{`${quiz[index]?.question}`}</h2>
-
                 <div className="marks-distribution">
                   <p>{`Correct : ${quiz[index]?.correct_marks} marks`}</p>
                   <p>{`Incorrect : ${quiz[index]?.negative_marks} marks`}</p>
