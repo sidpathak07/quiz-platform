@@ -97,7 +97,7 @@ const QuizPage = () => {
               <div className="quiz-options">
                 {quiz[index]?.option.length > 0 ? (
                   quiz[index]?.option.map((option) => {
-                    return <Options key={option.key} {...option} />;
+                    return <Options key={option.id} {...option} />;
                   })
                 ) : (
                   <textarea placeholder="Type your answer here" />
@@ -113,7 +113,7 @@ const QuizPage = () => {
                 Previous
               </button>
               {index === quiz.length - 1 && (
-                <button onClick={handleTestSubmit}>Submit test </button>
+                <button onClick={handleTestSubmit}>Submit test</button>
               )}
               <button
                 disabled={index === quiz.length - 1 ? true : false}
@@ -129,11 +129,7 @@ const QuizPage = () => {
               <p>
                 <IoIosTimer /> Time Left :{" "}
               </p>
-              <Countdown
-                className="quiz-countdown"
-                date={Date.now() + 10000}
-                
-              />
+              <Countdown className="quiz-countdown" date={Date.now() + 10000} />
             </div>
 
             <div className="quiz-navigation-stats">

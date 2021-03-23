@@ -16,14 +16,12 @@ export const UserContextProvider = (props) => {
 
   const updateUser = (data) => {
     setUserDetails(data);
-    sessionStorage.setItem("user-details", JSON.stringify(data.access));
+    sessionStorage.setItem("user-details", JSON.stringify(data));
   };
   const removeUser = () => {
     setUserDetails(null);
     sessionStorage.clear();
   };
-
-  console.log(userDetails);
 
   return (
     <UserContext.Provider value={{ userDetails, updateUser, removeUser }}>

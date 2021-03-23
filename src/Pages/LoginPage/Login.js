@@ -30,7 +30,6 @@ const Login = () => {
       updateUser(data);
       history.push("/");
     } catch (err) {
-      console.log(err.message);
       setError({
         username: "Invalid credentials",
         password: "Invalid credentials",
