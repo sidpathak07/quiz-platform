@@ -6,8 +6,7 @@ const ErrorPage = () => {
     <div className="error-page">
     <img src={img} alt='404'/>
       <p className="error-msg">
-        Seems you're lost..
-        This page could not be found.
+        Seems you're lost .. |  This page could not be found.
       </p>
     </div>
   );

@@ -18,4 +18,14 @@
 	font-size: 1.5em;
 	font-weight: 650;
 	color: gray;
+	text-align: center;
+}
+
+@media only screen and (max-width: 786px) {
+	.error-msg {
+		margin: 50px 0;
+		font-size: 0.9em;
+		font-weight: 650;
+		color: gray;
+	}
 }

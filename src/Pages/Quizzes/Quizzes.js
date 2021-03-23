@@ -3,6 +3,7 @@ import Loader from "../../Components/Loader/LoadingBar";
 import QuizCard from "./QuizCard";
 import axios from "../../axios/axios";
 import "./Quizzes.css";
+import NavBar from "../../Components/NavBar/NavBar";
 
 const Quizzes = () => {
   const [quizzes, setQuizzes] = useState(null);
@@ -31,6 +32,7 @@ const Quizzes = () => {
 
   return (
     <div className="Quizzes-Page">
+    <NavBar/>
       <div className="all-Quizzes">
         <QuizCard key={quizzes.id} {...quizzes} />
       </div>

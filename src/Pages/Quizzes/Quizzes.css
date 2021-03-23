@@ -1,8 +1,11 @@
 .Quizzes-Page {
 	width: 100%;
 	height: 100vh;
-	display: grid;
-	place-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #f3f7f7;
+	position: relative;
 }
 
 .all-Quizzes {
@@ -24,7 +27,10 @@
 	padding: 20px;
 	border-radius: 10px;
 	background-color: white;
-	box-shadow: 3px 3px 6px 2px rgba(0, 0, 0, 0.2);
+	box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.15);
+}
+.quiz-card:hover {
+	box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.25);
 }
 .quiz-loader {
 	position: absolute;
@@ -96,7 +102,6 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border-radius: 5px;
 	border: none;
 	outline: none;
 	color: #fff;
