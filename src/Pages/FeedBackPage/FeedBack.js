@@ -2,9 +2,12 @@ import React, { useState, useContext, useEffect } from "react";
 import "./FeedBack.css";
 import { AiOutlineFileDone } from "react-icons/ai";
 import UserContext from "../../Context/UserContext";
+import axios from "../../axios/axios";
+import Loader from "../../Components/Loader/LoadingBar";
 
 const FeedBack = () => {
-  const { removeUser } = useContext(UserContext);
+  const { userDetails ,removeUser } = useContext(UserContext);
+  const[loading,setLoading]=useState(false)
   const [submitted, setSubmitted] = useState(false);
   const [feedbackText, setFeedbackText] = useState("");
   const [learnSomething, setLearnSomething] = useState(1);
@@ -17,17 +20,43 @@ const FeedBack = () => {
   const [miniCourse, setMiniCourse] = useState("");
   const [nextContest,setNextContest] = useState("");
 
-  const handleSubmit = () => {
-    console.log("submitted");
+  const handleSubmit = async() => {
+    setLoading(true)
+    console.log(postData)
+    try{
+      await axios.post("/api/postFeedback/",postData)
+
+    }catch(err){
+      console.log(err.message)
+    }
+    setLoading(false)
     setSubmitted(true);
   };
 
-  useEffect(() => {
-    const submitForm = setTimeout(() => {
-      removeUser();
-    }, 5000);
-    return () => clearTimeout(submitForm, 5000);
-  }, [removeUser, submitted]);
+ if(submitted){
+   setTimeout(()=>{
+     removeUser()
+   },5000)
+ }
+
+ const postData={
+
+  "learn_new":parseInt(learnSomething),
+  "like_participating":parseInt(participating),
+  "difficulty": parseInt(difficultFeedback),
+  "participate_again": participateAgain,
+  "time_sufficient": timeSufficient,
+  "attend_webinar": attendWebinar,
+  "language_english": language,
+  "mini_course": miniCourse,
+  "next_contest":nextContest,
+  "suggestions": feedbackText,
+  "user": userDetails.user_id,
+  "quiz_id":"d3664bf4-5fcc-4991-b777-80e2703b6435"
+
+
+
+ }
 
   return (
     <>
@@ -38,6 +67,7 @@ const FeedBack = () => {
         </div>
       ) : (
         <div className="feedback-page">
+        { loading && <div className='feedback-loader'><Loader/></div>}
           <h1 className="quiz-submitted-header">
             Your test has been submitted
           </h1>
@@ -126,10 +156,10 @@ const FeedBack = () => {
               <p>In what language will you prefer to attend the webinar</p>
 
               <div>
-                <button value="english" onClick={(e) => setLanguage(e.target.value)}>
+                <button value="yes" onClick={(e) => setLanguage(e.target.value)}>
                   English
                 </button>
-                <button value="hindi" onClick={(e) => setLanguage(e.target.value)}>
+                <button value="no" onClick={(e) => setLanguage(e.target.value)}>
                   Hindi
                 </button>
               </div>

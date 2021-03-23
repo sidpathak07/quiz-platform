@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect, useReducer ,useContext} from "react";
 import Loader from "../../Components/Loader/LoadingBar";
 import Countdown from "react-countdown";
 import axios from "../../axios/axios";
@@ -12,6 +12,7 @@ import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 
 import "./QuizPage.css";
+import UserContext from "../../Context/UserContext";
 const Options = ({ option }) => {
   return (
     <div className="option-component">
@@ -30,6 +31,7 @@ const QuizPage = () => {
   const { id } = useParams();
   const [userId, setuserId] = useState();
   const [responses, setResponses] = useState([]);
+  const {userDetails} = useContext(UserContext);
 
   const history = useHistory();
 
@@ -85,7 +87,10 @@ const QuizPage = () => {
   useEffect(() => {
     const fetchQuestion = async () => {
       try {
-        const { data } = await axios.get(`/api/get-quiz/${id}`);
+        const config = {
+          headers: { Authorization: `Bearer ${userDetails.access}`},
+        };
+        const { data } = await axios.get(`/api/get-quiz/${id}`,config );
         setQuiz(data?.quiz_questions);
         setIsLoading(false);
         var arr = [];

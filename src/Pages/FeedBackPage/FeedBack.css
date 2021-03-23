@@ -23,7 +23,18 @@
 	padding: 10px;
 	color: rgb(100, 100, 100);
 }
-
+.feedback-loader {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 100%;
+	height: 100%;
+	display: grid;
+	place-items: center;
+	transform: translate(-50%, -50%);
+	background: rgba(255, 255, 255, 0.5);
+	z-index: 999;
+}
 .quiz-submitted-header {
 	font-size: 1.8em;
 	position: absolute;

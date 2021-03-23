@@ -8,7 +8,7 @@ import "./Quizzes.css";
 
 const Quizzes = () => {
   const [quizzes, setQuizzes] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const { userDetails } = useContext(UserContext);
 
   useEffect(() => {
