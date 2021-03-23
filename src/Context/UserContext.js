@@ -32,6 +32,7 @@ export const UserContextProvider = (props) => {
     setUserDetails(null);
     sessionStorage.removeItem("quiz-data");
     sessionStorage.removeItem("user-details");
+    sessionStorage.removeItem("quiz-responses");
   };
   const addQuiz =(id)=>{
     setUserCurrentQuiz(id)

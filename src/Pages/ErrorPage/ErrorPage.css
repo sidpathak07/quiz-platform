@@ -6,7 +6,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 50px;
+  padding: 0 10px;
 }
 
 .error-page img {
@@ -25,11 +25,18 @@
   text-align: center;
 }
 
-@media only screen and (max-width: 786px) {
+@media (max-width: 768px) {
+  .error-page img {
+    width: 80%;
+  }
+}
+@media (max-width: 576px) {
+  .error-page img {
+    width: 100%;
+  }
+}
+@media (max-width: 576px) {
   .error-msg {
-    margin: 50px 0;
-    font-size: 0.9em;
-    font-weight: 650;
-    color: gray;
+    margin-top: -50px;
   }
 }

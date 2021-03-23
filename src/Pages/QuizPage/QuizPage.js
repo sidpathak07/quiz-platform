@@ -2,26 +2,37 @@ import { useState, useEffect, useContext, useCallback } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import UserContext from "../../Context/UserContext";
 import Loader from "../../Components/Loader/LoadingBar";
+import CountDownTimer from "./CountDownTimer";
 import axios from "../../axios/axios";
 import { FiAlertTriangle } from "react-icons/fi";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-// import FormLabel from "@material-ui/core/FormLabel";
 import "./QuizPage.css";
-import CountDownTimer from "./CountDownTimer";
+
+const getResponses = () => {
+  const responses = sessionStorage.getItem("quiz-responses");
+  if (responses) {
+    return JSON.parse(responses);
+  } else {
+    return null;
+  }
+};
 
 const QuizPage = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [quiz, setQuiz] = useState([]);
+  const [quiz, setQuiz] = useState(getResponses);
   const [index, setIndex] = useState(0);
   const [userId, setuserId] = useState();
+  const [isLoading, setIsLoading] = useState(true);
   const [showSubmit, setShowSubmit] = useState(false);
   const [responses, setResponses] = useState([]);
+
   const { userDetails } = useContext(UserContext);
   const { id } = useParams();
   const history = useHistory();
+
+  console.log("rendered again");
 
   const handlePrevious = () => {
     if (index > 0) {
@@ -45,15 +56,14 @@ const QuizPage = () => {
   }
 
   const handleResponse = (e) => {
-    const { name, value } = e.target;
-    console.log(name, value);
-    var response = [...responses];
-    response[index] = {
-      key: quiz[index].id,
-      answer: name ? value.split(" ")[0] : value,
-    };
-    setResponses(response);
-    console.log(responses);
+    const { value } = e.target;
+    const newResponses = responses.map((ques) => {
+      console.log(quiz[id]);
+      if (ques.id === quiz[id]) return { ...ques, answer: value };
+      else return ques;
+    });
+    setResponses(newResponses);
+    sessionStorage.setItem("quiz-responses", JSON.stringify(newResponses));
   };
 
   const handleTestSubmit = useCallback(() => {
@@ -63,9 +73,8 @@ const QuizPage = () => {
         user: userId,
         response: responses,
       };
-      // console.log(userId);
       const data = await axios.post("/api/create-response", res);
-      // console.log(data);
+      console.log(data);
     };
     submitTest();
     history.push("/feedback");
@@ -79,20 +88,19 @@ const QuizPage = () => {
         };
         const { data } = await axios.get(`/api/get-quiz/${id}`, config);
         setQuiz(data?.quiz_questions);
-        setIsLoading(false);
-
-        var arr = [];
-        for (var i = 0; i < quiz.length; i++) {
-          arr.push({ key: quiz[i].id, answer: 0 });
-        }
-        setResponses(arr);
         setuserId(data?.quiz_details?.creator);
+        setResponses(
+          data?.quiz_questions.map((quiz) => ({ key: quiz.id, answer: "" }))
+        );
+        sessionStorage.setItem("quiz-responses", JSON.stringify(responses));
+        setIsLoading(false);
       } catch (err) {
+        console.log(err.message);
         history.push("/404");
       }
     };
     fetchQuestion();
-  }, [history, id, quiz, userDetails.access]);
+  }, [id, quiz, responses, userDetails.access]);
 
   return (
     <>
@@ -111,7 +119,7 @@ const QuizPage = () => {
 
           <div className="question-page-left">
             <div className="quiz-question">
-              <h3>{`Question: ${index + 1}`}</h3>
+              <h3>Question: {index + 1}</h3>
               <div className="question-details">
                 <h2>{quiz[index]?.question}</h2>
                 <div className="marks-distribution">
@@ -123,12 +131,10 @@ const QuizPage = () => {
               <div className="quiz-options">
                 {quiz[index]?.option.length > 0 ? (
                   <FormControl component="fieldset">
-                    <RadioGroup
-                      aria-label="gender"
-                      onClick={(e) => handleResponse(e)}
-                    >
-                      {quiz[index]?.option.map((option) => (
+                    <RadioGroup aria-label="gender" onClick={handleResponse}>
+                      {quiz[index]?.option.map((option, index) => (
                         <FormControlLabel
+                          key={index}
                           value={option.option}
                           name={option.key.toString()}
                           control={<Radio />}
@@ -186,7 +192,7 @@ const QuizPage = () => {
           )}
 
           <div className="quiz-status">
-            <CountDownTimer handleTestSubmit={handleTestSubmit} />
+            {/* <CountDownTimer handleTestSubmit={handleTestSubmit} /> */}
 
             <div className="quiz-navigation-stats">
               {btnarray.map((button) => {
