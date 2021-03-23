@@ -4,6 +4,7 @@ import Countdown from "react-countdown";
 import axios from "../../axios/axios";
 import { useParams, useHistory } from "react-router-dom";
 import { IoIosTimer } from "react-icons/io";
+import { FiAlertTriangle} from "react-icons/fi";
 // import { Checkbox } from "@material-ui/core";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup, { useRadioGroup } from "@material-ui/core/RadioGroup";
@@ -18,6 +19,7 @@ const QuizPage = () => {
   const [quiz, setQuiz] = useState([]);
   const [index, setIndex] = useState(0);
   const [userId, setuserId] = useState();
+  const [showSubmit,setShowSubmit] = useState(false)
   const [responses, setResponses] = useState([]);
   const { userDetails } = useContext(UserContext);
   const { id } = useParams();
@@ -150,7 +152,7 @@ const QuizPage = () => {
                 Previous
               </button>
               {index === quiz.length - 1 && (
-                <button onClick={handleTestSubmit}>Submit test</button>
+                <button onClick={()=> setShowSubmit(true)}>Submit test</button>
               )}
               <button
                 disabled={index === quiz.length - 1 ? true : false}
@@ -160,6 +162,34 @@ const QuizPage = () => {
               </button>
             </div>
           </div>
+
+
+          {showSubmit && <div className='submit-confirm'>
+          
+          <div className='submit-popup'>
+          <div className='submit-pop-text'> 
+          <p><FiAlertTriangle/> Are you sure you want to submit ?</p>
+          <p>Once you submit , All your responses will be recorded</p>
+          </div>
+        
+         
+
+          <div className='confirm-button'>
+
+          <button onClick={()=> setShowSubmit(false)}>Back to Test</button>
+          <button onClick={handleTestSubmit}>Proceed and Submit</button>
+          
+          </div>
+          
+          
+          
+          </div>
+          
+          
+          
+          
+          </div>}
+
 
           <div className="quiz-status">
             <div className="countdown-div">

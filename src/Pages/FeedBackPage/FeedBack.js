@@ -4,6 +4,7 @@ import { AiOutlineFileDone } from "react-icons/ai";
 import UserContext from "../../Context/UserContext";
 import axios from "../../axios/axios";
 import Loader from "../../Components/Loader/LoadingBar";
+import Error from "../../Components/ErrorComponent/Error";
 
 const FeedBack = () => {
   const { userDetails, removeUser } = useContext(UserContext);
@@ -19,25 +20,38 @@ const FeedBack = () => {
   const [language, setLanguage] = useState("");
   const [miniCourse, setMiniCourse] = useState("");
   const [nextContest, setNextContest] = useState("");
+  const [error,setError] = useState("")
+
+
+
+
+
 
   const handleSubmit = async () => {
-    setLoading(true);
-    console.log(postData);
-    try {
-      await axios.post("/api/postFeedback/", postData);
-    } catch (err) {
-      console.log(err.message);
-    }
-    setLoading(false);
-    setSubmitted(true);
-  };
+      if(participateAgain === '' || timeSufficient === '' ||attendWebinar === '' ||language === '' ||miniCourse === '' ||nextContest === ''  ){
+        setError("All fields are mandatory")
+        return;
+      }
+      setLoading(true);
+      setError("")
+      console.log(postData);
+      try {
+        await axios.post("/api/postFeedback/", postData);
+      } catch (err) {
+        console.log(err.message);
+      }
+      setLoading(false);
+      setSubmitted(true);
+    };
+  
+    if (submitted) {
+      setTimeout(() => {
+        removeUser();
+      }, 5000);
 
-  if (submitted) {
-    setTimeout(() => {
-      removeUser();
-    }, 5000);
   }
 
+ 
   const postData = {
     learn_new: parseInt(learnSomething),
     like_participating: parseInt(participating),
@@ -117,6 +131,7 @@ const FeedBack = () => {
             <div>
               <p>
                 If a contest like this is organised again, will you participate?
+                
               </p>
 
               <div>
@@ -254,6 +269,7 @@ const FeedBack = () => {
               onChange={(e) => setFeedbackText(e.target.value)}
             />
           </div>
+          {error && <Error msg={error}/>}
 
           <button
             className="feedback-submit"
