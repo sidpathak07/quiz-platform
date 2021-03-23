@@ -1,209 +1,223 @@
 .submitted-form {
-	width: 100vw;
-	height: 100vh;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.submitted-form {
+  font-size: 1em;
+  font-weight: 600;
 }
 .submitted-form h1 {
-	font-size: 2.3em;
+  margin-top: 20px;
 }
 .submitted-form svg {
-	font-size: 5em;
-	color: rgb(100, 100, 100);
+  font-size: 5em;
+  color: rgb(100, 100, 100);
 }
 .feedback-page-header {
-	font-size: 1.6em;
-	position: absolute;
-	top: 0%;
-	left: 0%;
-	transform: translate(10%, -50%);
-	background: white;
-	padding: 10px;
-	color: rgb(100, 100, 100);
+  font-size: 1.6em;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translate(10%, -50%);
+  background: white;
+  padding: 10px;
+  color: rgb(100, 100, 100);
 }
 .feedback-loader {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	width: 100%;
-	height: 100%;
-	display: grid;
-	place-items: center;
-	transform: translate(-50%, -50%);
-	background: rgba(255, 255, 255, 0.5);
-	z-index: 999;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.5);
+  z-index: 999;
 }
 .quiz-submitted-header {
-	font-size: 1.8em;
-	position: absolute;
-	top: -5%;
-	left: 0%;
-	text-align: center;
-	width: 100%;
-
-	background: white;
-	padding: 10px;
+  font-size: 1.8em;
+  position: absolute;
+  top: -5%;
+  left: 0%;
+  text-align: center;
+  width: 100%;
+  background: white;
+  padding: 10px;
 }
 
 .feedback-page {
-	position: relative;
-	padding: 50px;
-	max-width: 800px;
-	margin: 100px auto;
-	border: 2px solid rgb(231, 231, 231);
-	min-height: 85vh;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+  position: relative;
+  padding: 50px;
+  max-width: 805px;
+  margin: 100px auto;
+  border: 2px solid rgb(231, 231, 231);
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.feedback-page input[type='range'] {
-	width: 70%;
-	cursor: pointer;
-	-webkit-appearance: none;
-	height: 15px;
-	border-radius: 5px;
-	background: rgb(231, 231, 231);
-	outline: none;
+.feedback-page input[type="range"] {
+  width: 70%;
+  cursor: pointer;
+  -webkit-appearance: none;
+  height: 15px;
+  border-radius: 5px;
+  background: rgb(231, 231, 231);
+  outline: none;
 }
 
 .feedback-input-sliders,
 .feedback-yes-no {
-	min-height: 350px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-evenly;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 .feedback-text {
-	min-height: 150px;
+  min-height: 150px;
+}
+.feedback-text textarea {
+  resize: vertical;
+  width: 100%;
+  width: 100%;
 }
 
 .feedback-input-sliders p {
-	display: flex;
-	justify-content: space-between;
-	width: 70%;
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
 }
 .feedback-input-sliders p span {
-	font-size: 0.8em;
-	color: rgb(99, 99, 99);
+  font-size: 0.8em;
+  color: rgb(99, 99, 99);
 }
 
 .feedback-text p {
-	margin: 20px 10px;
-	font-size: 1.1em;
-	font-weight: 600;
+  margin: 20px 10px;
+  font-size: 1.1em;
+  font-weight: 600;
 }
 .feedback-text textarea {
-	height: 125px;
-	padding: 10px;
-	width: 90%;
+  height: 125px;
+  padding: 10px;
+  width: 90%;
 }
 
 .feedback-submit {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 40px;
-	width: 200px;
-	border: none;
-	outline: none;
-	color: white;
-	background: rgb(0, 140, 255);
-	cursor: pointer;
-	padding: 10px;
-	font-size: 1.1em;
-	font-weight: 700;
-	margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 200px;
+  border: none;
+  outline: none;
+  color: white;
+  background: rgb(0, 140, 255);
+  cursor: pointer;
+  padding: 10px;
+  font-size: 1.1em;
+  font-weight: 700;
+  margin: 20px 0;
 }
 .feedback-submit:hover {
-	background: white;
-	color: black;
-	border: 1px solid black;
+  background: white;
+  color: black;
+  border: 1px solid black;
 }
 
 .feedback-yes-no button:hover {
-	background: rgb(0, 140, 255);
-	color: white;
+  background: rgb(0, 140, 255);
+  color: white;
 }
 
 .feedback-yes-no button {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 40px;
-	width: 80px;
-	border: 1px solid rgb(99, 99, 99);
-	outline: none;
-	color: rgb(99, 99, 99);
-	background: white;
-	cursor: pointer;
-	padding: 10px;
-	font-size: 0.9em;
-	font-weight: 700;
-	margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 80px;
+  border: 1px solid rgb(99, 99, 99);
+  outline: none;
+  color: rgb(99, 99, 99);
+  background: white;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 0.9em;
+  font-weight: 700;
+  margin: 10px;
 }
 
 .feedback-yes-no div div {
-	display: flex;
+  display: flex;
 }
 .feedback-yes-no div p {
-	margin: 10px;
-	font-size: 1.1em;
-	font-weight: 600;
+  margin: 10px;
+  font-size: 1.1em;
+  font-weight: 600;
 }
 .feedback-yes-no {
-	margin-bottom: 50px;
+  margin-bottom: 50px;
 }
 
 .feedback-yes-no div {
-	margin: 10px 0;
+  margin: 10px 0;
 }
 
 .feedback-input-sliders div p {
-	margin-bottom: 10px;
-	font-size: 1.2em;
-	font-weight: 500;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  font-weight: 500;
 }
 .feedback-quiz div {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 .feedback-quiz div button {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 40px;
-	width: 50%;
-	border: 1px solid rgb(99, 99, 99);
-	outline: none;
-	background-color: white;
-	color: rgb(99, 99, 99);
-	cursor: pointer;
-	padding: 10px;
-	font-size: 0.9em;
-	font-weight: 700;
-	margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 50%;
+  border: 1px solid rgb(99, 99, 99);
+  outline: none;
+  background-color: white;
+  color: rgb(99, 99, 99);
+  cursor: pointer;
+  padding: 10px;
+  font-size: 0.9em;
+  font-weight: 700;
+  margin: 10px;
 }
 
 @media only screen and (max-width: 786px) {
-	.feedback-page input[type='range'] {
-		width: 100%;
-	}
-	.feedback-page {
-		padding: 20px;
-		margin: 20px;
-		margin-top: 100px;
-	}
-	.feedback-text textarea {
-		margin-top: 20px;
-		width: 100%;
-	}
-	.feedback-input-sliders p {
-		width: 100%;
-	}
-	.feedback-quiz div button {
-		width: 100%;
-	}
+  .feedback-page input[type="range"] {
+    width: 100%;
+  }
+  .feedback-page {
+    padding: 20px;
+    margin: 20px;
+    margin-top: 100px;
+  }
+  .feedback-text textarea {
+    margin-top: 200px;
+    width: 100%;
+  }
+  .feedback-input-sliders p {
+    width: 100%;
+  }
+  .feedback-quiz div button {
+    width: 100%;
+  }
+}
+
+.feedback-yes-no .selected-btn,
+.feedback-quiz .selected-btn {
+  background-color: rgb(0, 140, 255);
+  color: #fff;
 }

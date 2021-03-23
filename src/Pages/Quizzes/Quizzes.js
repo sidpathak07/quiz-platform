@@ -41,7 +41,7 @@ const Quizzes = () => {
       }
     };
     fetchQuizzes();
-  }, [userDetails.access, userDetails.user_id]);
+  }, [quizzes, userDetails.access, userDetails.user_id]);
 
   return (
     <div className="Quizzes-Page">

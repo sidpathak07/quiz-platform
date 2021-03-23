@@ -1,25 +1,23 @@
-import React, { useState, useEffect, useContext, useCallback } from "react";
-import Loader from "../../Components/Loader/LoadingBar";
-import Countdown from "react-countdown";
-import axios from "../../axios/axios";
+import { useState, useEffect, useContext, useCallback } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { IoIosTimer } from "react-icons/io";
-import { FiAlertTriangle} from "react-icons/fi";
-// import { Checkbox } from "@material-ui/core";
+import UserContext from "../../Context/UserContext";
+import Loader from "../../Components/Loader/LoadingBar";
+import axios from "../../axios/axios";
+import { FiAlertTriangle } from "react-icons/fi";
 import Radio from "@material-ui/core/Radio";
-import RadioGroup, { useRadioGroup } from "@material-ui/core/RadioGroup";
+import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 // import FormLabel from "@material-ui/core/FormLabel";
-import UserContext from "../../Context/UserContext";
 import "./QuizPage.css";
+import CountDownTimer from "./CountDownTimer";
 
 const QuizPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [quiz, setQuiz] = useState([]);
   const [index, setIndex] = useState(0);
   const [userId, setuserId] = useState();
-  const [showSubmit,setShowSubmit] = useState(false)
+  const [showSubmit, setShowSubmit] = useState(false);
   const [responses, setResponses] = useState([]);
   const { userDetails } = useContext(UserContext);
   const { id } = useParams();
@@ -46,32 +44,32 @@ const QuizPage = () => {
     btnarray.push(i);
   }
 
-  const handleTestSubmit = () => {
-    submitTest();
-    history.push("/feedback");
-  };
-
   const handleResponse = (e) => {
-    const { name } = e.target;
+    const { name, value } = e.target;
+    console.log(name, value);
     var response = [...responses];
     response[index] = {
       key: quiz[index].id,
-      answer: name,
+      answer: name ? value.split(" ")[0] : value,
     };
     setResponses(response);
     console.log(responses);
   };
 
-  const submitTest = async () => {
-    const res = {
-      quiz: id,
-      user: userId,
-      response: responses,
+  const handleTestSubmit = useCallback(() => {
+    const submitTest = async () => {
+      const res = {
+        quiz: id,
+        user: userId,
+        response: responses,
+      };
+      // console.log(userId);
+      const data = await axios.post("/api/create-response", res);
+      // console.log(data);
     };
-    console.log(userId);
-    const data = await axios.post("/api/create-response", res);
-    console.log(data);
-  };
+    submitTest();
+    history.push("/feedback");
+  }, [history, id, responses, userId]);
 
   useEffect(() => {
     const fetchQuestion = async () => {
@@ -82,6 +80,7 @@ const QuizPage = () => {
         const { data } = await axios.get(`/api/get-quiz/${id}`, config);
         setQuiz(data?.quiz_questions);
         setIsLoading(false);
+
         var arr = [];
         for (var i = 0; i < quiz.length; i++) {
           arr.push({ key: quiz[i].id, answer: 0 });
@@ -89,11 +88,11 @@ const QuizPage = () => {
         setResponses(arr);
         setuserId(data?.quiz_details?.creator);
       } catch (err) {
-        console.log(err.message);
+        history.push("/404");
       }
     };
     fetchQuestion();
-  }, [id, quiz, userDetails.access]);
+  }, [history, id, quiz, userDetails.access]);
 
   return (
     <>
@@ -139,7 +138,10 @@ const QuizPage = () => {
                     </RadioGroup>
                   </FormControl>
                 ) : (
-                  <textarea placeholder="Type your answer here" />
+                  <textarea
+                    placeholder="Type your answer here"
+                    onChange={handleResponse}
+                  />
                 )}
               </div>
             </div>
@@ -152,7 +154,7 @@ const QuizPage = () => {
                 Previous
               </button>
               {index === quiz.length - 1 && (
-                <button onClick={()=> setShowSubmit(true)}>Submit test</button>
+                <button onClick={() => setShowSubmit(true)}>Submit test</button>
               )}
               <button
                 disabled={index === quiz.length - 1 ? true : false}
@@ -163,45 +165,28 @@ const QuizPage = () => {
             </div>
           </div>
 
+          {showSubmit && (
+            <div className="submit-confirm">
+              <div className="submit-popup">
+                <div className="submit-pop-text">
+                  <p>
+                    <FiAlertTriangle /> Are you sure you want to submit ?
+                  </p>
+                  <p>Once you submit , All your responses will be recorded</p>
+                </div>
 
-          {showSubmit && <div className='submit-confirm'>
-          
-          <div className='submit-popup'>
-          <div className='submit-pop-text'> 
-          <p><FiAlertTriangle/> Are you sure you want to submit ?</p>
-          <p>Once you submit , All your responses will be recorded</p>
-          </div>
-        
-         
-
-          <div className='confirm-button'>
-
-          <button onClick={()=> setShowSubmit(false)}>Back to Test</button>
-          <button onClick={handleTestSubmit}>Proceed and Submit</button>
-          
-          </div>
-          
-          
-          
-          </div>
-          
-          
-          
-          
-          </div>}
-
+                <div className="confirm-button">
+                  <button onClick={() => setShowSubmit(false)}>
+                    Back to Test
+                  </button>
+                  <button onClick={handleTestSubmit}>Proceed and Submit</button>
+                </div>
+              </div>
+            </div>
+          )}
 
           <div className="quiz-status">
-            <div className="countdown-div">
-              <p>
-                <IoIosTimer /> Time Left :{" "}
-              </p>
-              <Countdown
-                className="quiz-countdown"
-                date={Date.now() + 1000000}
-                onComplete={handleTestSubmit}
-              />
-            </div>
+            <CountDownTimer handleTestSubmit={handleTestSubmit} />
 
             <div className="quiz-navigation-stats">
               {btnarray.map((button) => {

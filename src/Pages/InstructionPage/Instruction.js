@@ -6,7 +6,7 @@ import "./Instruction.css";
 
 const Instruction = () => {
   const [showbtn, setShowbtn] = useState(false);
-  const [time, setTime] = useState(Date.now() + 10000);
+  const [time, setTime] = useState(Date.now() + 10000); //change to 300000 for 5min timer
   const history = useHistory();
   const { userCurrentQuiz } = useContext(UserContext);
 
@@ -22,12 +22,10 @@ const Instruction = () => {
           <h1>Test Instruction</h1>
           <p>Please read the instructions carefully.</p>
         </div>
-
         <div className="instruction-one">
           <h2>Test Duration :</h2>
           <p>You have 1 hour 30 minutes to complete and submit the test.</p>
         </div>
-
         <div className="instruction-two">
           <h2>Marking Scheme :</h2>
           <p>
@@ -44,7 +42,6 @@ const Instruction = () => {
             <p>For True/False: Half of the marks of the question</p>
           </div>
         </div>
-
         <div className="instruction-three">
           <h2>Navigation through questions :</h2>
           <p>
@@ -56,7 +53,6 @@ const Instruction = () => {
             them for the end.
           </p>
         </div>
-
         <div className="instruction-four">
           <h2>Feedback instruction :</h2>
           <p>
@@ -65,7 +61,6 @@ const Instruction = () => {
             know your feedback about the contest.
           </p>
         </div>
-
         <div className="instruction-timer">
           <p>Your test will start in :</p>
           <Countdown

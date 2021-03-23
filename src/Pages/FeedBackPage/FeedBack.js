@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
-import "./FeedBack.css";
-import { AiOutlineFileDone } from "react-icons/ai";
+import { useState, useContext } from "react";
 import UserContext from "../../Context/UserContext";
-import axios from "../../axios/axios";
 import Loader from "../../Components/Loader/LoadingBar";
 import Error from "../../Components/ErrorComponent/Error";
+import axios from "../../axios/axios";
+import { AiOutlineFileDone } from "react-icons/ai";
+import "./FeedBack.css";
 
 const FeedBack = () => {
   const { userDetails, removeUser } = useContext(UserContext);
@@ -20,38 +20,8 @@ const FeedBack = () => {
   const [language, setLanguage] = useState("");
   const [miniCourse, setMiniCourse] = useState("");
   const [nextContest, setNextContest] = useState("");
-  const [error,setError] = useState("")
+  const [error, setError] = useState("");
 
-
-
-
-
-
-  const handleSubmit = async () => {
-      if(participateAgain === '' || timeSufficient === '' ||attendWebinar === '' ||language === '' ||miniCourse === '' ||nextContest === ''  ){
-        setError("All fields are mandatory")
-        return;
-      }
-      setLoading(true);
-      setError("")
-      console.log(postData);
-      try {
-        await axios.post("/api/postFeedback/", postData);
-      } catch (err) {
-        console.log(err.message);
-      }
-      setLoading(false);
-      setSubmitted(true);
-    };
-  
-    if (submitted) {
-      setTimeout(() => {
-        removeUser();
-      }, 5000);
-
-  }
-
- 
   const postData = {
     learn_new: parseInt(learnSomething),
     like_participating: parseInt(participating),
@@ -66,6 +36,35 @@ const FeedBack = () => {
     user: userDetails.user_id,
     quiz_id: "d3664bf4-5fcc-4991-b777-80e2703b6435",
   };
+
+  const handleSubmit = async () => {
+    if (
+      participateAgain === "" ||
+      timeSufficient === "" ||
+      attendWebinar === "" ||
+      language === "" ||
+      miniCourse === "" ||
+      nextContest === ""
+    ) {
+      setError("All fields are mandatory");
+      return;
+    }
+    setLoading(true);
+    setError("");
+    try {
+      await axios.post("/api/postFeedback/", postData);
+    } catch (err) {
+      console.log(err.message);
+    }
+    setLoading(false);
+    setSubmitted(true);
+  };
+
+  if (submitted) {
+    setTimeout(() => {
+      removeUser();
+    }, 5000);
+  }
 
   return (
     <>
@@ -88,7 +87,7 @@ const FeedBack = () => {
           <div className="feedback-input-sliders">
             <div className="learn-feedback">
               <p>
-                Do you learn something new ? <span> {learnSomething}/5</span>
+                Do you learn something new ?* <span> {learnSomething}/5</span>
               </p>
               <input
                 name="question-slider"
@@ -101,7 +100,7 @@ const FeedBack = () => {
             </div>
             <div className="participate-feedback">
               <p>
-                To what extent did you like participating in this contest?{" "}
+                To what extent did you like participating in this contest ?*{" "}
                 <span>{participating}/5</span>
               </p>
               <input
@@ -114,7 +113,7 @@ const FeedBack = () => {
             </div>
             <div className="difficulty-feedback">
               <p>
-                How difficult were the problems?
+                How difficult were the problems ?*
                 <span>{difficultFeedback}/5</span>{" "}
               </p>
               <input
@@ -130,38 +129,40 @@ const FeedBack = () => {
           <div className="feedback-yes-no">
             <div>
               <p>
-                If a contest like this is organised again, will you participate?
-                
+                If a contest like this is organised again, will you participate
+                ?*
               </p>
-
               <div>
                 <button
                   value="yes"
                   onClick={(e) => setParticipateAgain(e.target.value)}
+                  className={participateAgain === "yes" && "selected-btn"}
                 >
                   Yes
                 </button>
                 <button
                   value="no"
                   onClick={(e) => setParticipateAgain(e.target.value)}
+                  className={participateAgain === "no" && "selected-btn"}
                 >
                   No
                 </button>
               </div>
             </div>
             <div>
-              <p>Do you think time was sufficient?</p>
-
+              <p>Do you think time was sufficient ?*</p>
               <div>
                 <button
                   value="yes"
                   onClick={(e) => setTimeSufficient(e.target.value)}
+                  className={timeSufficient === "yes" && "selected-btn"}
                 >
                   Yes
                 </button>
                 <button
                   value="no"
                   onClick={(e) => setTimeSufficient(e.target.value)}
+                  className={timeSufficient === "no" && "selected-btn"}
                 >
                   No
                 </button>
@@ -170,107 +171,119 @@ const FeedBack = () => {
             <div>
               <p>
                 If a webinar is organised to discuss the solutions of these
-                problems will you attend?
+                problems will you attend ?*
               </p>
-
               <div>
                 <button
                   value="yes"
                   onClick={(e) => setAttendWebinar(e.target.value)}
+                  className={attendWebinar === "yes" && "selected-btn"}
                 >
                   Yes
                 </button>
                 <button
                   value="no"
                   onClick={(e) => setAttendWebinar(e.target.value)}
+                  className={attendWebinar === "no" && "selected-btn"}
                 >
                   No
                 </button>
               </div>
             </div>
-
             <div>
-              <p>In what language will you prefer to attend the webinar</p>
-
+              <p>In what language will you prefer to attend the webinar ?*</p>
               <div>
                 <button
                   value="yes"
                   onClick={(e) => setLanguage(e.target.value)}
+                  className={language === "yes" && "selected-btn"}
                 >
                   English
                 </button>
-                <button value="no" onClick={(e) => setLanguage(e.target.value)}>
+                <button
+                  value="no"
+                  onClick={(e) => setLanguage(e.target.value)}
+                  className={language === "no" && "selected-btn"}
+                >
                   Hindi
                 </button>
               </div>
             </div>
-
             <div>
               <p>
                 Would you like to see a mini course which focuses on training
-                middle and high school students about mathematics in real life?
+                middle and high school students about mathematics in real life
+                ?*
               </p>
-
               <div>
                 <button
                   value="yes"
                   onClick={(e) => setMiniCourse(e.target.value)}
+                  className={miniCourse === "yes" && "selected-btn"}
                 >
                   Yes
                 </button>
                 <button
                   value="no"
                   onClick={(e) => setMiniCourse(e.target.value)}
+                  className={miniCourse === "no" && "selected-btn"}
                 >
                   No
                 </button>
               </div>
             </div>
-
             <div className="feedback-quiz">
               <p>
                 Would you like to see a mini course which focuses on training
-                middle and high school students about mathematics in real life?
+                middle and high school students about mathematics in real life
+                ?*
               </p>
-
               <div>
                 <button
                   value="Puzzle Solving"
                   onClick={(e) => setNextContest(e.target.value)}
+                  className={nextContest === "Puzzle Solving" && "selected-btn"}
                 >
                   Puzzle Solving
                 </button>
                 <button
                   value="Problem solving strategies"
                   onClick={(e) => setNextContest(e.target.value)}
+                  className={
+                    nextContest === "Problem solving strategies" &&
+                    "selected-btn"
+                  }
                 >
                   Problem solving strategies
                 </button>
                 <button
-                  value="Mental Maths "
+                  value="Mental Maths"
                   onClick={(e) => setNextContest(e.target.value)}
+                  className={nextContest === "Mental Maths" && "selected-btn"}
                 >
                   Mental Maths
                 </button>
                 <button
                   value="Mathematics to entertain your spirit"
                   onClick={(e) => setNextContest(e.target.value)}
+                  className={
+                    nextContest === "Mathematics to entertain your spirit" &&
+                    "selected-btn"
+                  }
                 >
                   Mathematics to entertain your spirit
                 </button>
               </div>
             </div>
           </div>
-
           <div className="feedback-text">
-            <p>Do you have any other suggestions for future competition?</p>
+            <p>Do you have any other suggestions for future competition ?</p>
             <textarea
               placeholder="Feedback here..."
               onChange={(e) => setFeedbackText(e.target.value)}
             />
           </div>
-          {error && <Error msg={error}/>}
-
+          {error && <Error msg={error} />}
           <button
             className="feedback-submit"
             type="submit"
