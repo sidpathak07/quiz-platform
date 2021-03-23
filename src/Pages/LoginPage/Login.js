@@ -4,7 +4,7 @@ import UserContext from "../../Context/UserContext";
 import Loader from "../../Components/Loader/LoadingBar";
 import Error from "../../Components/ErrorComponent/Error";
 import axios from "../../axios/axios";
-import login_image from "../../assets/images/exam.svg";
+import login_image from "../../assets/images/login.png";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import "./Login.css";
 
