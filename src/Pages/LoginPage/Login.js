@@ -5,6 +5,7 @@ import Loader from "../../Components/Loader/LoadingBar";
 import Error from "../../Components/ErrorComponent/Error";
 import axios from "../../axios/axios";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import logo from '../../assets/images/login.png'
 import "./Login.css";
 
 const Login = () => {
@@ -72,6 +73,8 @@ const Login = () => {
           <Loader />
         </div>
       )}
+      <div className='login-svg'><img src={logo} alt="login-svg" /></div>
+      
       <form onSubmit={handleSubmit}>
         <div className="username">
           <label>
