@@ -1,31 +1,31 @@
 .error-page {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
 }
 .error-page img {
-	width: 80%;
-	height: 80%;
-	max-width: 500px;
-	max-height: 500px;
-	object-fit: contain;
+  width: 80%;
+  height: 80%;
+  max-width: 500px;
+  max-height: 500px;
+  object-fit: contain;
 }
 
 .error-msg {
-	margin: 50px 0;
-	font-size: 1.5em;
-	font-weight: 650;
-	color: gray;
-	text-align: center;
+  margin: 50px 0;
+  font-size: 1.5em;
+  font-weight: 500;
+  color: gray;
+  text-align: center;
 }
 
 @media only screen and (max-width: 786px) {
-	.error-msg {
-		margin: 50px 0;
-		font-size: 0.9em;
-		font-weight: 650;
-		color: gray;
-	}
+  .error-msg {
+    margin: 50px 0;
+    font-size: 0.9em;
+    font-weight: 650;
+    color: gray;
+  }
 }

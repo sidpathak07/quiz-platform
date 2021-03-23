@@ -15,19 +15,17 @@ const FeedBack = () => {
   const [attendWebinar, setAttendWebinar] = useState("");
   const [language, setLanguage] = useState("");
   const [miniCourse, setMiniCourse] = useState("");
-  const [nextContest,setNextContest] = useState("");
+  const [nextContest, setNextContest] = useState("");
 
   const handleSubmit = () => {
-    console.log("submitted");
     setSubmitted(true);
   };
 
-  useEffect(() => {
-    const submitForm = setTimeout(() => {
-      removeUser();
-    }, 5000);
-    return () => clearTimeout(submitForm, 5000);
-  }, [removeUser, submitted]);
+  // if (submitted) {
+  //   setTimeout(() => {
+  //     removeUser();
+  //   }, 5000);
+  // }
 
   return (
     <>
@@ -58,7 +56,8 @@ const FeedBack = () => {
             </div>
             <div className="participate-feedback">
               <p>
-              To what extent did you like participating in this contest? <span>{participating}/5</span>
+                To what extent did you like participating in this contest?{" "}
+                <span>{participating}/5</span>
               </p>
               <input
                 type="range"
@@ -70,7 +69,7 @@ const FeedBack = () => {
             </div>
             <div className="difficulty-feedback">
               <p>
-              How difficult were the problems? 
+                How difficult were the problems?
                 <span>{difficultFeedback}/5</span>{" "}
               </p>
               <input
@@ -81,18 +80,25 @@ const FeedBack = () => {
                 onChange={(e) => setDifficultFeedback(e.target.value)}
               />
             </div>
-           
           </div>
 
           <div className="feedback-yes-no">
             <div>
-              <p>If a contest like this is organised again, will you participate?</p>
+              <p>
+                If a contest like this is organised again, will you participate?
+              </p>
 
               <div>
-                <button  value="yes" onClick={(e) => setParticipateAgain(e.target.value)}>
+                <button
+                  value="yes"
+                  onClick={(e) => setParticipateAgain(e.target.value)}
+                >
                   Yes
                 </button>
-                <button value="no" onClick={(e) => setParticipateAgain(e.target.value)}>
+                <button
+                  value="no"
+                  onClick={(e) => setParticipateAgain(e.target.value)}
+                >
                   No
                 </button>
               </div>
@@ -101,22 +107,37 @@ const FeedBack = () => {
               <p>Do you think time was sufficient?</p>
 
               <div>
-                <button value="yes" onClick={(e) => setTimeSufficient(e.target.value)}>
+                <button
+                  value="yes"
+                  onClick={(e) => setTimeSufficient(e.target.value)}
+                >
                   Yes
                 </button>
-                <button value="no" onClick={(e) => setTimeSufficient(e.target.value)}>
+                <button
+                  value="no"
+                  onClick={(e) => setTimeSufficient(e.target.value)}
+                >
                   No
                 </button>
               </div>
             </div>
             <div>
-              <p>If a webinar is organised to discuss the solutions of these problems will you attend?</p>
+              <p>
+                If a webinar is organised to discuss the solutions of these
+                problems will you attend?
+              </p>
 
               <div>
-                <button value="yes" onClick={(e) => setAttendWebinar(e.target.value)}>
+                <button
+                  value="yes"
+                  onClick={(e) => setAttendWebinar(e.target.value)}
+                >
                   Yes
                 </button>
-                <button value="no" onClick={(e) => setAttendWebinar(e.target.value)}>
+                <button
+                  value="no"
+                  onClick={(e) => setAttendWebinar(e.target.value)}
+                >
                   No
                 </button>
               </div>
@@ -126,51 +147,80 @@ const FeedBack = () => {
               <p>In what language will you prefer to attend the webinar</p>
 
               <div>
-                <button value="english" onClick={(e) => setLanguage(e.target.value)}>
+                <button
+                  value="english"
+                  onClick={(e) => setLanguage(e.target.value)}
+                >
                   English
                 </button>
-                <button value="hindi" onClick={(e) => setLanguage(e.target.value)}>
+                <button
+                  value="hindi"
+                  onClick={(e) => setLanguage(e.target.value)}
+                >
                   Hindi
                 </button>
               </div>
             </div>
 
             <div>
-              <p>Would you like to see a mini course which focuses on training middle and high school students about mathematics in real life?</p>
+              <p>
+                Would you like to see a mini course which focuses on training
+                middle and high school students about mathematics in real life?
+              </p>
 
               <div>
-                <button value="yes" onClick={(e) => setMiniCourse(e.target.value)}>
+                <button
+                  value="yes"
+                  onClick={(e) => setMiniCourse(e.target.value)}
+                >
                   Yes
                 </button>
-                <button value="no" onClick={(e) => setMiniCourse(e.target.value)}>
+                <button
+                  value="no"
+                  onClick={(e) => setMiniCourse(e.target.value)}
+                >
                   No
                 </button>
               </div>
             </div>
 
-            <div className='feedback-quiz'>
-              <p>Would you like to see a mini course which focuses on training middle and high school students about mathematics in real life?</p>
+            <div className="feedback-quiz">
+              <p>
+                Would you like to see a mini course which focuses on training
+                middle and high school students about mathematics in real life?
+              </p>
 
-              <div >
-                <button value="Puzzle Solving" onClick={(e) => setNextContest(e.target.value)}>
-                Puzzle Solving
+              <div>
+                <button
+                  value="Puzzle Solving"
+                  onClick={(e) => setNextContest(e.target.value)}
+                >
+                  Puzzle Solving
                 </button>
-                <button value="Problem solving strategies" onClick={(e) => setNextContest(e.target.value)}>
-                Problem solving strategies
+                <button
+                  value="Problem solving strategies"
+                  onClick={(e) => setNextContest(e.target.value)}
+                >
+                  Problem solving strategies
                 </button>
-                <button value="Mental Maths " onClick={(e) => setNextContest(e.target.value)}>
-                Mental Maths 
-              </button>
-              <button value="Mathematics to entertain your spirit" onClick={(e) => setNextContest(e.target.value)}>
-              Mathematics to entertain your spirit
-              </button>
+                <button
+                  value="Mental Maths "
+                  onClick={(e) => setNextContest(e.target.value)}
+                >
+                  Mental Maths
+                </button>
+                <button
+                  value="Mathematics to entertain your spirit"
+                  onClick={(e) => setNextContest(e.target.value)}
+                >
+                  Mathematics to entertain your spirit
+                </button>
               </div>
             </div>
-
           </div>
 
           <div className="feedback-text">
-          <p>Do you have any other suggestions for future competition?</p>
+            <p>Do you have any other suggestions for future competition?</p>
             <textarea
               placeholder="Feedback here..."
               onChange={(e) => setFeedbackText(e.target.value)}

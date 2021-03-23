@@ -20,7 +20,8 @@ export const UserContextProvider = (props) => {
   };
   const removeUser = () => {
     setUserDetails(null);
-    sessionStorage.clear();
+    sessionStorage.removeItem("quiz-data");
+    sessionStorage.removeItem("user-details");
   };
 
   return (

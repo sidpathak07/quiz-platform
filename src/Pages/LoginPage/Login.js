@@ -4,8 +4,8 @@ import UserContext from "../../Context/UserContext";
 import Loader from "../../Components/Loader/LoadingBar";
 import Error from "../../Components/ErrorComponent/Error";
 import axios from "../../axios/axios";
+import login_image from "../../assets/images/exam.svg";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import logo from '../../assets/images/login.png'
 import "./Login.css";
 
 const Login = () => {
@@ -72,40 +72,48 @@ const Login = () => {
           <Loader />
         </div>
       )}
-      <div className='login-svg'><img src={logo} alt="login-svg" /></div>
-      
-      <form onSubmit={handleSubmit}>
-        <div className="username">
-          <label>
-            Username
-            <input
-              type="text"
-              value={username}
-              placeholder="Enter username..."
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            {error.username && <Error msg={error.username} />}
-          </label>
+      <div className="login-page-contents">
+        <div className="login-image">
+          <img src={login_image} alt="login" />
         </div>
-        <div className="password">
-          <label>
-            Password
-            <input
-              type={showPassword ? "text" : "password"}
-              value={password}
-              placeholder="Enter password..."
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <div onClick={() => setShowPassword(!showPassword)} className="show-password">
-              {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+        <div className="form-holder">
+          <form onSubmit={handleSubmit}>
+            <div className="username">
+              <label>
+                Username
+                <input
+                  type="text"
+                  value={username}
+                  placeholder="Enter username..."
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+                {error.username && <Error msg={error.username} />}
+              </label>
             </div>
-            {error.password && <Error msg={error.password} />}
-          </label>
+            <div className="password">
+              <label>
+                Password
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  placeholder="Enter password..."
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <div
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="show-password"
+                >
+                  {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+                </div>
+                {error.password && <Error msg={error.password} />}
+              </label>
+            </div>
+            <button onClick={handleSubmit} type="submit">
+              Log in
+            </button>
+          </form>
         </div>
-        <button onClick={handleSubmit} type="submit">
-          Log in
-        </button>
-      </form>
+      </div>
     </div>
   );
 };

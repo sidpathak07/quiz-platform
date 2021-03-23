@@ -1,36 +1,27 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Loader from "../../Components/Loader/LoadingBar";
 import Countdown from "react-countdown";
 import axios from "../../axios/axios";
 import { useParams, useHistory } from "react-router-dom";
 import { IoIosTimer } from "react-icons/io";
-import { Checkbox } from "@material-ui/core";
+// import { Checkbox } from "@material-ui/core";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup, { useRadioGroup } from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-
+// import FormLabel from "@material-ui/core/FormLabel";
+import UserContext from "../../Context/UserContext";
 import "./QuizPage.css";
-const Options = ({ option }) => {
-  return (
-    <div className="option-component">
-      <label>
-        <input type="radio" />
-        {option}
-      </label>
-    </div>
-  );
-};
 
 const QuizPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [quiz, setQuiz] = useState([]);
   const [index, setIndex] = useState(0);
-  const { id } = useParams();
   const [userId, setuserId] = useState();
   const [responses, setResponses] = useState([]);
 
+  const { userDetails } = useContext(UserContext);
+  const { id } = useParams();
   const history = useHistory();
 
   const handlePrevious = () => {
@@ -50,9 +41,11 @@ const QuizPage = () => {
   };
 
   const btnarray = [];
-  for (var i = 0; i < quiz?.length; i++) {
-    btnarray.push(i);
-  }
+  useEffect(() => {
+    for (var i = 0; i < quiz?.length; i++) {
+      btnarray.push(i);
+    }
+  });
 
   const handleTestSubmit = () => {
     submitTest();
@@ -85,12 +78,14 @@ const QuizPage = () => {
   useEffect(() => {
     const fetchQuestion = async () => {
       try {
-        const { data } = await axios.get(`/api/get-quiz/${id}`);
+        const config = {
+          headers: { Authorization: `Bearer ${userDetails.access}` },
+        };
+        const { data } = await axios.get(`/api/get-quiz/${id}`, config);
         setQuiz(data?.quiz_questions);
         setIsLoading(false);
         var arr = [];
         for (var i = 0; i < quiz.length; i++) {
-          // dispatch({ type: "add", key: quiz[i].id, value: "" })
           arr.push({ key: quiz[i].id, answer: 0 });
         }
         setResponses(arr);
@@ -100,9 +95,7 @@ const QuizPage = () => {
       }
     };
     fetchQuestion();
-  }, [id]);
-
-  // console.log(quiz);
+  }, [id, quiz, userDetails.access]);
 
   return (
     <>
@@ -114,7 +107,7 @@ const QuizPage = () => {
         <div className="quiz-page">
           <div className="question-progress-bar">
             <div
-              style={{ width: ((index + 1) / quiz.length) * 100 + "vw" }}
+              style={{ width: ((index + 1) / quiz.length) * 100 + "%" }}
               className="question-progress"
             ></div>
           </div>

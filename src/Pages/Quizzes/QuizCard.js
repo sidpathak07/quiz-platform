@@ -3,7 +3,6 @@ import { BsPencilSquare } from "react-icons/bs";
 import { IoIosTimer } from "react-icons/io";
 
 const QuizCard = (props) => {
-  console.log(props);
   const { id, title, desc, duration, creator_username } = props;
   const history = useHistory();
 

@@ -1,154 +1,155 @@
 .login-page {
-	width: 100%;
-	height: 100vh;
-	display: flex;
-	justify-content: space-evenly;
-	align-items: center;
-	/* background: rgb(0, 140, 255); */
-	position: relative;
-	padding: 0 30px;
+  width: 100%;
+  height: 100vh;
+  background-color: #f3f3f3;
+  position: relative;
 }
-.login-svg {
-	width: 100%;
-	max-width: 600px;
-	height: auto;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+
+.login-page-contents {
+  width: 90vw;
+  max-width: 1168px;
+  margin: auto;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
 }
-.login-svg img {
-	width: 100%;
-	height: 100%;
-	object-fit: contain;
+
+.login-image {
+  display: grid;
+  place-items: center;
+}
+
+.login-image img {
+  width: 80%;
+  object-fit: contain;
+}
+
+.form-holder {
+  display: grid;
+  place-items: center;
 }
 
 .login-page form {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-evenly;
-	align-items: stretch;
-	width: 90%;
-	margin: 0 30px;
-	max-width: 400px;
-	min-height: 350px;
-	padding: 25px;
-	border-radius: 10px;
-	box-shadow: 5px 5px 30px 10px rgba(0, 0, 0, 0.3);
-	background: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: stretch;
+  width: 90%;
+  margin: 0 30px;
+  max-width: 400px;
+  min-height: 350px;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  background: rgb(255, 255, 255);
 }
 
 .login-page input {
-	padding: 10px 10px;
-	border: none;
-	border: 1px solid lightgray;
-	border-radius: 5px;
-	background: inherit;
-	outline: none;
-	margin-top: 5px;
-	font-weight: 500;
-	font-size: 16px;
+  padding: 10px 10px;
+  border: none;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  background: inherit;
+  outline: none;
+  margin-top: 5px;
+  font-weight: 500;
+  font-size: 16px;
 }
 
 input::placeholder {
-	font-size: 1em;
-	color: rgb(180, 182, 184);
-	font-weight: 400;
+  font-size: 1em;
+  color: rgb(180, 182, 184);
+  font-weight: 400;
 }
 
 .username label,
 .password label {
-	display: flex;
-	flex-direction: column;
-	font-size: 1.1em;
-	font-weight: 600;
-	margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.1em;
+  font-weight: 600;
+  margin-bottom: 20px;
 }
 
 .login-page button {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 40px;
-	border: none;
-	outline: none;
-	color: white;
-	background: rgb(0, 140, 255);
-	cursor: pointer;
-	padding: 10px;
-	font-size: 1.1em;
-	font-weight: 700;
-	border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  border: none;
+  outline: none;
+  color: white;
+  background: rgb(0, 140, 255);
+  cursor: pointer;
+  padding: 10px;
+  font-size: 1.1em;
+  font-weight: 700;
+  border-radius: 5px;
 }
 
 .login-page button:hover {
-	background: white;
-	color: black;
-	border: 1px solid black;
+  background: white;
+  color: black;
+  border: 1px solid black;
 }
 
 .username label p,
 .password label p {
-	margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .login-loader {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100vh;
-	display: grid;
-	place-items: center;
-	background-color: rgba(255, 255, 255, 0.5);
-	z-index: 99;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 99;
 }
 
 .password label {
-	position: relative;
+  position: relative;
 }
 .password .show-password {
-	position: absolute;
-	right: 10px;
-	top: 40px;
-	cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 40px;
+  cursor: pointer;
 }
 
 .show-password svg {
-	color: rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.5);
 }
 
-@media only screen and (max-width: 1100px) {
-	.login-svg {
-		display: none;
-	}
+@media (max-width: 888px) {
+  .login-image img {
+    width: 100%;
+  }
+}
 
-	.login-page form {
-		width: 90%;
-		margin: 0;
-	}
-
-	.login-page {
-		background-image: linear-gradient(
-				to bottom,
-				rgba(0, 140, 255, 0.6),
-				rgba(0, 140, 255, 0.6)
-			),
-			url('../../assets//images//login.png');
-		background-repeat: no-repeat;
-		background-position: center;
-		background-size: contain;
-	}
+@media (max-width: 750px) {
+  .login-image {
+    display: none;
+  }
+  .form-holder {
+    width: 90vw;
+  }
 }
 
 @media only screen and (max-width: 500px) {
-	.login-page {
-		padding: 20px;
-		background-size: cover;
-	}
-	.login-page form {
-		width: 100%;
-		max-width: 400px;
-		min-height: 350px;
-		padding: 25px;
-	}
+  .login-page {
+    padding: 20px;
+    background-size: cover;
+  }
+  .login-page form {
+    width: 100%;
+    max-width: 400px;
+    min-height: 350px;
+    padding: 25px;
+  }
 }
