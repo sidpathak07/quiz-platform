@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import Loader from "../../Components/Loader/LoadingBar";
 import Countdown from "react-countdown";
 import axios from "../../axios/axios";
@@ -112,10 +112,10 @@ const QuizPage = () => {
             <div className="quiz-question">
               <h3>{`Question: ${index + 1}`}</h3>
               <div className="question-details">
-                <h2>{`${quiz[index]?.question}`}</h2>
+                <h2>{quiz[index]?.question}</h2>
                 <div className="marks-distribution">
-                  <p>{`Correct : ${quiz[index]?.correct_marks} marks`}</p>
-                  <p>{`Incorrect : ${quiz[index]?.negative_marks} marks`}</p>
+                  <p>Correct : {quiz[index]?.correct_marks} marks</p>
+                  <p>Incorrect : {quiz[index]?.negative_marks} marks</p>
                 </div>
               </div>
 
