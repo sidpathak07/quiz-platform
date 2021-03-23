@@ -1,11 +1,12 @@
 import "./ErrorPage.css";
+import img from '../../assets/images/img-4.svg'
 
 const ErrorPage = () => {
   return (
     <div className="error-page">
+    <img src={img} alt='404'/>
       <p className="error-msg">
-        <span>404</span>
-        This page could not be found.
+        Seems you're lost .. |  This page could not be found.
       </p>
     </div>
   );

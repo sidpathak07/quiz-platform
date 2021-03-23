@@ -27,7 +27,7 @@
 .quiz-submitted-header {
 	font-size: 1.8em;
 	position: absolute;
-	top: -7%;
+	top: -5%;
 	left: 0%;
 	text-align: center;
 	width: 100%;
@@ -79,6 +79,11 @@
 	color: rgb(99, 99, 99);
 }
 
+.feedback-text p {
+	margin: 20px 10px;
+	font-size: 1.1em;
+	font-weight: 600;
+}
 .feedback-text textarea {
 	height: 125px;
 	padding: 10px;
@@ -101,11 +106,15 @@
 	font-weight: 700;
 	margin: 20px 0;
 }
-.feedback-submit:hover,
-.feedback-yes-no button:hover {
+.feedback-submit:hover {
 	background: white;
-	border: 1px solid black;
 	color: black;
+	border: 1px solid black;
+}
+
+.feedback-yes-no button:hover {
+	background: rgb(0, 140, 255);
+	color: white;
 }
 
 .feedback-yes-no button {
@@ -114,13 +123,13 @@
 	align-items: center;
 	height: 40px;
 	width: 80px;
-	border: none;
+	border: 1px solid rgb(99, 99, 99);
 	outline: none;
-	color: white;
-	background: rgb(0, 140, 255);
+	color: rgb(99, 99, 99);
+	background: white;
 	cursor: pointer;
 	padding: 10px;
-	font-size: 1.1em;
+	font-size: 0.9em;
 	font-weight: 700;
 	margin: 10px;
 }
@@ -137,10 +146,34 @@
 	margin-bottom: 50px;
 }
 
+.feedback-yes-no div {
+	margin: 10px 0;
+}
+
 .feedback-input-sliders div p {
 	margin-bottom: 10px;
 	font-size: 1.2em;
 	font-weight: 500;
+}
+.feedback-quiz div {
+	display: flex;
+	flex-direction: column;
+}
+.feedback-quiz div button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 40px;
+	width: 50%;
+	border: 1px solid rgb(99, 99, 99);
+	outline: none;
+	background-color: white;
+	color: rgb(99, 99, 99);
+	cursor: pointer;
+	padding: 10px;
+	font-size: 0.9em;
+	font-weight: 700;
+	margin: 10px;
 }
 
 @media only screen and (max-width: 786px) {
@@ -157,6 +190,9 @@
 		width: 100%;
 	}
 	.feedback-input-sliders p {
+		width: 100%;
+	}
+	.feedback-quiz div button {
 		width: 100%;
 	}
 }

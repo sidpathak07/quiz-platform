@@ -1,11 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import Loader from "../../Components/Loader/LoadingBar";
 import Countdown from "react-countdown";
 import axios from "../../axios/axios";
 import { useParams, useHistory } from "react-router-dom";
 import { IoIosTimer } from "react-icons/io";
-import "./QuizPage.css";
+import { Checkbox } from "@material-ui/core";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup, { useRadioGroup } from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
 
+import "./QuizPage.css";
 const Options = ({ option }) => {
   return (
     <div className="option-component">
@@ -22,6 +28,9 @@ const QuizPage = () => {
   const [quiz, setQuiz] = useState([]);
   const [index, setIndex] = useState(0);
   const { id } = useParams();
+  const [userId, setuserId] = useState();
+  const [responses, setResponses] = useState([]);
+
   const history = useHistory();
 
   const handlePrevious = () => {
@@ -50,7 +59,28 @@ const QuizPage = () => {
     history.push("/feedback");
   };
 
-  const submitTest = () => {};
+  const handleResponse = (e) => {
+    const { name } = e.target;
+
+    var response = [...responses];
+    response[index] = {
+      key: quiz[index].id,
+      answer: name,
+    };
+    setResponses(response);
+    console.log(responses);
+  };
+
+  const submitTest = async () => {
+    const res = {
+      quiz: id,
+      user: userId,
+      response: responses,
+    };
+    console.log(userId);
+    const data = await axios.post("/api/create-response", res);
+    console.log(data);
+  };
 
   useEffect(() => {
     const fetchQuestion = async () => {
@@ -58,6 +88,13 @@ const QuizPage = () => {
         const { data } = await axios.get(`/api/get-quiz/${id}`);
         setQuiz(data?.quiz_questions);
         setIsLoading(false);
+        var arr = [];
+        for (var i = 0; i < quiz.length; i++) {
+          // dispatch({ type: "add", key: quiz[i].id, value: "" })
+          arr.push({ key: quiz[i].id, answer: 0 });
+        }
+        setResponses(arr);
+        setuserId(data?.quiz_details?.creator);
       } catch (err) {
         console.log(err.message);
       }
@@ -65,7 +102,7 @@ const QuizPage = () => {
     fetchQuestion();
   }, [id]);
 
-  console.log(quiz);
+  // console.log(quiz);
 
   return (
     <>
@@ -84,9 +121,9 @@ const QuizPage = () => {
 
           <div className="question-page-left">
             <div className="quiz-question">
-              <h3>Question:</h3>
+              <h3>{`Question: ${index + 1}`}</h3>
               <div className="question-details">
-                <h2>{`${index + 1}. ${quiz[index]?.question}`}</h2>
+                <h2>{`${quiz[index]?.question}`}</h2>
 
                 <div className="marks-distribution">
                   <p>{`Correct : ${quiz[index]?.correct_marks} marks`}</p>
@@ -96,9 +133,21 @@ const QuizPage = () => {
 
               <div className="quiz-options">
                 {quiz[index]?.option.length > 0 ? (
-                  quiz[index]?.option.map((option) => {
-                    return <Options key={option.id} {...option} />;
-                  })
+                  <FormControl component="fieldset">
+                    <RadioGroup
+                      aria-label="gender"
+                      onClick={(e) => handleResponse(e)}
+                    >
+                      {quiz[index]?.option.map((option) => (
+                        <FormControlLabel
+                          value={option.option}
+                          name={option.key.toString()}
+                          control={<Radio />}
+                          label={option.option}
+                        />
+                      ))}
+                    </RadioGroup>
+                  </FormControl>
                 ) : (
                   <textarea placeholder="Type your answer here" />
                 )}
@@ -129,7 +178,11 @@ const QuizPage = () => {
               <p>
                 <IoIosTimer /> Time Left :{" "}
               </p>
-              <Countdown className="quiz-countdown" date={Date.now() + 10000} />
+              <Countdown
+                className="quiz-countdown"
+                date={Date.now() + 1000000}
+                onComplete={handleTestSubmit}
+              />
             </div>
 
             <div className="quiz-navigation-stats">

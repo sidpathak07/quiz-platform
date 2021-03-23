@@ -1,19 +1,31 @@
 .error-page {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 50px;
+}
+.error-page img {
+	width: 80%;
+	height: 80%;
+	max-width: 500px;
+	max-height: 500px;
+	object-fit: contain;
 }
 
-.error-page p {
-  font-size: 22px;
+.error-msg {
+	margin: 50px 0;
+	font-size: 1.5em;
+	font-weight: 650;
+	color: gray;
+	text-align: center;
 }
 
-.error-page span {
-  font-weight: 600;
-  font-size: 26px;
-  padding: 10px 20px;
-  margin-right: 20px;
-  border-right: solid 1px rgba(0, 0, 0, 0.4);
+@media only screen and (max-width: 786px) {
+	.error-msg {
+		margin: 50px 0;
+		font-size: 0.9em;
+		font-weight: 650;
+		color: gray;
+	}
 }
