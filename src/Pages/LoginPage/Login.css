@@ -77,7 +77,6 @@ input::placeholder {
 	padding: 10px;
 	font-size: 1.1em;
 	font-weight: 700;
-	border-radius: 5px;
 }
 
 .login-page button:hover {

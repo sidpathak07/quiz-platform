@@ -1,11 +1,22 @@
-import { useHistory } from "react-router-dom";
+import { useHistory} from "react-router-dom";
 import { BsPencilSquare } from "react-icons/bs";
 import { IoIosTimer } from "react-icons/io";
+import UserContext from "../../Context/UserContext";
+import {useContext} from 'react'
 
 const QuizCard = (props) => {
   console.log(props);
   const { id, title, desc, duration, creator_username } = props;
   const history = useHistory();
+  const{addQuiz , userCurrentQuiz} =  useContext(UserContext)
+
+  const handleClick =()=>{
+    addQuiz(id)
+    setTimeout(()=>{
+      history.push(`/instruction/${userCurrentQuiz}`)
+    },1000)
+    
+  }
 
   return (
     <div className="quiz-card">
@@ -29,7 +40,7 @@ const QuizCard = (props) => {
         </p>
       </div>
       <div className="quiz-start-button">
-        <button onClick={() => history.push(`/quizpage/${id}`)}>
+        <button onClick={handleClick}>
           Start test
         </button>
       </div>

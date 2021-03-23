@@ -11,6 +11,7 @@ import Quizzes from "./Pages/Quizzes/Quizzes";
 import ErrorPage from "./Pages/ErrorPage/ErrorPage";
 import FeedBack from "./Pages/FeedBackPage/FeedBack";
 import UserContext from "./Context/UserContext";
+import Instruction from "./Pages/InstructionPage/Instruction";
 
 const App = () => {
   const { userDetails } = useContext(UserContext);
@@ -27,6 +28,9 @@ const App = () => {
           </Route>
           <Route exact path="/quizpage/:id">
             {userDetails ? <QuizPage /> : <Redirect to="/login" />}
+          </Route>
+          <Route exact path="/instruction/:id">
+          {userDetails ? <Instruction /> : <Redirect to="/login" />}
           </Route>
           <Route exact path="/feedback">
             {userDetails ? <FeedBack /> : <Redirect to="/login" />}
