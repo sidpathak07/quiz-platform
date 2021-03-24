@@ -4,7 +4,6 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding-top: 90px;
   align-items: center;
   position: relative;
   background-color: #f3f3f3;
@@ -18,7 +17,7 @@
   grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   grid-gap: 30px;
   margin-bottom: 40px;
-  margin-top: 30px !important;
+  margin-top: 40px !important;
 }
 
 .quiz-card {
@@ -35,7 +34,6 @@
   background-color: white;
   box-shadow: rgba(50, 50, 93, 0.3) 0px 2px 5px -1px,
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  padding-bottom: 0px;
 }
 .quiz-loader {
   position: absolute;
@@ -103,7 +101,7 @@
   font-weight: 700;
 }
 
-.quiz-card button {
+.quiz-card .quiz-start-button button {
   display: flex;
   justify-content: center;
   align-items: center;

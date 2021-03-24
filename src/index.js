@@ -6,11 +6,9 @@ import reportWebVitals from "./reportWebVitals";
 import { UserContextProvider } from "./Context/UserContext";
 
 ReactDOM.render(
-  <React.StrictMode>
     <UserContextProvider>
       <App />
-    </UserContextProvider>
-  </React.StrictMode>,
+    </UserContextProvider>,
   document.getElementById("root")
 );
 

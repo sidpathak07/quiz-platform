@@ -20,12 +20,13 @@
   padding: 30px;
   min-width: 700px;
 }
+
 .quiz-question {
   border: 1px solid rgb(170, 170, 170);
   padding: 30px;
   position: relative;
   min-width: 700px;
-  max-width: 700px;
+  max-width: 800px;
 }
 
 .quiz-options textarea {
@@ -43,7 +44,6 @@
   transform: translate(25%, -50%);
   padding: 10px;
   background: white;
-
   font-size: 1.5em;
 }
 
@@ -183,7 +183,7 @@
 
 .question-progress-bar {
   width: 100vw;
-  height: 10px;
+  height: 3px;
   position: absolute;
   top: 0%;
   left: 0%;

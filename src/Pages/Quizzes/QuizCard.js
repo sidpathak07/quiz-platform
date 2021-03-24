@@ -28,13 +28,12 @@ const QuizCard = (props) => {
       );
       console.log(data);
       if (data.message === "Success") {
-        toast.warn("Already Attempted!", {
+        toast.warn("You have already attempted this quiz!", {
           position: "top-center",
-          autoClose: 1000000,
+          autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: false,
-          draggable: true,
           progress: undefined,
         });
       } else {
@@ -43,6 +42,7 @@ const QuizCard = (props) => {
     } catch (err) {
       console.log(err.message);
     }
+    // history.push(`/instruction/${id}`);
   };
 
   return (
@@ -66,9 +66,6 @@ const QuizCard = (props) => {
           <span>created by:</span> {creator_username}
         </p>
       </div>
-      <div className="quiz-start-button">
-        <button onClick={handleClick}>Start test</button>
-      </div>
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -77,10 +74,12 @@ const QuizCard = (props) => {
         closeOnClick
         rtl={false}
         pauseOnFocusLoss
-        draggable
         pauseOnHover
       />
       <ToastContainer />
+      <div className="quiz-start-button">
+        <button onClick={handleClick}>Start test</button>
+      </div>
     </div>
   );
 };

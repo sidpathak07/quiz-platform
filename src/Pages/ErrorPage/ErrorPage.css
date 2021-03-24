@@ -25,6 +25,28 @@
   text-align: center;
 }
 
+.error-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  border: none;
+  outline: none;
+  color: white;
+  background: rgb(0, 140, 255);
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 1.1em;
+  font-weight: 500;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+.error-btn:hover {
+  background: white;
+  color: black;
+  border: 1px solid black;
+}
+
 @media (max-width: 768px) {
   .error-page img {
     width: 80%;

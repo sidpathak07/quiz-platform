@@ -10,8 +10,8 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-import "./QuizPage.css";
 import MathJax from "react-mathjax3";
+import "./QuizPage.css";
 
 const getResponses = () => {
   const responses = sessionStorage.getItem("quiz-responses");
@@ -58,13 +58,12 @@ const QuizPage = () => {
   const handleResponse = (e) => {
     const { value } = e.target;
     const newResponses = responses.map((ques) => {
-      if (ques.key === quiz[index].id){
-        if(ques.answer===value){
-          return {...ques, answer: ""}
+      if (ques.key === quiz[index].id) {
+        if (ques.answer === value) {
+          return { ...ques, answer: "" };
         }
-        return { ...ques, answer: value }
-      }
-      else return ques;
+        return { ...ques, answer: value };
+      } else return ques;
     });
     setResponses(newResponses);
     sessionStorage.setItem("quiz-responses", JSON.stringify(newResponses));
@@ -104,6 +103,7 @@ const QuizPage = () => {
           headers: { Authorization: `Bearer ${userDetails.access}` },
         };
         const { data } = await axios.get(`/api/get-quiz/${id}`, config);
+        console.log(data);
         setDuration(data?.quiz_details.duration);
         setQuiz(data?.quiz_questions);
         if (responses == null) {
@@ -176,7 +176,6 @@ const QuizPage = () => {
                 className="question-progress"
               ></div>
             </div>
-
             <div className="question-page-left">
               <div className="quiz-question">
                 <h3>Question: {index + 1}</h3>
@@ -224,7 +223,6 @@ const QuizPage = () => {
                   )}
                 </div>
               </div>
-
               <div className="navigation-btn">
                 <button
                   disabled={index === 0 ? true : false}
@@ -245,7 +243,6 @@ const QuizPage = () => {
                 </button>
               </div>
             </div>
-
             {showSubmit && (
               <div className="submit-confirm">
                 <div className="submit-popup">
@@ -267,13 +264,11 @@ const QuizPage = () => {
                 </div>
               </div>
             )}
-
             <div className="quiz-status">
               <CountDownTimer
                 handleTestSubmit={handleTestSubmit}
                 duration={duration}
               />
-
               <div className="quiz-navigation-stats">
                 {btnarray.map((button, idx) => {
                   return (
@@ -293,7 +288,6 @@ const QuizPage = () => {
                   );
                 })}
               </div>
-
               <div className="choice-sign">
                 <div className="attempted-sign">
                   <button disabled={true} />
