@@ -21,7 +21,6 @@ const NavBar = () => {
             place="bottom"
             type="dark"
             effect="solid"
-            delayHide={1000}
           />
         </div>
       </div>

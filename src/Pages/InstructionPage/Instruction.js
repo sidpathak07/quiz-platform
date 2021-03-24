@@ -10,6 +10,9 @@ const Instruction = () => {
   const { userCurrentQuiz } = useContext(UserContext);
   const history = useHistory();
 
+  const hours = userCurrentQuiz.duration.split(":")[0].split("")[1];
+  const minutes = userCurrentQuiz.duration.split(":")[1];
+
   const onComplete = () => {
     setShowbtn(true);
     setTime(Date.now());
@@ -24,7 +27,10 @@ const Instruction = () => {
         </div>
         <div className="instruction-one">
           <h2>Test Duration :</h2>
-          <p>You have 1 hour 30 minutes to complete and submit the test.</p>
+          <p>
+            You have {hours !== "0" && `${hours} hours and`} {minutes} minutes
+            to complete and submit the test.
+          </p>
         </div>
         <div className="instruction-two">
           <h2>Marking Scheme :</h2>
@@ -70,7 +76,7 @@ const Instruction = () => {
           />
           {showbtn && (
             <button
-              onClick={() => history.push(`/quizpage/${userCurrentQuiz}`)}
+              onClick={() => history.push(`/quizpage/${userCurrentQuiz.id}`)}
             >
               Proceed to Test
             </button>
