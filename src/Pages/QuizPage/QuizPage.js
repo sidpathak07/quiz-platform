@@ -5,12 +5,17 @@ import Loader from "../../Components/Loader/LoadingBar";
 import CountDownTimer from "./CountDownTimer";
 import axios from "../../axios/axios";
 import { FiAlertTriangle } from "react-icons/fi";
+import { IoFlag } from "react-icons/io5";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import "./QuizPage.css";
-import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+import ReactHtmlParser, {
+  processNodes,
+  convertNodeToElement,
+  htmlparser2,
+} from "react-html-parser";
 
 const getResponses = () => {
   const responses = sessionStorage.getItem("quiz-responses");
@@ -58,7 +63,16 @@ const QuizPage = () => {
   const handleResponse = (e) => {
     const { value } = e.target;
     const newResponses = responses.map((ques) => {
-      if (ques.key === quiz[index].id) return { key: ques.key, answer: value };
+      if (ques.key === quiz[index].id) return { ...ques, answer: value };
+      else return ques;
+    });
+    setResponses(newResponses);
+    sessionStorage.setItem("quiz-responses", JSON.stringify(newResponses));
+  };
+
+  const handleFlagQuestion = () => {
+    const newResponses = responses.map((ques) => {
+      if (ques.key === quiz[index].id) return { ...ques, flag: !ques.flag };
       else return ques;
     });
     setResponses(newResponses);
@@ -80,6 +94,7 @@ const QuizPage = () => {
     };
     submitTest();
     history.push("/feedback");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -92,9 +107,13 @@ const QuizPage = () => {
         setDuration(data?.quiz_details.duration);
         setQuiz(data?.quiz_questions);
         setuserId(data?.quiz_details?.creator);
-        if(responses==null){
+        if (responses == null) {
           setResponses(
-            data?.quiz_questions.map((quiz) => ({ key: quiz.id, answer: "" }))
+            data?.quiz_questions.map((quiz) => ({
+              key: quiz.id,
+              answer: "",
+              flag: false,
+            }))
           );
           sessionStorage.setItem("quiz-responses", JSON.stringify(responses));
         }
@@ -131,13 +150,22 @@ const QuizPage = () => {
                 <div className="marks-distribution">
                   <p>Correct : {quiz[index]?.correct_marks} marks</p>
                   <p>Incorrect : {quiz[index]?.negative_marks} marks</p>
+                  <p className="flag-question" onClick={handleFlagQuestion}>
+                    <IoFlag />
+                    {responses[index].flag
+                      ? "Unflag Question"
+                      : "Flag Question"}
+                  </p>
                 </div>
               </div>
 
               <div className="quiz-options">
                 {quiz[index]?.option.length > 0 ? (
                   <FormControl component="fieldset">
-                    <RadioGroup aria-label="gender" value={responses[index]?.answer}>
+                    <RadioGroup
+                      aria-label="gender"
+                      value={responses[index]?.answer}
+                    >
                       {quiz[index]?.option.map((option, idx) => (
                         <FormControlLabel
                           key={idx}
@@ -217,6 +245,7 @@ const QuizPage = () => {
                     className={
                       responses[idx].answer ? "checked-answer" : undefined
                     }
+                    style={{ backgroundColor: responses[idx].flag && "red" }}
                   >
                     {button + 1}
                   </button>
