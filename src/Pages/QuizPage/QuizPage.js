@@ -192,7 +192,7 @@ const QuizPage = () => {
           )}
 
           <div className="quiz-status">
-            <CountDownTimer handleTestSubmit={handleTestSubmit} duration={} />
+            <CountDownTimer handleTestSubmit={handleTestSubmit} />
 
             <div className="quiz-navigation-stats">
               {btnarray.map((button, idx) => {

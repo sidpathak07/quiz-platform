@@ -47,13 +47,14 @@ const Quizzes = () => {
   return (
     <div className="Quizzes-Page">
       <NavBar />
-      <h2>Your Quizzes</h2>
+       {!isLoading && <h2>Your Quizzes</h2>}
       {isLoading ? (
         <div className="quiz-loader">
           <Loader />
         </div>
       ) : (
         <div className="all-Quizzes">
+        
           {quizzes?.map((quiz) => {
             if (new Date(quiz.endtime) > new Date()) {
               return <QuizCard key={quiz.id} {...quiz} />;
