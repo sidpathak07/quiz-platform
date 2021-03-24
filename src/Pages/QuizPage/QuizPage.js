@@ -83,10 +83,14 @@ const QuizPage = () => {
       const config = {
         headers: { Authorization: `Bearer ${userDetails.access}` },
       };
+      const newResponses = responses.map((res) => ({
+        key: res.key,
+        answer: res.answer,
+      }));
       const res = {
         quiz: id,
         user: userDetails.user_id,
-        response: responses,
+        response: newResponses,
       };
       const data = await axios.post("/api/create-response", res, config);
       console.log(data);
@@ -184,8 +188,14 @@ const QuizPage = () => {
                     <MathJax.Html html={quiz[index]?.question} />
                   </h2>
                   <div className="marks-distribution">
-                    <p>Correct : {quiz[index]?.correct_marks} marks</p>
-                    <p>Incorrect : {quiz[index]?.negative_marks} marks</p>
+                    <p>Correct: {quiz[index]?.correct_marks} marks</p>
+                    <p>
+                      Incorrect:{" "}
+                      {quiz[index]?.negative_marks === 0
+                        ? quiz[index]?.negative_marks
+                        : `-${quiz[index]?.negative_marks}`}{" "}
+                      marks
+                    </p>
                     <p className="flag-question" onClick={handleFlagQuestion}>
                       <IoFlag />
                       {responses[index].flag
