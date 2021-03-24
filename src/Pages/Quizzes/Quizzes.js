@@ -55,6 +55,7 @@ const Quizzes = () => {
         </div>
       ) : (
         <div className="all-Quizzes">
+        
           {quizzes?.map((quiz) => {
             if (new Date(quiz.endtime) > new Date()) {
               return <QuizCard key={quiz.id} {...quiz} />;
