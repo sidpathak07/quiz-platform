@@ -27,7 +27,7 @@ const QuizCard = (props) => {
         config
       );
       console.log(data);
-      if (data.message === "Success") {
+      if (data.message !== "Success") {
         toast.warn("You have already attempted this quiz!", {
           position: "top-center",
           autoClose: 5000,
