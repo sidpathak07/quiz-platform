@@ -196,7 +196,7 @@ const QuizPage = () => {
                 </div>
 
                 <div className="quiz-options">
-                  {quiz[index]?.option.length > 0 ? (
+                  {quiz[index]?.option?.length > 0 ? (
                     <FormControl component="fieldset">
                       <RadioGroup
                         aria-label="gender"

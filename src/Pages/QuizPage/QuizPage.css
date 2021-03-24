@@ -3,6 +3,7 @@
   display: flex;
   justify-content: space-between;
   padding-top: 100px;
+  line-height: 1.5;
 }
 
 .question-page-left {
@@ -54,7 +55,9 @@
 }
 
 .question-details h2 {
-  width: 70%;
+  width: 75%;
+  font-weight: 500;
+  font-size: 16px;
 }
 
 .marks-distribution > * {
@@ -148,7 +151,7 @@
   height: 15px;
   border: 1px solid black;
   outline: none;
-  margin-right: 10px;
+  margin-right: 5px;
   border-radius: 50%;
 }
 
@@ -284,6 +287,9 @@
     width: 80vw;
     margin-left: 0;
   }
+  .question-details h2 {
+    width: 100%;
+  }
   .navigation-btn {
     display: flex;
     justify-content: space-between;
@@ -317,6 +323,9 @@
   }
   .quiz-status {
     margin-top: 50px;
+  }
+  .quiz-options textarea {
+    width: 100%;
   }
 }
 
