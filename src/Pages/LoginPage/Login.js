@@ -18,7 +18,6 @@ const Login = () => {
     password: "",
   });
   const history = useHistory();
-
   const { updateUser } = useContext(UserContext);
 
   const fetchUser = async () => {

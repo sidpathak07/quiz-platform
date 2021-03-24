@@ -35,7 +35,8 @@
 }
 
 .navbar-logo h1{
-  margin-top: -5px
+  margin-top: -5px;
+  cursor: default;
 }
 
 .nav-logout {

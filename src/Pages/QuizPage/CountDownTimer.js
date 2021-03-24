@@ -11,7 +11,7 @@ const CountDownTimer = ({ handleTestSubmit }) => {
       </p>
       <Countdown
         className="quiz-countdown"
-        date={Date.now() + 10000}
+        date={Date.now() + 300000}
         onComplete={handleTestSubmit}
       />
     </div>

@@ -100,7 +100,7 @@ const QuizPage = () => {
       }
     };
     fetchQuestion();
-  }, [id, quiz, responses, userDetails.access]);
+  }, []);
 
   return (
     <>
@@ -132,9 +132,9 @@ const QuizPage = () => {
                 {quiz[index]?.option.length > 0 ? (
                   <FormControl component="fieldset">
                     <RadioGroup aria-label="gender" onClick={handleResponse}>
-                      {quiz[index]?.option.map((option, index) => (
+                      {quiz[index]?.option.map((option, idx) => (
                         <FormControlLabel
-                          key={index}
+                          key={idx}
                           value={option.option}
                           name={option.key.toString()}
                           control={<Radio />}
@@ -192,12 +192,13 @@ const QuizPage = () => {
           )}
 
           <div className="quiz-status">
-            {/* <CountDownTimer handleTestSubmit={handleTestSubmit} /> */}
+            <CountDownTimer handleTestSubmit={handleTestSubmit} />
 
             <div className="quiz-navigation-stats">
-              {btnarray.map((button) => {
+              {btnarray.map((button, idx) => {
                 return (
                   <button
+                    key={idx}
                     onClick={(e) => {
                       setIndex(e.target.value - 1);
                     }}

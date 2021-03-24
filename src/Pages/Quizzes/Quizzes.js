@@ -34,6 +34,7 @@ const Quizzes = () => {
           config
         );
         sessionStorage.setItem("quiz-data", JSON.stringify(data));
+        console.log(data);
         setQuizzes(data);
         setIsLoading(false);
       } catch (err) {
@@ -41,20 +42,23 @@ const Quizzes = () => {
       }
     };
     fetchQuizzes();
-  }, [quizzes, userDetails.access, userDetails.user_id]);
+  }, []);
 
   return (
     <div className="Quizzes-Page">
       <NavBar />
+      <h2>Your Quizzes</h2>
       {isLoading ? (
         <div className="quiz-loader">
           <Loader />
         </div>
       ) : (
         <div className="all-Quizzes">
-          {quizzes?.map((quiz) => (
-            <QuizCard key={quiz.id} {...quiz} />
-          ))}
+          {quizzes?.map((quiz) => {
+            if (new Date(quiz.endtime) > new Date()) {
+              return <QuizCard key={quiz.id} {...quiz} />;
+            } else return false;
+          })}
         </div>
       )}
     </div>
