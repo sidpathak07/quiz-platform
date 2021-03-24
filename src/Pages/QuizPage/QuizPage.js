@@ -58,7 +58,12 @@ const QuizPage = () => {
   const handleResponse = (e) => {
     const { value } = e.target;
     const newResponses = responses.map((ques) => {
-      if (ques.key === quiz[index].id) return { ...ques, answer: value };
+      if (ques.key === quiz[index].id){
+        if(ques.answer===value){
+          return {...ques, answer: ""}
+        }
+        return { ...ques, answer: value }
+      }
       else return ques;
     });
     setResponses(newResponses);
@@ -205,7 +210,7 @@ const QuizPage = () => {
                             name={option.key.toString()}
                             control={<Radio />}
                             label={option.option}
-                            onChange={handleResponse}
+                            onClick={handleResponse}
                           />
                         ))}
                       </RadioGroup>
