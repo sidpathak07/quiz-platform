@@ -97,8 +97,8 @@ input::placeholder {
   border: 1px solid black;
 }
 
-.username label p,
-.password label p {
+.username label p:first-child,
+.password label p:first-child {
   margin-bottom: 10px;
 }
 

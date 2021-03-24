@@ -21,18 +21,17 @@ const getResponses = () => {
 };
 
 const QuizPage = () => {
-  const [quiz, setQuiz] = useState(getResponses);
+  const [quiz, setQuiz] = useState(null);
   const [index, setIndex] = useState(0);
   const [userId, setuserId] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [showSubmit, setShowSubmit] = useState(false);
-  const [responses, setResponses] = useState([]);
+  const [responses, setResponses] = useState(getResponses);
+  const [duration, setDuration] = useState(0);
 
   const { userDetails } = useContext(UserContext);
   const { id } = useParams();
   const history = useHistory();
-
-  console.log("rendered again");
 
   const handlePrevious = () => {
     if (index > 0) {
@@ -58,8 +57,7 @@ const QuizPage = () => {
   const handleResponse = (e) => {
     const { value } = e.target;
     const newResponses = responses.map((ques) => {
-      console.log(quiz[id]);
-      if (ques.id === quiz[id]) return { ...ques, answer: value };
+      if (ques.key === quiz[index].id) return { key: ques.key, answer: value };
       else return ques;
     });
     setResponses(newResponses);
@@ -78,7 +76,8 @@ const QuizPage = () => {
     };
     submitTest();
     history.push("/feedback");
-  }, [history, id, responses, userId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const fetchQuestion = async () => {
@@ -87,11 +86,13 @@ const QuizPage = () => {
           headers: { Authorization: `Bearer ${userDetails.access}` },
         };
         const { data } = await axios.get(`/api/get-quiz/${id}`, config);
+        setDuration(data?.quiz_details.duration);
         setQuiz(data?.quiz_questions);
         setuserId(data?.quiz_details?.creator);
         setResponses(
           data?.quiz_questions.map((quiz) => ({ key: quiz.id, answer: "" }))
         );
+        console.log(responses);
         sessionStorage.setItem("quiz-responses", JSON.stringify(responses));
         setIsLoading(false);
       } catch (err) {
@@ -100,6 +101,7 @@ const QuizPage = () => {
       }
     };
     fetchQuestion();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -131,14 +133,15 @@ const QuizPage = () => {
               <div className="quiz-options">
                 {quiz[index]?.option.length > 0 ? (
                   <FormControl component="fieldset">
-                    <RadioGroup aria-label="gender" onClick={handleResponse}>
+                    <RadioGroup aria-label="gender">
                       {quiz[index]?.option.map((option, idx) => (
                         <FormControlLabel
                           key={idx}
                           value={option.option}
                           name={option.key.toString()}
-                          control={<Radio />}
+                          control={<Radio checked={responses[idx].answer} />}
                           label={option.option}
+                          onChange={handleResponse}
                         />
                       ))}
                     </RadioGroup>
@@ -192,7 +195,10 @@ const QuizPage = () => {
           )}
 
           <div className="quiz-status">
-            <CountDownTimer handleTestSubmit={handleTestSubmit} duration={} />
+            <CountDownTimer
+              handleTestSubmit={handleTestSubmit}
+              duration={duration}
+            />
 
             <div className="quiz-navigation-stats">
               {btnarray.map((button, idx) => {
@@ -203,6 +209,9 @@ const QuizPage = () => {
                       setIndex(e.target.value - 1);
                     }}
                     value={button + 1}
+                    className={
+                      responses[idx].answer ? "checked-answer" : undefined
+                    }
                   >
                     {button + 1}
                   </button>

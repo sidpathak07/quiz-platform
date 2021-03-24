@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { FiLogOut } from "react-icons/fi";
-import { Tooltip } from "@material-ui/core";
+import ReactTooltip from "react-tooltip";
 import UserContext from "../../Context/UserContext";
 import "./NavBar.css";
 
@@ -14,11 +14,15 @@ const NavBar = () => {
         </div>
         <div className="user-name-nav">
           <p>Hello, {userDetails.first_name}</p>
-          <Tooltip arrow title="Logout">
-            <button onClick={removeUser} className="nav-logout">
-              <FiLogOut />
-            </button>
-          </Tooltip>
+          <button onClick={removeUser} className="nav-logout" data-tip="logout">
+            <FiLogOut />
+          </button>
+          <ReactTooltip
+            place="bottom"
+            type="dark"
+            effect="solid"
+            delayHide={1000}
+          />
         </div>
       </div>
     </div>

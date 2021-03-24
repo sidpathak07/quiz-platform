@@ -2,8 +2,10 @@ import { memo } from "react";
 import Countdown from "react-countdown";
 import { IoIosTimer } from "react-icons/io";
 
-const CountDownTimer = ({ handleTestSubmit }) => {
-  // console.log("Countdown re-rendered");
+const getTestDuration = (timeString) =>
+  new Date("1970-01-01T" + timeString + "Z").getTime();
+
+const CountDownTimer = ({ handleTestSubmit, duration }) => {
   return (
     <div className="countdown-div">
       <p>
@@ -11,7 +13,7 @@ const CountDownTimer = ({ handleTestSubmit }) => {
       </p>
       <Countdown
         className="quiz-countdown"
-        date={Date.now() + 300000}
+        date={Date.now() + getTestDuration(duration)}
         onComplete={handleTestSubmit}
       />
     </div>

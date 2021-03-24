@@ -42,12 +42,13 @@ const Quizzes = () => {
       }
     };
     fetchQuizzes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="Quizzes-Page">
       <NavBar />
-      <h2>Your Quizzes</h2>
+      {quizzes && <h2>Your Quizzes</h2>}
       {isLoading ? (
         <div className="quiz-loader">
           <Loader />
