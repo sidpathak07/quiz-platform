@@ -7,8 +7,8 @@ import "./Instruction.css";
 const Instruction = () => {
   const [showbtn, setShowbtn] = useState(false);
   const [time, setTime] = useState(Date.now() + 10000); //change to 300000 for 5min timer
-  const history = useHistory();
   const { userCurrentQuiz } = useContext(UserContext);
+  const history = useHistory();
 
   const onComplete = () => {
     setShowbtn(true);
