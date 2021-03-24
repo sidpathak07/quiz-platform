@@ -24,7 +24,7 @@ const Login = () => {
     setLoading(true);
     try {
       const { data } = await axios.post("/api/auth/login", {
-        username: username,
+        username: username.trim(),
         password: password,
       });
       updateUser(data);

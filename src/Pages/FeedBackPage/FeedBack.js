@@ -136,14 +136,18 @@ const FeedBack = () => {
                 <button
                   value="yes"
                   onClick={(e) => setParticipateAgain(e.target.value)}
-                  className={participateAgain === "yes" && "selected-btn"}
+                  className={
+                    participateAgain === "yes" ? "selected-btn" : undefined
+                  }
                 >
                   Yes
                 </button>
                 <button
                   value="no"
                   onClick={(e) => setParticipateAgain(e.target.value)}
-                  className={participateAgain === "no" && "selected-btn"}
+                  className={
+                    participateAgain === "no" ? "selected-btn" : undefined
+                  }
                 >
                   No
                 </button>
@@ -155,14 +159,18 @@ const FeedBack = () => {
                 <button
                   value="yes"
                   onClick={(e) => setTimeSufficient(e.target.value)}
-                  className={timeSufficient === "yes" && "selected-btn"}
+                  className={
+                    timeSufficient === "yes" ? "selected-btn" : undefined
+                  }
                 >
                   Yes
                 </button>
                 <button
                   value="no"
                   onClick={(e) => setTimeSufficient(e.target.value)}
-                  className={timeSufficient === "no" && "selected-btn"}
+                  className={
+                    timeSufficient === "no" ? "selected-btn" : undefined
+                  }
                 >
                   No
                 </button>
@@ -177,14 +185,18 @@ const FeedBack = () => {
                 <button
                   value="yes"
                   onClick={(e) => setAttendWebinar(e.target.value)}
-                  className={attendWebinar === "yes" && "selected-btn"}
+                  className={
+                    attendWebinar === "yes" ? "selected-btn" : undefined
+                  }
                 >
                   Yes
                 </button>
                 <button
                   value="no"
                   onClick={(e) => setAttendWebinar(e.target.value)}
-                  className={attendWebinar === "no" && "selected-btn"}
+                  className={
+                    attendWebinar === "no" ? "selected-btn" : undefined
+                  }
                 >
                   No
                 </button>
@@ -196,14 +208,14 @@ const FeedBack = () => {
                 <button
                   value="yes"
                   onClick={(e) => setLanguage(e.target.value)}
-                  className={language === "yes" && "selected-btn"}
+                  className={language === "yes" ? "selected-btn" : undefined}
                 >
                   English
                 </button>
                 <button
                   value="no"
                   onClick={(e) => setLanguage(e.target.value)}
-                  className={language === "no" && "selected-btn"}
+                  className={language === "no" ? "selected-btn" : undefined}
                 >
                   Hindi
                 </button>
@@ -219,14 +231,14 @@ const FeedBack = () => {
                 <button
                   value="yes"
                   onClick={(e) => setMiniCourse(e.target.value)}
-                  className={miniCourse === "yes" && "selected-btn"}
+                  className={miniCourse === "yes" ? "selected-btn" : undefined}
                 >
                   Yes
                 </button>
                 <button
                   value="no"
                   onClick={(e) => setMiniCourse(e.target.value)}
-                  className={miniCourse === "no" && "selected-btn"}
+                  className={miniCourse === "no" ? "selected-btn" : undefined}
                 >
                   No
                 </button>
@@ -242,7 +254,11 @@ const FeedBack = () => {
                 <button
                   value="Puzzle Solving"
                   onClick={(e) => setNextContest(e.target.value)}
-                  className={nextContest === "Puzzle Solving" && "selected-btn"}
+                  className={
+                    nextContest === "Puzzle Solving"
+                      ? "selected-btn"
+                      : undefined
+                  }
                 >
                   Puzzle Solving
                 </button>
@@ -250,8 +266,9 @@ const FeedBack = () => {
                   value="Problem solving strategies"
                   onClick={(e) => setNextContest(e.target.value)}
                   className={
-                    nextContest === "Problem solving strategies" &&
-                    "selected-btn"
+                    nextContest === "Problem solving strategies"
+                      ? "selected-btn"
+                      : undefined
                   }
                 >
                   Problem solving strategies
@@ -259,7 +276,9 @@ const FeedBack = () => {
                 <button
                   value="Mental Maths"
                   onClick={(e) => setNextContest(e.target.value)}
-                  className={nextContest === "Mental Maths" && "selected-btn"}
+                  className={
+                    nextContest === "Mental Maths" ? "selected-btn" : undefined
+                  }
                 >
                   Mental Maths
                 </button>
@@ -267,8 +286,9 @@ const FeedBack = () => {
                   value="Mathematics to entertain your spirit"
                   onClick={(e) => setNextContest(e.target.value)}
                   className={
-                    nextContest === "Mathematics to entertain your spirit" &&
-                    "selected-btn"
+                    nextContest === "Mathematics to entertain your spirit"
+                      ? "selected-btn"
+                      : undefined
                   }
                 >
                   Mathematics to entertain your spirit
