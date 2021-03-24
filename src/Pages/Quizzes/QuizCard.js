@@ -10,9 +10,9 @@ const QuizCard = (props) => {
   const{addQuiz , userCurrentQuiz} =  useContext(UserContext)
 
   const handleClick =()=>{
-    addQuiz(id)
+    addQuiz(id,duration)
     setTimeout(()=>{
-      history.push(`/instruction/${userCurrentQuiz}`)
+      history.push(`/instruction/${userCurrentQuiz.id}`)
     },1750)
     
   }

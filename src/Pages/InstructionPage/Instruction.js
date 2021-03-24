@@ -7,6 +7,7 @@ import "./Instruction.css";
 const Instruction = () => {
   const [showbtn, setShowbtn] = useState(false);
   const [time, setTime] = useState(Date.now() + 10000); //change to 300000 for 5min timer
+  
   const history = useHistory();
   const { userCurrentQuiz } = useContext(UserContext);
 
@@ -14,6 +15,7 @@ const Instruction = () => {
     setShowbtn(true);
     setTime(Date.now());
   };
+  
 
   return (
     <div className="instruction-page">
@@ -24,7 +26,7 @@ const Instruction = () => {
         </div>
         <div className="instruction-one">
           <h2>Test Duration :</h2>
-          <p>You have 1 hour 30 minutes to complete and submit the test.</p>
+          <p>{`You have ${userCurrentQuiz.duration.split(":")[0]} hours and ${userCurrentQuiz.duration.split(":")[1]} minutes to complete and submit the test.`}</p>
         </div>
         <div className="instruction-two">
           <h2>Marking Scheme :</h2>
@@ -70,7 +72,7 @@ const Instruction = () => {
           />
           {showbtn && (
             <button
-              onClick={() => history.push(`/quizpage/${userCurrentQuiz}`)}
+              onClick={() => history.push(`/quizpage/${userCurrentQuiz.id}`)}
             >
               Proceed to Test
             </button>

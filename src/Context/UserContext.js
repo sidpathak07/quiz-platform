@@ -12,9 +12,9 @@ const getUserDetails = () => {
 };
 
 const getUserQuiz = () => {
-  const quizId = sessionStorage.getItem("user-current-quiz");
-  if (quizId) {
-    return JSON.parse(quizId);
+  const quiz = sessionStorage.getItem("user-current-quiz");
+  if (quiz) {
+    return JSON.parse(quiz);
   } else {
     return null;
   }
@@ -26,19 +26,17 @@ export const UserContextProvider = (props) => {
 
   const updateUser = (data) => {
     setUserDetails(data);
-    sessionStorage.setItem("user-details", JSON.stringify(data));
+    sessionStorage.setItem("user-details", JSON.stringify(userDetails));
   };
   const removeUser = () => {
     setUserDetails(null);
-    // sessionStorage.removeItem("quiz-data");
-    // sessionStorage.removeItem("user-details");
-    // sessionStorage.removeItem("quiz-responses");
-    // sessionStorage.removeItem("user-current-quiz");
+    setUserCurrentQuiz(null)
     sessionStorage.clear();
   };
-  const addQuiz =(id)=>{
-    setUserCurrentQuiz(id)
-    sessionStorage.setItem("user-current-quiz", JSON.stringify(id));
+  const addQuiz =(id,duration)=>{
+    setUserCurrentQuiz({id: id,
+    duration: duration})
+    sessionStorage.setItem("user-current-quiz", JSON.stringify(userCurrentQuiz));
   }
 
   return (
