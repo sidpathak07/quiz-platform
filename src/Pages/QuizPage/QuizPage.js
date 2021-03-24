@@ -10,6 +10,7 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import "./QuizPage.css";
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 
 const getResponses = () => {
   const responses = sessionStorage.getItem("quiz-responses");
@@ -66,17 +67,19 @@ const QuizPage = () => {
 
   const handleTestSubmit = useCallback(() => {
     const submitTest = async () => {
+      const config = {
+        headers: { Authorization: `Bearer ${userDetails.access}` },
+      };
       const res = {
         quiz: id,
-        user: userId,
+        user: userDetails.user_id,
         response: responses,
       };
-      const data = await axios.post("/api/create-response", res);
+      const data = await axios.post("/api/create-response", res, config);
       console.log(data);
     };
     submitTest();
     history.push("/feedback");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -89,10 +92,12 @@ const QuizPage = () => {
         setDuration(data?.quiz_details.duration);
         setQuiz(data?.quiz_questions);
         setuserId(data?.quiz_details?.creator);
-        setResponses(
-          data?.quiz_questions.map((quiz) => ({ key: quiz.id, answer: "" }))
-        );
-        sessionStorage.setItem("quiz-responses", JSON.stringify(responses));
+        if(responses==null){
+          setResponses(
+            data?.quiz_questions.map((quiz) => ({ key: quiz.id, answer: "" }))
+          );
+          sessionStorage.setItem("quiz-responses", JSON.stringify(responses));
+        }
         setIsLoading(false);
       } catch (err) {
         console.log(err.message);
@@ -122,7 +127,7 @@ const QuizPage = () => {
             <div className="quiz-question">
               <h3>Question: {index + 1}</h3>
               <div className="question-details">
-                <h2>{quiz[index]?.question}</h2>
+                <h2>{ReactHtmlParser(quiz[index]?.question)}</h2>
                 <div className="marks-distribution">
                   <p>Correct : {quiz[index]?.correct_marks} marks</p>
                   <p>Incorrect : {quiz[index]?.negative_marks} marks</p>
@@ -132,11 +137,11 @@ const QuizPage = () => {
               <div className="quiz-options">
                 {quiz[index]?.option.length > 0 ? (
                   <FormControl component="fieldset">
-                    <RadioGroup aria-label="gender">
+                    <RadioGroup aria-label="gender" value={responses[index]?.answer}>
                       {quiz[index]?.option.map((option, idx) => (
                         <FormControlLabel
                           key={idx}
-                          value={option.option}
+                          value={option.key.toString()}
                           name={option.key.toString()}
                           control={<Radio />}
                           label={option.option}
@@ -148,6 +153,7 @@ const QuizPage = () => {
                 ) : (
                   <textarea
                     placeholder="Type your answer here"
+                    value={responses[index]?.answer}
                     onChange={handleResponse}
                   />
                 )}
