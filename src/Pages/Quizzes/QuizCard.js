@@ -13,7 +13,7 @@ const QuizCard = (props) => {
     addQuiz(id)
     setTimeout(()=>{
       history.push(`/instruction/${userCurrentQuiz}`)
-    },1000)
+    },1750)
     
   }
 
