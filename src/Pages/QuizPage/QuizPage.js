@@ -11,11 +11,8 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import "./QuizPage.css";
-import ReactHtmlParser, {
-  processNodes,
-  convertNodeToElement,
-  htmlparser2,
-} from "react-html-parser";
+import MathJax from "react-mathjax3";
+
 
 const getResponses = () => {
   const responses = sessionStorage.getItem("quiz-responses");
@@ -29,7 +26,6 @@ const getResponses = () => {
 const QuizPage = () => {
   const [quiz, setQuiz] = useState(null);
   const [index, setIndex] = useState(0);
-  const [userId, setuserId] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [showSubmit, setShowSubmit] = useState(false);
   const [responses, setResponses] = useState(getResponses);
@@ -106,7 +102,6 @@ const QuizPage = () => {
         const { data } = await axios.get(`/api/get-quiz/${id}`, config);
         setDuration(data?.quiz_details.duration);
         setQuiz(data?.quiz_questions);
-        setuserId(data?.quiz_details?.creator);
         if (responses == null) {
           setResponses(
             data?.quiz_questions.map((quiz) => ({
@@ -134,6 +129,30 @@ const QuizPage = () => {
           <Loader />
         </div>
       ) : (
+        <MathJax.Context
+            input='tex'
+            onLoad={ () => console.log("Loaded MathJax script!") }
+            onError={ (MathJax, error) => {
+                console.warn(error);
+                console.log("Encountered a MathJax error, re-attempting a typeset!");
+                MathJax.Hub.Queue(
+                  MathJax.Hub.Typeset()
+                );
+            } }
+            script="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"
+            options={ {
+                messageStyle: 'none',
+                extensions: ['tex2jax.js'],
+                jax: ['input/TeX', 'output/HTML-CSS'],
+                tex2jax: {
+                    inlineMath: [['$', '$'], ['\\(', '\\)']],
+                    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                    processEscapes: true,
+                },
+                TeX: {
+                    extensions: ['AMSmath.js', 'AMSsymbols.js', 'noErrors.js', 'noUndefined.js']
+                }
+            } }>
         <div className="quiz-page">
           <div className="question-progress-bar">
             <div
@@ -146,7 +165,7 @@ const QuizPage = () => {
             <div className="quiz-question">
               <h3>Question: {index + 1}</h3>
               <div className="question-details">
-                <h2>{ReactHtmlParser(quiz[index]?.question)}</h2>
+                <h2><MathJax.Html html={ quiz[index]?.question } /></h2>
                 <div className="marks-distribution">
                   <p>Correct : {quiz[index]?.correct_marks} marks</p>
                   <p>Incorrect : {quiz[index]?.negative_marks} marks</p>
@@ -265,8 +284,10 @@ const QuizPage = () => {
             </div>
           </div>
         </div>
+        </MathJax.Context>
       )}
     </>
+     
   );
 };
 
