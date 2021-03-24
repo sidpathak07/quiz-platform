@@ -34,7 +34,6 @@ const Quizzes = () => {
           config
         );
         sessionStorage.setItem("quiz-data", JSON.stringify(data));
-        console.log(data);
         setQuizzes(data);
         setIsLoading(false);
       } catch (err) {
@@ -42,6 +41,7 @@ const Quizzes = () => {
       }
     };
     fetchQuizzes();
+    return () => fetchQuizzes();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

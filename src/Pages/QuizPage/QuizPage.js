@@ -92,7 +92,6 @@ const QuizPage = () => {
         setResponses(
           data?.quiz_questions.map((quiz) => ({ key: quiz.id, answer: "" }))
         );
-        console.log(responses);
         sessionStorage.setItem("quiz-responses", JSON.stringify(responses));
         setIsLoading(false);
       } catch (err) {
@@ -139,7 +138,7 @@ const QuizPage = () => {
                           key={idx}
                           value={option.option}
                           name={option.key.toString()}
-                          control={<Radio checked={responses[idx].answer} />}
+                          control={<Radio />}
                           label={option.option}
                           onChange={handleResponse}
                         />
