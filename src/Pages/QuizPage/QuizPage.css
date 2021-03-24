@@ -61,6 +61,15 @@
   margin: 5px 0;
   font-weight: 500;
 }
+.marks-distribution .flag-question {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: red;
+}
+.marks-distribution svg {
+  margin-right: 5px;
+}
 .quiz-loader {
   position: absolute;
   top: 50%;
@@ -104,7 +113,7 @@
   border: 1px solid rgb(170, 170, 170);
   padding: 20px;
   margin-right: 100px;
-  max-height: object-fit;
+  height: 500px;
 }
 
 .quiz-navigation-stats {
@@ -114,6 +123,7 @@
   grid-gap: 5px;
   min-height: 250px;
 }
+
 .quiz-navigation-stats button {
   width: 50px;
   height: 50px;
@@ -145,7 +155,9 @@
 .attempted-sign button {
   background: rgb(0, 214, 0);
 }
-
+.flagged-sign button {
+  background: red;
+}
 .unattempted-sign button {
   background: rgb(185, 185, 185);
 }
@@ -239,9 +251,7 @@
 }
 .confirm-button button:hover {
   border: 1px solid black;
-
   color: black;
-
   background: white;
 }
 .submit-pop-text {
@@ -271,10 +281,9 @@
     height: auto;
   }
   .question-page-left {
-    width: 90%;
-    min-width: 350px;
+    width: 80vw;
+    margin-left: 0;
   }
-
   .navigation-btn {
     display: flex;
     justify-content: space-between;
@@ -285,11 +294,11 @@
   .navigation-btn button {
     width: 75px;
     height: 50px;
-    font-size: 0.7em;
+    font-size: 0.85em;
   }
   .marks-distribution > * {
     margin: 5px 0;
-    font-size: 0.7em;
+    font-size: 0.85em;
     font-weight: 500;
   }
   .marks-distribution {
@@ -312,6 +321,10 @@
 }
 
 @media only screen and (max-width: 900px) {
+  .question-page-left {
+    width: 90vw;
+    margin: 0;
+  }
   .navigation-btn {
     min-width: 0;
     width: 90%;

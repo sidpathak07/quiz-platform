@@ -1,17 +1,48 @@
+import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { BsPencilSquare } from "react-icons/bs";
 import { IoIosTimer } from "react-icons/io";
 import UserContext from "../../Context/UserContext";
-import { useContext } from "react";
+import axios from "../../axios/axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const QuizCard = (props) => {
   const { id, title, desc, duration, creator_username } = props;
   const history = useHistory();
-  const { addQuiz } = useContext(UserContext);
+  const { addQuiz, userDetails } = useContext(UserContext);
 
-  const handleClick = () => {
+  const handleClick = async () => {
     addQuiz(id, duration);
-    history.push(`/instruction/${id}`);
+    try {
+      const config = {
+        headers: { Authorization: `Bearer ${userDetails.access}` },
+      };
+      const { data } = await axios.post(
+        "/api/check-quiz-assigned",
+        {
+          user: userDetails?.user_id,
+          quiz: id,
+        },
+        config
+      );
+      console.log(data);
+      if (data.message === "Success") {
+        toast.warn("Already Attempted!", {
+          position: "top-center",
+          autoClose: 1000000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
+      } else {
+        history.push(`/instruction/${id}`);
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   return (
@@ -38,6 +69,18 @@ const QuizCard = (props) => {
       <div className="quiz-start-button">
         <button onClick={handleClick}>Start test</button>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <ToastContainer />
     </div>
   );
 };

@@ -294,6 +294,10 @@ const QuizPage = () => {
                   <button disabled={true} />
                   <p>Attempted</p>
                 </div>
+                <div className="flagged-sign">
+                  <button disabled={true} />
+                  <p>Flagged Question</p>
+                </div>
                 <div className="unattempted-sign">
                   <button disabled={true} />
                   <p>Not Attempted</p>
