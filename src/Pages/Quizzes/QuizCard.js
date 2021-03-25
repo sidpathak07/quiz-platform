@@ -19,34 +19,34 @@ const QuizCard = (props) => {
   const handleClick = async () => {
     setIsLoading(true);
     addQuiz(id, duration, test_time);
-    // try {
-    //   const config = {
-    //     headers: { Authorization: `Bearer ${userDetails.access}` },
-    //   };
-    //   const { data } = await axios.post(
-    //     "/api/check-quiz-assigned",
-    //     {
-    //       user: userDetails?.user_id,
-    //       quiz: id,
-    //     },
-    //     config
-    //   );
-    //   if (data.message === "Success") {
-    //     toast.warn("You have already attempted this quiz!", {
-    //       position: "top-center",
-    //       autoClose: 4000,
-    //       hideProgressBar: false,
-    //       closeOnClick: true,
-    //       pauseOnHover: false,
-    //       progress: undefined,
-    //     });
-    //   } else {
-    //     history.push(`/instruction/${id}`);
-    //   }
-    // } catch (err) {
-    //   console.log(err.message);
-    // }
-    history.push(`/instruction/${id}`);
+    try {
+      const config = {
+        headers: { Authorization: `Bearer ${userDetails.access}` },
+      };
+      const { data } = await axios.post(
+        "/api/check-quiz-assigned",
+        {
+          user: userDetails?.user_id,
+          quiz: id,
+        },
+        config
+      );
+      if (data.message !== "Success") {
+        toast.warn("You have already attempted this quiz!", {
+          position: "top-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          progress: undefined,
+        });
+      } else {
+        history.push(`/instruction/${id}`);
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+    // history.push(`/instruction/${id}`);
     setIsLoading(false);
   };
 

@@ -28,7 +28,7 @@ const QuizPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showSubmit, setShowSubmit] = useState(false);
   const [responses, setResponses] = useState(getResponses);
-  const [duration, setDuration] = useState(0);
+  // const [duration, setDuration] = useState(0);
 
   const { userDetails, userCurrentQuiz } = useContext(UserContext);
   const { id } = useParams();
@@ -83,16 +83,22 @@ const QuizPage = () => {
       const config = {
         headers: { Authorization: `Bearer ${userDetails.access}` },
       };
-      const newResponses = responses?.map((res) => ({
-        key: res.key,
-        answer: res.answer,
-      }));
+      const newResponses = [];
+      for (let i = 0; i < responses?.length; i++) {
+        newResponses.push({
+          key: responses[i].key,
+          answer: responses[i].answer,
+        });
+      }
+      // console.log(responses);
+      console.log(newResponses);
       const res = {
         quiz: id,
         user: userDetails?.user_id,
         response: newResponses,
       };
-      const data = await axios.post("/api/create-response/", res, config);
+      console.log(res);
+      const data = await axios.post("/api/create-response", res, config);
       console.log(data);
     };
     submitTest();
@@ -107,8 +113,7 @@ const QuizPage = () => {
           headers: { Authorization: `Bearer ${userDetails.access}` },
         };
         const { data } = await axios.get(`/api/get-quiz/${id}`, config);
-        console.log(data);
-        setDuration(data?.quiz_details.duration);
+        // setDuration(data?.quiz_details.duration);
         setQuiz(data?.quiz_questions);
 
         setResponses(
