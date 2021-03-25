@@ -44,7 +44,7 @@ export const UserContextProvider = (props) => {
   useEffect(() => {
 
     const interval = setInterval(()=>{
-      setUserCurrentQuiz({...userCurrentQuiz,"test_time": userCurrentQuiz.test_time - 1000 })
+      setUserCurrentQuiz({...userCurrentQuiz,"test_time": userCurrentQuiz?.test_time - 1000 })
       sessionStorage.setItem(
         "user-current-quiz",
         JSON.stringify(userCurrentQuiz)
