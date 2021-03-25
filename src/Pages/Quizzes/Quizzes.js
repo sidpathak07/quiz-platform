@@ -21,11 +21,9 @@ const Quizzes = () => {
   const { userDetails } = useContext(UserContext);
 
   useEffect(() => {
+    let isUnmounted = false;
     const fetchQuizzes = async () => {
-     try {
-        if (quizzes) {
-          setIsLoading(false);
-        }
+      try {
         const config = {
           headers: { Authorization: `Bearer ${userDetails.access}` },
         };
@@ -33,15 +31,19 @@ const Quizzes = () => {
           `/api/get-all-quizzes/${userDetails.user_id}`,
           config
         );
-        setQuizzes(data);
-        setIsLoading(false);
-        sessionStorage.setItem("quiz-data", JSON.stringify(data));
+        if (!isUnmounted) {
+          setQuizzes(data);
+          setIsLoading(false);
+          sessionStorage.setItem("quiz-data", JSON.stringify(data));
+        }
       } catch (err) {
         console.log(err.message);
       }
     };
     fetchQuizzes();
-    return () => fetchQuizzes();
+    return () => {
+      isUnmounted = true;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

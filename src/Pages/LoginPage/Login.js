@@ -21,14 +21,17 @@ const Login = () => {
   const { updateUser } = useContext(UserContext);
 
   const fetchUser = async () => {
+    let isUnMounted = false;
     setLoading(true);
     try {
       const { data } = await axios.post("/api/auth/login", {
         username: username.trim(),
         password: password,
       });
-      updateUser(data);
-      history.push("/");
+      if (!isUnMounted) {
+        updateUser(data);
+        history.push("/");
+      }
     } catch (err) {
       setError({
         username: "Invalid credentials",
@@ -36,6 +39,7 @@ const Login = () => {
       });
     }
     setLoading(false);
+    isUnMounted = true;
   };
 
   const handleSubmit = (e) => {

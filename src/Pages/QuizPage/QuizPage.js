@@ -16,7 +16,6 @@ import "./QuizPage.css";
 const getResponses = () => {
   const responses = sessionStorage.getItem("quiz-responses");
   if (responses) {
-    console.log(JSON.parse(responses));
     return JSON.parse(responses);
   } else {
     return null;
@@ -29,12 +28,9 @@ const QuizPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showSubmit, setShowSubmit] = useState(false);
   const [responses, setResponses] = useState(getResponses);
-
   const { userDetails, userCurrentQuiz } = useContext(UserContext);
   const { id } = useParams();
   const history = useHistory();
-
-  // console.log(responses);
 
   const handlePrevious = () => {
     if (index > 0) {
@@ -94,13 +90,13 @@ const QuizPage = () => {
             answer: responses[i].answer,
           });
         }
-        console.log(newResponses);
+        // console.log(newResponses);
         const res = {
           quiz: id,
           user: userDetails?.user_id,
           response: responses,
         };
-        console.log(res);
+        // console.log(res);
         const data = await axios.post("/api/create-response", res, config);
         if (data.status === 200) {
           setIsLoading(false);
@@ -115,28 +111,36 @@ const QuizPage = () => {
   }, []);
 
   useEffect(() => {
+    let isUnmounted = false;
     const fetchQuestion = async () => {
       try {
         const config = {
           headers: { Authorization: `Bearer ${userDetails.access}` },
         };
         const { data } = await axios.get(`/api/get-quiz/${id}`, config);
-        setQuiz(data?.quiz_questions);
-        setResponses(
-          data?.quiz_questions.map((quiz) => ({
-            key: quiz.id,
-            answer: "",
-            flag: false,
-          }))
-        );
-        sessionStorage.setItem("quiz-responses", JSON.stringify(responses));
-        setIsLoading(false);
+        if (!isUnmounted) {
+          setQuiz(data?.quiz_questions);
+          if (responses === null) {
+            setResponses(
+              data?.quiz_questions.map((quiz) => ({
+                key: quiz.id,
+                answer: "",
+                flag: false,
+              }))
+            );
+          }
+          sessionStorage.setItem("quiz-responses", JSON.stringify(responses));
+          setIsLoading(false);
+        }
       } catch (err) {
         console.log(err.message);
         history.push("/404");
       }
     };
     fetchQuestion();
+    return () => {
+      isUnmounted = true;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -234,14 +238,11 @@ const QuizPage = () => {
                       </RadioGroup>
                     </FormControl>
                   ) : (
-                    <>
-                      <textarea
-                        placeholder="Type your answer here"
-                        value={responses[index]?.answer}
-                        onChange={handleResponse}
-                      />
-                      {console.log(responses[index].answer)}
-                    </>
+                    <textarea
+                      placeholder="Type your answer here"
+                      value={responses[index]?.answer}
+                      onChange={handleResponse}
+                    />
                   )}
                 </div>
               </div>
