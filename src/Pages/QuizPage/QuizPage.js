@@ -16,6 +16,7 @@ import "./QuizPage.css";
 const getResponses = () => {
   const responses = sessionStorage.getItem("quiz-responses");
   if (responses) {
+    console.log(JSON.parse(responses));
     return JSON.parse(responses);
   } else {
     return null;
@@ -28,11 +29,12 @@ const QuizPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showSubmit, setShowSubmit] = useState(false);
   const [responses, setResponses] = useState(getResponses);
-  // const [duration, setDuration] = useState(0);
 
   const { userDetails, userCurrentQuiz } = useContext(UserContext);
   const { id } = useParams();
   const history = useHistory();
+
+  // console.log(responses);
 
   const handlePrevious = () => {
     if (index > 0) {
@@ -80,26 +82,32 @@ const QuizPage = () => {
 
   const handleTestSubmit = useCallback(() => {
     const submitTest = async () => {
-      const config = {
-        headers: { Authorization: `Bearer ${userDetails.access}` },
-      };
-      const newResponses = [];
-      for (let i = 0; i < responses?.length; i++) {
-        newResponses.push({
-          key: responses[i].key,
-          answer: responses[i].answer,
-        });
-      }
-      // console.log(newResponses);
-      const res = {
-        quiz: id,
-        user: userDetails?.user_id,
-        response: newResponses,
-      };
-      // console.log(res);
-      const data = await axios.post("/api/create-response", res, config);
-      if (data.status === 200) {
-        history.push("/feedback");
+      try {
+        setIsLoading(true);
+        const config = {
+          headers: { Authorization: `Bearer ${userDetails.access}` },
+        };
+        const newResponses = [];
+        for (let i = 0; i < responses?.length; i++) {
+          newResponses.push({
+            key: responses[i].key,
+            answer: responses[i].answer,
+          });
+        }
+        console.log(newResponses);
+        const res = {
+          quiz: id,
+          user: userDetails?.user_id,
+          response: responses,
+        };
+        console.log(res);
+        const data = await axios.post("/api/create-response", res, config);
+        if (data.status === 200) {
+          setIsLoading(false);
+          history.push("/feedback");
+        }
+      } catch (err) {
+        console.log(err.message);
       }
     };
     submitTest();
@@ -226,11 +234,14 @@ const QuizPage = () => {
                       </RadioGroup>
                     </FormControl>
                   ) : (
-                    <textarea
-                      placeholder="Type your answer here"
-                      value={responses[index]?.answer}
-                      onChange={handleResponse}
-                    />
+                    <>
+                      <textarea
+                        placeholder="Type your answer here"
+                        value={responses[index]?.answer}
+                        onChange={handleResponse}
+                      />
+                      {console.log(responses[index].answer)}
+                    </>
                   )}
                 </div>
               </div>
