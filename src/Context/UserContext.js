@@ -39,23 +39,28 @@ export const UserContextProvider = (props) => {
     setUserCurrentQuiz({ id, duration, test_time });
   };
 
+  const timeUpdate =()=>{
+    setUserCurrentQuiz({
+      ...userCurrentQuiz,
+      test_time: userCurrentQuiz?.test_time-1000 ,
+    });
+    sessionStorage.setItem(
+      "user-current-quiz",
+      JSON.stringify(userCurrentQuiz)
+    );
+ 
+}
+
   useEffect(() => {
     const interval = setInterval(() => {
-      setUserCurrentQuiz({
-        ...userCurrentQuiz,
-        test_time: userCurrentQuiz?.test_time - 1000,
-      });
-      sessionStorage.setItem(
-        "user-current-quiz",
-        JSON.stringify(userCurrentQuiz)
-      );
+      timeUpdate()
     }, 1000);
     return () => clearInterval(interval);
   });
 
   return (
     <UserContext.Provider
-      value={{ userDetails, updateUser, removeUser, addQuiz, userCurrentQuiz }}
+      value={{ userDetails, updateUser, removeUser, addQuiz, userCurrentQuiz,timeUpdate }}
     >
       {props.children}
     </UserContext.Provider>

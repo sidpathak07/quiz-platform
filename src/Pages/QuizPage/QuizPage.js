@@ -30,7 +30,7 @@ const QuizPage = () => {
   const [showSubmit, setShowSubmit] = useState(false);
   const [responses, setResponses] = useState(getResponses);
 
-  const { userDetails, userCurrentQuiz } = useContext(UserContext);
+  const { userDetails, userCurrentQuiz ,timeUpdate} = useContext(UserContext);
   const { id } = useParams();
   const history = useHistory();
 
@@ -84,6 +84,7 @@ const QuizPage = () => {
     const submitTest = async () => {
       try {
         setIsLoading(true);
+        
         const config = {
           headers: { Authorization: `Bearer ${userDetails.access}` },
         };
@@ -122,6 +123,7 @@ const QuizPage = () => {
         };
         const { data } = await axios.get(`/api/get-quiz/${id}`, config);
         setQuiz(data?.quiz_questions);
+        timeUpdate()
         if(responses===null){
 
           setResponses(
@@ -295,7 +297,7 @@ const QuizPage = () => {
             <div className="quiz-status">
               <CountDownTimer
                 handleTestSubmit={handleTestSubmit}
-                duration={userCurrentQuiz.test_time + 10000}
+                duration={userCurrentQuiz.test_time }
               />
               <div className="quiz-navigation-stats">
                 {btnarray.map((button, idx) => {
