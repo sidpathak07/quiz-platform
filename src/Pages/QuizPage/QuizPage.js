@@ -34,6 +34,8 @@ const QuizPage = () => {
   const { id } = useParams();
   const history = useHistory();
 
+
+
   const handlePrevious = () => {
     if (index > 0) {
       setIndex(index - 1);
@@ -110,7 +112,7 @@ const QuizPage = () => {
         console.log(data);
         setDuration(data?.quiz_details.duration);
         setQuiz(data?.quiz_questions);
-        if (responses == null) {
+       
           setResponses(
             data?.quiz_questions.map((quiz) => ({
               key: quiz.id,
@@ -119,7 +121,7 @@ const QuizPage = () => {
             }))
           );
           sessionStorage.setItem("quiz-responses", JSON.stringify(responses));
-        }
+        
         setIsLoading(false);
       } catch (err) {
         console.log(err.message);
@@ -193,12 +195,12 @@ const QuizPage = () => {
                       Incorrect:{" "}
                       {quiz[index]?.negative_marks === 0
                         ? quiz[index]?.negative_marks
-                        : `-${quiz[index]?.negative_marks}`}{" "}
+                        : `${quiz[index]?.negative_marks}`}{" "}
                       marks
                     </p>
                     <p className="flag-question" onClick={handleFlagQuestion}>
                       <IoFlag />
-                      {responses[index].flag
+                      {responses[index]?.flag
                         ? "Unflag Question"
                         : "Flag Question"}
                     </p>
@@ -277,7 +279,7 @@ const QuizPage = () => {
             <div className="quiz-status">
               <CountDownTimer
                 handleTestSubmit={handleTestSubmit}
-                duration={userCurrentQuiz.test_time}
+                duration={userCurrentQuiz.test_time+10000}
               />
               <div className="quiz-navigation-stats">
                 {btnarray.map((button, idx) => {

@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState,useEffect } from "react";
 
 const UserContext = createContext();
 
@@ -37,11 +37,23 @@ export const UserContextProvider = (props) => {
 
   const addQuiz = (id, duration , test_time) => {
     setUserCurrentQuiz({ id, duration,test_time });
-    sessionStorage.setItem(
-      "user-current-quiz",
-      JSON.stringify({ id, duration,test_time })
-    );
+ 
   };
+
+
+  useEffect(() => {
+
+    const interval = setInterval(()=>{
+      setUserCurrentQuiz({...userCurrentQuiz,"test_time": userCurrentQuiz.test_time - 1000 })
+      sessionStorage.setItem(
+        "user-current-quiz",
+        JSON.stringify(userCurrentQuiz)
+      );
+    },1000)
+    return () => clearInterval(interval);
+   
+  })
+
 
   return (
     <UserContext.Provider
