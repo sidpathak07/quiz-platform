@@ -11,9 +11,10 @@ const QuizCard = (props) => {
   const { id, title, desc, duration, creator_username } = props;
   const history = useHistory();
   const { addQuiz, userDetails } = useContext(UserContext);
+  const test_time = new Date('1970-01-01T' + duration + 'Z').getTime();
 
   const handleClick = async () => {
-    addQuiz(id, duration);
+    addQuiz(id, duration,test_time);
     // try {
     //   const config = {
     //     headers: { Authorization: `Bearer ${userDetails.access}` },

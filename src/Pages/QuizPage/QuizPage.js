@@ -30,7 +30,7 @@ const QuizPage = () => {
   const [responses, setResponses] = useState(getResponses);
   const [duration, setDuration] = useState(0);
 
-  const { userDetails } = useContext(UserContext);
+  const { userDetails,userCurrentQuiz } = useContext(UserContext);
   const { id } = useParams();
   const history = useHistory();
 
@@ -83,13 +83,13 @@ const QuizPage = () => {
       const config = {
         headers: { Authorization: `Bearer ${userDetails.access}` },
       };
-      const newResponses = responses.map((res) => ({
+      const newResponses = responses?.map((res) => ({
         key: res.key,
         answer: res.answer,
       }));
       const res = {
         quiz: id,
-        user: userDetails.user_id,
+        user: userDetails?.user_id,
         response: newResponses,
       };
       const data = await axios.post("/api/create-response", res, config);
@@ -277,7 +277,7 @@ const QuizPage = () => {
             <div className="quiz-status">
               <CountDownTimer
                 handleTestSubmit={handleTestSubmit}
-                duration={duration}
+                duration={userCurrentQuiz.test_time}
               />
               <div className="quiz-navigation-stats">
                 {btnarray.map((button, idx) => {
