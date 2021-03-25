@@ -16,7 +16,7 @@ import "./QuizPage.css";
 const getResponses = () => {
   const responses = sessionStorage.getItem("quiz-responses");
   if (responses) {
-    console.log(JSON.parse(responses));
+   
     return JSON.parse(responses);
   } else {
     return null;
@@ -34,7 +34,7 @@ const QuizPage = () => {
   const { id } = useParams();
   const history = useHistory();
 
-  // console.log(responses);
+
 
   const handlePrevious = () => {
     if (index > 0) {
@@ -122,13 +122,19 @@ const QuizPage = () => {
         };
         const { data } = await axios.get(`/api/get-quiz/${id}`, config);
         setQuiz(data?.quiz_questions);
-        setResponses(
-          data?.quiz_questions.map((quiz) => ({
-            key: quiz.id,
-            answer: "",
-            flag: false,
-          }))
-        );
+        if(responses===null){
+
+          setResponses(
+            data?.quiz_questions.map((quiz) => ({
+              key: quiz.id,
+              answer: "",
+              flag: false,
+            }))
+          );
+
+
+        }
+        
         sessionStorage.setItem("quiz-responses", JSON.stringify(responses));
         setIsLoading(false);
       } catch (err) {
@@ -240,7 +246,7 @@ const QuizPage = () => {
                         value={responses[index]?.answer}
                         onChange={handleResponse}
                       />
-                      {console.log(responses[index].answer)}
+                   
                     </>
                   )}
                 </div>
