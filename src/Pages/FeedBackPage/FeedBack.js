@@ -7,7 +7,7 @@ import { AiOutlineFileDone } from "react-icons/ai";
 import "./FeedBack.css";
 
 const FeedBack = () => {
-  const { userDetails, removeUser } = useContext(UserContext);
+  const { userDetails, removeUser, userCurrentQuiz } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [feedbackText, setFeedbackText] = useState("");
@@ -34,7 +34,7 @@ const FeedBack = () => {
     next_contest: nextContest,
     suggestions: feedbackText,
     user: userDetails.user_id,
-    quiz_id: "d3664bf4-5fcc-4991-b777-80e2703b6435",
+    quiz_id: userCurrentQuiz.id,
   };
 
   const handleSubmit = async () => {
@@ -52,12 +52,15 @@ const FeedBack = () => {
     setLoading(true);
     setError("");
     try {
-      await axios.post("/api/postFeedback/", postData);
+      const config = {
+        headers: { Authorization: `Bearer ${userDetails.access}` },
+      };
+      await axios.post("/api/postFeedback/", postData, config);
+      setSubmitted(true);
     } catch (err) {
       console.log(err.message);
     }
     setLoading(false);
-    setSubmitted(true);
   };
 
   if (submitted) {

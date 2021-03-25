@@ -9,7 +9,7 @@
 .question-page-left {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   margin-left: 100px;
   justify-self: flex-start;
@@ -118,6 +118,7 @@
   padding: 20px;
   margin-right: 100px;
   min-height: 450px;
+  margin-bottom: 20px;
 }
 
 .quiz-navigation-stats {

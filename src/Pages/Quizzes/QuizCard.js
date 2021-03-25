@@ -1,20 +1,24 @@
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { BsPencilSquare } from "react-icons/bs";
 import { IoIosTimer } from "react-icons/io";
 import UserContext from "../../Context/UserContext";
+import Loader from "../../Components/Loader/LoadingBar";
 import axios from "../../axios/axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const QuizCard = (props) => {
   const { id, title, desc, duration, creator_username } = props;
-  const history = useHistory();
   const { addQuiz, userDetails } = useContext(UserContext);
-  const test_time = new Date('1970-01-01T' + duration + 'Z').getTime();
+  const [isLoading, setIsLoading] = useState(false);
+  const history = useHistory();
+
+  const test_time = new Date("1970-01-01T" + duration + "Z").getTime();
 
   const handleClick = async () => {
-    addQuiz(id, duration,test_time);
+    setIsLoading(true);
+    addQuiz(id, duration, test_time);
     // try {
     //   const config = {
     //     headers: { Authorization: `Bearer ${userDetails.access}` },
@@ -27,11 +31,10 @@ const QuizCard = (props) => {
     //     },
     //     config
     //   );
-    //   console.log(data);
     //   if (data.message === "Success") {
     //     toast.warn("You have already attempted this quiz!", {
     //       position: "top-center",
-    //       autoClose: 5000,
+    //       autoClose: 4000,
     //       hideProgressBar: false,
     //       closeOnClick: true,
     //       pauseOnHover: false,
@@ -44,10 +47,16 @@ const QuizCard = (props) => {
     //   console.log(err.message);
     // }
     history.push(`/instruction/${id}`);
+    setIsLoading(false);
   };
 
   return (
     <div className="quiz-card">
+      {isLoading && (
+        <div className="quizcard-loader">
+          <Loader />
+        </div>
+      )}
       <div className="quiz-header">
         <div>
           <div className="quiz-title">
@@ -67,16 +76,6 @@ const QuizCard = (props) => {
           <span>created by:</span> {creator_username}
         </p>
       </div>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        pauseOnHover
-      />
       <ToastContainer />
       <div className="quiz-start-button">
         <button onClick={handleClick}>Start test</button>

@@ -30,11 +30,9 @@ const QuizPage = () => {
   const [responses, setResponses] = useState(getResponses);
   const [duration, setDuration] = useState(0);
 
-  const { userDetails,userCurrentQuiz } = useContext(UserContext);
+  const { userDetails, userCurrentQuiz } = useContext(UserContext);
   const { id } = useParams();
   const history = useHistory();
-
-
 
   const handlePrevious = () => {
     if (index > 0) {
@@ -94,7 +92,7 @@ const QuizPage = () => {
         user: userDetails?.user_id,
         response: newResponses,
       };
-      const data = await axios.post("/api/create-response", res, config);
+      const data = await axios.post("/api/create-response/", res, config);
       console.log(data);
     };
     submitTest();
@@ -112,16 +110,15 @@ const QuizPage = () => {
         console.log(data);
         setDuration(data?.quiz_details.duration);
         setQuiz(data?.quiz_questions);
-       
-          setResponses(
-            data?.quiz_questions.map((quiz) => ({
-              key: quiz.id,
-              answer: "",
-              flag: false,
-            }))
-          );
-          sessionStorage.setItem("quiz-responses", JSON.stringify(responses));
-        
+
+        setResponses(
+          data?.quiz_questions.map((quiz) => ({
+            key: quiz.id,
+            answer: "",
+            flag: false,
+          }))
+        );
+        sessionStorage.setItem("quiz-responses", JSON.stringify(responses));
         setIsLoading(false);
       } catch (err) {
         console.log(err.message);
@@ -141,7 +138,7 @@ const QuizPage = () => {
       ) : (
         <MathJax.Context
           input="tex"
-          onLoad={() => console.log("Loaded MathJax script!")}
+          onLoad={() => {}}
           onError={(MathJax, error) => {
             console.warn(error);
             console.log(
@@ -214,7 +211,7 @@ const QuizPage = () => {
                         aria-label="gender"
                         value={responses[index]?.answer}
                       >
-                        {quiz[index]?.option.map((option, idx) => (
+                        {quiz[index]?.option?.map((option, idx) => (
                           <FormControlLabel
                             key={idx}
                             value={option.key.toString()}
@@ -279,7 +276,7 @@ const QuizPage = () => {
             <div className="quiz-status">
               <CountDownTimer
                 handleTestSubmit={handleTestSubmit}
-                duration={userCurrentQuiz.test_time+10000}
+                duration={userCurrentQuiz.test_time + 10000}
               />
               <div className="quiz-navigation-stats">
                 {btnarray.map((button, idx) => {
@@ -291,9 +288,9 @@ const QuizPage = () => {
                       }}
                       value={button + 1}
                       className={
-                        responses[idx].answer ? "checked-answer" : undefined
+                        responses[idx]?.answer ? "checked-answer" : undefined
                       }
-                      style={{ backgroundColor: responses[idx].flag && "red" }}
+                      style={{ backgroundColor: responses[idx]?.flag && "red" }}
                     >
                       {button + 1}
                     </button>

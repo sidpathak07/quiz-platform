@@ -22,10 +22,10 @@ const Quizzes = () => {
 
   useEffect(() => {
     const fetchQuizzes = async () => {
-      if (quizzes) {
-        setIsLoading(false);
-      }
-      try {
+     try {
+        if (quizzes) {
+          setIsLoading(false);
+        }
         const config = {
           headers: { Authorization: `Bearer ${userDetails.access}` },
         };
@@ -33,9 +33,9 @@ const Quizzes = () => {
           `/api/get-all-quizzes/${userDetails.user_id}`,
           config
         );
-        sessionStorage.setItem("quiz-data", JSON.stringify(data));
         setQuizzes(data);
         setIsLoading(false);
+        sessionStorage.setItem("quiz-data", JSON.stringify(data));
       } catch (err) {
         console.log(err.message);
       }
@@ -50,7 +50,7 @@ const Quizzes = () => {
       <NavBar />
       {quizzes && <h2>Your Quizzes</h2>}
       {isLoading ? (
-        <div className="quiz-loader">
+        <div className="quizcard-loader">
           <Loader />
         </div>
       ) : (
