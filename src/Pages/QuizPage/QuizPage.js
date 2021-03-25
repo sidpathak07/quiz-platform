@@ -90,19 +90,19 @@ const QuizPage = () => {
           answer: responses[i].answer,
         });
       }
-      // console.log(responses);
-      console.log(newResponses);
+      // console.log(newResponses);
       const res = {
         quiz: id,
         user: userDetails?.user_id,
         response: newResponses,
       };
-      console.log(res);
+      // console.log(res);
       const data = await axios.post("/api/create-response", res, config);
-      console.log(data);
+      if (data.status === 200) {
+        history.push("/feedback");
+      }
     };
     submitTest();
-    history.push("/feedback");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -113,9 +113,7 @@ const QuizPage = () => {
           headers: { Authorization: `Bearer ${userDetails.access}` },
         };
         const { data } = await axios.get(`/api/get-quiz/${id}`, config);
-        // setDuration(data?.quiz_details.duration);
         setQuiz(data?.quiz_questions);
-
         setResponses(
           data?.quiz_questions.map((quiz) => ({
             key: quiz.id,
@@ -221,9 +219,8 @@ const QuizPage = () => {
                             key={idx}
                             value={option.key.toString()}
                             name={option.key.toString()}
-                            control={<Radio />}
+                            control={<Radio onClick={handleResponse} />}
                             label={option.option}
-                            onClick={handleResponse}
                           />
                         ))}
                       </RadioGroup>

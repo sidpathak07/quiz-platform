@@ -31,6 +31,7 @@ const QuizCard = (props) => {
         },
         config
       );
+      console.log(data);
       if (data.message !== "Success") {
         toast.warn("You have already attempted this quiz!", {
           position: "top-center",
@@ -46,7 +47,7 @@ const QuizCard = (props) => {
     } catch (err) {
       console.log(err.message);
     }
-    // history.push(`/instruction/${id}`);
+    history.push(`/instruction/${id}`);
     setIsLoading(false);
   };
 

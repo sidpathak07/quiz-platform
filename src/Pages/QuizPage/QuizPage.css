@@ -28,7 +28,6 @@
   padding: 30px;
   position: relative;
   min-width: 700px;
-  max-width: 800px;
 }
 
 .quiz-options textarea {
@@ -116,6 +115,9 @@
   min-width: 250px;
   border: 1px solid rgb(170, 170, 170);
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   margin-right: 100px;
   min-height: 450px;
   margin-bottom: 20px;
@@ -124,9 +126,11 @@
 .quiz-navigation-stats {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(5, 50px);
-  grid-gap: 5px;
-  min-height: 250px;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 50px));
+  grid-template-rows: repeat(auto-fit, minmax(50px, 50px));
+  grid-gap: 7px;
+  flex: 1;
+  height: 50px;
 }
 
 .quiz-navigation-stats button {
@@ -146,7 +150,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin: 20px 0;
+  margin-top: 10px;
 }
 .choice-sign button {
   width: 15px;
@@ -289,6 +293,10 @@
   .question-page-left {
     width: 100%;
     margin-left: 0;
+    padding: 0;
+  }
+  .quiz-question {
+    padding: 30px 20px;
   }
   .question-details h2 {
     width: 100%;
@@ -344,7 +352,7 @@
   }
   .navigation-btn {
     min-width: 0;
-    width: 90%;
+    width: 100%;
   }
   .quiz-question {
     min-width: 0;
