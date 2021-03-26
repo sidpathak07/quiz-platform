@@ -35,7 +35,6 @@ const QuizPage = () => {
   const history = useHistory();
 
 
-
   const handlePrevious = () => {
     if (index > 0) {
       setIndex(index - 1);
@@ -159,6 +158,7 @@ const QuizPage = () => {
           input="tex"
           onLoad={() => {}}
           onError={(MathJax, error) => {
+            window.location.reload(false);
             console.warn(error);
             console.log(
               "Encountered a MathJax error, re-attempting a typeset!"
