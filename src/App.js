@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
+  Redirect,
 } from "react-router-dom";
 import Login from "./Pages/LoginPage/Login";
 import QuizPage from "./Pages/QuizPage/QuizPage";
@@ -30,7 +30,7 @@ const App = () => {
             {userDetails ? <QuizPage /> : <Redirect to="/login" />}
           </Route>
           <Route exact path="/instruction/:id">
-          {userDetails ? <Instruction /> : <Redirect to="/login" />}
+            {userDetails ? <Instruction /> : <Redirect to="/login" />}
           </Route>
           <Route exact path="/feedback">
             {userDetails ? <FeedBack /> : <Redirect to="/login" />}

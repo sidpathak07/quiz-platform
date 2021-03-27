@@ -21,11 +21,12 @@
 .feedback-page-header {
   font-size: 1.6em;
   position: absolute;
-  top: 0%;
-  left: 0%;
-  transform: translate(10%, -50%);
+  top: -30px;
+  left: 22%;
+  transform: translateX(-50%);
   background: white;
   padding: 10px;
+  width: auto;
   color: rgb(100, 100, 100);
 }
 .feedback-loader {
@@ -53,9 +54,10 @@
 
 .feedback-page {
   position: relative;
-  padding: 50px;
+  width: 95vw;
   max-width: 805px;
-  margin: 100px auto;
+  padding: 40px;
+  margin: 120px auto 50px auto;
   border: 2px solid rgb(231, 231, 231);
   min-height: 85vh;
   display: flex;
@@ -64,9 +66,8 @@
 }
 
 .feedback-page input[type="range"] {
-  width: 70%;
+  width: 75%;
   cursor: pointer;
-  -webkit-appearance: none;
   height: 15px;
   border-radius: 5px;
   background: rgb(231, 231, 231);
@@ -92,7 +93,7 @@
 .feedback-input-sliders p {
   display: flex;
   justify-content: space-between;
-  width: 70%;
+  width: 75%;
 }
 .feedback-input-sliders p span {
   font-size: 0.8em;
@@ -162,9 +163,6 @@
   font-size: 1.1em;
   font-weight: 600;
 }
-.feedback-yes-no {
-  margin-bottom: 50px;
-}
 
 .feedback-yes-no div {
   margin: 10px 0;
@@ -193,7 +191,7 @@
   padding: 10px;
   font-size: 0.9em;
   font-weight: 700;
-  margin: 10px;
+  margin: 10px 0;
 }
 
 @media only screen and (max-width: 786px) {
@@ -202,8 +200,14 @@
   }
   .feedback-page {
     padding: 20px;
-    margin: 20px;
-    margin-top: 100px;
+    margin: 100px auto 50px auto;
+  }
+  .feedback-page-header {
+    top: -20px;
+    left: 50%;
+    width: 310px;
+    text-align: center;
+    padding: 0;
   }
   .feedback-text textarea {
     width: 100%;
@@ -226,4 +230,25 @@
 .feedback-quiz .selected-btn {
   background-color: rgb(0, 140, 255);
   color: #fff;
+}
+
+@media (max-width: 450px) {
+  .quiz-submitted-header {
+    font-size: 1.6em;
+  }
+}
+@media (max-width: 400px) {
+  .quiz-submitted-header {
+    font-size: 1.45em;
+  }
+}
+
+@media (max-width: 360px) {
+  .feedback-page-header {
+    width: 90%;
+    font-size: 1.4em;
+  }
+  .quiz-submitted-header {
+    font-size: 1.35em;
+  }
 }

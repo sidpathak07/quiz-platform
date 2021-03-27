@@ -26,14 +26,14 @@ const Instruction = () => {
           <p>Please read the instructions carefully.</p>
         </div>
         <div className="instruction-one">
-          <h2>Test Duration :</h2>
+          <h2>Test Duration:</h2>
           <p>
             You have {hours !== "0" && `${hours} hours and`} {minutes} minutes
             to complete and submit the test.
           </p>
         </div>
         <div className="instruction-two">
-          <h2>Marking Scheme :</h2>
+          <h2>Marking Scheme:</h2>
           <p>
             There are three type of questions. Multiple choice questions,
             Integer type questions and true/false questions. The marks of are
@@ -43,13 +43,13 @@ const Instruction = () => {
             is as follows:{" "}
           </p>
           <div className="marking-instruction">
-            <p>For MCQ : 1/4th of the marks of question</p>
-            <p>For Integers: 1/4th of the marks of the question</p>
-            <p>For True/False: Half of the marks of the question</p>
+            <p><strong>For MCQ:</strong> 1/4th of the marks of question</p>
+            <p><strong>For Integers: </strong> 1/4th of the marks of the question</p>
+            <p><strong>For True/False: </strong> Half of the marks of the question</p>
           </div>
         </div>
         <div className="instruction-three">
-          <h2>Navigation through questions :</h2>
+          <h2>Navigation through questions:</h2>
           <p>
             You can leave a question, answer a question and even flag a
             question. By flagging a question you mark it to review it later.
@@ -60,7 +60,7 @@ const Instruction = () => {
           </p>
         </div>
         <div className="instruction-four">
-          <h2>Feedback instruction :</h2>
+          <h2>Feedback instruction:</h2>
           <p>
             There will be a feedback form at the end of the quiz which is
             mandatory to fill. It contains simple questions which will help us
@@ -68,7 +68,7 @@ const Instruction = () => {
           </p>
         </div>
         <div className="instruction-timer">
-          <p>Your test will start in :</p>
+          <p>Your test will start in:</p>
           <Countdown
             className="instruction-countdown"
             date={time}

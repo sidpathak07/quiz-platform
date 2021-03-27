@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, useCallback } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import UserContext from "../../Context/UserContext";
 import Loader from "../../Components/Loader/LoadingBar";
@@ -29,6 +29,7 @@ const QuizPage = () => {
   const [showSubmit, setShowSubmit] = useState(false);
   const [responses, setResponses] = useState(getResponses);
   const { userDetails, userCurrentQuiz } = useContext(UserContext);
+  const duration = userCurrentQuiz.test_time;
   const { id } = useParams();
   const history = useHistory();
 
@@ -76,39 +77,35 @@ const QuizPage = () => {
     sessionStorage.setItem("quiz-responses", JSON.stringify(newResponses));
   };
 
-  const handleTestSubmit = useCallback(() => {
-    const submitTest = async () => {
-      try {
-        setIsLoading(true);
-        const config = {
-          headers: { Authorization: `Bearer ${userDetails.access}` },
-        };
-        const newResponses = [];
-        for (let i = 0; i < responses?.length; i++) {
-          newResponses.push({
-            key: responses[i].key,
-            answer: responses[i].answer,
-          });
-        }
-        // console.log(newResponses);
-        const res = {
-          quiz: id,
-          user: userDetails?.user_id,
-          response: responses,
-        };
-        // console.log(res);
-        const data = await axios.post("/api/create-response", res, config);
-        if (data.status === 200) {
-          setIsLoading(false);
-          history.push("/feedback");
-        }
-      } catch (err) {
-        console.log(err.message);
+  const handleTestSubmit = async () => {
+    try {
+      setIsLoading(true);
+      const config = {
+        headers: { Authorization: `Bearer ${userDetails.access}` },
+      };
+      const newResponses = [];
+      for (let i = 0; i < responses?.length; i++) {
+        newResponses.push({
+          key: responses[i].key,
+          answer: responses[i].answer,
+        });
       }
-    };
-    submitTest();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+      // console.log(newResponses);
+      const res = {
+        quiz: id,
+        user: userDetails?.user_id,
+        response: responses,
+      };
+      // console.log(res);
+      const data = await axios.post("/api/create-response", res, config);
+      if (data.status === 200) {
+        setIsLoading(false);
+        history.push("/feedback");
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
 
   useEffect(() => {
     let isUnmounted = false;
@@ -271,9 +268,9 @@ const QuizPage = () => {
                 <div className="submit-popup">
                   <div className="submit-pop-text">
                     <p>
-                      <FiAlertTriangle /> Are you sure you want to submit ?
+                      <FiAlertTriangle /> Are you sure you want to submit?
                     </p>
-                    <p>Once you submit , All your responses will be recorded</p>
+                    <p>Once you submit, All your responses will be recorded</p>
                   </div>
 
                   <div className="confirm-button">
@@ -290,7 +287,7 @@ const QuizPage = () => {
             <div className="quiz-status">
               <CountDownTimer
                 handleTestSubmit={handleTestSubmit}
-                duration={userCurrentQuiz.test_time}
+                duration={duration}
               />
               <div className="quiz-navigation-stats">
                 {btnarray.map((button, idx) => {

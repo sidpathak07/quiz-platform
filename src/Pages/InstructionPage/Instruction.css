@@ -7,9 +7,9 @@
 
 .instruction-container {
   max-width: 1168px;
-  width: 90vw;
+  width: 95vw;
   margin: auto;
-  padding: 0 30px;
+  padding: 10px 30px;
   border: 1px solid lightgray;
 }
 
@@ -62,7 +62,7 @@
 
 .marking-instruction {
   margin: 20px 0;
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .marking-instruction > * {
@@ -78,3 +78,8 @@
   margin: 10px 0;
 }
 
+@media (max-width: 500px) {
+  .instruction-container {
+    padding: 10px 20px;
+  }
+}
