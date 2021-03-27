@@ -14,7 +14,8 @@ import UserContext from "./Context/UserContext";
 import Instruction from "./Pages/InstructionPage/Instruction";
 
 const App = () => {
-  const { userDetails } = useContext(UserContext);
+  const { userDetails, isTestSubmitted } = useContext(UserContext);
+  // console.log(isTestSubmitted);
 
   return (
     <div className="App">
@@ -27,10 +28,26 @@ const App = () => {
             {!userDetails ? <Login /> : <Redirect to="/" />}
           </Route>
           <Route exact path="/quizpage/:id">
-            {userDetails ? <QuizPage /> : <Redirect to="/login" />}
+            {userDetails ? (
+              isTestSubmitted ? (
+                <Redirect to="/feedback" />
+              ) : (
+                <QuizPage />
+              )
+            ) : (
+              <Redirect to="/login" />
+            )}
           </Route>
           <Route exact path="/instruction/:id">
-            {userDetails ? <Instruction /> : <Redirect to="/login" />}
+            {userDetails ? (
+              isTestSubmitted ? (
+                <Redirect to="/feedback" />
+              ) : (
+                <Instruction />
+              )
+            ) : (
+              <Redirect to="/login" />
+            )}
           </Route>
           <Route exact path="/feedback">
             {userDetails ? <FeedBack /> : <Redirect to="/login" />}

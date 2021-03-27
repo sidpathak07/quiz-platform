@@ -10,8 +10,8 @@ const Instruction = () => {
   const { userCurrentQuiz } = useContext(UserContext);
   const history = useHistory();
 
-  const hours = userCurrentQuiz.duration.split(":")[0].split("")[1];
-  const minutes = userCurrentQuiz.duration.split(":")[1];
+  const hours = userCurrentQuiz?.duration?.split(":")[0].split("")[1];
+  const minutes = userCurrentQuiz?.duration?.split(":")[1];
 
   const onComplete = () => {
     setShowbtn(true);

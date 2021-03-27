@@ -20,9 +20,19 @@ const getUserQuiz = () => {
   }
 };
 
+const checkIsTestSubmitted = () => {
+  const quiz = sessionStorage.getItem("test-submitted");
+  if (quiz) {
+    return JSON.parse(quiz);
+  } else {
+    return null;
+  }
+};
+
 export const UserContextProvider = (props) => {
   const [userDetails, setUserDetails] = useState(getUserDetails);
   const [userCurrentQuiz, setUserCurrentQuiz] = useState(getUserQuiz);
+  const [isTestSubmitted, setIsTestSubmitted] = useState(checkIsTestSubmitted);
 
   const updateUser = (data) => {
     setUserDetails(data);
@@ -50,6 +60,11 @@ export const UserContextProvider = (props) => {
     );
   };
 
+  const submitTest = () => {
+    setIsTestSubmitted(true);
+    sessionStorage.setItem("test-submitted", true);
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
       timeUpdate();
@@ -66,6 +81,8 @@ export const UserContextProvider = (props) => {
         addQuiz,
         userCurrentQuiz,
         timeUpdate,
+        submitTest,
+        isTestSubmitted,
       }}
     >
       {props.children}

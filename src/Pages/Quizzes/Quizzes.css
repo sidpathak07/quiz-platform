@@ -161,4 +161,11 @@
   .quiz-duration-card {
     margin-top: 10px;
   }
+  .quiz-title-heading {
+    align-items: flex-start;
+  }
+  .quiz-title-heading svg {
+    margin-top: 5px;
+    margin-right: 10px;
+  }
 }

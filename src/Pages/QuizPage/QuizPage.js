@@ -28,8 +28,7 @@ const QuizPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showSubmit, setShowSubmit] = useState(false);
   const [responses, setResponses] = useState(getResponses);
-  const { userDetails, userCurrentQuiz } = useContext(UserContext);
-  const duration = userCurrentQuiz.test_time;
+  const { userDetails, userCurrentQuiz, timeUpdate, submitTest } = useContext(UserContext);
   const { id } = useParams();
   const history = useHistory();
 
@@ -101,6 +100,7 @@ const QuizPage = () => {
       if (data.status === 200) {
         setIsLoading(false);
         history.push("/feedback");
+        submitTest(true);
       }
     } catch (err) {
       console.log(err.message);
@@ -117,6 +117,7 @@ const QuizPage = () => {
         const { data } = await axios.get(`/api/get-quiz/${id}`, config);
         if (!isUnmounted) {
           setQuiz(data?.quiz_questions);
+          timeUpdate();
           if (responses === null) {
             setResponses(
               data?.quiz_questions.map((quiz) => ({
@@ -288,7 +289,7 @@ const QuizPage = () => {
             <div className="quiz-status">
               <CountDownTimer
                 handleTestSubmit={handleTestSubmit}
-                duration={duration}
+                duration={userCurrentQuiz?.test_time}
               />
               <div className="quiz-navigation-stats">
                 {btnarray.map((button, idx) => {
