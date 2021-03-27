@@ -152,6 +152,7 @@ const QuizPage = () => {
           input="tex"
           onLoad={() => {}}
           onError={(MathJax, error) => {
+            window.location.reload(false);
             console.warn(error);
             console.log(
               "Encountered a MathJax error, re-attempting a typeset!"
