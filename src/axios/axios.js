@@ -1,7 +1,8 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "http://18.222.104.46",
+  baseURL: "https://quiz-mycrobites.herokuapp.com",
 });
 
 // old base url : https://quiz-mycrobites.herokuapp.com
+// new base url : http://18.222.104.46
