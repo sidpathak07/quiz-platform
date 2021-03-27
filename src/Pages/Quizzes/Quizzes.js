@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback, useRef } from "react";
 import UserContext from "../../Context/UserContext";
 import Loader from "../../Components/Loader/LoadingBar";
 import QuizCard from "./QuizCard";
@@ -19,33 +19,31 @@ const Quizzes = () => {
   const [quizzes, setQuizzes] = useState(getQuizDatafromSessionStorage);
   const [isLoading, setIsLoading] = useState(true);
   const { userDetails } = useContext(UserContext);
+  const mountedRef = useRef(true);
+  const fetchQuizzes = useCallback(async () => {
+    try {
+      const config = {
+        headers: { Authorization: `Bearer ${userDetails.access}` },
+      };
+      const { data } = await axios.get(
+        `/api/get-all-quizzes/${userDetails.user_id}`,
+        config
+      );
+      if (!mountedRef.current) return null;
+      setQuizzes(data);
+      sessionStorage.setItem("quiz-data", JSON.stringify(data));
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err.message);
+    }
+  }, [mountedRef, userDetails]);
 
   useEffect(() => {
-    let isUnmounted = false;
-    const fetchQuizzes = async () => {
-      try {
-        const config = {
-          headers: { Authorization: `Bearer ${userDetails.access}` },
-        };
-        const { data } = await axios.get(
-          `/api/get-all-quizzes/${userDetails.user_id}`,
-          config
-        );
-        if (!isUnmounted) {
-          setQuizzes(data);
-          setIsLoading(false);
-          sessionStorage.setItem("quiz-data", JSON.stringify(data));
-        }
-      } catch (err) {
-        console.log(err.message);
-      }
-    };
     fetchQuizzes();
-    return () => {
-      isUnmounted = true;
+    return function cleanup(){
+      mountedRef.current = false;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [fetchQuizzes]);
 
   return (
     <div className="Quizzes-Page">
