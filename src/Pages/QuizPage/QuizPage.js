@@ -28,7 +28,9 @@ const QuizPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showSubmit, setShowSubmit] = useState(false);
   const [responses, setResponses] = useState(getResponses);
-  const { userDetails, userCurrentQuiz, timeUpdate, submitTest } = useContext(UserContext);
+  const { userDetails, userCurrentQuiz, timeUpdate, submitTest } = useContext(
+    UserContext
+  );
   const { id } = useParams();
   const history = useHistory();
   const mountedRef = useRef(true);
@@ -79,7 +81,7 @@ const QuizPage = () => {
 
   const testSubmit = async () => {
     setIsLoading(true);
-    try { 
+    try {
       const config = {
         headers: { Authorization: `Bearer ${userDetails.access}` },
       };
@@ -89,6 +91,7 @@ const QuizPage = () => {
         response: responses,
       };
       await axios.post("/api/create-response", res, config);
+      submitTest();
       history.push("/feedback");
     } catch (err) {
       console.log(err.message);
@@ -110,6 +113,7 @@ const QuizPage = () => {
         const { data } = await axios.get(`/api/get-quiz/${id}`, config);
         if (!mountedRef.current) return null;
         setQuiz(data?.quiz_questions);
+        timeUpdate();
         if (responses === null) {
           setResponses(
             data?.quiz_questions.map((quiz) => ({
@@ -127,10 +131,11 @@ const QuizPage = () => {
       }
     };
     fetchQuestion();
-    return function cleanup(){
+    return function cleanup() {
       mountedRef.current = false;
     };
-  }, [history, id, responses, userDetails.access]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -196,7 +201,7 @@ const QuizPage = () => {
                       Incorrect:{" "}
                       {quiz[index]?.negative_marks === 0
                         ? quiz[index]?.negative_marks
-                        : `${quiz[index]?.negative_marks}`}{" "}
+                        : `-${quiz[index]?.negative_marks}`}{" "}
                       marks
                     </p>
                     <p className="flag-question" onClick={handleFlagQuestion}>
@@ -279,7 +284,7 @@ const QuizPage = () => {
             <div className="quiz-status">
               <CountDownTimer
                 handleTestSubmit={handleTestSubmit}
-                duration={userCurrentQuiz?.test_time+10000}
+                duration={userCurrentQuiz?.test_time + 10000}
               />
               <div className="quiz-navigation-stats">
                 {btnarray.map((button, idx) => {

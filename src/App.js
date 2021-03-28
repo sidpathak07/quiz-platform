@@ -15,7 +15,6 @@ import Instruction from "./Pages/InstructionPage/Instruction";
 
 const App = () => {
   const { userDetails, isTestSubmitted } = useContext(UserContext);
-  // console.log(isTestSubmitted);
 
   return (
     <div className="App">

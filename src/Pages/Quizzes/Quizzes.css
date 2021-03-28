@@ -14,10 +14,6 @@
   max-width: 1168px;
   width: 95vw;
   margin: auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-  grid-gap: 30px;
-  margin-bottom: 40px;
   margin-top: 40px !important;
 }
 
@@ -41,6 +37,7 @@
   background-color: white;
   box-shadow: rgba(50, 50, 93, 0.3) 0px 2px 5px -1px,
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  margin-bottom: 40px;
 }
 .quiz-loader {
   position: absolute;

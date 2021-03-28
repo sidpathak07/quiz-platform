@@ -1,22 +1,20 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useCallback } from "react";
 import { useHistory } from "react-router-dom";
-import Countdown from "react-countdown";
+import Timer from "./Timer";
 import UserContext from "../../Context/UserContext";
 import "./Instruction.css";
 
 const Instruction = () => {
   const [showbtn, setShowbtn] = useState(false);
-  const [time, setTime] = useState(Date.now() + 10000); //change to 300000 for 5min timer
   const { userCurrentQuiz } = useContext(UserContext);
   const history = useHistory();
 
   const hours = userCurrentQuiz?.duration?.split(":")[0].split("")[1];
   const minutes = userCurrentQuiz?.duration?.split(":")[1];
 
-  const onComplete = () => {
+  const onComplete = useCallback(() => {
     setShowbtn(true);
-    setTime(Date.now());
-  };
+  }, []);
 
   return (
     <div className="instruction-page">
@@ -81,12 +79,7 @@ const Instruction = () => {
         </div>
         <div className="instruction-timer">
           <p>Your test will start in:</p>
-          <Countdown
-            className="instruction-countdown"
-            date={time}
-            // date={Date.now() + 10000}
-            onComplete={onComplete}
-          />
+          <Timer onComplete={onComplete} duration={30000} />
           {showbtn && (
             <button
               onClick={() => history.push(`/quizpage/${userCurrentQuiz.id}`)}

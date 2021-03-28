@@ -131,6 +131,7 @@
   grid-gap: 7px;
   flex: 1;
   height: 50px;
+  margin-bottom: 15px;
 }
 
 .quiz-navigation-stats button {

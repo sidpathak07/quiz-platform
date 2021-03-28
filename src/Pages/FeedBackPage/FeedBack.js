@@ -57,8 +57,9 @@ const FeedBack = () => {
       const config = {
         headers: { Authorization: `Bearer ${userDetails.access}` },
       };
-      await axios.post("/api/postFeedback/", postData, config);
+      const data = await axios.post("/api/postFeedback/", postData, config);
       setSubmitted(true);
+      console.log(data);
     } catch (err) {
       console.log(err.message);
     }
@@ -143,7 +144,8 @@ const FeedBack = () => {
           <div className="feedback-yes-no">
             <div>
               <p>
-                If a contest like this is organised again, will you participate?*
+                If a contest like this is organised again, will you
+                participate?*
               </p>
               <div>
                 <button
@@ -258,8 +260,8 @@ const FeedBack = () => {
             </div>
             <div className="feedback-quiz">
               <p>
-                Would you like to see a mini course which focuses on training
-                middle and high school students about mathematics in real life?*
+                Which of the following do you think is the good topic for next
+                contest?*
               </p>
               <div>
                 <button
