@@ -6,7 +6,7 @@
 }
 
 .instruction-container {
-  max-width: 1168px;
+  max-width: 998px;
   width: 95vw;
   margin: auto;
   padding: 10px 30px;
@@ -60,18 +60,10 @@
   font-size: 1.4em;
 }
 
-.marking-instruction {
-  margin: 20px 0;
-  font-weight: 400;
-}
-
-.marking-instruction > * {
-  margin: 10px 0;
-}
-
 .instruction-header {
   text-align: center;
   font-weight: 700;
+  margin-bottom: 20px;
 }
 
 .instruction-header > * {

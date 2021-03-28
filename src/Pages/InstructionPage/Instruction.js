@@ -26,52 +26,65 @@ const Instruction = () => {
           <p>Please read the instructions carefully.</p>
         </div>
         <div className="instruction-one">
-          <h2>Test Duration:</h2>
           <p>
-            You have {hours !== "0" && `${hours} hours and`} {minutes} minutes
-            to complete and submit the test.
+            1. You have {hours !== "0" && `${hours} hours and`} {minutes}{" "}
+            minutes to complete and submit the test.
           </p>
+          <br />
         </div>
         <div className="instruction-two">
-          <h2>Marking Scheme:</h2>
           <p>
-            There are three type of questions. Multiple choice questions,
-            Integer type questions and true/false questions. The marks of are
-            written at the end of each question. If you get the answer right you
-            get those marks if you get the wrong answer some marks from your
-            already gained marks will be deducted. The negative marking scheme
-            is as follows:{" "}
+            2. There are 14 problems for Middle School students and 20 problems
+            for High School and University students in the test . They are
+            arranged randomly.
           </p>
-          <div className="marking-instruction">
-            <p><strong>For MCQ:</strong> 1/4th of the marks of question</p>
-            <p><strong>For Integers: </strong> 1/4th of the marks of the question</p>
-            <p><strong>For True/False: </strong> Half of the marks of the question</p>
+          <br />
+          <div className="marking-three">
+            <p>
+              3. There are three type of questions. Multiple choice questions ,
+              Integer type questions and True/False questions. The marks of the
+              each question are written at the right hand side of your screen.
+              If you get the answer right you get marks corresponding to correct
+              answer. If you get the wrong answer some marks from your already
+              gained marks will be deducted and those are indicated as Negetive
+              Marks just below Marks of the question.
+            </p>
+            <br />
           </div>
         </div>
-        <div className="instruction-three">
-          <h2>Navigation through questions:</h2>
-          <p>
-            You can leave a question, answer a question and even flag a
-            question. By flagging a question you mark it to review it later.
-            Flag question feature help you differentiate between the problems
-            that you don't want to answer and problems that you want to answer
-            but you are not sure how much time they'll take so you're leaving
-            them for the end.
-          </p>
-        </div>
         <div className="instruction-four">
-          <h2>Feedback instruction:</h2>
           <p>
-            There will be a feedback form at the end of the quiz which is
-            mandatory to fill. It contains simple questions which will help us
-            know your feedback about the contest.
+            4. The marks and negetive marks for each question depend upon the
+            difficulty and type of question.
           </p>
+          <br />
+        </div>
+        <div className="instruction-five">
+          <p>
+            5. You can leave a question, answer a question and even flag a
+            question. By flagging a question you mark it so that you can review
+            it later. Flag question feature help you differentiate between the
+            problems that you don't want to answer and problems that you want to
+            answer but you are not sure how much time they'll take so you're
+            leaving them for the end.
+          </p>
+          <br />
+        </div>
+        <div className="instruction-six">
+          <p>
+            6. There will be a feedback form at the end of the quiz which is
+            mandatory to fill. It contains simple questions which will help us
+            know your feedback about the contest. Kindly fill the form with your
+            actual thoughts and not for formality.
+          </p>
+          <br />
         </div>
         <div className="instruction-timer">
           <p>Your test will start in:</p>
           <Countdown
             className="instruction-countdown"
             date={time}
+            // date={Date.now() + 10000}
             onComplete={onComplete}
           />
           {showbtn && (

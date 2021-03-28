@@ -21,6 +21,7 @@ const FeedBack = () => {
   const [miniCourse, setMiniCourse] = useState("");
   const [nextContest, setNextContest] = useState("");
   const [error, setError] = useState("");
+  const [username, setUsername] = useState("");
 
   const postData = {
     learn_new: parseInt(learnSomething),
@@ -35,6 +36,7 @@ const FeedBack = () => {
     suggestions: feedbackText,
     user: userDetails.user_id,
     quiz_id: userCurrentQuiz.id,
+    username: username,
   };
 
   const handleSubmit = async () => {
@@ -42,9 +44,9 @@ const FeedBack = () => {
       participateAgain === "" ||
       timeSufficient === "" ||
       attendWebinar === "" ||
-      language === "" ||
       miniCourse === "" ||
-      nextContest === ""
+      nextContest === "" ||
+      username === ""
     ) {
       setError("All fields are mandatory");
       return;
@@ -88,9 +90,18 @@ const FeedBack = () => {
           </h1>
           <h1 className="feedback-page-header">Give Us Some Feedback</h1>
           <div className="feedback-input-sliders">
+            <div className="feedback-username">
+              <p>Enter your Full name*</p>
+              <input
+                type="text"
+                placeholder="Enter username..."
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
             <div className="learn-feedback">
               <p>
-                Do you learn something new ?* <span> {learnSomething}/5</span>
+                Did you learn something new?* <span> {learnSomething}/5</span>
               </p>
               <input
                 name="question-slider"
@@ -103,7 +114,7 @@ const FeedBack = () => {
             </div>
             <div className="participate-feedback">
               <p>
-                To what extent did you like participating in this contest ?*{" "}
+                To what extent did you like participating in this contest?*{" "}
                 <span>{participating}/5</span>
               </p>
               <input
@@ -116,7 +127,7 @@ const FeedBack = () => {
             </div>
             <div className="difficulty-feedback">
               <p>
-                How difficult were the problems ?*
+                How difficult were the problems?*
                 <span>{difficultFeedback}/5</span>{" "}
               </p>
               <input
@@ -132,8 +143,7 @@ const FeedBack = () => {
           <div className="feedback-yes-no">
             <div>
               <p>
-                If a contest like this is organised again, will you participate
-                ?*
+                If a contest like this is organised again, will you participate?*
               </p>
               <div>
                 <button
@@ -157,7 +167,7 @@ const FeedBack = () => {
               </div>
             </div>
             <div>
-              <p>Do you think time was sufficient ?*</p>
+              <p>Do you think time was sufficient?*</p>
               <div>
                 <button
                   value="yes"
@@ -182,7 +192,7 @@ const FeedBack = () => {
             <div>
               <p>
                 If a webinar is organised to discuss the solutions of these
-                problems will you attend ?*
+                problems will you attend?*
               </p>
               <div>
                 <button
@@ -206,7 +216,7 @@ const FeedBack = () => {
               </div>
             </div>
             <div>
-              <p>In what language will you prefer to attend the webinar ?*</p>
+              <p>In which language will you prefer to attend the webinar?</p>
               <div>
                 <button
                   value="yes"
@@ -227,8 +237,7 @@ const FeedBack = () => {
             <div>
               <p>
                 Would you like to see a mini course which focuses on training
-                middle and high school students about mathematics in real life
-                ?*
+                middle and high school students about mathematics in real life?*
               </p>
               <div>
                 <button
@@ -250,8 +259,7 @@ const FeedBack = () => {
             <div className="feedback-quiz">
               <p>
                 Would you like to see a mini course which focuses on training
-                middle and high school students about mathematics in real life
-                ?*
+                middle and high school students about mathematics in real life?*
               </p>
               <div>
                 <button
@@ -300,7 +308,7 @@ const FeedBack = () => {
             </div>
           </div>
           <div className="feedback-text">
-            <p>Do you have any other suggestions for future competition ?</p>
+            <p>Do you have any other suggestions for future competition?</p>
             <textarea
               placeholder="Feedback here..."
               onChange={(e) => setFeedbackText(e.target.value)}
