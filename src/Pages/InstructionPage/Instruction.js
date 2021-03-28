@@ -32,7 +32,7 @@ const Instruction = () => {
         </div>
         <div className="instruction-two">
           <p>
-            2. There are 14 problems (for middle school student) and 20 problems (for high school/university student) in the test"
+            2. There are 14 problems (for middle school student) and 20 problems (for high school/university student) in the test
           </p>
           <br />
           <div className="marking-three">
