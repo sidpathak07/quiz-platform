@@ -94,7 +94,7 @@ const FeedBack = () => {
               <p>Enter your Full name*</p>
               <input
                 type="text"
-                placeholder="Enter username..."
+                placeholder="Enter name..."
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
