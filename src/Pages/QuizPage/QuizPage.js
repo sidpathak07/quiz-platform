@@ -28,12 +28,18 @@ const QuizPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showSubmit, setShowSubmit] = useState(false);
   const [responses, setResponses] = useState(getResponses);
-  const { userDetails, userCurrentQuiz, timeUpdate, submitTest } = useContext(
-    UserContext
-  );
+  const {
+    userDetails,
+    userCurrentQuiz,
+    timeUpdate,
+    submitTest,
+    addQuiz,
+  } = useContext(UserContext);
   const { id } = useParams();
   const history = useHistory();
   const mountedRef = useRef(true);
+
+  const { id: quizid, duration: quizDuration, test_time } = userCurrentQuiz;
 
   const handlePrevious = () => {
     if (index > 0) {
@@ -134,6 +140,18 @@ const QuizPage = () => {
     return function cleanup() {
       mountedRef.current = false;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      timeUpdate();
+    }, 1000);
+    return () => clearInterval(interval);
+  });
+
+  useEffect(() => {
+    addQuiz(quizid, quizDuration, test_time);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -284,7 +302,7 @@ const QuizPage = () => {
             <div className="quiz-status">
               <CountDownTimer
                 handleTestSubmit={handleTestSubmit}
-                duration={userCurrentQuiz?.test_time + 10000}
+                duration={userCurrentQuiz?.test_time}
               />
               <div className="quiz-navigation-stats">
                 {btnarray.map((button, idx) => {

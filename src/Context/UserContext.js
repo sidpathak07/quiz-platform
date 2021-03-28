@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 
 const UserContext = createContext();
 
@@ -65,12 +65,7 @@ export const UserContextProvider = (props) => {
     sessionStorage.setItem("test-submitted", true);
   };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      timeUpdate();
-    }, 1000);
-    return () => clearInterval(interval);
-  });
+  
 
   return (
     <UserContext.Provider
