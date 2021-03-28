@@ -32,9 +32,7 @@ const Instruction = () => {
         </div>
         <div className="instruction-two">
           <p>
-            2. There are 14 problems for Middle School students and 20 problems
-            for High School and University students in the test . They are
-            arranged randomly.
+            2. There are 14 problems (for middle school student) and 20 problems (for high school/university student) in the test"
           </p>
           <br />
           <div className="marking-three">
