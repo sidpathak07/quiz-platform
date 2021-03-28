@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import UserContext from "../../Context/UserContext";
 import Loader from "../../Components/Loader/LoadingBar";
@@ -28,9 +28,10 @@ const QuizPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showSubmit, setShowSubmit] = useState(false);
   const [responses, setResponses] = useState(getResponses);
-  const { userDetails, userCurrentQuiz,timeUpdate, submitTest } = useContext(UserContext);
+  const { userDetails, userCurrentQuiz, timeUpdate, submitTest } = useContext(UserContext);
   const { id } = useParams();
   const history = useHistory();
+  const mountedRef = useRef(true);
 
   const handlePrevious = () => {
     if (index > 0) {
@@ -76,71 +77,60 @@ const QuizPage = () => {
     sessionStorage.setItem("quiz-responses", JSON.stringify(newResponses));
   };
 
-  const handleTestSubmit = async () => {
-    try {
-      setIsLoading(true);
+  const testSubmit = async () => {
+    setIsLoading(true);
+    try { 
       const config = {
         headers: { Authorization: `Bearer ${userDetails.access}` },
       };
-      const newResponses = [];
-      for (let i = 0; i < responses?.length; i++) {
-        newResponses.push({
-          key: responses[i].key,
-          answer: responses[i].answer,
-        });
-      }
-      // console.log(newResponses);
       const res = {
         quiz: id,
         user: userDetails?.user_id,
         response: responses,
       };
-      // console.log(res);
-      const data = await axios.post("/api/create-response", res, config);
-      if (data.status === 200) {
-        setIsLoading(false);
-        history.push("/feedback");
-        submitTest(true);
-      }
+      await axios.post("/api/create-response", res, config);
+      history.push("/feedback");
     } catch (err) {
       console.log(err.message);
+      setIsLoading(false);
     }
   };
 
+  const handleTestSubmit = (e) => {
+    e.preventDefault();
+    testSubmit();
+  };
+
   useEffect(() => {
-    let isUnmounted = false;
     const fetchQuestion = async () => {
       try {
         const config = {
           headers: { Authorization: `Bearer ${userDetails.access}` },
         };
         const { data } = await axios.get(`/api/get-quiz/${id}`, config);
-        if (!isUnmounted) {
-          setQuiz(data?.quiz_questions);
-          timeUpdate()
-          if (responses === null) {
-            setResponses(
-              data?.quiz_questions.map((quiz) => ({
-                key: quiz.id,
-                answer: "",
-                flag: false,
-              }))
-            );
-          }
-          sessionStorage.setItem("quiz-responses", JSON.stringify(responses));
-          setIsLoading(false);
+        if (!mountedRef.current) return null;
+        setQuiz(data?.quiz_questions);
+        if (responses === null) {
+          setResponses(
+            data?.quiz_questions.map((quiz) => ({
+              key: quiz.id,
+              answer: "",
+              flag: false,
+            }))
+          );
         }
+        setIsLoading(false);
+        sessionStorage.setItem("quiz-responses", JSON.stringify(responses));
       } catch (err) {
         console.log(err.message);
         history.push("/404");
       }
     };
     fetchQuestion();
-    return () => {
-      isUnmounted = true;
+    return function cleanup(){
+      mountedRef.current = false;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [history, id, responses, userDetails.access]);
 
   return (
     <>
@@ -153,14 +143,14 @@ const QuizPage = () => {
           input="tex"
           onLoad={() => {}}
           onError={(MathJax, error) => {
-            window.location.reload(false);
+            // window.location.reload(false);
             console.warn(error);
             console.log(
               "Encountered a MathJax error, re-attempting a typeset!"
             );
             MathJax.Hub.Queue(MathJax.Hub.Typeset());
           }}
-          script="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"
+          // script="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js"
           options={{
             messageStyle: "none",
             extensions: ["tex2jax.js"],
@@ -279,7 +269,7 @@ const QuizPage = () => {
                     <button onClick={() => setShowSubmit(false)}>
                       Back to Test
                     </button>
-                    <button onClick={handleTestSubmit}>
+                    <button onClick={handleTestSubmit} type="submit">
                       Proceed and Submit
                     </button>
                   </div>

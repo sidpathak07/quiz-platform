@@ -20,26 +20,23 @@ const Login = () => {
   const history = useHistory();
   const { updateUser } = useContext(UserContext);
 
-  const fetchUser = async () => {
-    let isUnMounted = false;
+  const fetchUser =  async () => {
     setLoading(true);
     try {
       const { data } = await axios.post("/api/auth/login", {
         username: username.trim(),
         password: password,
       });
-      if (!isUnMounted) {
-        updateUser(data);
-        history.push("/");
-      }
+      setLoading(false);
+      updateUser(data);
+      history.push("/");
     } catch (err) {
       setError({
         username: "Invalid credentials",
         password: "Invalid credentials",
       });
+      setLoading(false);
     }
-    setLoading(false);
-    isUnMounted = true;
   };
 
   const handleSubmit = (e) => {

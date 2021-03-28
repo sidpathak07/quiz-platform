@@ -20,7 +20,6 @@ const QuizCard = (props) => {
     setIsLoading(true);
     addQuiz(id, duration, test_time);
     try {
-      // console.log(userDetails.access);
       const config = {
         headers: { Authorization: `Bearer ${userDetails.access}` },
       };
@@ -28,14 +27,15 @@ const QuizCard = (props) => {
         user: userDetails.user_id,
         quiz: id,
       };
-      // console.log(postData);
       await axios.post(
         "/api/check-quiz-assigned",
         postData,
         config
       );
+      setIsLoading(false);
       history.push(`/instruction/${id}`);
     } catch (err) {
+      setIsLoading(false);
       toast.warn("You have already attempted the test", {
         position: "top-center",
         autoClose: 4000,
@@ -46,7 +46,7 @@ const QuizCard = (props) => {
       });
       console.log(err.message);
     }
-    setIsLoading(false);
+    // setIsLoading(false);
   };
 
   return (
