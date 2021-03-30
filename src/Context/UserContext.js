@@ -65,8 +65,6 @@ export const UserContextProvider = (props) => {
     sessionStorage.setItem("test-submitted", true);
   };
 
-  
-
   return (
     <UserContext.Provider
       value={{

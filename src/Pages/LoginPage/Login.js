@@ -20,7 +20,7 @@ const Login = () => {
   const history = useHistory();
   const { updateUser } = useContext(UserContext);
 
-  const fetchUser =  async () => {
+  const fetchUser = async () => {
     setLoading(true);
     try {
       const { data } = await axios.post("/api/auth/login", {
@@ -46,13 +46,14 @@ const Login = () => {
         username: "Please enter username!",
         password: "Please enter password!",
       });
-    } else if (!username) {
-      setError({
+    }
+    if (!username) {
+      return setError({
         username: "Please enter username!",
         password: "",
       });
     } else if (!password) {
-      setError({
+      return setError({
         username: "",
         password: "Please enter password!",
       });
@@ -67,7 +68,7 @@ const Login = () => {
 
   return (
     <div className="login-page">
-    <div className='login-clip-path'></div>
+      <div className="login-clip-path"></div>
       {loading && (
         <div className="login-loader">
           <Loader />

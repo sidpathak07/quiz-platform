@@ -41,12 +41,12 @@ const FeedBack = () => {
 
   const handleSubmit = async () => {
     if (
-      participateAgain === "" ||
-      timeSufficient === "" ||
-      attendWebinar === "" ||
-      miniCourse === "" ||
-      nextContest === "" ||
-      username === ""
+      !participateAgain ||
+      !timeSufficient ||
+      !attendWebinar ||
+      !miniCourse ||
+      !nextContest ||
+      !username
     ) {
       setError("All fields are mandatory");
       return;
@@ -74,16 +74,13 @@ const FeedBack = () => {
 
   return (
     <>
-    <div className='feedback-clip-path'></div>
       {submitted ? (
         <div className="submitted-form">
-        
           <AiOutlineFileDone />
           <h1>Thank You for giving the feedback</h1>
         </div>
       ) : (
         <div className="feedback-page">
-        
           {loading && (
             <div className="feedback-loader">
               <Loader />

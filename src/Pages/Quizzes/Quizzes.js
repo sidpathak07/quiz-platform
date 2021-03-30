@@ -40,7 +40,7 @@ const Quizzes = () => {
 
   useEffect(() => {
     fetchQuizzes();
-    return function cleanup(){
+    return function cleanup() {
       mountedRef.current = false;
     };
   }, [fetchQuizzes]);
@@ -48,8 +48,7 @@ const Quizzes = () => {
   return (
     <div className="Quizzes-Page">
       <NavBar />
-      <div className='quizzes-clip-path'></div>
-      {quizzes && <h2 className='quizzes-header'>Your Quizzes</h2>}
+      {quizzes && <h2 className="quizzes-header">Your Quizzes</h2>}
       {isLoading ? (
         <div className="quizcard-loader">
           <Loader />

@@ -210,7 +210,13 @@
   color: rgb(100, 100, 100);
 }
 .countdown-div p {
+  display: flex;
+  align-items: center;
   font-size: 0.8em;
+}
+.countdown-div svg {
+  font-size: 1em;
+  margin-right: 5px;
 }
 
 .submit-confirm {
@@ -249,7 +255,7 @@
   justify-content: center;
   align-items: center;
   font-size: 0.8em;
-  width: 160px;
+  width: 180px;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
@@ -312,7 +318,7 @@
     min-width: 200px;
   }
   .navigation-btn button {
-    width: 75px;
+    width: 100px;
     height: 50px;
     font-size: 0.85em;
   }
@@ -379,8 +385,11 @@
     padding: 10px;
     width: 140px;
   }
+  .navigation-btn {
+    padding: 50px 10px;
+  }
 }
-@media (max-width: 370) {
+@media (max-width: 370px) {
   .submit-popup {
     padding: 10px 15px;
   }
@@ -388,7 +397,7 @@
     padding: 5px;
     width: 130px;
   }
-  .submit-pop-text svg {
-    margin-top: 10px;
+  .navigation-btn button {
+    width: 75px;
   }
 }

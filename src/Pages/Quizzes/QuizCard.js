@@ -27,11 +27,7 @@ const QuizCard = (props) => {
         user: userDetails.user_id,
         quiz: id,
       };
-      await axios.post(
-        "/api/check-quiz-assigned",
-        postData,
-        config
-      );
+      await axios.post("/api/check-quiz-assigned", postData, config);
       setIsLoading(false);
       history.push(`/instruction/${id}`);
     } catch (err) {
