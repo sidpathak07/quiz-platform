@@ -18,6 +18,7 @@ const Instruction = () => {
 
   return (
     <div className="instruction-page">
+    <div className='instruction-clip-path'></div>
       <div className="instruction-container">
         <div className="instruction-header">
           <h1>Test Instruction</h1>

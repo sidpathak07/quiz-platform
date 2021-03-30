@@ -1,64 +1,73 @@
 .error-page {
-  width: 100%;
-  height: 100vh;
-  background-color: #f3f3f3;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0 10px;
+	width: 100%;
+	height: 100vh;
+	background-color: #f3f3f3;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 0 10px;
 }
 
 .error-page img {
-  width: 60%;
-  height: 60%;
-  max-width: 500px;
-  max-height: 500px;
-  object-fit: contain;
+	width: 60%;
+	height: 60%;
+	max-width: 500px;
+	max-height: 500px;
+	object-fit: contain;
+	z-index: 10;
 }
 
 .error-msg {
-  margin-top: 40px;
-  font-size: 1.5em;
-  font-weight: 500;
-  color: grey;
-  text-align: center;
+	margin-top: 40px;
+	font-size: 1.5em;
+	font-weight: 500;
+	text-align: center;
+	z-index: 10;
 }
-
+.error-clip-path {
+	clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+	background: linear-gradient(to bottom, #22aeff, #f3f3f3);
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	width: 100vw;
+	height: 75vh;
+}
 .error-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  border: none;
-  outline: none;
-  color: white;
-  background: rgb(0, 140, 255);
-  cursor: pointer;
-  padding: 5px 10px;
-  font-size: 1.1em;
-  font-weight: 500;
-  border-radius: 5px;
-  margin-top: 25px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 40px;
+	border: none;
+	outline: none;
+	color: white;
+	background: rgb(0, 140, 255);
+	cursor: pointer;
+	padding: 5px 10px;
+	font-size: 1.1em;
+	font-weight: 500;
+	border-radius: 5px;
+	margin-top: 25px;
 }
 .error-btn:hover {
-  background: white;
-  color: black;
-  border: 1px solid black;
+	background: white;
+	color: black;
+	border: 1px solid black;
 }
 
 @media (max-width: 768px) {
-  .error-page img {
-    width: 80%;
-  }
+	.error-page img {
+		width: 80%;
+	}
 }
 @media (max-width: 576px) {
-  .error-page img {
-    width: 100%;
-  }
+	.error-page img {
+		width: 100%;
+	}
 }
 @media (max-width: 576px) {
-  .error-msg {
-    margin-top: -50px;
-  }
+	.error-msg {
+		margin-top: -50px;
+	}
 }

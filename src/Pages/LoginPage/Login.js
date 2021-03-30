@@ -67,6 +67,7 @@ const Login = () => {
 
   return (
     <div className="login-page">
+    <div className='login-clip-path'></div>
       {loading && (
         <div className="login-loader">
           <Loader />

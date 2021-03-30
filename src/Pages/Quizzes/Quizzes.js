@@ -48,7 +48,8 @@ const Quizzes = () => {
   return (
     <div className="Quizzes-Page">
       <NavBar />
-      {quizzes && <h2>Your Quizzes</h2>}
+      <div className='quizzes-clip-path'></div>
+      {quizzes && <h2 className='quizzes-header'>Your Quizzes</h2>}
       {isLoading ? (
         <div className="quizcard-loader">
           <Loader />
