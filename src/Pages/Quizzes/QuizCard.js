@@ -18,8 +18,8 @@ const QuizCard = (props) => {
 
   const handleClick = async () => {
     setIsLoading(true);
-    addQuiz(id, duration, test_time);
     try {
+      addQuiz(id, duration, test_time);
       const config = {
         headers: { Authorization: `Bearer ${userDetails.access}` },
       };
@@ -42,7 +42,6 @@ const QuizCard = (props) => {
       });
       console.log(err.message);
     }
-    // setIsLoading(false);
   };
 
   return (

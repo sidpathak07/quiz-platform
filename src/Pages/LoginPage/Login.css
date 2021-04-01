@@ -153,6 +153,10 @@ input::placeholder {
   .form-holder {
     width: 90vw;
   }
+  .login-clip-path {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    background: linear-gradient(to bottom, #00aeff, #eee);
+  }
 }
 
 @media only screen and (max-width: 500px) {

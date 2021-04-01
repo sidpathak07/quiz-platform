@@ -47,6 +47,10 @@ export const UserContextProvider = (props) => {
 
   const addQuiz = (id, duration, test_time) => {
     setUserCurrentQuiz({ id, duration, test_time });
+    sessionStorage.setItem(
+      "user-current-quiz",
+      JSON.stringify({ id, duration, test_time })
+    );
   };
 
   const timeUpdate = () => {

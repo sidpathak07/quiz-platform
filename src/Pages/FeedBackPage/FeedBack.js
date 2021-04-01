@@ -57,9 +57,8 @@ const FeedBack = () => {
       const config = {
         headers: { Authorization: `Bearer ${userDetails.access}` },
       };
-      const data = await axios.post("/api/postFeedback/", postData, config);
+      await axios.post("/api/postFeedback/", postData, config);
       setSubmitted(true);
-      console.log(data);
     } catch (err) {
       console.log(err.message);
     }

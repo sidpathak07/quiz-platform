@@ -39,6 +39,8 @@ const QuizPage = () => {
   const history = useHistory();
   const mountedRef = useRef(true);
 
+  console.log(userCurrentQuiz);
+
   const { id: quizid, duration: quizDuration, test_time } = userCurrentQuiz;
 
   const handlePrevious = () => {
@@ -299,7 +301,7 @@ const QuizPage = () => {
             )}
             <div className="quiz-status">
               <CountDownTimer
-                handleTestSubmit={handleTestSubmit}
+                testSubmit={testSubmit}
                 duration={userCurrentQuiz?.test_time}
               />
               <div className="quiz-navigation-stats">
