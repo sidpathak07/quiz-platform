@@ -5,8 +5,6 @@ import { IoIosTimer } from "react-icons/io";
 import UserContext from "../../Context/UserContext";
 import Loader from "../../Components/Loader/LoadingBar";
 import axios from "../../axios/axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const QuizCard = (props) => {
   const { id, title, desc, duration, creator_username } = props;
@@ -32,14 +30,7 @@ const QuizCard = (props) => {
       history.push(`/instruction/${id}`);
     } catch (err) {
       setIsLoading(false);
-      toast.warn("You have already attempted the test", {
-        position: "top-center",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        progress: undefined,
-      });
+      alert("You have already attempted the test!");
       console.log(err.message);
     }
   };
@@ -70,7 +61,6 @@ const QuizCard = (props) => {
           <span>created by:</span> {creator_username}
         </p>
       </div>
-      <ToastContainer />
       <div className="quiz-start-button">
         <button onClick={handleClick}>Start test</button>
       </div>

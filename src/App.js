@@ -12,6 +12,9 @@ import ErrorPage from "./Pages/ErrorPage/ErrorPage";
 import FeedBack from "./Pages/FeedBackPage/FeedBack";
 import UserContext from "./Context/UserContext";
 import Instruction from "./Pages/InstructionPage/Instruction";
+import TeacherQuizzes from "./Pages/TeacherQuizzes/TeacherQuizzes";
+import QuizQuestions from "./Pages/QuizQuestions/QuizQuestions";
+import QuizEditPage from "./Pages/QuizEditPage/QuizEditPage";
 
 const App = () => {
   const { userDetails, isTestSubmitted } = useContext(UserContext);
@@ -21,36 +24,101 @@ const App = () => {
       <Router>
         <Switch>
           <Route exact path="/">
-            {userDetails ? <Quizzes /> : <Redirect to="/login" />}
+            {userDetails ? (
+              userDetails.role === "Teacher" ? (
+                <TeacherQuizzes />
+              ) : (
+                <Quizzes />
+              )
+            ) : (
+              <Redirect to="/login" />
+            )}
           </Route>
+
           <Route exact path="/login">
             {!userDetails ? <Login /> : <Redirect to="/" />}
           </Route>
+
           <Route exact path="/quizpage/:id">
             {userDetails ? (
-              isTestSubmitted ? (
-                <Redirect to="/feedback" />
+              userDetails.role === "Student" ? (
+                isTestSubmitted ? (
+                  <Redirect to="/feedback" />
+                ) : (
+                  <QuizPage />
+                )
               ) : (
-                <QuizPage />
+                <Redirect to="/404" />
               )
             ) : (
               <Redirect to="/login" />
             )}
           </Route>
+
           <Route exact path="/instruction/:id">
             {userDetails ? (
-              isTestSubmitted ? (
-                <Redirect to="/feedback" />
+              userDetails.role === "Student" ? (
+                isTestSubmitted ? (
+                  <Redirect to="/feedback" />
+                ) : (
+                  <Instruction />
+                )
               ) : (
-                <Instruction />
+                <Redirect to="/404" />
               )
             ) : (
               <Redirect to="/login" />
             )}
           </Route>
+
           <Route exact path="/feedback">
-            {userDetails ? <FeedBack /> : <Redirect to="/login" />}
+            {userDetails ? (
+              userDetails.role === "Student" ? (
+                <FeedBack />
+              ) : (
+                <Redirect to="/404" />
+              )
+            ) : (
+              <Redirect to="/login" />
+            )}
           </Route>
+
+          <Route exact path="/allquizzes">
+            {userDetails ? (
+              userDetails.role === "Teacher" ? (
+                <TeacherQuizzes />
+              ) : (
+                <Redirect to="/404" />
+              )
+            ) : (
+              <Redirect to="/login" />
+            )}
+          </Route>
+
+          <Route exact path="/quizquestions/:id">
+            {userDetails ? (
+              userDetails.role === "Teacher" ? (
+                <QuizQuestions />
+              ) : (
+                <Redirect to="/404" />
+              )
+            ) : (
+              <Redirect to="/login" />
+            )}
+          </Route>
+
+          <Route exact path="/quizedit/:id">
+            {userDetails ? (
+              userDetails.role === "Teacher" ? (
+                <QuizEditPage />
+              ) : (
+                <Redirect to="/404" />
+              )
+            ) : (
+              <Redirect to="/login" />
+            )}
+          </Route>
+
           <Route path="*">
             <ErrorPage />
           </Route>

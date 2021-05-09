@@ -20,6 +20,7 @@ const Quizzes = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { userDetails } = useContext(UserContext);
   const mountedRef = useRef(true);
+  
   const fetchQuizzes = useCallback(async () => {
     try {
       const config = {
