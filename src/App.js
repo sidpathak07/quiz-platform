@@ -15,6 +15,7 @@ import Instruction from "./Pages/InstructionPage/Instruction";
 import TeacherQuizzes from "./Pages/TeacherQuizzes/TeacherQuizzes";
 import QuizQuestions from "./Pages/QuizQuestions/QuizQuestions";
 import QuizEditPage from "./Pages/QuizEditPage/QuizEditPage";
+import TeacherHomePage from "./Pages/TeacherHomePage/TeacherHomePage";
 
 const App = () => {
   const { userDetails, isTestSubmitted } = useContext(UserContext);
@@ -26,7 +27,7 @@ const App = () => {
           <Route exact path="/">
             {userDetails ? (
               userDetails.role === "Teacher" ? (
-                <TeacherQuizzes />
+                <TeacherHomePage />
               ) : (
                 <Quizzes />
               )

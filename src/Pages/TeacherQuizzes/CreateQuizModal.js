@@ -6,7 +6,6 @@ import "./EditQuizModal.css";
 
 const ScheduleClass = (props) => {
   const { userDetails, fetchAllQuizzes, setShowCreateModal } = props;
-
   const [quizTitle, setQuizTitle] = useState("");
   const [quizDesc, setQuizDesc] = useState("");
   const [quizDuration, setQuizDuration] = useState("");

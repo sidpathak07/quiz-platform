@@ -42,7 +42,6 @@ const ScheduleClass = (props) => {
         starttime: startdate + "+05:30",
         endtime: enddate + "+05:30",
       };
-      console.log(postData);
       const config = {
         headers: { Authorization: `Bearer ${userDetails.access}` },
       };
