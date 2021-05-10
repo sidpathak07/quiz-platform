@@ -38,9 +38,6 @@ const QuizPage = () => {
   const { id } = useParams();
   const history = useHistory();
   const mountedRef = useRef(true);
-
-  console.log(userCurrentQuiz);
-
   const { id: quizid, duration: quizDuration, test_time } = userCurrentQuiz;
 
   const handlePrevious = () => {
@@ -169,9 +166,9 @@ const QuizPage = () => {
           onLoad={() => {}}
           onError={(MathJax, error) => {
             console.warn(error);
-            console.log(
-              "Encountered a MathJax error, re-attempting a typeset!"
-            );
+            // console.log(
+            //   "Encountered a MathJax error, re-attempting a typeset!"
+            // );
             MathJax.Hub.Queue(MathJax.Hub.Typeset());
           }}
           options={{

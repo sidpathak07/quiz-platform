@@ -5,4 +5,4 @@ export default axios.create({
 });
 
 // old base url : https://quiz-mycrobites.herokuapp.com
-// new base url : http://18.222.104.46
+// new base url : https://api.progressiveminds.in

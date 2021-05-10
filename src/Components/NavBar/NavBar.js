@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { FiLogOut } from "react-icons/fi";
 import { CgNotes } from "react-icons/cg";
 import ReactTooltip from "react-tooltip";
@@ -7,11 +8,16 @@ import "./NavBar.css";
 
 const NavBar = () => {
   const { removeUser, userDetails } = useContext(UserContext);
+  const history = useHistory();
+
   return (
     <div className="navbar">
       <div className="navbar-container">
         <div className="navbar-logo">
-          <CgNotes />
+          <CgNotes
+            onClick={() => history.push("/")}
+            style={{ cursor: "pointer" }}
+          />
         </div>
         <div className="user-name-nav">
           <p>Hello, {userDetails.first_name}</p>

@@ -434,6 +434,19 @@ const QuizEditPage = () => {
           )}
         </div>
 
+        {filteredQuestionBank?.length === 0 && (
+          <p
+            style={{
+              textAlign: "center",
+              marginTop: 200,
+              fontWeight: 600,
+              color: "rgba(0,0,0,0.5)",
+            }}
+          >
+            No matched questions
+          </p>
+        )}
+
         {/* QUESTION BANK QUESTIONS */}
         {filteredQuestionBank?.map((ques) => (
           <div className="qb-question" key={ques.id}>

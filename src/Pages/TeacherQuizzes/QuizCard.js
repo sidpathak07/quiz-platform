@@ -74,7 +74,9 @@ const QuizCard = (props) => {
         {getTime(endtime)}
       </p>
       <div className="teacher-quiz-card-buttons">
-        <button onClick={() => history.push(`/quizquestions/${id}`)}>View</button>
+        <button onClick={() => history.push(`/quizquestions/${id}`)}>
+          View
+        </button>
         <button onClick={() => setEditQuiz(!editQuiz)}>Edit</button>
         <button onClick={() => setShowConfirmDelete(true)}>Delete</button>
       </div>

@@ -50,11 +50,16 @@
     text-transform: capitalize;
 }
 .teacher-quiz-card .desc {
-    margin: 5px 0 10px 0;
+    margin: 7px 0 10px 0;
     text-transform: capitalize;
+    flex: 1;
+    overflow-y: scroll;
+}
+.teacher-quiz-card .desc::-webkit-scrollbar {
+    display: none;
 }
 .teacher-quiz-card .duration {
-    flex: 1;
+    margin-bottom: 5px;
 }
 .teacher-quiz-card .time {
     padding: 5px 0;
