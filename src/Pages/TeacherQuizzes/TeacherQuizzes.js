@@ -63,18 +63,20 @@ const TeacherQuizzes = () => {
       {allquizzes?.length === 0 && (
         <p className="no-quiz-created">You haven't created any quiz yet.</p>
       )}
-      <div className="all-Quizzes">
-        <Carousel breakPoints={breakPoints}>
-          {allquizzes?.map((quiz) => (
-            <QuizCard
-              key={quiz.id}
-              {...quiz}
-              userDetails={userDetails}
-              fetchAllQuizzes={fetchAllQuizzes}
-            />
-          ))}
-        </Carousel>
-      </div>
+      {allquizzes?.length > 0 && (
+        <div className="all-Quizzes">
+          <Carousel breakPoints={breakPoints}>
+            {allquizzes?.map((quiz) => (
+              <QuizCard
+                key={quiz.id}
+                {...quiz}
+                userDetails={userDetails}
+                fetchAllQuizzes={fetchAllQuizzes}
+              />
+            ))}
+          </Carousel>
+        </div>
+      )}
       {showCreateModal && (
         <CreateQuizModal
           userDetails={userDetails}

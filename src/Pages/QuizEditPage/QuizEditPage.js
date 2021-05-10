@@ -457,6 +457,14 @@ const QuizEditPage = () => {
               <div>
                 <MathJax.Html html={ques.question} />
               </div>
+              <div className="question-tags">
+                  <h4>Tags: </h4>
+                  {ques?.dificulty_tag && <p>{ques?.dificulty_tag}</p>}
+                  {ques?.skill && <p>{ques?.skill}</p>}
+                  {ques?.subject_tag && <p>{ques?.subject_tag}</p>}
+                  {ques?.topic_tag && <p>{ques?.topic_tag}</p>}
+                  {ques?.subtopic_tag && <p>{ques?.subtopic_tag}</p>}
+                </div>
               <div className="options">
                 {Array.isArray(ques.option) &&
                   ques.option?.map((op, idx) => {
