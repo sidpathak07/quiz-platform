@@ -1,10 +1,24 @@
-import { useState, useContext, useCallback } from "react";
-import { useHistory } from "react-router-dom";
+import { useState, useContext, useCallback, useEffect } from "react";
+import { useHistory, withRouter } from "react-router-dom";
 import Timer from "./Timer";
 import UserContext from "../../Context/UserContext";
 import "./Instruction.css";
+import axios from "../../axios/axios";
+import Loader from "../../Components/Loader/LoadingBar";
 
-const Instruction = () => {
+const Instruction = ({ match }) => {
+  const [appData, setappData] = useState({});
+  const userDetails = sessionStorage.getItem("user-details");
+  const usingData = JSON.parse(userDetails);
+  const getData = async () => {
+    let res = await axios.get(`/api/get-quiz/${match.params.id}`, {
+      headers: { Authorization: `Bearer ${usingData.access}` },
+    });
+    setappData(res.data);
+  };
+
+  useEffect(() => getData(), []);
+
   const [showbtn, setShowbtn] = useState(false);
   const { userCurrentQuiz } = useContext(UserContext);
   const history = useHistory();
@@ -16,27 +30,36 @@ const Instruction = () => {
     setShowbtn(true);
   }, []);
 
+  if (!appData) {
+    return (
+      <div className='quiz-loader'>
+        <Loader />
+      </div>
+    );
+  }
+
   return (
-    <div className="instruction-page">
-      <div className="instruction-container">
-        <div className="instruction-header">
+    <div className='instruction-page'>
+      <div className='instruction-container'>
+        <div className='instruction-header'>
           <h1>Test Instruction</h1>
           <p>Please read the instructions carefully.</p>
         </div>
-        <div className="instruction-one">
+        <div className='instruction-one'>
           <p>
             1. You have {hours !== "0" && `${hours} hours and`} {minutes}{" "}
             minutes to complete and submit the test.
           </p>
           <br />
         </div>
-        <div className="instruction-two">
+        <div className='instruction-two'>
           <p>
-            2. There are 14 problems (for middle school student) and 20 problems
-            (for high school/university student) in the test.
+            2. There are {appData.quiz_questions?.length} problems (for middle
+            school student) and 20 problems (for high school/university student)
+            in the test.
           </p>
           <br />
-          <div className="marking-three">
+          <div className='marking-three'>
             <p>
               3. There are three types of questions. Multiple choice questions ,
               Integer type questions and True/False questions. The marks of the
@@ -49,14 +72,14 @@ const Instruction = () => {
             <br />
           </div>
         </div>
-        <div className="instruction-four">
+        <div className='instruction-four'>
           <p>
             4. The marks and negetive marks for each question depend upon the
             difficulty and type of question.
           </p>
           <br />
         </div>
-        <div className="instruction-five">
+        <div className='instruction-five'>
           <p>
             5. You can leave a question, answer a question and even flag a
             question. By flagging a question you mark it so that you can review
@@ -67,7 +90,7 @@ const Instruction = () => {
           </p>
           <br />
         </div>
-        <div className="instruction-six">
+        <div className='instruction-six'>
           <p>
             6. There will be a feedback form at the end of the quiz which is
             mandatory to fill. It contains simple questions which will help us
@@ -76,7 +99,7 @@ const Instruction = () => {
           </p>
           <br />
         </div>
-        <div className="instruction-timer">
+        <div className='instruction-timer'>
           <p>Your test will start in:</p>
           <Timer onComplete={onComplete} duration={30000} />
           {showbtn && (
@@ -92,4 +115,4 @@ const Instruction = () => {
   );
 };
 
-export default Instruction;
+export default withRouter(Instruction);
