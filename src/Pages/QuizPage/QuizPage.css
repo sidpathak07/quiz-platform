@@ -6,6 +6,10 @@
   line-height: 1.4;
 }
 
+.quiz-page img {
+  width:100%;
+}
+
 .question-page-left {
   display: flex;
   flex-direction: column;
