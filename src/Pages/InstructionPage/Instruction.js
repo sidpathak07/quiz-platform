@@ -72,28 +72,20 @@ const Instruction = ({ match }) => {
         </div>
         <div className="instruction-one">
           <p>
-            1. You have{" "}
-            <strong>
-              {hours !== "0" && `${hours} hours and`} {minutes} minutes
-            </strong>{" "}
-            to complete and submit the test.
+            1. Do not <strong>Refresh</strong> the page.
           </p>
-          <br />
+          <br/>
         </div>
         <div className="instruction-two">
           <p>
             2. There are{" "}
-            <strong>
-              {appData.quiz_questions?.length} problems (for middle school
-              student)
-            </strong>{" "}
-            and{" "}
-            <strong>20 problems (for high school/university student)</strong> in
-            the test.
+            <strong>{appData.quiz_questions?.length} problems </strong> in the
+            test.
           </p>
           <br />
-          <div className="marking-three">
-            <p>
+        </div>
+        <div className="marking-three">
+          {/* <p>
               3. There are three types of questions.{" "}
               <strong>{mcqCounter} Multiple choice questions,</strong>{" "}
               <strong>{intQuesCounter} Integer type questions</strong> and{" "}
@@ -103,34 +95,38 @@ const Instruction = ({ match }) => {
               corresponding to correct answer. If you get the wrong answer some
               marks from your already gained marks will be deducted and those
               are indicated as Negative Marks just below Marks of the question.
-            </p>
-            <br />
-          </div>
+            </p> */}
+          <p>
+            3. You have{" "}
+            <strong>
+              {hours !== "0" && `${hours} hours and`} {minutes} minutes
+            </strong>{" "}
+            to complete and submit the test.
+          </p>
+          <br />
         </div>
         <div className="instruction-four">
           <p>
-            4. The marks and negative marks for each question depend upon the
-            difficulty and type of question.
+            4. There are two types of problems. One whose answer must be
+            submitted as a non negative integer and other whose answer is one of
+            the four options provided just below the problem.
           </p>
           <br />
         </div>
         <div className="instruction-five">
           <p>
-            5. You can leave a question, answer a question and even flag a
-            question. By flagging a question you mark it so that you can review
-            it later. Flag question feature helps you differentiate between the
-            problems that you don't want to answer and problems that you want to
-            answer but you are not sure how much time they'll take so you're
-            leaving them for the end.
+            5. For correct response of each problem, 5 marks get added to your
+            score and for every incorrect response, 2 marks are deducted from
+            your score. Maximum marks one can score is 100.
           </p>
           <br />
         </div>
         <div className="instruction-six">
           <p>
-            6. There will be a feedback form at the end of the quiz which is
-            mandatory to fill. It contains simple questions which will help us
-            know your feedback about the contest. Kindly fill the form with your
-            actual thoughts and not for formality.
+            6. There's also an option to flag a problem. On flagging a problem
+            you mark it to review later. This option can be used for problems
+            which you would like to review in the last time before submitting
+            the test.
           </p>
           <br />
         </div>
