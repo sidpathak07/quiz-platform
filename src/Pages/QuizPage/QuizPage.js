@@ -11,6 +11,7 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import MathJax from "react-mathjax3";
+import parse from "html-react-parser";
 import "./QuizPage.css";
 
 const getResponses = () => {
@@ -28,13 +29,8 @@ const QuizPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showSubmit, setShowSubmit] = useState(false);
   const [responses, setResponses] = useState(getResponses);
-  const {
-    userDetails,
-    userCurrentQuiz,
-    timeUpdate,
-    submitTest,
-    addQuiz,
-  } = useContext(UserContext);
+  const { userDetails, userCurrentQuiz, timeUpdate, submitTest, addQuiz } =
+    useContext(UserContext);
   const { id } = useParams();
   const history = useHistory();
   const mountedRef = useRef(true);
@@ -119,15 +115,13 @@ const QuizPage = () => {
         if (!mountedRef.current) return null;
         setQuiz(data?.quiz_questions);
         timeUpdate();
-        if (responses === null) {
-          setResponses(
-            data?.quiz_questions.map((quiz) => ({
-              key: quiz.id,
-              answer: "",
-              flag: false,
-            }))
-          );
-        }
+        setResponses(
+          data?.quiz_questions.map((quiz) => ({
+            key: quiz.id,
+            answer: "",
+            flag: false,
+          }))
+        );
         setIsLoading(false);
         sessionStorage.setItem("quiz-responses", JSON.stringify(responses));
       } catch (err) {
@@ -238,10 +232,10 @@ const QuizPage = () => {
                         {quiz[index]?.option?.map((option, idx) => (
                           <FormControlLabel
                             key={idx}
-                            value={option.key.toString()}
-                            name={option.key.toString()}
+                            value={option}
+                            name={parse(option)}
                             control={<Radio onClick={handleResponse} />}
-                            label={option.option}
+                            label={parse(option)}
                           />
                         ))}
                       </RadioGroup>
@@ -322,15 +316,24 @@ const QuizPage = () => {
               </div>
               <div className="choice-sign">
                 <div className="attempted-sign">
-                  <button disabled={true} />
+                  <button
+                    disabled={true}
+                    style={{ opacity: 1, cursor: "default" }}
+                  />
                   <p>Attempted</p>
                 </div>
                 <div className="flagged-sign">
-                  <button disabled={true} />
+                  <button
+                    disabled={true}
+                    style={{ opacity: 1, cursor: "default" }}
+                  />
                   <p>Flagged Question</p>
                 </div>
                 <div className="unattempted-sign">
-                  <button disabled={true} />
+                  <button
+                    disabled={true}
+                    style={{ opacity: 1, cursor: "default" }}
+                  />
                   <p>Not Attempted</p>
                 </div>
               </div>
