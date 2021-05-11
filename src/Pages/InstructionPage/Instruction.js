@@ -8,9 +8,9 @@ import Loader from "../../Components/Loader/LoadingBar";
 
 const Instruction = ({ match }) => {
   const [appData, setappData] = useState({});
-  const [mcqCounter, setmcqCounter] = useState(0);
-  const [intQuesCounter, setIntQuesCounter] = useState(0);
-  const [trueFalseCounter, setTrueFalseCounter] = useState(0);
+  // const [mcqCounter, setmcqCounter] = useState(0);
+  // const [intQuesCounter, setIntQuesCounter] = useState(0);
+  // const [trueFalseCounter, setTrueFalseCounter] = useState(0);
   const userDetails = sessionStorage.getItem("user-details");
   const usingData = JSON.parse(userDetails);
 
@@ -24,18 +24,18 @@ const Instruction = ({ match }) => {
         config
       );
       setappData(data);
-      data.quiz_questions.forEach((ques) => {
-        if (ques.option.length === 0) {
-          setIntQuesCounter((prevCount) => prevCount + 1);
-        } else if (
-          ques.option[0].toLowerCase() === "true" ||
-          ques.option[0].toLowerCase() === "false"
-        ) {
-          setTrueFalseCounter((prevCount) => prevCount + 1);
-        } else {
-          setmcqCounter((prevCount) => prevCount + 1);
-        }
-      });
+      // data.quiz_questions.forEach((ques) => {
+      //   if (ques.option.length === 0) {
+      //     setIntQuesCounter((prevCount) => prevCount + 1);
+      //   } else if (
+      //     ques.option[0].toLowerCase() === "true" ||
+      //     ques.option[0].toLowerCase() === "false"
+      //   ) {
+      //     setTrueFalseCounter((prevCount) => prevCount + 1);
+      //   } else {
+      //     setmcqCounter((prevCount) => prevCount + 1);
+      //   }
+      // });
     } catch (err) {
       console.log(err.message);
     }
@@ -74,7 +74,7 @@ const Instruction = ({ match }) => {
           <p>
             1. Do not <strong>Refresh</strong> the page.
           </p>
-          <br/>
+          <br />
         </div>
         <div className="instruction-two">
           <p>
