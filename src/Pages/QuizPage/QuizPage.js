@@ -93,7 +93,7 @@ const QuizPage = () => {
       };
       await axios.post("/api/create-response", res, config);
       submitTest();
-      history.push("/feedback");
+      setTimeout(() => history.push("/login"), 5000);
     } catch (err) {
       console.log(err.message);
       setIsLoading(false);
@@ -151,12 +151,12 @@ const QuizPage = () => {
   return (
     <>
       {isLoading ? (
-        <div className="quiz-loader">
+        <div className='quiz-loader'>
           <Loader />
         </div>
       ) : (
         <MathJax.Context
-          input="tex"
+          input='tex'
           onLoad={() => {}}
           onError={(MathJax, error) => {
             console.warn(error);
@@ -190,21 +190,21 @@ const QuizPage = () => {
             },
           }}
         >
-          <div className="quiz-page">
-            <div className="question-progress-bar">
+          <div className='quiz-page'>
+            <div className='question-progress-bar'>
               <div
                 style={{ width: ((index + 1) / quiz.length) * 100 + "%" }}
-                className="question-progress"
+                className='question-progress'
               ></div>
             </div>
-            <div className="question-page-left">
-              <div className="quiz-question">
+            <div className='question-page-left'>
+              <div className='quiz-question'>
                 <h3>Question: {index + 1}</h3>
-                <div className="question-details">
+                <div className='question-details'>
                   <h2>
                     <MathJax.Html html={quiz[index]?.question} />
                   </h2>
-                  <div className="marks-distribution">
+                  <div className='marks-distribution'>
                     <p>Correct: {quiz[index]?.correct_marks} marks</p>
                     <p>
                       Incorrect:{" "}
@@ -213,7 +213,7 @@ const QuizPage = () => {
                         : `-${quiz[index]?.negative_marks}`}{" "}
                       marks
                     </p>
-                    <p className="flag-question" onClick={handleFlagQuestion}>
+                    <p className='flag-question' onClick={handleFlagQuestion}>
                       <IoFlag />
                       {responses[index]?.flag
                         ? "Unflag Question"
@@ -222,11 +222,11 @@ const QuizPage = () => {
                   </div>
                 </div>
 
-                <div className="quiz-options">
+                <div className='quiz-options'>
                   {quiz[index]?.option?.length > 0 ? (
-                    <FormControl component="fieldset">
+                    <FormControl component='fieldset'>
                       <RadioGroup
-                        aria-label="gender"
+                        aria-label='gender'
                         value={responses[index]?.answer}
                       >
                         {quiz[index]?.option?.map((option, idx) => (
@@ -242,14 +242,14 @@ const QuizPage = () => {
                     </FormControl>
                   ) : (
                     <textarea
-                      placeholder="Type your answer here"
+                      placeholder='Type your answer here'
                       value={responses[index]?.answer}
                       onChange={handleResponse}
                     />
                   )}
                 </div>
               </div>
-              <div className="navigation-btn">
+              <div className='navigation-btn'>
                 <button
                   disabled={index === 0 ? true : false}
                   onClick={handlePrevious}
@@ -270,32 +270,32 @@ const QuizPage = () => {
               </div>
             </div>
             {showSubmit && (
-              <div className="submit-confirm">
-                <div className="submit-popup">
-                  <div className="submit-pop-text">
+              <div className='submit-confirm'>
+                <div className='submit-popup'>
+                  <div className='submit-pop-text'>
                     <p>
                       <FiAlertTriangle /> Are you sure you want to submit?
                     </p>
                     <p>Once you submit, All your responses will be recorded</p>
                   </div>
 
-                  <div className="confirm-button">
+                  <div className='confirm-button'>
                     <button onClick={() => setShowSubmit(false)}>
                       Back to Test
                     </button>
-                    <button onClick={handleTestSubmit} type="submit">
+                    <button onClick={handleTestSubmit} type='submit'>
                       Proceed and Submit
                     </button>
                   </div>
                 </div>
               </div>
             )}
-            <div className="quiz-status">
+            <div className='quiz-status'>
               <CountDownTimer
                 testSubmit={testSubmit}
                 duration={userCurrentQuiz?.test_time}
               />
-              <div className="quiz-navigation-stats">
+              <div className='quiz-navigation-stats'>
                 {btnarray.map((button, idx) => {
                   return (
                     <button
@@ -314,22 +314,22 @@ const QuizPage = () => {
                   );
                 })}
               </div>
-              <div className="choice-sign">
-                <div className="attempted-sign">
+              <div className='choice-sign'>
+                <div className='attempted-sign'>
                   <button
                     disabled={true}
                     style={{ opacity: 1, cursor: "default" }}
                   />
                   <p>Attempted</p>
                 </div>
-                <div className="flagged-sign">
+                <div className='flagged-sign'>
                   <button
                     disabled={true}
                     style={{ opacity: 1, cursor: "default" }}
                   />
                   <p>Flagged Question</p>
                 </div>
-                <div className="unattempted-sign">
+                <div className='unattempted-sign'>
                   <button
                     disabled={true}
                     style={{ opacity: 1, cursor: "default" }}

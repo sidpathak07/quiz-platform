@@ -46,6 +46,7 @@ const Instruction = ({ match }) => {
           <p>Please read the instructions carefully.</p>
         </div>
         <div className='instruction-one'>
+          <p>There are problems in the test.</p>
           <p>
             1. You have {hours !== "0" && `${hours} hours and`} {minutes}{" "}
             minutes to complete and submit the test.
