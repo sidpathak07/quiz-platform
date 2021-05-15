@@ -72,7 +72,7 @@ const App = () => {
             )}
           </Route>
 
-          <Route exact path='/feedback'>
+          {/* <Route exact path='/feedback'>
             {userDetails ? (
               userDetails.role === "Student" ? (
                 <FeedBack />
@@ -82,7 +82,7 @@ const App = () => {
             ) : (
               <Redirect to='/login' />
             )}
-          </Route>
+          </Route> */}
 
           <Route exact path='/allquizzes'>
             {userDetails ? (

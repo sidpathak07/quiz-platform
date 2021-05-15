@@ -58,13 +58,19 @@ const QuizPage = () => {
   }
 
   const handleResponse = (e) => {
-    const { value } = e.target;
+    const { value, name } = e.target;
+    let ans = "";
+    if (name) {
+      ans = name;
+    } else {
+      ans = value;
+    }
     const newResponses = responses.map((ques) => {
       if (ques.key === quiz[index].id) {
         if (ques.answer === value) {
-          return { ...ques, answer: "" };
+          return { ...ques, answer: "", selectetedAnswer: "" };
         }
-        return { ...ques, answer: value };
+        return { ...ques, answer: value, selectetedAnswer: ans };
       } else return ques;
     });
     setResponses(newResponses);
@@ -89,7 +95,10 @@ const QuizPage = () => {
       const res = {
         quiz: id,
         user: userDetails?.user_id,
-        response: responses,
+        response: responses.map((res) => ({
+          key: res.key,
+          answer: res.selectetedAnswer,
+        })),
       };
       await axios.post("/api/create-response", res, config);
       submitTest();
@@ -120,6 +129,7 @@ const QuizPage = () => {
             key: quiz.id,
             answer: "",
             flag: false,
+            selectetedAnswer: "",
           }))
         );
         setIsLoading(false);
@@ -233,7 +243,7 @@ const QuizPage = () => {
                           <FormControlLabel
                             key={idx}
                             value={option}
-                            name={parse(option)}
+                            name={idx + 1}
                             control={<Radio onClick={handleResponse} />}
                             label={parse(option)}
                           />
@@ -242,7 +252,7 @@ const QuizPage = () => {
                     </FormControl>
                   ) : (
                     <textarea
-                      placeholder='Type your answer here'
+                      placeholder='Type your answer here...'
                       value={responses[index]?.answer}
                       onChange={handleResponse}
                     />
