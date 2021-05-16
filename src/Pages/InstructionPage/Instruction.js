@@ -47,15 +47,20 @@ const Instruction = ({ match }) => {
         </div>
         <div className='instruction-one'>
           <p>
-            1. There are {appData.quiz_questions?.length} problems in the test.
+            1. There are{" "}
+            <strong> {appData.quiz_questions?.length} problems</strong> in the
+            test.
           </p>
 
           <br />
         </div>
         <div className='instruction-two'>
           <p>
-            2. You have {hours !== "0" && `${hours} hours and`} {minutes}{" "}
-            minutes to solve all the problems.
+            2. You have{" "}
+            <strong>
+              {hours !== "0" && `${hours} hours and`} {minutes} minutes{" "}
+            </strong>{" "}
+            to solve all the problems.
           </p>
           <br />
           <div className='marking-three'>
