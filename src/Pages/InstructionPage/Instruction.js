@@ -47,15 +47,15 @@ const Instruction = ({ match }) => {
         </div>
         <div className='instruction-one'>
           <p>
-            1. There are{appData.quiz_questions?.length} problems in the test.
+            1. There are {appData.quiz_questions?.length} problems in the test.
           </p>
 
           <br />
         </div>
         <div className='instruction-two'>
           <p>
-            2. You have{hours !== "0" && `${hours} hours and`} {minutes} minutes
-            to solve all the problems.
+            2. You have {hours !== "0" && `${hours} hours and`} {minutes}{" "}
+            minutes to solve all the problems.
           </p>
           <br />
           <div className='marking-three'>
@@ -72,7 +72,7 @@ const Instruction = ({ match }) => {
           <p>
             4. For correct response of each problem, 4 marks get added to your
             score and for every incorrect response, 1 mark is deducted from your
-            score. <strong>Maximum marks one can score is 100.</strong>
+            score.
           </p>
           <br />
         </div>
