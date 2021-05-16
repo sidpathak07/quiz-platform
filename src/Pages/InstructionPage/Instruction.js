@@ -72,7 +72,7 @@ const Instruction = ({ match }) => {
           <p>
             4. For correct response of each problem, 4 marks get added to your
             score and for every incorrect response, 1 mark is deducted from your
-            score. Maximum marks one can score is 100.
+            score. <strong>Maximum marks one can score is 100.</strong>
           </p>
           <br />
         </div>
