@@ -5,6 +5,7 @@ import { IoIosTimer } from "react-icons/io";
 import UserContext from "../../Context/UserContext";
 import Loader from "../../Components/Loader/LoadingBar";
 import axios from "../../axios/axios";
+import ReactHtmlParser from "react-html-parser";
 
 const QuizCard = (props) => {
   const { id, title, desc, duration, creator_username } = props;
@@ -53,7 +54,7 @@ const QuizCard = (props) => {
               <IoIosTimer /> : {duration ? duration : "N/A"}
             </p>
           </div>
-          <p>{desc}</p>
+          <p>{ReactHtmlParser(desc)}</p>
         </div>
       </div>
       <div className="quiz-creator">
