@@ -4,6 +4,7 @@ import Loader from "../../Components/Loader/LoadingBar";
 import EditQuizModal from "./EditQuizModal";
 import months from "../../assets/months/months";
 import axios from "../../axios/axios";
+import ReactHtmlParser from "react-html-parser";
 
 const getTime = (time) => {
   const t = time.split("T")[1].split("+")[0];
@@ -60,7 +61,7 @@ const QuizCard = (props) => {
         </div>
       )}
       <h2 className="title">{title}</h2>
-      <p className="desc">{desc}</p>
+      <p className="desc">{ReactHtmlParser(desc)}</p>
       <p className="duration">
         <span>Duration: </span>
         {duration}
