@@ -27,6 +27,7 @@ const QuizEditPage = () => {
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
+  const [selectAllQuestions, setSelectAllQuestions] = useState(false);
   //context
   const { userDetails } = useContext(UserContext);
   //react-router
@@ -43,6 +44,29 @@ const QuizEditPage = () => {
     }
   };
 
+   //select all questions method
+  const addAllQuestions = () => {
+    let allQ = [];
+    questionBank.forEach((question, index) => {
+      allQ.push(question.id);
+    });
+    setSelectedQuestions(allQ);
+    setSelectAllQuestions(true);
+  };
+
+  //useEffect hook to set all checkboxes to checked after selecting all questions
+  useEffect(() => {
+    if (selectAllQuestions) {
+      let checkboxes = document.getElementsByClassName("checkboxip");
+      console.log(checkboxes);
+      let length = checkboxes.length;
+      for (let i = 0; i < length; i++) {
+        checkboxes[i].setAttribute("checked", true);
+      }
+    }
+  }, [selectAllQuestions]);
+  
+  
   const addQuestions = async () => {
     try {
       const config = {
@@ -321,6 +345,7 @@ const QuizEditPage = () => {
               >
                 Add Questions
               </button>
+              <button onClick={addAllQuestions}>Add All Questions</button>
               <button onClick={() => setShowFilter(!showFilter)}>
                 Filter <BsFilterRight />
               </button>
