@@ -41,6 +41,13 @@ const ScheduleClass = (props) => {
     setLoading(false);
   };
 
+  //changeQuizDesc method handles changes in description using data.getData() method from editor
+  const changeQuizDesc = (e, editor) => {
+    const data = editor.getData();
+    // console.log(data);
+    setQuizDesc(data);
+  };
+  
   useEffect(() => {
     const handler = (e) => {
       if (!modalRef.current?.contains(e.target)) {
