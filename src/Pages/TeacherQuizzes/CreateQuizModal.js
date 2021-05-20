@@ -3,6 +3,8 @@ import Loader from "../../Components/Loader/LoadingBar";
 import axios from "../../axios/axios";
 import { IoCloseOutline } from "react-icons/io5";
 import "./EditQuizModal.css";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 const ScheduleClass = (props) => {
   const { userDetails, fetchAllQuizzes, setShowCreateModal } = props;
@@ -67,11 +69,10 @@ const ScheduleClass = (props) => {
           />
           <br />
           <label>Description</label>
-          <input
-            type="text"
-            placeholder="Description..."
-            value={quizDesc}
-            onChange={(e) => setQuizDesc(e.target.value)}
+           <CKEditor
+            editor={ClassicEditor}
+            data={quizDesc}
+            onChange={changeQuizDesc}
           />
           <br />
           <label>Duration (format: hh:mm:ss)</label>
