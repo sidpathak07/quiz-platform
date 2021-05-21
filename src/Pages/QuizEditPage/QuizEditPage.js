@@ -313,6 +313,10 @@ const QuizEditPage = () => {
       console.log(err.message);
     }
   };
+  
+   useEffect(() => {
+    fetchQuestions();
+  }, [id]);
 
   if (!questionBank) {
     return (
