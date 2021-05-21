@@ -299,6 +299,20 @@ const QuizEditPage = () => {
     getQuestionBank();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  
+  const fetchQuestions = async () => {
+    try {
+      const config = {
+        headers: { Authorization: `Bearer ${userDetails.access}` },
+      };
+      setLoading(true);
+      const { data } = await axios.get(`/api/get-quiz/${id}`, config);
+      setQuestionsInQuiz(data.quiz_questions);
+      setLoading(false);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
 
   if (!questionBank) {
     return (
