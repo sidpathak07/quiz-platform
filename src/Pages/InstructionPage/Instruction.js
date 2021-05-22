@@ -5,6 +5,7 @@ import UserContext from "../../Context/UserContext";
 import "./Instruction.css";
 import axios from "../../axios/axios";
 import Loader from "../../Components/Loader/LoadingBar";
+import ReactHtmlParser from "react-html-parser";
 
 const Instruction = ({ match }) => {
   const [appData, setappData] = useState({});
@@ -25,80 +26,55 @@ const Instruction = ({ match }) => {
 
   const hours = userCurrentQuiz?.duration?.split(":")[0].split("")[1];
   const minutes = userCurrentQuiz?.duration?.split(":")[1];
-
+  //added instructions field to get instructions of current quiz
+  const instructions = userCurrentQuiz?.instructions;
+  console.log(userCurrentQuiz);
   const onComplete = useCallback(() => {
     setShowbtn(true);
   }, []);
 
   if (!appData) {
     return (
-      <div className='quiz-loader'>
+      <div className="quiz-loader">
         <Loader />
       </div>
     );
   }
 
   return (
-    <div className='instruction-page'>
-      <div className='instruction-container'>
-        <div className='instruction-header'>
+    <div className="instruction-page">
+      <div className="instruction-container">
+        <div className="instruction-header">
           <h1>Test Instruction</h1>
           <p>Please read the instructions carefully.</p>
         </div>
-        <div className='instruction-one'>
-          <p>
-            1. There are{" "}
-            <strong> {appData.quiz_questions?.length} problems</strong> in the
-            test.
-          </p>
+        <div className="instruction-one">
+          <ul>
+            <li>
+              {" "}
+              There are{" "}
+              <strong> {appData.quiz_questions?.length} problems</strong> in the
+              test.
+            </li>
+          </ul>
 
           <br />
         </div>
-        <div className='instruction-two'>
-          <p>
-            2. You have{" "}
-            <strong>
-              {hours !== "0" && `${hours} hours and`} {minutes} minutes{" "}
-            </strong>{" "}
-            to solve all the problems.
-          </p>
+        <div className="instruction-two">
+          <ul>
+            <li>
+              You have{" "}
+              <strong>
+                {hours !== "0" && `${hours} hours and`} {minutes} minutes{" "}
+              </strong>{" "}
+              to solve all the problems.
+            </li>
+          </ul>
           <br />
-          <div className='marking-three'>
-            <p>
-              3. There are two types of problems. One whose answer is one of the
-              four options provided just below the problem and other whose
-              answer must be submitted as a non negative integer or rounding off
-              to one decimal place.
-            </p>
-            <br />
-          </div>
+          <h5 style={{ marginBottom: "5px" }}>TEACHERS INSTRUCTIONS:</h5>
+          <p>{ReactHtmlParser(instructions)}</p>
         </div>
-        <div className='instruction-four'>
-          <p>
-            4. For correct response of each problem, 4 marks get added to your
-            score and for every incorrect response, 1 mark is deducted from your
-            score.
-          </p>
-          <br />
-        </div>
-        <div className='instruction-five'>
-          <p>
-            5. There is also an option to flag a problem. On flagging a problem
-            you mark it to review later. This option can be used for problems
-            which you would like to review in the last time before submitting
-            the test.
-          </p>
-          <br />
-        </div>
-        <div className='instruction-six'>
-          <p>
-            6. Kindly do not refresh or click back button during the test. In
-            case your quiz gets stuck due to bad network, kindly inform the
-            admin about the same immediately.
-          </p>
-          <br />
-        </div>
-        <div className='instruction-timer'>
+        <div className="instruction-timer">
           <p>Your test will start in:</p>
           <Timer onComplete={onComplete} duration={30000} />
           {showbtn && (

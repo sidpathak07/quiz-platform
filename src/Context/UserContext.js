@@ -45,8 +45,8 @@ export const UserContextProvider = (props) => {
     sessionStorage.clear();
   };
 
-  const addQuiz = (id, duration, test_time) => {
-    setUserCurrentQuiz({ id, duration, test_time });
+  const addQuiz = (id, duration, test_time, instructions) => {
+    setUserCurrentQuiz({ id, duration, test_time, instructions });
     sessionStorage.setItem(
       "user-current-quiz",
       JSON.stringify({ id, duration, test_time })

@@ -13,6 +13,7 @@ const ScheduleClass = (props) => {
   const [quizDuration, setQuizDuration] = useState("");
   const [startdate, setStartdate] = useState("");
   const [enddate, setEnddate] = useState("");
+  const [quizInstructions, setQuizInstructions] = useState("");
   const [loading, setLoading] = useState(false);
   const modalRef = useRef(null);
 
@@ -25,6 +26,8 @@ const ScheduleClass = (props) => {
         creator: userDetails.user_id,
         desc: quizDesc,
         duration: quizDuration,
+        //added quiz instruction
+        instructions: quizInstructions,
         starttime: startdate + ":00+05:30",
         endtime: enddate + ":00+05:30",
       };
@@ -47,7 +50,14 @@ const ScheduleClass = (props) => {
     // console.log(data);
     setQuizDesc(data);
   };
-  
+
+  //changeQuizInstruction method handles changes in description using data.getData() method from editor
+  const changeQuizInstruction = (e, editor) => {
+    const Instructiondata = editor.getData();
+    console.log(Instructiondata);
+    setQuizInstructions(Instructiondata);
+  };
+
   useEffect(() => {
     const handler = (e) => {
       if (!modalRef.current?.contains(e.target)) {
@@ -76,7 +86,7 @@ const ScheduleClass = (props) => {
           />
           <br />
           <label>Description</label>
-           <CKEditor
+          <CKEditor
             editor={ClassicEditor}
             data={quizDesc}
             onChange={changeQuizDesc}
@@ -102,6 +112,13 @@ const ScheduleClass = (props) => {
             type="datetime-local"
             value={enddate}
             onChange={(e) => setEnddate(e.target.value)}
+          />
+          <br />
+          <label>Instructions</label>
+          <CKEditor
+            editor={ClassicEditor}
+            data={quizInstructions}
+            onChange={changeQuizInstruction}
           />
           <br />
           <button className="submit-btn" onClick={editQuiz}>
