@@ -8,7 +8,7 @@ import axios from "../../axios/axios";
 import ReactHtmlParser from "react-html-parser";
 
 const QuizCard = (props) => {
-  const { id, title, desc, duration, creator_username } = props;
+  const { id, title, desc, duration, creator_username, instructions } = props;
   const { addQuiz, userDetails } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
@@ -18,7 +18,7 @@ const QuizCard = (props) => {
   const handleClick = async () => {
     setIsLoading(true);
     try {
-      addQuiz(id, duration, test_time);
+      addQuiz(id, duration, test_time, instructions);
       const config = {
         headers: { Authorization: `Bearer ${userDetails.access}` },
       };
