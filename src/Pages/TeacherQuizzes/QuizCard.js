@@ -24,6 +24,7 @@ const QuizCard = (props) => {
     duration,
     starttime,
     endtime,
+    instructions,
     userDetails,
     fetchAllQuizzes,
   } = props;
@@ -74,6 +75,7 @@ const QuizCard = (props) => {
         <span>End Time: </span>
         {getTime(endtime)}
       </p>
+      <p>{ReactHtmlParser(instructions)}</p>
       <div className="teacher-quiz-card-buttons">
         <button onClick={() => history.push(`/quizquestions/${id}`)}>
           View

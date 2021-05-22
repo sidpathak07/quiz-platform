@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import Loader from "../../Components/Loader/LoadingBar"
+import Loader from "../../Components/Loader/LoadingBar";
 import axios from "../../axios/axios";
 import { IoCloseOutline } from "react-icons/io5";
 import "./EditQuizModal.css";
@@ -18,6 +18,7 @@ const ScheduleClass = (props) => {
     duration,
     starttime,
     endtime,
+    instructions,
     userDetails,
     fetchAllQuizzes,
     setEditQuiz,
@@ -26,6 +27,7 @@ const ScheduleClass = (props) => {
   const [quizTitle, setQuizTitle] = useState(title);
   const [quizDesc, setQuizDesc] = useState(desc);
   const [quizDuration, setQuizDuration] = useState(duration);
+  const [quizInstructions, setQuizInstructions] = useState(instructions);
   const [startdate, setStartdate] = useState(() =>
     getCorrectDateFormat(starttime)
   );
@@ -41,6 +43,8 @@ const ScheduleClass = (props) => {
         title: quizTitle,
         desc: quizDesc,
         duration: quizDuration,
+        //added quiz instruction
+        instructions: quizInstructions,
         starttime: startdate + "+05:30",
         endtime: enddate + "+05:30",
       };
@@ -52,18 +56,25 @@ const ScheduleClass = (props) => {
       fetchAllQuizzes();
       setLoading(false);
     } catch (err) {
-        console.log(err.message);
+      console.log(err.message);
     }
     setEditQuiz(false);
   };
 
-   //changeQuizDesc method handles changes in description using data.getData() method from editor
+  //changeQuizDesc method handles changes in description using data.getData() method from editor
   const changeQuizDesc = (e, editor) => {
     const data = editor.getData();
     // console.log(data);
     setQuizDesc(data);
   };
-  
+
+  //changeQuizInstruction method handles changes in description using data.getData() method from editor
+  const changeQuizInstruction = (e, editor) => {
+    const Instructiondata = editor.getData();
+    console.log(Instructiondata);
+    setQuizInstructions(Instructiondata);
+  };
+
   useEffect(() => {
     const handler = (e) => {
       if (!modalRef.current?.contains(e.target)) {
@@ -92,7 +103,7 @@ const ScheduleClass = (props) => {
           />
           <br />
           <label>Description</label>
-         <CKEditor
+          <CKEditor
             editor={ClassicEditor}
             data={quizDesc}
             onChange={changeQuizDesc}
@@ -118,6 +129,13 @@ const ScheduleClass = (props) => {
             type="datetime-local"
             value={enddate}
             onChange={(e) => setEnddate(e.target.value)}
+          />
+          <br />
+          <label>Instructions</label>
+          <CKEditor
+            editor={ClassicEditor}
+            data={quizInstructions}
+            onChange={changeQuizInstruction}
           />
           <br />
           <button className="submit-btn" onClick={editQuiz}>
