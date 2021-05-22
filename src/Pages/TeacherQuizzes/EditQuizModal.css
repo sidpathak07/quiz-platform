@@ -8,6 +8,7 @@
     background-color: rgba(0, 0, 0, 0.4);
     display: grid;
     place-items: center;
+    overflow: scroll;
   }
   
   .edit-quiz-modal-card {
