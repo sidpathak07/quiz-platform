@@ -54,16 +54,10 @@ const QuizEditPage = () => {
 
    //select all questions method
   const addAllQuestions = () => {
-    let allQ = [];
-    let questions = [];
-    questionsInQuiz.forEach((question,index) => {
-      questions.push(question.id);
-    });
-    console.log(questions);
-    questionBank.forEach((question, index) => {
-      !(questions.includes(question.id)) && allQ.push(question.id) ;
-    });
-    // console.log(allQ);
+   let allQ = [];
+    questionBank.forEach((question,index) => {
+      allQ.push(question.id);
+    })
     setSelectedQuestions(allQ);
     setSelectAllQuestions(true);
   };
