@@ -36,22 +36,21 @@ const QuizEditPage = () => {
   const history = useHistory();
 
   const handleChange = (qid) => {
-    let Questions = [];
-    questionsInQuiz.forEach((question,index) => {
-      Questions.push(question.id);
-    });
-    !Questions.includes(qid) && setSelectedQuestions([...selectedQuestions,qid]);
+     if (selectedQuestions.includes(qid)) {
+          setSelectedQuestions(
+            selectedQuestions.filter((question) => question !== qid)
+          );
+     } else {
+          setSelectedQuestions([...selectedQuestions, qid]);
+     }
+    //     let Questions = [];
+    //     questionsInQuiz.forEach((question,index) => {
+    //       Questions.push(question.id);
+    //     });
+    //     !Questions.includes(qid) && setSelectedQuestions([...selectedQuestions,qid]);
     //    console.log(selectedQuestions);
     //      Old Method
-    //     if (selectedQuestions.includes(qid)) {
-    //       setSelectedQuestions(
-    //         selectedQuestions.filter((question) => question !== qid)
-    //       );
-    //     } else {
-    //       setSelectedQuestions([...selectedQuestions, qid]);
-    //     }
-    
-  };
+    };
 
    //select all questions method
   const addAllQuestions = () => {
