@@ -268,16 +268,16 @@ const QuizEditPage = () => {
     setSelectedSubject("");
     setFilteredQuestionBank(questionBank);
   };
+  
+  const getQuestionBank = async () => {
+    try {
+      const config = {
+        headers: { Authorization: `Bearer ${userDetails.access}` },
+      };
+      setLoading(true);
+      const { data } = await axios.get(`/api/getQuestionsFromQB/${id}`, config);
 
-  useEffect(() => {
-    const getQuestionBank = async () => {
-      try {
-        const config = {
-          headers: { Authorization: `Bearer ${userDetails.access}` },
-        };
-        const { data } = await axios.get("/api/getQuestionsFromQB", config);
-        //questionbank
-        setQuestionBank(data.questions);
+      setQuestionBank(data.questions);
         setFilteredQuestionBank(data.questions);
         //difficulty
         setDifficulty(data.tags.dificulty);
@@ -285,31 +285,43 @@ const QuizEditPage = () => {
         setSkills(data.tags.skill);
         //subjects
         setSubjects(data.tags.subject);
-      } catch (err) {
-        console.log(err.message);
-      }
-    };
-    getQuestionBank();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  
-  const fetchQuestions = async () => {
-    try {
-      const config = {
-        headers: { Authorization: `Bearer ${userDetails.access}` },
-      };
-      setLoading(true);
-      const { data } = await axios.get(`/api/get-quiz/${id}`, config);
-      setQuestionsInQuiz(data.quiz_questions);
+      console.log(data);
+     
       setLoading(false);
     } catch (err) {
       console.log(err.message);
     }
   };
-  
-   useEffect(() => {
-    fetchQuestions();
+
+  useEffect(() => {
+    getQuestionBank();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
+
+
+//   useEffect(() => {
+//     const getQuestionBank = async () => {
+//       try {
+//         const config = {
+//           headers: { Authorization: `Bearer ${userDetails.access}` },
+//         };
+//         const { data } = await axios.get("/api/getQuestionsFromQB/", config);
+//         //questionbank
+//         setQuestionBank(data.questions);
+//         setFilteredQuestionBank(data.questions);
+//         //difficulty
+//         setDifficulty(data.tags.dificulty);
+//         //skills
+//         setSkills(data.tags.skill);
+//         //subjects
+//         setSubjects(data.tags.subject);
+//       } catch (err) {
+//         console.log(err.message);
+//       }
+//     };
+//     getQuestionBank();
+//     // eslint-disable-next-line react-hooks/exhaustive-deps
+//   }, []);
 
   if (!questionBank) {
     return (
