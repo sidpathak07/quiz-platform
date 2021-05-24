@@ -1,3 +1,4 @@
+//new editpage
 import { useState, useEffect, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "../../axios/axios";
@@ -10,7 +11,7 @@ import "./QuizEditPage.css";
 
 const QuizEditPage = () => {
   //questionbank
-  const [questionsInQuiz,setQuestionsInQuiz] = useState([]);
+  const [questionsInQuiz, setQuestionsInQuiz] = useState([]);
   const [questionBank, setQuestionBank] = useState(null);
   const [filteredQuestionBank, setFilteredQuestionBank] = useState(null);
   //difficulty
@@ -35,32 +36,22 @@ const QuizEditPage = () => {
   const { id } = useParams();
   const history = useHistory();
 
-  const handleChange = (qid) => {
-     if (selectedQuestions.includes(qid)) {
-          setSelectedQuestions(
-            selectedQuestions.filter((question) => question !== qid)
-          );
-     } else {
-          setSelectedQuestions([...selectedQuestions, qid]);
-     }
-    //     let Questions = [];
-    //     questionsInQuiz.forEach((question,index) => {
-    //       Questions.push(question.id);
-    //     });
-    //     !Questions.includes(qid) && setSelectedQuestions([...selectedQuestions,qid]);
-    //    console.log(selectedQuestions);
-    //      Old Method
-    };
-
-   //select all questions method
+  //select all questions method
   const addAllQuestions = () => {
-   let allQ = [];
-    questionBank.forEach((question,index) => {
-      allQ.push(question.id);
-    })
-    setSelectedQuestions(allQ);
-    setSelectAllQuestions(true);
+    if (!selectAllQuestions) {
+      let allQ = [];
+      questionBank.forEach((question, index) => {
+        allQ.push(question.id);
+      });
+      setSelectedQuestions(allQ);
+      setSelectAllQuestions(true);
+    } else {
+      setSelectedQuestions([]);
+      setSelectAllQuestions(false);
+    }
   };
+  console.log(selectedQuestions);
+  console.log(questionsInQuiz);
 
   //useEffect hook to set all checkboxes to checked after selecting all questions
   useEffect(() => {
@@ -71,10 +62,31 @@ const QuizEditPage = () => {
       for (let i = 0; i < length; i++) {
         checkboxes[i].setAttribute("checked", true);
       }
+    } else {
+      let checkboxes = document.getElementsByClassName("checkboxip");
+      console.log(checkboxes);
+      let length = checkboxes.length;
+      for (let i = 0; i < length; i++) {
+        checkboxes[i].removeAttribute("checked");
+      }
     }
   }, [selectAllQuestions]);
-  
-  
+  const handleChange = (qid) => {
+    // let Questions = [];
+    // questionsInQuiz.forEach((question,index) => {
+    //   Questions.push(question.id);
+    // });
+    // !Questions.includes(qid) && setSelectedQuestions([...selectedQuestions,qid]);
+    // console.log(selectedQuestions);
+    if (selectedQuestions.includes(qid)) {
+      setSelectedQuestions(
+        selectedQuestions.filter((question) => question !== qid)
+      );
+    } else {
+      setSelectedQuestions([...selectedQuestions, qid]);
+    }
+  };
+
   const addQuestions = async () => {
     try {
       const config = {
@@ -268,7 +280,54 @@ const QuizEditPage = () => {
     setSelectedSubject("");
     setFilteredQuestionBank(questionBank);
   };
-  
+
+  // useEffect(() => {
+  //   const getQuestionBank = async () => {
+  //     try {
+  //       const config = {
+  //         headers: { Authorization: `Bearer ${userDetails.access}` },
+  //       };
+  //       const { data } = await axios.get("/api/getQuestionsFromQB", config);
+  //       //questionbank
+  //       setQuestionBank(data.questions);
+  //       setFilteredQuestionBank(data.questions);
+  //       //difficulty
+  //       setDifficulty(data.tags.dificulty);
+  //       //skills
+  //       setSkills(data.tags.skill);
+  //       //subjects
+  //       setSubjects(data.tags.subject);
+  //     } catch (err) {
+  //       console.log(err.message);
+  //     }
+  //   };
+  //   getQuestionBank();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+
+  // const fetchQuestions = async () => {
+  //   try {
+  //     const config = {
+  //       headers: { Authorization: `Bearer ${userDetails.access}` },
+  //     };
+  //     setLoading(true);
+  //     const { data } = await axios.get(`/api/get-quiz/${id}`, config);
+
+  //     setQuestionsInQuiz(data.quiz_questions);
+  //     // console.log(data.quiz_questions[0].id);
+  //     console.log(data);
+
+  //     setLoading(false);
+  //   } catch (err) {
+  //     console.log(err.message);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchQuestions();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [id]);
+
   const getQuestionBank = async () => {
     try {
       const config = {
@@ -278,15 +337,17 @@ const QuizEditPage = () => {
       const { data } = await axios.get(`/api/getQuestionsFromQB/${id}`, config);
 
       setQuestionBank(data.questions);
-        setFilteredQuestionBank(data.questions);
-        //difficulty
-        setDifficulty(data.tags.dificulty);
-        //skills
-        setSkills(data.tags.skill);
-        //subjects
-        setSubjects(data.tags.subject);
       console.log(data);
-     
+      console.log(questionBank);
+      setFilteredQuestionBank(data.questions);
+      //difficulty
+      setDifficulty(data.tags.dificulty);
+      //skills
+      setSkills(data.tags.skill);
+      //subjects
+      setSubjects(data.tags.subject);
+      console.log(data);
+
       setLoading(false);
     } catch (err) {
       console.log(err.message);
@@ -297,31 +358,6 @@ const QuizEditPage = () => {
     getQuestionBank();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
-
-
-//   useEffect(() => {
-//     const getQuestionBank = async () => {
-//       try {
-//         const config = {
-//           headers: { Authorization: `Bearer ${userDetails.access}` },
-//         };
-//         const { data } = await axios.get("/api/getQuestionsFromQB/", config);
-//         //questionbank
-//         setQuestionBank(data.questions);
-//         setFilteredQuestionBank(data.questions);
-//         //difficulty
-//         setDifficulty(data.tags.dificulty);
-//         //skills
-//         setSkills(data.tags.skill);
-//         //subjects
-//         setSubjects(data.tags.subject);
-//       } catch (err) {
-//         console.log(err.message);
-//       }
-//     };
-//     getQuestionBank();
-//     // eslint-disable-next-line react-hooks/exhaustive-deps
-//   }, []);
 
   if (!questionBank) {
     return (
@@ -375,15 +411,15 @@ const QuizEditPage = () => {
                 className="enrollment-course-btn"
                 onClick={() => history.push(`/quizQuestions/${id}`)}
               >
-                Back to Quiz Questions
+                Back
               </button>
+              <button onClick={addAllQuestions}>Select All</button>
               <button
                 disabled={selectedQuestions.length === 0}
                 onClick={addQuestions}
               >
                 Add Questions
               </button>
-              <button onClick={addAllQuestions}>Add All Questions</button>
               <button onClick={() => setShowFilter(!showFilter)}>
                 Filter <BsFilterRight />
               </button>
@@ -514,20 +550,24 @@ const QuizEditPage = () => {
         {filteredQuestionBank?.map((ques) => (
           <div className="qb-question" key={ques.id}>
             <div className="check-box">
-              <input type="checkbox" onChange={() => handleChange(ques.id)} />
+              <input
+                type="checkbox"
+                className="checkboxip"
+                onChange={() => handleChange(ques.id)}
+              />
             </div>
             <div className="question-content">
               <div>
                 <MathJax.Html html={ques.question} />
               </div>
               <div className="question-tags">
-                  <h4>Tags: </h4>
-                  {ques?.dificulty_tag && <p>{ques?.dificulty_tag}</p>}
-                  {ques?.skill && <p>{ques?.skill}</p>}
-                  {ques?.subject_tag && <p>{ques?.subject_tag}</p>}
-                  {ques?.topic_tag && <p>{ques?.topic_tag}</p>}
-                  {ques?.subtopic_tag && <p>{ques?.subtopic_tag}</p>}
-                </div>
+                <h4>Tags: </h4>
+                {ques?.dificulty_tag && <p>{ques?.dificulty_tag}</p>}
+                {ques?.skill && <p>{ques?.skill}</p>}
+                {ques?.subject_tag && <p>{ques?.subject_tag}</p>}
+                {ques?.topic_tag && <p>{ques?.topic_tag}</p>}
+                {ques?.subtopic_tag && <p>{ques?.subtopic_tag}</p>}
+              </div>
               <div className="options">
                 {Array.isArray(ques.option) &&
                   ques.option?.map((op, idx) => {
