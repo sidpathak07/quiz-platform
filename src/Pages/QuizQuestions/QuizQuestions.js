@@ -108,6 +108,12 @@ const QuizQuestions = () => {
             >
               Add Questions
             </button>
+            <button
+              className="enrollment-course-btn"
+              onClick={() => history.push(`/customfeedback/${id}`)}
+            >
+              Custom Feedback
+            </button>
           </div>
         </div>
         {questions?.length === 0 && (

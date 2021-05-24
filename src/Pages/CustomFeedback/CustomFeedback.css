@@ -1,0 +1,107 @@
+.title {
+  font-size: xx-large;
+  font-weight: 800;
+  margin-left: 0vw;
+  margin-top: 4vh;
+  font-family: "Montserrat", sans-serif;
+  width: 25vw;
+}
+
+.p1 {
+  font-weight: 400;
+  font-family: "Montserrat", sans-serif;
+  margin-left: 0vw;
+  margin-top: 1.5vh;
+}
+
+.element {
+  box-sizing: border-box;
+  box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.4);
+  margin-top: 5vh;
+  padding-left: 3vw;
+  padding-right: 3vw;
+  padding-top: 3vh;
+  padding-bottom: 1vh;
+  border-radius: 15px;
+}
+
+.customfeedback {
+  padding-left: 12vw;
+  padding-right: 12vw;
+  padding-bottom: 6vh;
+}
+
+.p4 {
+  font-family: "Montserrat", sans-serif;
+  margin-left: -0.3vw;
+  margin-top: 8vh;
+  font-weight: bolder;
+}
+
+.p3 {
+  width: 100%;
+  display: flex;
+}
+
+.input1 {
+  width: 100%;
+  margin-right: 1vw;
+  border-radius: 5px;
+  height: 5vh;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  border-color: #008cff;
+}
+
+.p2 {
+  margin-bottom: 2vh;
+}
+
+.MuiIconButton-root {
+  flex: 0 0 auto;
+  color: rgba(0, 0, 0, 0.54);
+  padding: 12px;
+  overflow: visible;
+  font-size: 1.5rem;
+  text-align: center;
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 50%;
+  margin-top: 2vh;
+  margin-left: -2vw;
+}
+
+.select {
+  width: 6vw;
+  border-radius: 5px;
+  cursor: pointer;
+  border-color: #008cff;
+  border-width: 2px;
+}
+
+.select1,
+.select2,
+.select3 {
+  cursor: pointer;
+}
+
+.g1 {
+  display: flex;
+}
+
+.btn1 {
+  background: #008cff;
+  margin-left: 35vw;
+  margin-top: 5.5vh;
+  border-width: 0;
+  height: 6vh;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  border-radius: 10px;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+}
+
+.df {
+  display: flex;
+}

@@ -16,6 +16,8 @@ import TeacherQuizzes from "./Pages/TeacherQuizzes/TeacherQuizzes";
 import QuizQuestions from "./Pages/QuizQuestions/QuizQuestions";
 import QuizEditPage from "./Pages/QuizEditPage/QuizEditPage";
 import TeacherHomePage from "./Pages/TeacherHomePage/TeacherHomePage";
+import FeedBack from "./Pages/FeedBackPage/FeedBack";
+import CustomFeedback from "./Pages/CustomFeedback/CustomFeedback";
 
 const App = () => {
   const { userDetails, isTestSubmitted } = useContext(UserContext);
@@ -72,7 +74,7 @@ const App = () => {
             )}
           </Route>
 
-          {/* <Route exact path='/feedback'>
+          <Route exact path='/feedback'>
             {userDetails ? (
               userDetails.role === "Student" ? (
                 <FeedBack />
@@ -82,7 +84,19 @@ const App = () => {
             ) : (
               <Redirect to='/login' />
             )}
-          </Route> */}
+          </Route>
+
+          <Route exact path='/customfeedback/:id'>
+            {userDetails ? (
+              userDetails.role === "Teacher" ? (
+                <CustomFeedback />
+              ) : (
+                <Redirect to='/404' />
+              )
+            ) : (
+              <Redirect to='/login' />
+            )}
+          </Route>
 
           <Route exact path='/allquizzes'>
             {userDetails ? (
