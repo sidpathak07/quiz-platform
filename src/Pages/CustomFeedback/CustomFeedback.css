@@ -105,3 +105,11 @@
 .df {
   display: flex;
 }
+
+.bn {
+  margin-left: 1vw;
+  background: #008cff;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+}
