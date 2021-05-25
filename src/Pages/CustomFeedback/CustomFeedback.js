@@ -6,36 +6,28 @@ import { useState, useEffect, useContext } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import { IconButton } from "@material-ui/core";
 import RemoveIcon from "@material-ui/icons/Remove";
+import UserContext from "../../Context/UserContext";
+import axios from "../../axios/axios";
+import Loader from "../../Components/Loader/LoadingBar";
+import { v4 } from "uuid";
 
-function CustomFeedback() {
-  let [numberOfQuestions, setNumberOfQuestions] = useState([1]);
-  const { id } = useParams();
-
+const CustomFeedback = () => {
   const [questions, setQuestions] = useState([]);
-  const [confirm, setConfirm] = useState(false);
-
-  let question;
-
-  const addelement = () => {
-    if (confirm) {
-      setNumberOfQuestions([...numberOfQuestions, 1]);
-      setConfirm(false);
-    } else {
-      alert("Please confirm question to add new question");
-    }
-  };
-
-  const handleInputChange = (e, index) => {
-    question = e.target.value;
-  };
-
+  const [question, setQuestion] = useState("");
+  const [responseType, setResponseType] = useState("");
   const confirmQuestion = (e) => {
-    setQuestions([...questions, question]);
-    setConfirm(true);
+    let quest = {
+      id: v4(),
+      question: question,
+      responseType: responseType,
+    };
+    setQuestions([...questions, quest]);
+    setQuestion("");
+    setResponseType("");
   };
 
-  const showQuestions = () => {
-    console.log(questions);
+  const deleteQ = (id) => {
+    setQuestions(questions.filter((quest) => quest.id !== id));
   };
   return (
     <div className="customfeedback">
@@ -43,53 +35,57 @@ function CustomFeedback() {
         <div className="j1">
           <p className="title">Custom Feedback</p>
           <p className="p1">Add the questions for feedback.</p>
-        </div>
-        <div className="j2">
-          <button className="btn1">Submit Feedback Questions</button>
-          <button onClick={() => showQuestions()}>Show Questions</button>
+          <button onClick={() => console.log(questions)}>Show Q</button>
         </div>
       </div>
-
-      {numberOfQuestions.map((question, index) => {
-        return (
-          <div id={index}>
+      <div className="element">
+        <div className="p2">
+          <label className="p4">Question</label>
+        </div>
+        <div className="p3">
+          <input
+            type="text"
+            className="input1"
+            onChange={(e) => setQuestion(e.target.value)}
+            value={question}
+          />
+          <select
+            id="responsetype"
+            className="select"
+            onChange={(e) => setResponseType(e.target.value)}
+            value={responseType}
+          >
+            <option className="select1" value="range" selected>
+              Slider
+            </option>
+            <option className="select2" value="text">
+              Text
+            </option>
+            <option className="select3" value="radio">
+              Yes/No
+            </option>
+          </select>
+          <button onClick={(e) => confirmQuestion(e)}>Confirm</button>
+        </div>
+      </div>
+      <div>
+        {questions.map((question) => {
+          return (
             <div className="element">
               <div className="p2">
                 <label className="p4">Question</label>
               </div>
               <div className="p3">
-                <input
-                  type="text"
-                  className="input1"
-                  onChange={(e) => handleInputChange(e)}
-                  value={questions[index]}
-                />
-                <select id="responsetype" className="select">
-                  <option className="select1" value="volvo">
-                    Slider
-                  </option>
-                  <option className="select2" value="saab">
-                    Text
-                  </option>
-                  <option className="select3" value="vw">
-                    Yes/No
-                  </option>
-                </select>
-                <button onClick={confirmQuestion} className="select bn">Confirm</button>
-              </div>
-              <div className="df">
-                <div className="plus">
-                  <IconButton onClick={addelement}>
-                    <AddIcon />
-                  </IconButton>
-                </div>
+                <h3>{question.question}</h3>
+                <h5>{question.responseType}</h5>
+                <button onClick={() => deleteQ(question.id)}>delete</button>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
-}
+};
 
 export default CustomFeedback;
