@@ -91,6 +91,15 @@ const QuizPage = () => {
 		setResponses(newResponses);
 		sessionStorage.setItem('quiz-responses', JSON.stringify(newResponses));
 	};
+	
+	const clearResponse = () => {
+		const newResponses = responses.map((ques) => {
+			if (ques.key === quiz[index].id) return { ...ques,answer: '', selectetedAnswer: '' };
+			else return ques;
+		});
+		setResponses(newResponses);
+		sessionStorage.setItem('quiz-responses', JSON.stringify(newResponses));
+	}
 
 	const testSubmit = async () => {
 		setIsLoading(true);
