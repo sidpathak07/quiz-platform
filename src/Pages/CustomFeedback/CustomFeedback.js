@@ -25,18 +25,8 @@ function CustomFeedback() {
     }
   };
 
-  const removeElement = (e, index) => {
-    console.log(index);
-    numberOfQuestions.pop();
-    setNumberOfQuestions([...numberOfQuestions]);
-  };
-
   const handleInputChange = (e, index) => {
-    // questionArray.splice(index, 0, e.target.value);
-    // console.log(questionArray[index]);
     question = e.target.value;
-    console.log(question);
-    // setQuestions([...questions, questionArray]);
   };
 
   const confirmQuestion = (e) => {
@@ -56,7 +46,7 @@ function CustomFeedback() {
         </div>
         <div className="j2">
           <button className="btn1">Submit Feedback Questions</button>
-          <button onClick={showQuestions}>Show Questions</button>
+          <button onClick={() => showQuestions()}>Show Questions</button>
         </div>
       </div>
 
