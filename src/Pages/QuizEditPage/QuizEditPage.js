@@ -4,6 +4,7 @@ import { useParams, useHistory } from "react-router-dom";
 import axios from "../../axios/axios";
 import Loader from "../../Components/Loader/LoadingBar";
 import UserContext from "../../Context/UserContext";
+import Checkbox from '@material-ui/core/Checkbox';
 import MathJax from "react-mathjax3";
 import parse from "react-html-parser";
 import { BsFilterRight } from "react-icons/bs";
@@ -29,6 +30,7 @@ const QuizEditPage = () => {
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
+  let [checked,setChecked] = useState(false);
   //context
   const { userDetails } = useContext(UserContext);
   //react-router
@@ -401,11 +403,13 @@ const QuizEditPage = () => {
               >
                 Back
               </button>
-              <input
-                type="checkbox"
-                id="selctallq"
-                onClick={(e) => addAllQuestions(e)}
-              />
+                <Checkbox
+                checked={checked}
+                style={{color:"#008cff",marginRight:"-1vw"}}
+                onClick={() => checked ? setChecked(false) : setChecked(true)}
+                 inputProps={{ 'aria-label': 'primary checkbox' }}
+                 onChange={addAllQuestions}
+                />
               <button
                 disabled={selectedQuestions.length === 0}
                 onClick={addQuestions}
