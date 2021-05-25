@@ -75,7 +75,7 @@ function CustomFeedback() {
                     Yes/No
                   </option>
                 </select>
-                <button onClick={confirmQuestion}>Confirm</button>
+                <button onClick={confirmQuestion} className="select bn">Confirm</button>
               </div>
               <div className="df">
                 <div className="plus">
