@@ -29,7 +29,6 @@ const QuizEditPage = () => {
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
-  const [selectAllQuestions, setSelectAllQuestions] = useState(false);
   //context
   const { userDetails } = useContext(UserContext);
   //react-router
@@ -38,17 +37,6 @@ const QuizEditPage = () => {
 
   //select all questions method
   const addAllQuestions = (e) => {
-    if (!selectAllQuestions) {
-      let allQ = [];
-      questionBank.forEach((question, index) => {
-        allQ.push(question.id);
-      });
-      setSelectedQuestions(allQ);
-      setSelectAllQuestions(true);
-    } else {
-      setSelectedQuestions([]);
-      setSelectAllQuestions(false);
-    }
     console.log(e.target.checked);
     if (e.target.checked) {
       setSelectedQuestions([]);
@@ -71,25 +59,6 @@ const QuizEditPage = () => {
       }
     }
   };
-  // console.log(selectedQuestions);
-  // console.log(questionsInQuiz);
-
-  //useEffect hook to set all checkboxes to checked after selecting all questions
-  // useEffect(() => {
-  //   if (selectAllQuestions) {
-  // let checkboxes = document.getElementsByClassName("checkboxip");
-  // let length = checkboxes.length;
-  // for (let i = 0; i < length; i++) {
-  //   checkboxes[i].setAttribute("checked", true);
-  // }
-  //   } else {
-  //     let checkboxes = document.getElementsByClassName("checkboxip");
-  //     let length = checkboxes.length;
-  //     for (let i = 0; i < length; i++) {
-  //       checkboxes[i].removeAttribute("checked");
-  //     }
-  //   }
-  // }, [selectAllQuestions]);
   const handleChange = (qid, e) => {
     // let Questions = [];
     // questionsInQuiz.forEach((question,index) => {
