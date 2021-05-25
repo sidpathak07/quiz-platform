@@ -432,9 +432,6 @@ const QuizEditPage = () => {
               >
                 Back
               </button>
-              <button onClick={() => console.log(selectedQuestions)}>
-                Show Selected
-              </button>
               <input
                 type="checkbox"
                 id="selctallq"
