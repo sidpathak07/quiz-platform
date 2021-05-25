@@ -292,6 +292,7 @@ const QuizPage = () => {
 								>
 									Next
 								</button>
+								<button onClick={clearResponse}>Clear Response</button>
 							</div>
 						</div>
 						{showSubmit && (
