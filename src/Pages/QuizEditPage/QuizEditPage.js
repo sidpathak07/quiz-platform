@@ -37,7 +37,7 @@ const QuizEditPage = () => {
   const history = useHistory();
 
   //select all questions method
-  const addAllQuestions = () => {
+  const addAllQuestions = (e) => {
     if (!selectAllQuestions) {
       let allQ = [];
       questionBank.forEach((question, index) => {
@@ -49,29 +49,48 @@ const QuizEditPage = () => {
       setSelectedQuestions([]);
       setSelectAllQuestions(false);
     }
-  };
-  console.log(selectedQuestions);
-  console.log(questionsInQuiz);
-
-  //useEffect hook to set all checkboxes to checked after selecting all questions
-  useEffect(() => {
-    if (selectAllQuestions) {
+    console.log(e.target.checked);
+    if (e.target.checked) {
+      setSelectedQuestions([]);
+      let allQ = [];
+      questionBank.forEach((question, index) => {
+        allQ.push(question.id);
+      });
+      setSelectedQuestions(allQ);
       let checkboxes = document.getElementsByClassName("checkboxip");
-      console.log(checkboxes);
       let length = checkboxes.length;
       for (let i = 0; i < length; i++) {
-        checkboxes[i].setAttribute("checked", true);
+        checkboxes[i].checked = e.target.checked;
       }
     } else {
+      setSelectedQuestions([]);
       let checkboxes = document.getElementsByClassName("checkboxip");
-      console.log(checkboxes);
       let length = checkboxes.length;
       for (let i = 0; i < length; i++) {
-        checkboxes[i].removeAttribute("checked");
+        checkboxes[i].checked = e.target.checked;
       }
     }
-  }, [selectAllQuestions]);
-  const handleChange = (qid) => {
+  };
+  // console.log(selectedQuestions);
+  // console.log(questionsInQuiz);
+
+  //useEffect hook to set all checkboxes to checked after selecting all questions
+  // useEffect(() => {
+  //   if (selectAllQuestions) {
+  // let checkboxes = document.getElementsByClassName("checkboxip");
+  // let length = checkboxes.length;
+  // for (let i = 0; i < length; i++) {
+  //   checkboxes[i].setAttribute("checked", true);
+  // }
+  //   } else {
+  //     let checkboxes = document.getElementsByClassName("checkboxip");
+  //     let length = checkboxes.length;
+  //     for (let i = 0; i < length; i++) {
+  //       checkboxes[i].removeAttribute("checked");
+  //     }
+  //   }
+  // }, [selectAllQuestions]);
+  const handleChange = (qid, e) => {
     // let Questions = [];
     // questionsInQuiz.forEach((question,index) => {
     //   Questions.push(question.id);
@@ -337,8 +356,8 @@ const QuizEditPage = () => {
       const { data } = await axios.get(`/api/getQuestionsFromQB/${id}`, config);
 
       setQuestionBank(data.questions);
-      console.log(data);
-      console.log(questionBank);
+      // console.log(data);
+      // console.log(questionBank);
       setFilteredQuestionBank(data.questions);
       //difficulty
       setDifficulty(data.tags.dificulty);
@@ -346,7 +365,7 @@ const QuizEditPage = () => {
       setSkills(data.tags.skill);
       //subjects
       setSubjects(data.tags.subject);
-      console.log(data);
+      // console.log(data);
 
       setLoading(false);
     } catch (err) {
@@ -413,7 +432,14 @@ const QuizEditPage = () => {
               >
                 Back
               </button>
-              <button onClick={addAllQuestions}>Select All</button>
+              <button onClick={() => console.log(selectedQuestions)}>
+                Show Selected
+              </button>
+              <input
+                type="checkbox"
+                id="selctallq"
+                onClick={(e) => addAllQuestions(e)}
+              />
               <button
                 disabled={selectedQuestions.length === 0}
                 onClick={addQuestions}
@@ -553,7 +579,7 @@ const QuizEditPage = () => {
               <input
                 type="checkbox"
                 className="checkboxip"
-                onChange={() => handleChange(ques.id)}
+                onChange={(e) => handleChange(ques.id)}
               />
             </div>
             <div className="question-content">
