@@ -1,218 +1,218 @@
 .quiz-questions-div {
-    width: 90vw;
-    max-width: 998px;
-    margin: 20px auto;
-    padding-bottom: 20px;
-  }
-  
-  .quiz-question-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .questionbank-header {
-    padding-bottom: 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  }
-  .quiz-header-buttons {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
-  
-  .quiz-question-header button {
-    display: grid;
-    place-items: center;
-    border: none;
-    outline: none;
-    color: white;
-    background: rgb(0, 140, 255);
-    cursor: pointer;
-    padding: 5px 10px;
-    font-size: 15px;
-    font-weight: 500;
-    border-radius: 4px;
-    margin-top: 5px;
-    margin-left: 10px;
-  }
-  .questionbank-header button:last-child {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .questionbank-header button:last-child svg {
-    margin-left: 5px;
-    font-size: 18px;
-  }
-  .qb-question {
-    display: flex;
-    justify-content: space-between;
-    align-items: center !important;
-    margin: 20px 0;
-    border: 1px solid rgba(0, 0, 0, 0.7);
-    padding: 10px;
-    border-radius: 8px;
-  }
-  
-  .qb-question .question-content {
-    flex: 1;
-  }
-  
-  .question-content img {
-    width: 95%;
-  }
-  
-  .question-delete-btn {
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    font-size: 20px;
-    display: grid;
-    place-items: center;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    background: transparent;
-  }
-  .question-delete-btn:hover {
-    background-color: #ddd;
-  }
-  
-  .quiz-questions-loader {
-    width: 100%;
-    margin-top: 30vh;
-    display: grid;
-    place-items: center;
-  }
-  .quiz-questions-loader div {
-    margin-right: 30px;
-  }
-  
-  .no-questions {
-    text-align: center;
-    font-size: 18px;
-    font-weight: 500;
-    margin-top: 50px;
-  }
-  
-  .question-content p:first-child {
-    font-weight: 500;
-    word-spacing: 1.3px;
-    margin-left: 10px;
-  }
-  
-  .quiz-question-header button:disabled {
-    cursor: not-allowed;
-  }
-  
-  .quizquestion-loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: rgba(255, 255, 255, 0.5);
-    display: grid;
-    place-items: center;
-  }
-  .quizquestion-loader div {
-    margin-right: 25px;
-  }
-  
-  .options {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-  }
-  
-  .option {
-    margin-left: 10px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
-  .option > * {
-    font-size: 16px;
-    font-weight: 500;
-  }
-  
-  .option span {
-    font-weight: 700;
-  }
-  
-  .marks {
-    align-self: flex-start;
-    margin-top: 10px;
-    margin-left: 10px;
-  }
-  
-  .marks p {
-    font-size: 12px;
-    font-weight: 600;
-    text-align: right;
-    color: rgba(0, 0, 0, 0.6);
-    margin-bottom: 3px;
-  }
-  
-  .check-box {
-    width: 30px;
-    display: grid;
-    place-items: center;
-  }
-  
-  .check-box input[type="checkbox"] {
-    transform: scale(1.5);
-    cursor: pointer;
-  }
-  
-  /* FILTER DIV */
-  .filter {
-    margin-top: 20px;
-  }
-  
-  .filter .filter-selects div {
-    margin: 10px 0;
-  }
-  .filter .filter-selects select {
-    width: 200px;
-    cursor: pointer;
-  }
-  
-  .filter .filter-selects label {
-    display: flex;
-  }
-  .filter .filter-selects label p {
-    width: 100px;
-    font-weight: 500;
-  }
-  
-  .filter .filter-buttons {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-top: 10px;
-  }
-  
-  .filter button {
-    display: grid;
-    place-items: center;
-    border: none;
-    outline: none;
-    color: white;
-    background: rgb(0, 140, 255);
-    cursor: pointer;
-    padding: 5px 10px;
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: 4px;
-    margin-top: 5px;
-    margin-right: 10px;
-    width: 145px;
-  }
-  
-  .question-tags {
+  width: 90vw;
+  max-width: 998px;
+  margin: 20px auto;
+  padding-bottom: 20px;
+}
+
+.quiz-question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.questionbank-header {
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.quiz-header-buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.quiz-question-header button {
+  display: grid;
+  place-items: center;
+  border: none;
+  outline: none;
+  color: white;
+  background: rgb(0, 140, 255);
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 4px;
+  margin-top: 5px;
+  margin-left: 10px;
+}
+.questionbank-header button:last-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.questionbank-header button:last-child svg {
+  margin-left: 5px;
+  font-size: 18px;
+}
+.qb-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center !important;
+  margin: 20px 0;
+  border: 1px solid rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.qb-question .question-content {
+  flex: 1;
+}
+
+.question-content img {
+  width: 95%;
+}
+
+.question-delete-btn {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  display: grid;
+  place-items: center;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: transparent;
+}
+.question-delete-btn:hover {
+  background-color: #ddd;
+}
+
+.quiz-questions-loader {
+  width: 100%;
+  margin-top: 30vh;
+  display: grid;
+  place-items: center;
+}
+.quiz-questions-loader div {
+  margin-right: 30px;
+}
+
+.no-questions {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 50px;
+}
+
+.question-content p:first-child {
+  font-weight: 500;
+  word-spacing: 1.3px;
+  margin-left: 10px;
+}
+
+.quiz-question-header button:disabled {
+  cursor: not-allowed;
+}
+
+.quizquestion-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.5);
+  display: grid;
+  place-items: center;
+}
+.quizquestion-loader div {
+  margin-right: 25px;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.option {
+  margin-left: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.option > * {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.option span {
+  font-weight: 700;
+}
+
+.marks {
+  align-self: flex-start;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.marks p {
+  font-size: 12px;
+  font-weight: 600;
+  text-align: right;
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 3px;
+}
+
+.check-box {
+  width: 30px;
+  display: grid;
+  place-items: center;
+}
+
+.check-box input[type="checkbox"] {
+  transform: scale(1.5);
+  cursor: pointer;
+}
+
+/* FILTER DIV */
+.filter {
+  margin-top: 20px;
+}
+
+.filter .filter-selects div {
+  margin: 10px 0;
+}
+.filter .filter-selects select {
+  width: 200px;
+  cursor: pointer;
+}
+
+.filter .filter-selects label {
+  display: flex;
+}
+.filter .filter-selects label p {
+  width: 100px;
+  font-weight: 500;
+}
+
+.filter .filter-buttons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.filter button {
+  display: grid;
+  place-items: center;
+  border: none;
+  outline: none;
+  color: white;
+  background: rgb(0, 140, 255);
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 4px;
+  margin-top: 5px;
+  margin-right: 10px;
+  width: 145px;
+}
+
+.question-tags {
   margin: 5px 0 10px 0;
   display: flex;
   justify-content: flex-start;
@@ -231,4 +231,30 @@
   margin: 0 5px;
   font-size: 12px;
   font-weight: 500;
+}
+
+.sdk {
+  margin-left: 1vw;
+  margin-top: 0.5vh;
+  margin-right: 0.3vw;
+  padding-top: 10vh;
+}
+
+.fil1 {
+  display: flex;
+}
+
+.fil2 {
+  display: flex;
+}
+
+.topics {
+  padding-left: 2vw;
+}
+.sub-topic {
+  padding-left: 2vw;
+}
+
+.skill-level {
+  padding-left: 2vw;
 }
