@@ -36,6 +36,7 @@ const CustomFeedback = () => {
       );
       setMessage(data);
       console.log(data);
+      alert("Feedback Created Successfully");
     } catch (err) {
       console.log(err.message);
     }
