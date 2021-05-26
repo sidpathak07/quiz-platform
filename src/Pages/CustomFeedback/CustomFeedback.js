@@ -3,9 +3,6 @@ import NavBar from "../../Components/NavBar/NavBar";
 import { useParams, useHistory } from "react-router-dom";
 import "./CustomFeedback.css";
 import { useState, useEffect, useContext } from "react";
-import AddIcon from "@material-ui/icons/Add";
-import { IconButton } from "@material-ui/core";
-import RemoveIcon from "@material-ui/icons/Remove";
 import UserContext from "../../Context/UserContext";
 import axios from "../../axios/axios";
 import Loader from "../../Components/Loader/LoadingBar";
@@ -14,7 +11,40 @@ import { v4 } from "uuid";
 const CustomFeedback = () => {
   const [questions, setQuestions] = useState([]);
   const [question, setQuestion] = useState("");
+  const [loading, setLoading] = useState(false);
   const [responseType, setResponseType] = useState("");
+  const { userDetails } = useContext(UserContext);
+  const { id } = useParams();
+  const [message, setMessage] = useState("");
+
+  const createFeedback = async () => {
+    try {
+      const postData = {
+        quiz_id: id,
+        user: userDetails.user_id,
+        question: questions,
+      };
+      const config = {
+        headers: { Authorization: `Bearer ${userDetails.access}` },
+      };
+      setLoading(true);
+      const { data } = await axios.post(
+        "/api/FeedbackQs/post",
+        postData,
+        config
+      );
+      setMessage(data);
+      console.log(data);
+    } catch (err) {
+      console.log(err.message);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    createFeedback();
+  }, [id]);
+
   const confirmQuestion = (e) => {
     let quest = {
       id: v4(),
@@ -33,14 +63,24 @@ const CustomFeedback = () => {
     <div className="customfeedback">
       <div className="g1">
         <div className="j1">
-          <p className="title">Custom Feedback</p>
-          <p className="p1">Add the questions for feedback.</p>
-          <button onClick={() => console.log(questions)}>Show Q</button>
+          <div className="j11">
+            <p className="title">Custom Feedback</p>
+            <p className="p1">Add the questions for feedback.</p>
+          </div>
+          <div className="j12">
+            <button
+              onClick={() => createFeedback()}
+              className="select bn create"
+            >
+              Create Feedback
+            </button>
+            {/* <button onClick={() => console.log(questions)}>Show Q</button> */}
+          </div>
         </div>
       </div>
       <div className="element">
         <div className="p2">
-          <label className="p4">Question</label>
+          <label className="p4">Your Question</label>
         </div>
         <div className="p3">
           <input
@@ -55,7 +95,8 @@ const CustomFeedback = () => {
             onChange={(e) => setResponseType(e.target.value)}
             value={responseType}
           >
-            <option className="select1" value="range" selected>
+            <option className="select1">select option</option>
+            <option className="select1" value="range">
               Slider
             </option>
             <option className="select2" value="text">
@@ -65,25 +106,37 @@ const CustomFeedback = () => {
               Yes/No
             </option>
           </select>
-          <button onClick={(e) => confirmQuestion(e)}>Confirm</button>
+          <button onClick={(e) => confirmQuestion(e)} className="select bn">
+            Confirm
+          </button>
         </div>
       </div>
       <div>
         {questions.map((question) => {
           return (
-            <div className="element">
+            <div className="element1">
               <div className="p2">
                 <label className="p4">Question</label>
               </div>
-              <div className="p3">
-                <h3>{question.question}</h3>
-                <h5>{question.responseType}</h5>
-                <button onClick={() => deleteQ(question.id)}>delete</button>
+              <div className="p33">
+                <h3 className="p31">{question.question}</h3>
+                <h5 className="p32">Response Type : {question.responseType}</h5>
+                <button
+                  className="select bn cn"
+                  onClick={() => deleteQ(question.id)}
+                >
+                  delete
+                </button>
               </div>
             </div>
           );
         })}
       </div>
+      {loading && (
+        <div className="quiz--loader">
+          <Loader />
+        </div>
+      )}
     </div>
   );
 };

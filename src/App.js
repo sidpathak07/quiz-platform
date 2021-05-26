@@ -23,10 +23,10 @@ const App = () => {
   const { userDetails, isTestSubmitted } = useContext(UserContext);
 
   return (
-    <div className='App'>
+    <div className="App">
       <Router>
         <Switch>
-          <Route exact path='/'>
+          <Route exact path="/">
             {userDetails ? (
               userDetails.role === "Teacher" ? (
                 <TeacherHomePage />
@@ -34,107 +34,107 @@ const App = () => {
                 <Quizzes />
               )
             ) : (
-              <Redirect to='/login' />
+              <Redirect to="/login" />
             )}
           </Route>
 
-          <Route exact path='/login'>
-            {!userDetails ? <Login /> : <Redirect to='/' />}
+          <Route exact path="/login">
+            {!userDetails ? <Login /> : <Redirect to="/" />}
           </Route>
 
-          <Route exact path='/quizpage/:id'>
+          <Route exact path="/quizpage/:id">
             {userDetails ? (
               userDetails.role === "Student" ? (
                 isTestSubmitted ? (
-                  <Redirect to='/feedback' />
+                  <Redirect to="/feedback" />
                 ) : (
                   <QuizPage />
                 )
               ) : (
-                <Redirect to='/404' />
+                <Redirect to="/404" />
               )
             ) : (
-              <Redirect to='/login' />
+              <Redirect to="/login" />
             )}
           </Route>
 
-          <Route exact path='/instruction/:id'>
+          <Route exact path="/instruction/:id">
             {userDetails ? (
               userDetails.role === "Student" ? (
                 isTestSubmitted ? (
-                  <Redirect to='/feedback' />
+                  <Redirect to="/feedback" />
                 ) : (
                   <Instruction />
                 )
               ) : (
-                <Redirect to='/404' />
+                <Redirect to="/404" />
               )
             ) : (
-              <Redirect to='/login' />
+              <Redirect to="/login" />
             )}
           </Route>
 
-          <Route exact path='/feedback'>
+          <Route exact path="/feedback/:id">
             {userDetails ? (
               userDetails.role === "Student" ? (
                 <FeedBack />
               ) : (
-                <Redirect to='/404' />
+                <Redirect to="/404" />
               )
             ) : (
-              <Redirect to='/login' />
+              <Redirect to="/login" />
             )}
           </Route>
 
-          <Route exact path='/customfeedback/:id'>
+          <Route exact path="/customfeedback/:id">
             {userDetails ? (
               userDetails.role === "Teacher" ? (
                 <CustomFeedback />
               ) : (
-                <Redirect to='/404' />
+                <Redirect to="/404" />
               )
             ) : (
-              <Redirect to='/login' />
+              <Redirect to="/login" />
             )}
           </Route>
 
-          <Route exact path='/allquizzes'>
+          <Route exact path="/allquizzes">
             {userDetails ? (
               userDetails.role === "Teacher" ? (
                 <TeacherQuizzes />
               ) : (
-                <Redirect to='/404' />
+                <Redirect to="/404" />
               )
             ) : (
-              <Redirect to='/login' />
+              <Redirect to="/login" />
             )}
           </Route>
 
-          <Route exact path='/quizquestions/:id'>
+          <Route exact path="/quizquestions/:id">
             {userDetails ? (
               userDetails.role === "Teacher" ? (
                 <QuizQuestions />
               ) : (
-                <Redirect to='/404' />
+                <Redirect to="/404" />
               )
             ) : (
-              <Redirect to='/login' />
+              <Redirect to="/login" />
             )}
           </Route>
 
-          <Route exact path='/quizedit/:id'>
+          <Route exact path="/quizedit/:id">
             {userDetails ? (
               userDetails.role === "Teacher" ? (
                 <QuizEditPage />
               ) : (
-                <Redirect to='/404' />
+                <Redirect to="/404" />
               )
             ) : (
-              <Redirect to='/login' />
+              <Redirect to="/login" />
             )}
           </Route>
 
-          <Route path='*'>
+          <Route path="*">
             <ErrorPage />
           </Route>
         </Switch>

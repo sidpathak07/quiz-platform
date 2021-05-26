@@ -21,7 +21,7 @@
   padding-left: 3vw;
   padding-right: 3vw;
   padding-top: 3vh;
-  padding-bottom: 1vh;
+  padding-bottom: 4vh;
   border-radius: 15px;
 }
 
@@ -71,7 +71,7 @@
 }
 
 .select {
-  width: 6vw;
+  width: 10vw;
   border-radius: 5px;
   cursor: pointer;
   border-color: #008cff;
@@ -90,10 +90,10 @@
 
 .btn1 {
   background: #008cff;
-  margin-left: 35vw;
-  margin-top: 5.5vh;
+  margin-left: 2vw;
+  margin-top: 0vh;
   border-width: 0;
-  height: 6vh;
+  height: 4vh;
   padding-left: 2vw;
   padding-right: 2vw;
   border-radius: 10px;
@@ -112,4 +112,47 @@
   color: white;
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
+}
+
+.element1 {
+  box-sizing: border-box;
+  box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.4);
+  margin-top: 5vh;
+  padding-left: 3vw;
+  padding-right: 3vw;
+  padding-top: 3vh;
+  padding-bottom: 4vh;
+  border-radius: 15px;
+}
+
+.p33 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.p32 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 2.5vh;
+}
+
+.p31 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+}
+
+.cn {
+  margin-left: 6vw;
+  height: 5vh;
+}
+
+.j1 {
+  display: flex;
+}
+
+.create {
+  margin-top: 6vh;
+  height: 5vh;
+  margin-left: 38vw;
 }
