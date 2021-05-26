@@ -1,18 +1,17 @@
-//new editpage
 import { useState, useEffect, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "../../axios/axios";
 import Loader from "../../Components/Loader/LoadingBar";
 import UserContext from "../../Context/UserContext";
-import Checkbox from '@material-ui/core/Checkbox';
 import MathJax from "react-mathjax3";
 import parse from "react-html-parser";
 import { BsFilterRight } from "react-icons/bs";
 import "./QuizEditPage.css";
+import Checkbox from '@material-ui/core/Checkbox';
 
 const QuizEditPage = () => {
   //questionbank
-  const [questionsInQuiz, setQuestionsInQuiz] = useState([]);
+  const [questionsInQuiz,setQuestionsInQuiz] = useState([]);
   const [questionBank, setQuestionBank] = useState(null);
   const [filteredQuestionBank, setFilteredQuestionBank] = useState(null);
   //difficulty
@@ -30,15 +29,15 @@ const QuizEditPage = () => {
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
-  let [checked,setChecked] = useState(false);
+  const [selectAllQuestions, setSelectAllQuestions] = useState(false);
   //context
   const { userDetails } = useContext(UserContext);
   //react-router
   const { id } = useParams();
   const history = useHistory();
+  let [checked,setChecked] = useState(false);
 
-  //select all questions method
-  const addAllQuestions = (e) => {
+    const addAllQuestions = (e) => {
     console.log(e.target.checked);
     if (e.target.checked) {
       setSelectedQuestions([]);
@@ -61,13 +60,20 @@ const QuizEditPage = () => {
       }
     }
   };
-  const handleChange = (qid, e) => {
-    // let Questions = [];
-    // questionsInQuiz.forEach((question,index) => {
-    //   Questions.push(question.id);
-    // });
-    // !Questions.includes(qid) && setSelectedQuestions([...selectedQuestions,qid]);
-    // console.log(selectedQuestions);
+  
+
+  //useEffect hook to set all checkboxes to checked after selecting all questions
+  useEffect(() => {
+    if (selectAllQuestions) {
+      let checkboxes = document.getElementsByClassName("checkboxip");
+      console.log(checkboxes);
+      let length = checkboxes.length;
+      for (let i = 0; i < length; i++) {
+        checkboxes[i].setAttribute("checked", true);
+      }
+    }
+  }, [selectAllQuestions]);
+  const handleChange = (qid) => {
     if (selectedQuestions.includes(qid)) {
       setSelectedQuestions(
         selectedQuestions.filter((question) => question !== qid)
@@ -271,53 +277,7 @@ const QuizEditPage = () => {
     setFilteredQuestionBank(questionBank);
   };
 
-  // useEffect(() => {
-  //   const getQuestionBank = async () => {
-  //     try {
-  //       const config = {
-  //         headers: { Authorization: `Bearer ${userDetails.access}` },
-  //       };
-  //       const { data } = await axios.get("/api/getQuestionsFromQB", config);
-  //       //questionbank
-  //       setQuestionBank(data.questions);
-  //       setFilteredQuestionBank(data.questions);
-  //       //difficulty
-  //       setDifficulty(data.tags.dificulty);
-  //       //skills
-  //       setSkills(data.tags.skill);
-  //       //subjects
-  //       setSubjects(data.tags.subject);
-  //     } catch (err) {
-  //       console.log(err.message);
-  //     }
-  //   };
-  //   getQuestionBank();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
-  // const fetchQuestions = async () => {
-  //   try {
-  //     const config = {
-  //       headers: { Authorization: `Bearer ${userDetails.access}` },
-  //     };
-  //     setLoading(true);
-  //     const { data } = await axios.get(`/api/get-quiz/${id}`, config);
-
-  //     setQuestionsInQuiz(data.quiz_questions);
-  //     // console.log(data.quiz_questions[0].id);
-  //     console.log(data);
-
-  //     setLoading(false);
-  //   } catch (err) {
-  //     console.log(err.message);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchQuestions();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [id]);
-
+  
   const getQuestionBank = async () => {
     try {
       const config = {
@@ -327,17 +287,17 @@ const QuizEditPage = () => {
       const { data } = await axios.get(`/api/getQuestionsFromQB/${id}`, config);
 
       setQuestionBank(data.questions);
-      // console.log(data);
-      // console.log(questionBank);
-      setFilteredQuestionBank(data.questions);
-      //difficulty
-      setDifficulty(data.tags.dificulty);
-      //skills
-      setSkills(data.tags.skill);
-      //subjects
-      setSubjects(data.tags.subject);
-      // console.log(data);
-
+      console.log(data);
+      console.log(questionBank);
+        setFilteredQuestionBank(data.questions);
+        //difficulty
+        setDifficulty(data.tags.dificulty);
+        //skills
+        setSkills(data.tags.skill);
+        //subjects
+        setSubjects(data.tags.subject);
+      console.log(data);
+     
       setLoading(false);
     } catch (err) {
       console.log(err.message);
@@ -348,6 +308,8 @@ const QuizEditPage = () => {
     getQuestionBank();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
+
+  
 
   if (!questionBank) {
     return (
@@ -403,13 +365,20 @@ const QuizEditPage = () => {
               >
                 Back
               </button>
-                <Checkbox
+              {/* <button onClick={addAllQuestions}>Select All</button> */}
+              {/* <input
+                type="checkbox"
+                
+                className="checkboxip"
+                onClick={(e) => addAllQuestions(e)}
+              /> */}
+              <Checkbox
                 checked={checked}
                 style={{color:"#008cff",marginRight:"-1vw"}}
                 onClick={() => checked ? setChecked(false) : setChecked(true)}
                  inputProps={{ 'aria-label': 'primary checkbox' }}
                  onChange={addAllQuestions}
-                />
+              />
               <button
                 disabled={selectedQuestions.length === 0}
                 onClick={addQuestions}
@@ -427,99 +396,115 @@ const QuizEditPage = () => {
             <div className="filter">
               <div className="filter-selects">
                 <h2>Filter</h2>
-                <div className="difficulty-level">
-                  <label>
-                    <p>Difficulty</p>
-                    <select
-                      value={difficultyLevel}
-                      onChange={(e) => setDifficultyLevel(e.target.value)}
-                    >
-                      <option value="">All</option>
-                      {difficulty?.map((d, i) => (
-                        <option key={i} value={d}>
-                          {d}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                </div>
+                <div className="fil">
+                    <div className="fil1">
+                        <div className="subject">
+                          <label>
+                            <p>Subject</p>
+                            <select
+                              value={selectedSubject}
+                              onChange={(e) => setSelectedSubject(e.target.value)}
+                            >
+                              <option value="">All</option>
+                              {subjects?.map((s, i) => (
+                                <option key={i} value={`${i}*${s.name}`}>
+                                  {s.name}
+                                </option>
+                              ))}
+                            </select>
+                          </label>
+                        </div>
+                        {/* {selectedSubject !== "" && ( */}
+                          <div className="topics">
+                            <label>
+                              <p>Topics</p>
+                              <select
+                                value={selectedTopic}
+                                onChange={(e) => setSelectedTopic(e.target.value)}
+                              >
+                                <option value="">All</option>
+                                {subjects[selectedSubject.split("*")[0]]?.topics?.map(
+                                  (t, i) => (
+                                    <option key={i} value={`${i}*${t.name}`}>
+                                      {t.name}
+                                    </option>
+                                  )
+                                )}
+                              </select>
+                            </label>
+                          </div>
+                        {/* )} */}
+                        {/* {selectedSubject !== "" && selectedTopic !== "" && ( */}
+                          <div className="sub-topic">
+                                  <label>
+                                    <p>SubTopics</p>
+                                    <select
+                                      value={selectedSubTopics}
+                                      onChange={(e) => setSelectedSubTopics(e.target.value)}
+                                    >
+                                      <option value="">All</option>
+                                      {subjects[selectedSubject.split("*")[0]]?.topics[
+                                        selectedTopic.split("*")[0]
+                                      ]?.subTopics?.map((st, idx) => (
+                                        <option key={idx} value={st}>
+                                          {st}
+                                        </option>
+                                      ))}
+                                    </select>
+                                  </label>
+                                </div>
+                          {/* )} */}
+                     
+                    </div>
+                    {/* {selectedSubject !== "" && selectedTopic !== "" && ( */}
+                  {selectedSubTopics !== ""  && (
+                    <div className="fil2">
+                            <div className="difficulty-level">
+                            <label>
+                              <p>Difficulty</p>
+                              <select
+                                value={difficultyLevel}
+                                onChange={(e) => setDifficultyLevel(e.target.value)}
+                              >
+                                <option value="">All</option>
+                                {difficulty?.map((d, i) => (
+                                  <option key={i} value={d}>
+                                    {d}
+                                  </option>
+                                ))}
+                              </select>
+                            </label>
+                          </div>
+                          {/* {difficultyLevel !== "" && ( */}
+                            <div className="skill-level">
+                              <label>
+                                <p>Skill</p>
+                                <select
+                                  value={skillLevel}
+                                  onChange={(e) => setSkillLevel(e.target.value)}
+                                >
+                                  <option value="">All</option>
+                                  {skills?.map((s, i) => (
+                                    <option key={i} value={s}>
+                                      {s}
+                                    </option>
+                                  ))}
+                                </select>
+                              </label>
+                            </div>
+                            {/* )} */}
 
-                <div className="skill-level">
-                  <label>
-                    <p>Skill</p>
-                    <select
-                      value={skillLevel}
-                      onChange={(e) => setSkillLevel(e.target.value)}
-                    >
-                      <option value="">All</option>
-                      {skills?.map((s, i) => (
-                        <option key={i} value={s}>
-                          {s}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                </div>
-
-                <div className="subject">
-                  <label>
-                    <p>Subject</p>
-                    <select
-                      value={selectedSubject}
-                      onChange={(e) => setSelectedSubject(e.target.value)}
-                    >
-                      <option value="">All</option>
-                      {subjects?.map((s, i) => (
-                        <option key={i} value={`${i}*${s.name}`}>
-                          {s.name}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                </div>
-
-                {selectedSubject !== "" && (
-                  <div className="topics">
-                    <label>
-                      <p>Topics</p>
-                      <select
-                        value={selectedTopic}
-                        onChange={(e) => setSelectedTopic(e.target.value)}
-                      >
-                        <option value="">All</option>
-                        {subjects[selectedSubject.split("*")[0]]?.topics?.map(
-                          (t, i) => (
-                            <option key={i} value={`${i}*${t.name}`}>
-                              {t.name}
-                            </option>
-                          )
-                        )}
-                      </select>
-                    </label>
+                    </div>
+                    )}
                   </div>
-                )}
+                  
+                </div>
+                
 
-                {selectedSubject !== "" && selectedTopic !== "" && (
-                  <div className="sub-topic">
-                    <label>
-                      <p>SubTopics</p>
-                      <select
-                        value={selectedSubTopics}
-                        onChange={(e) => setSelectedSubTopics(e.target.value)}
-                      >
-                        <option value="">All</option>
-                        {subjects[selectedSubject.split("*")[0]]?.topics[
-                          selectedTopic.split("*")[0]
-                        ]?.subTopics?.map((st, idx) => (
-                          <option key={idx} value={st}>
-                            {st}
-                          </option>
-                        ))}
-                      </select>
-                    </label>
-                  </div>
-                )}
-              </div>
+                
+
+                
+                
 
               <div className="filter-buttons">
                 <button onClick={clearFilters}>Clear filters</button>
@@ -549,7 +534,7 @@ const QuizEditPage = () => {
               <input
                 type="checkbox"
                 className="checkboxip"
-                onChange={(e) => handleChange(ques.id)}
+                onChange={() => handleChange(ques.id)}
               />
             </div>
             <div className="question-content">
