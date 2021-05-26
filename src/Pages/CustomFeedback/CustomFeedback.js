@@ -16,6 +16,7 @@ const CustomFeedback = () => {
   const { userDetails } = useContext(UserContext);
   const { id } = useParams();
   const [message, setMessage] = useState("");
+  const history = useHistory();
 
   const createFeedback = async () => {
     try {
@@ -68,6 +69,7 @@ const CustomFeedback = () => {
             <p className="p1">Add the questions for feedback.</p>
           </div>
           <div className="j12">
+            <button onClick={() => history.push(`/quizquestions/${id}`)} className="select bn create1">Back</button>
             <button
               onClick={() => createFeedback()}
               className="select bn create"
