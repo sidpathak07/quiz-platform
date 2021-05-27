@@ -127,6 +127,7 @@ const QuizPage = () => {
 	const handleTestSubmit = (e) => {
 		e.preventDefault();
 		testSubmit();
+		history.push("/login");
 	};
 
 	useEffect(() => {
