@@ -77,7 +77,7 @@ const CustomFeedback = () => {
       <div className="g1">
         <div className="j1">
           <div className="j11">
-            <p className="title">Custom Feedback</p>
+            <p className="title1">Custom Feedback</p>
             <p className="p1">Add the questions for feedback.</p>
             <button className="p1" onClick={() => console.log(questions)}>
               show feedback. q
