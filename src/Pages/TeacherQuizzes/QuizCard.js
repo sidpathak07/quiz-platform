@@ -24,7 +24,6 @@ const QuizCard = (props) => {
     duration,
     starttime,
     endtime,
-    instructions,
     userDetails,
     fetchAllQuizzes,
   } = props;

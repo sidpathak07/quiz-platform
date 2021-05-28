@@ -16,6 +16,9 @@ const CustomFeedback = () => {
   const { userDetails } = useContext(UserContext);
   const { id } = useParams();
   const [message, setMessage] = useState("");
+
+  // console.log(id);
+
   const history = useHistory();
 
   const createFeedback = async () => {
@@ -25,6 +28,7 @@ const CustomFeedback = () => {
         user: userDetails.user_id,
         question: questions,
       };
+      // console.log(postData);
       const config = {
         headers: { Authorization: `Bearer ${userDetails.access}` },
       };
@@ -35,6 +39,9 @@ const CustomFeedback = () => {
         config
       );
       setMessage(data);
+
+      // console.log(data);
+
       console.log(data);
       alert("Feedback Created Successfully");
     } catch (err) {
@@ -43,19 +50,23 @@ const CustomFeedback = () => {
     setLoading(false);
   };
 
-  useEffect(() => {
-    createFeedback();
-  }, [id]);
+  // useEffect(() => {
+  //   createFeedback();
+  // }, [id]);
 
   const confirmQuestion = (e) => {
-    let quest = {
-      id: v4(),
-      question: question,
-      responseType: responseType,
-    };
-    setQuestions([...questions, quest]);
-    setQuestion("");
-    setResponseType("");
+    if (question && responseType) {
+      let quest = {
+        id: v4(),
+        question: question,
+        responseType: responseType,
+      };
+      setQuestions([...questions, quest]);
+      setQuestion("");
+      setResponseType("");
+    } else {
+      alert("Add question and select response type");
+    }
   };
 
   const deleteQ = (id) => {
@@ -68,9 +79,17 @@ const CustomFeedback = () => {
           <div className="j11">
             <p className="title">Custom Feedback</p>
             <p className="p1">Add the questions for feedback.</p>
+            <button className="p1" onClick={() => console.log(questions)}>
+              show feedback. q
+            </button>
           </div>
           <div className="j12">
-            <button onClick={() => history.push(`/quizquestions/${id}`)} className="select bn create1">Back</button>
+            <button
+              onClick={() => history.push(`/quizquestions/${id}`)}
+              className="select bn create1"
+            >
+              Back
+            </button>
             <button
               onClick={() => createFeedback()}
               className="select bn create"
