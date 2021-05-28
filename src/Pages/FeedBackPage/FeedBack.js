@@ -102,11 +102,11 @@ const FeedBack = () => {
           </h1>
           <h1 className="feedback-page-header">Give Us Some Feedback</h1>
           <div className="feedback-input-sliders">
-            <button onClick={() => console.log(answers)}>Show Answers</button>
+            {/* <button onClick={() => console.log(answers)}>Show Answers</button> */}
             {questions.map((question, index) => {
               return (
                 <div key={question.id}>
-                  <h3>{question.question}</h3>
+                  <h3 className="student-feedback-question">{question.question}</h3>
                   {question.responseType === "range" ? (
                     <input
                       type="range"
@@ -132,25 +132,31 @@ const FeedBack = () => {
                     ""
                   )}
                   {question.responseType === "radio" ? (
-                    <div>
-                      <input
-                        type="radio"
-                        name="resRadio"
-                        id={index}
-                        value="Yes"
-                        className={question.id}
-                        onChange={(e, index) => handleChange(e, index)}
-                      />
-                      Yes
-                      <input
-                        type="radio"
-                        name="resRadio"
-                        id={index}
-                        value="No"
-                        className={question.id}
-                        onChange={(e, index) => handleChange(e, index)}
-                      />
-                      No
+                    <div className="rad">
+                      <div className="input-radio">
+                        <input
+                          type="radio"
+                          name="resRadio"
+                          id={index}
+                          value="Yes"
+                          className={question.id}
+                          onChange={(e, index) => handleChange(e, index)}
+                        />
+                        <p className="rad-1">Yes</p>
+                      </div>
+                      <div className="input-radio">
+                          <input
+                            type="radio"
+                            name="resRadio"
+                            id={index}
+                            value="No"
+                            className={question.id}
+                            onChange={(e, index) => handleChange(e, index)}
+                          />
+                          <p className="rad-1">No</p>
+                      </div>
+                      
+                      
                     </div>
                   ) : (
                     ""
