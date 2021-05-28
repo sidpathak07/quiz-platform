@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "../../Components/NavBar/NavBar";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Redirect } from "react-router-dom";
 import "./CustomFeedback.css";
 import { useState, useEffect, useContext } from "react";
 import UserContext from "../../Context/UserContext";
@@ -41,8 +41,6 @@ const CustomFeedback = () => {
       setMessage(data);
 
       // console.log(data);
-
-      console.log(data);
       alert("Feedback Created Successfully");
     } catch (err) {
       console.log(err.message);
@@ -95,6 +93,9 @@ const CustomFeedback = () => {
               className="select bn create"
             >
               Create Feedback
+            </button>
+            <button onClick={() => history.push(`/previewfeedback/${id}`)}>
+              Preview Feedback
             </button>
             {/* <button onClick={() => console.log(questions)}>Show Q</button> */}
           </div>

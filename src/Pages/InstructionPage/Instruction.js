@@ -24,8 +24,6 @@ const Instruction = ({ match }) => {
   const { userCurrentQuiz } = useContext(UserContext);
   const history = useHistory();
 
-  const hours = userCurrentQuiz?.duration?.split(":")[0].split("")[1];
-  const minutes = userCurrentQuiz?.duration?.split(":")[1];
   //added instructions field to get instructions of current quiz
   const instructions = userCurrentQuiz?.instructions;
   console.log(userCurrentQuiz);
@@ -48,30 +46,8 @@ const Instruction = ({ match }) => {
           <h1>Test Instruction</h1>
           <p>Please read the instructions carefully.</p>
         </div>
-        <div className="instruction-one">
-          <ul>
-            <li>
-              {" "}
-              There are{" "}
-              <strong> {appData.quiz_questions?.length} problems</strong> in the
-              test.
-            </li>
-          </ul>
 
-          <br />
-        </div>
         <div className="instruction-two">
-          <ul>
-            <li>
-              You have{" "}
-              <strong>
-                {hours !== "0" && `${hours} hours and`} {minutes} minutes{" "}
-              </strong>{" "}
-              to solve all the problems.
-            </li>
-          </ul>
-          <br />
-          <h5 style={{ marginBottom: "5px" }}>TEACHERS INSTRUCTIONS:</h5>
           <p>{ReactHtmlParser(instructions)}</p>
         </div>
         <div className="instruction-timer">
