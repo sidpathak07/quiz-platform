@@ -47,7 +47,7 @@ const App = () => {
             {userDetails ? (
               userDetails.role === "Student" ? (
                 isTestSubmitted ? (
-                  <Redirect to="/feedback/" />
+                  <Redirect to="/feedback/:id" />
                 ) : (
                   <QuizPage />
                 )
@@ -63,7 +63,7 @@ const App = () => {
             {userDetails ? (
               userDetails.role === "Student" ? (
                 isTestSubmitted ? (
-                  <Redirect to="/feedback/" />
+                  <Redirect to="/feedback/:id" />
                 ) : (
                   <Instruction />
                 )
@@ -75,7 +75,7 @@ const App = () => {
             )}
           </Route>
 
-          <Route exact path="/feedback/">
+          <Route exact path="/feedback/:id">
             {userDetails ? (
               userDetails.role === "Student" ? (
                 <FeedBack />
