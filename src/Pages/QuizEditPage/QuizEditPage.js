@@ -372,13 +372,6 @@ const QuizEditPage = () => {
                 className="checkboxip"
                 onClick={(e) => addAllQuestions(e)}
               /> */}
-              <Checkbox
-                checked={checked}
-                style={{color:"#008cff",marginRight:"-1vw"}}
-                onClick={() => checked ? setChecked(false) : setChecked(true)}
-                 inputProps={{ 'aria-label': 'primary checkbox' }}
-                 onChange={addAllQuestions}
-              />
               <button
                 disabled={selectedQuestions.length === 0}
                 onClick={addQuestions}
