@@ -513,6 +513,17 @@ const QuizEditPage = () => {
             </div>
           )}
         </div>
+        
+        <div className="sel">
+              <Checkbox
+                 checked={checked}
+                 style={{color:"#008cff",marginRight:"-1vw"}}
+                 onClick={() => checked ? setChecked(false) : setChecked(true)}
+                 inputProps={{ 'aria-label': 'primary checkbox' }}
+                 onChange={addAllQuestions}
+              />
+              <p className="sel1">Select All</p>
+          </div>
 
         {filteredQuestionBank?.length === 0 && (
           <p
