@@ -258,3 +258,14 @@
 .skill-level {
   padding-left: 2vw;
 }
+
+.sel {
+  display: flex;
+  align-items: center;
+  margin-bottom: -3vh;
+}
+
+.sel1 {
+  margin-left: 1vw;
+  font-family: "Montserrat", sans-serif;
+}
