@@ -61,8 +61,12 @@ const QuizCard = (props) => {
           </div>
         </div>
       )}
-      <h2 className="title">{title}</h2>
-      <p className="desc">{ReactHtmlParser(desc)}</p>
+      <div className="title-1">
+            <h2 className="title">{title}</h2>
+      </div>
+      <div className="description-1">
+            <p className="desc">{ReactHtmlParser(desc)}</p>
+      </div>
       <p className="duration">
         <span>Duration: </span>
         {duration}
