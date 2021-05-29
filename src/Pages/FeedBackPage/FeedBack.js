@@ -105,7 +105,7 @@ const FeedBack = () => {
             {/* <button onClick={() => console.log(answers)}>Show Answers</button> */}
             {questions.map((question, index) => {
               return (
-                <div key={question.id}>
+                <div key={question.id} className="whole">
                   <h3 className="student-feedback-question">{question.question}</h3>
                   {question.responseType === "range" ? (
                     <input
