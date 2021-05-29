@@ -286,6 +286,19 @@
   margin-left: 0.7vw;
 }
 
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 20vw;
+  margin-left: 19vw;
+  margin-bottom: -15vh;
+  margin-top: 4vh;
+}
+.preview {
+  font-family: "Montserrat", sans-serif;
+}
+
 @media (max-width: 450px) {
   .quiz-submitted-header {
     font-size: 1.6em;
