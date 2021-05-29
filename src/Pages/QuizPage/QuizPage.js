@@ -128,7 +128,7 @@ const QuizPage = () => {
   const handleTestSubmit = (e) => {
     e.preventDefault();
     testSubmit();
-    // history.push(`/login`);
+    history.push(`/feedback/${id}`);
   };
 
   useEffect(() => {
