@@ -154,10 +154,11 @@
 .create {
   margin-top: 6vh;
   height: 5vh;
+  margin-right: 1vw;
 }
 
 .create1 {
-  margin-left: 28vw;
+  margin-left: 14vw;
   height: 5vh;
   margin-right: 1vw;
 }
