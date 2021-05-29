@@ -92,7 +92,7 @@ const CustomFeedback = () => {
               onClick={() => createFeedback()}
               className="select bn create"
             >
-              Create Feedback
+              Save
             </button>
             <button onClick={() => history.push(`/previewfeedback/${id}`)} className="select bn"
               style={{height:"5vh"}}>
