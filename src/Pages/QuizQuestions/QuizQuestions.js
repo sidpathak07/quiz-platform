@@ -99,6 +99,7 @@ const QuizQuestions = () => {
             <button
               className="enrollment-course-btn"
               onClick={() => history.push(`/allquizzes`)}
+              style={{marginRight:"1vw"}}
             >
               Back to Quiz
             </button>
