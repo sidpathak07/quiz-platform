@@ -60,7 +60,6 @@
   padding: 40px;
   margin: 120px auto 50px auto;
   border: 2px solid rgb(231, 231, 231);
-  min-height: 85vh;
   display: flex;
   height: 100%;
   flex-direction: column;
@@ -232,6 +231,7 @@
 .student-feedback-question {
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
+  margin-top: 7vh;
   margin-bottom: 2vh;
 }
 
