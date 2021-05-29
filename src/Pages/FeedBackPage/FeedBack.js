@@ -5,6 +5,65 @@ import Error from "../../Components/ErrorComponent/Error";
 import axios from "../../axios/axios";
 import { AiOutlineFileDone } from "react-icons/ai";
 import "./FeedBack.css";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
+
+const useStyles = makeStyles({
+  root: {
+    width: '100%',
+  },
+});
+
+const rating = [
+  {
+    value: 0,
+    label: '0',
+  },
+  {
+    value: 10,
+    label: '1',
+  },
+  {
+    value: 20,
+    label: '2',
+  },
+  {
+    value: 30,
+    label: '3',
+  },
+  {
+    value: 40,
+    label: '4',
+  },
+  {
+    value: 50,
+    label: '5',
+  },
+  {
+    value: 60,
+    label: '6',
+  },
+  {
+    value: 70,
+    label: '7',
+  },
+  {
+    value: 80,
+    label: '8',
+  },
+  {
+    value: 90,
+    label: '9',
+  },
+  {
+    value: 100,
+    label: '10',
+  },
+
+];
+
 
 const FeedBack = () => {
   const { userDetails, removeUser, userCurrentQuiz } = useContext(UserContext);
@@ -83,6 +142,14 @@ const FeedBack = () => {
     setAnswers(arr);
   };
 
+  function valuetext(value) {
+    return `${value}`;
+  }
+
+  function valueLabelFormat(value) {
+    return rating.findIndex((rating) => rating.value === value) ;
+  }
+
   return (
     <>
       {submitted ? (
@@ -108,15 +175,29 @@ const FeedBack = () => {
                 <div key={question.id} className="whole">
                   <h3 className="student-feedback-question">{question.question}</h3>
                   {question.responseType === "range" ? (
-                    <input
-                      type="range"
-                      name=""
-                      id={index}
-                      max="10"
-                      min="1"
-                      className={question.id}
-                      onChange={(e, index) => handleChange(e, index)}
-                    />
+                          <Slider
+                          defaultValue={0}
+                          valueLabelFormat={valueLabelFormat}
+                          getAriaValueText={valuetext}
+                          aria-labelledby="discrete-slider-restrict"
+                          step={null}
+                          valueLabelDisplay="auto"
+                          marks={rating}
+                          className={question.id}
+                          name=""
+                          id={index}
+                          onChange={(e, index) => handleChange(e, index)}
+                      />
+                    // <input
+                    //   type="range"
+                    //   name=""
+                    //   id={index}
+                    //   max="10"
+                    //   min="1"
+                    //   className={question.id}
+                    //   onChange={(e, index) => handleChange(e, index)}
+                    // />
+
                   ) : (
                     ""
                   )}
