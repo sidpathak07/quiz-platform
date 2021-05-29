@@ -77,9 +77,9 @@ const CustomFeedback = () => {
           <div className="j11">
             <p className="title1">Custom Feedback</p>
             <p className="p1">Add the questions for feedback.</p>
-            <button className="p1" onClick={() => console.log(questions)}>
+            {/* <button className="p1" onClick={() => console.log(questions)}>
               show feedback. q
-            </button>
+            </button> */}
           </div>
           <div className="j12">
             <button
@@ -94,7 +94,8 @@ const CustomFeedback = () => {
             >
               Create Feedback
             </button>
-            <button onClick={() => history.push(`/previewfeedback/${id}`)}>
+            <button onClick={() => history.push(`/previewfeedback/${id}`)} className="select bn"
+              style={{height:"5vh"}}>
               Preview Feedback
             </button>
             {/* <button onClick={() => console.log(questions)}>Show Q</button> */}
