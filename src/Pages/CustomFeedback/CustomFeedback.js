@@ -1,8 +1,7 @@
 import React from "react";
-import NavBar from "../../Components/NavBar/NavBar";
-import { useParams, useHistory, Redirect } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import "./CustomFeedback.css";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import UserContext from "../../Context/UserContext";
 import axios from "../../axios/axios";
 import Loader from "../../Components/Loader/LoadingBar";
@@ -11,11 +10,11 @@ import { v4 } from "uuid";
 const CustomFeedback = () => {
   const [questions, setQuestions] = useState([]);
   const [question, setQuestion] = useState("");
+  const [updateId, setUpdateId] = useState("");
   const [loading, setLoading] = useState(false);
   const [responseType, setResponseType] = useState("");
   const { userDetails } = useContext(UserContext);
   const { id } = useParams();
-  const [message, setMessage] = useState("");
 
   // console.log(id);
 
@@ -38,8 +37,6 @@ const CustomFeedback = () => {
         postData,
         config
       );
-      setMessage(data);
-
       // console.log(data);
       alert("Feedback Created Successfully");
     } catch (err) {
@@ -53,23 +50,47 @@ const CustomFeedback = () => {
   // }, [id]);
 
   const confirmQuestion = (e) => {
-    if (question && responseType) {
-      let quest = {
-        id: v4(),
-        question: question,
-        responseType: responseType,
-      };
-      setQuestions([...questions, quest]);
-      setQuestion("");
-      setResponseType("");
+    if (updateId) {
+      if (question && responseType) {
+        let arr = questions;
+        let obj = arr[updateId];
+        obj.question = question;
+        obj.responseType = responseType;
+        arr[updateId] = obj;
+        setQuestions(arr);
+        setQuestion("");
+        setResponseType("");
+        setUpdateId("");
+      } else {
+        alert("Add question and select response type");
+      }
     } else {
-      alert("Add question and select response type");
+      if (question && responseType) {
+        let quest = {
+          id: v4(),
+          question: question,
+          responseType: responseType,
+        };
+        setQuestions([...questions, quest]);
+        setQuestion("");
+        setResponseType("");
+      } else {
+        alert("Add question and select response type");
+      }
     }
   };
 
   const deleteQ = (id) => {
     setQuestions(questions.filter((quest) => quest.id !== id));
   };
+
+  const editQ = (e) => {
+    let obj = questions[e.target.id];
+    setQuestion(obj.question);
+    setResponseType(obj.responseType);
+    setUpdateId(e.target.id);
+  };
+
   return (
     <div className="customfeedback">
       <div className="g1">
@@ -94,11 +115,13 @@ const CustomFeedback = () => {
             >
               Save
             </button>
-            <button onClick={() => history.push(`/previewfeedback/${id}`)} className="select bn"
-              style={{height:"5vh"}}>
+            <button
+              onClick={() => history.push(`/previewfeedback/${id}`)}
+              className="select bn"
+              style={{ height: "5vh" }}
+            >
               Preview Feedback
             </button>
-            {/* <button onClick={() => console.log(questions)}>Show Q</button> */}
           </div>
         </div>
       </div>
@@ -136,9 +159,9 @@ const CustomFeedback = () => {
         </div>
       </div>
       <div>
-        {questions.map((question) => {
+        {questions.map((question, index) => {
           return (
-            <div className="element1">
+            <div className="element1" key={index}>
               <div className="p2">
                 <label className="p4">Question</label>
               </div>
@@ -147,9 +170,16 @@ const CustomFeedback = () => {
                 <h5 className="p32">Response Type : {question.responseType}</h5>
                 <button
                   className="select bn cn"
+                  id={index}
+                  onClick={(e) => editQ(e)}
+                >
+                  Update
+                </button>
+                <button
+                  className="select bn cn"
                   onClick={() => deleteQ(question.id)}
                 >
-                  delete
+                  Delete
                 </button>
               </div>
             </div>
