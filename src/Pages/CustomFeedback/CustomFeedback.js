@@ -27,7 +27,7 @@ const CustomFeedback = () => {
         user: userDetails.user_id,
         question: questions,
       };
-      // console.log(postData);
+      console.log(postData);
       const config = {
         headers: { Authorization: `Bearer ${userDetails.access}` },
       };
