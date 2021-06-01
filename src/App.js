@@ -19,6 +19,8 @@ import TeacherHomePage from "./Pages/TeacherHomePage/TeacherHomePage";
 import FeedBack from "./Pages/FeedBackPage/FeedBack";
 import CustomFeedback from "./Pages/CustomFeedback/CustomFeedback";
 import PreviewFeedBack from "./Pages/CustomFeedback/PreviewFeedBack";
+import Report from "./Pages/Report/Report";
+import SubjectReport from "./Pages/Report/SubjectReport";
 
 const App = () => {
   const { userDetails, isTestSubmitted } = useContext(UserContext);
@@ -46,11 +48,11 @@ const App = () => {
           <Route exact path="/quizpage/:id">
             {userDetails ? (
               userDetails.role === "Student" ? (
-                // isTestSubmitted ? (
-                //   <Redirect to="/feedback/:id" />
-                // ) : (
+                isTestSubmitted ? (
+                  <Redirect to="/feedback/" />
+                ) : (
                   <QuizPage />
-                // )
+                )
               ) : (
                 <Redirect to="/404" />
               )
@@ -62,11 +64,11 @@ const App = () => {
           <Route exact path="/instruction/:id">
             {userDetails ? (
               userDetails.role === "Student" ? (
-                // isTestSubmitted ? (
-                //   <Redirect to="/feedback/:id" />
-                // ) : (
+                isTestSubmitted ? (
+                  <Redirect to="/feedback/" />
+                ) : (
                   <Instruction />
-                // )
+                )
               ) : (
                 <Redirect to="/404" />
               )
@@ -75,10 +77,34 @@ const App = () => {
             )}
           </Route>
 
-          <Route exact path="/feedback/:id">
+          <Route exact path="/feedback/">
             {userDetails ? (
               userDetails.role === "Student" ? (
                 <FeedBack />
+              ) : (
+                <Redirect to="/404" />
+              )
+            ) : (
+              <Redirect to="/login" />
+            )}
+          </Route>
+
+          <Route exact path="/report/:username/:id">
+            {userDetails ? (
+              userDetails.role === "Student" ? (
+                <Report />
+              ) : (
+                <Redirect to="/404" />
+              )
+            ) : (
+              <Redirect to="/login" />
+            )}
+          </Route>
+
+          <Route exact path="/report/subjectreport/:username/:id">
+            {userDetails ? (
+              userDetails.role === "Student" ? (
+                <SubjectReport />
               ) : (
                 <Redirect to="/404" />
               )
