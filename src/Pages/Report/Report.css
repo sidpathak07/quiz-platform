@@ -1,0 +1,98 @@
+.head {
+  margin-left: 3vw;
+  margin-top: 2vh;
+  font-size: 4vh;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+}
+
+.time {
+  font-size: 2vh;
+  color: gray;
+  margin-left: 3vw;
+  margin-top: -1.5vh;
+  font-family: "Montserrat", sans-serif;
+}
+
+.report-card {
+  border-top: 1.5px solid lightgray;
+  margin-left: 5vw;
+  margin-right: 5vw;
+  margin-top: 8vh;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  margin-left: 0.3vw;
+  margin-top: 0.5vh;
+}
+
+.nav-item {
+  background: #214786;
+  color: white;
+  padding-right: 1vw;
+  padding-left: 1vw;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  font-family: "Montserrat", sans-serif;
+  border-right: 2.5px solid white;
+}
+
+.nav-item:hover {
+  background: white;
+  border-top: 3px solid #214786;
+  color: #214786;
+}
+
+.rank {
+  display: flex;
+  margin-top: 4vh;
+}
+
+.rank-card,
+.marks-card {
+  background: #f5f5f5;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 3vh;
+  padding-bottom: 2vh;
+}
+
+.rank-card {
+  margin-right: 2vw;
+}
+
+.rank-des {
+  font-family: "Montserrat", sans-serif;
+  font-weight: bolder;
+}
+
+.rank-rank {
+  font-family: "Montserrat", sans-serif;
+  color: #214786;
+  font-weight: 900;
+  font-size: 3vh;
+}
+
+.txt {
+  margin-top: 4vh;
+}
+.score-txt {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 2.5vh;
+}
+
+.accuracy-1,
+.attempted {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 2.5vh;
+}
+.attempted {
+  margin-top: -2vh;
+}
