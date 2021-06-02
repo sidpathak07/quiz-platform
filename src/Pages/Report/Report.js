@@ -145,11 +145,11 @@ function Report() {
         </div>
         <div className="accuracy">
           <p className="accuracy-1">
-            Accuracy:{" "}
+            Accuracy:
             <span style={{ color: "#214786", fontWeight: "600" }}>62%</span>
           </p>
           <p className="attempted">
-            Total attempted questions:{" "}
+            Total attempted questions:
             <span style={{ color: "#214786", fontWeight: "700" }}>
               43 out of 60 (Correct: 27, Incorrect: 16)
             </span>
@@ -158,8 +158,9 @@ function Report() {
         <div className="graph">
           <div className="bar-graph">
             <Chart
-              width={"1000px"}
-              height={"500px"}
+              width={"600px"}
+              height={"300px"}
+              style={{paddingRight:"-3vw"}}
               chartType="Bar"
               loader={<div>Loading Chart</div>}
               data={[
