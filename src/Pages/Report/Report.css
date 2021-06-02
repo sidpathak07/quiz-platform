@@ -1,23 +1,24 @@
 .head {
   margin-left: 3vw;
   margin-top: 2vh;
+  margin-bottom: 2vh;
   font-size: 4vh;
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
 }
 
 .time {
-  font-size: 2vh;
+  font-size: 3vh;
   color: gray;
   margin-left: 3vw;
-  margin-top: -1.5vh;
+  margin-top: 1vh;
   font-family: "Montserrat", sans-serif;
 }
 
 .report-card {
   border-top: 1.5px solid lightgray;
-  margin-left: 5vw;
-  margin-right: 5vw;
+  margin-left: 3vw;
+  margin-right: 3vw;
   margin-top: 8vh;
 }
 
@@ -93,6 +94,26 @@
   font-weight: 600;
   font-size: 2.5vh;
 }
-.attempted {
+
+.accuracy-1 {
+  margin-top: 3vh;
+  margin-bottom: 2vh;
+}
+/* .attempted {
   margin-top: -2vh;
+} */
+
+.graph {
+  margin-top: 4vh;
+  display: flex;
+}
+
+.bar-graph {
+  border: 2px solid lightgray;
+  margin-right: 6px;
+  padding: 1.5vh;
+}
+
+.pie-chart {
+  border: 2px solid lightgray;
 }
