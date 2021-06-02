@@ -156,45 +156,46 @@ function SubjectReport() {
               </span>
             </p>
           </div>
-        </div>
-        <div className="graph">
-          <div className="bar-graph">
-            <Chart
-              width={"1000px"}
-              height={"500px"}
-              chartType="Bar"
-              loader={<div>Loading Chart</div>}
-              data={[
-                ["", "Easy", "Medium", "Hard"],
-                ["Correct", 24, 11, 35],
-                ["Incorrect", 30, 40, 70],
-                ["Total", 60, 10, 70],
-              ]}
-              options={{
-                chart: {
-                  title: `Accuracy:45%`,
-                  subtitle: "Total attempted Questions",
-                },
-              }}
-            />
+            <div className="graph">
+            <div className="bar-graph-2">
+              <Chart
+                width={"675px"}
+                height={"300px"}
+                chartType="Bar"
+                loader={<div>Loading Chart</div>}
+                data={[
+                  ["", "Easy", "Medium", "Hard"],
+                  ["Correct", 24, 11, 35],
+                  ["Incorrect", 30, 40, 70],
+                  ["Total", 60, 10, 70],
+                ]}
+                options={{
+                  chart: {
+                    title: `Accuracy:45%`,
+                    subtitle: "Total attempted Questions",
+                  },
+                }}
+              />
+            </div>
+            <div className="pie-chart-2">
+              <Chart
+                width={"400px"}
+                height={"300px"}
+                chartType="PieChart"
+                loader={<div>Loading Chart</div>}
+                data={[
+                  ["Task", "Hours per Day"],
+                  ["Correct", 45],
+                  ["Incorrect/Unattempted", 20],
+                ]}
+                options={{
+                  title: "Attempt Summary",
+                }}
+              />
+            </div>
           </div>
-          <div className="pie-chart">
-            <Chart
-              width={"500px"}
-              height={"300px"}
-              chartType="PieChart"
-              loader={<div>Loading Chart</div>}
-              data={[
-                ["Task", "Hours per Day"],
-                ["Correct", 45],
-                ["Incorrect/Unattempted", 20],
-              ]}
-              options={{
-                title: "Attempt Summary",
-              }}
-            />
-          </div>
         </div>
+        
       </div>
     </div>
   );
