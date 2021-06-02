@@ -99,10 +99,11 @@
 
 .subject {
   border: 2.5px solid lightgray;
-  padding-left: 1.5vw;
-  padding-right: 1.5vw;
+  padding-left: 1vw;
+  padding-right: 1vw;
   padding-top: 2vh;
   padding-bottom: 2vh;
+  margin-top: 2vh;
 }
 
 .h-1 {
@@ -115,4 +116,18 @@
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 2.4vh;
+}
+
+.report {
+  padding-bottom: 6vh;
+}
+
+.bar-graph-2 {
+  border: 2px solid lightgray;
+  margin-right: 6px;
+  padding: 1.5vh;
+}
+
+.pie-chart-2 {
+  border: 2px solid lightgray;
 }
