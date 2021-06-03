@@ -127,7 +127,7 @@ function SubjectReport() {
           </p>
           <p
             className="nav-item comparative-report"
-            onClick={() => history.push("/report/comparativereport")}
+            onClick={() => history.push(`/report/comparativereport/${username}/${id}`)}
           >
             Comparative Report
           </p>
