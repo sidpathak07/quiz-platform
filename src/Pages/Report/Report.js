@@ -213,24 +213,9 @@ function Report() {
               loader={<div>Loading Chart</div>}
               data={[
                 ["", "Easy", "Medium", "Hard"],
-                [
-                  "Correct",
-                  levels[0]["dificulty: Easy"]["correct_questions"],
-                  levels[1]["dificulty: Medium"]["correct_questions"],
-                  levels[2]["dificulty: Hard"]["correct_questions"],
-                ],
-                [
-                  "Incorrect/Unattempted",
-                  levels[0]["dificulty: Easy"]["incorrect_or_not_attempted"],
-                  levels[1]["dificulty: Medium"]["incorrect_or_not_attempted"],
-                  levels[2]["dificulty: Hard"]["incorrect_or_not_attempted"],
-                ],
-                [
-                  "Total",
-                  levels[0]["dificulty: Easy"]["total_questions"],
-                  levels[1]["dificulty: Medium"]["total_questions"],
-                  levels[2]["dificulty: Hard"]["total_questions"],
-                ],
+                ["Correct", 10, 20, 30],
+                ["Incorrect/Unattempted", 10, 20, 30],
+                ["Total", 10, 20, 30],
               ]}
               options={{
                 chart: {
@@ -248,9 +233,9 @@ function Report() {
               loader={<div>Loading Chart</div>}
               data={[
                 ["Quiz", "Types of Questions"],
-                ["Correct", correctQ],
-                ["Incorrect", incorrectQ],
-                ["unattempted", unattemptedQ],
+                ["Correct", 10],
+                ["Incorrect", 5],
+                ["unattempted", 10],
               ]}
               options={{
                 title: "Attempt Summary",
