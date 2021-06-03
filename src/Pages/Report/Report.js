@@ -160,7 +160,12 @@ function Report() {
           >
             Subject Report
           </p>
-          <p className="nav-item comparative-report">Comparative Report</p>
+           <p
+            className="nav-item comparative-report"
+            onClick={() => history.push(`/report/comparativereport/${username}/${id}`)}
+          >
+            Comparative Report
+          </p>
         </div>
         <div className="rank">
           <div className="rank-card">
