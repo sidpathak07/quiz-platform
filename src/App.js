@@ -21,6 +21,7 @@ import CustomFeedback from "./Pages/CustomFeedback/CustomFeedback";
 import PreviewFeedBack from "./Pages/CustomFeedback/PreviewFeedBack";
 import Report from "./Pages/Report/Report";
 import SubjectReport from "./Pages/Report/SubjectReport";
+import Comparative from "./Pages/Report/Comparative";
 
 const App = () => {
   const { userDetails, isTestSubmitted } = useContext(UserContext);
@@ -105,6 +106,18 @@ const App = () => {
             {userDetails ? (
               userDetails.role === "Student" ? (
                 <SubjectReport />
+              ) : (
+                <Redirect to="/404" />
+              )
+            ) : (
+              <Redirect to="/login" />
+            )}
+          </Route>
+
+          <Route exact path="/report/comparativereport/:username/:id">
+            {userDetails ? (
+              userDetails.role === "Student" ? (
+                <Comparative />
               ) : (
                 <Redirect to="/404" />
               )
