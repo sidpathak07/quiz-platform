@@ -154,26 +154,10 @@ function Report() {
     setIsLoading(false);
   };
 
-  const showData = () => {
-    console.log(
-      "attempted",
-      attempted,
-      "CorrectQ",
-      correctQ,
-      "IncorrectQ",
-      incorrectQ,
-      "UnattemptedQ",
-      unattemptedQ,
-      "MarksObtained",
-      marksObtained
-    );
-    console.log("LEVELS:", levels);
-  };
   return (
     <div className="report">
       {!isLoading && (
         <>
-          <button onClick={() => showData()}>Show data</button>
           <p className="head">Result Analysis - Scorecard</p>
           <p className="time">
             {day} , {ISTTime.getDate()} {month} {hoursIST} : {minutesIST} {ampm}
