@@ -92,7 +92,7 @@ function Report() {
         user: username,
         quiz: id,
       };
-      const { data } = await axios.post(
+      const { data } = await axios.get(
         `/api/getresult/${username}/${id}`,
         postData,
         config
@@ -126,6 +126,7 @@ function Report() {
       setLevels(lvl);
       let acc = ((correctQ / totalQ) * 100).toFixed(2);
       setAccuracy(acc);
+
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -160,9 +161,11 @@ function Report() {
           >
             Subject Report
           </p>
-           <p
+          <p
             className="nav-item comparative-report"
-            onClick={() => history.push(`/report/comparativereport/${username}/${id}`)}
+            onClick={() =>
+              history.push(`/report/comparativereport/${username}/${id}`)
+            }
           >
             Comparative Report
           </p>
