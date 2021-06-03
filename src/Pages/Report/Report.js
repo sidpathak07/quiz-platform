@@ -11,6 +11,15 @@ function Report() {
   const [isLoading, setIsLoading] = useState(false);
   const { userDetails } = useContext(UserContext);
   const history = useHistory();
+  // const [subjects,setSubjects] = useState([]);
+  const [levels, setLevels] = useState([]);
+  const [correctQ, setCorrectQ] = useState(0);
+  const [incorrectQ, setIncorrectQ] = useState(0);
+  const [unattemptedQ, setUnattemptedQ] = useState(0);
+  const [totalQ, setTotalQ] = useState(0);
+  const [accuracy, setAccuracy] = useState(0);
+  const [marksObtained, setMarksObtained] = useState(0);
+  let lvl = [];
   var currentTime = new Date();
   var currentOffset = currentTime.getTimezoneOffset();
   var ISTOffset = 330; // IST offset UTC +5:30
@@ -89,6 +98,34 @@ function Report() {
         config
       );
       console.log(data);
+      const {
+        attempted,
+        correctquestion,
+        incorrectquestion,
+        marks_obtained,
+        not_attempted,
+        analysis,
+      } = data;
+      setCorrectQ(correctquestion);
+      setIncorrectQ(incorrectquestion);
+      setUnattemptedQ(not_attempted);
+      setTotalQ(attempted + not_attempted);
+      setMarksObtained(marks_obtained);
+      for (const key in analysis) {
+        // if (key.includes("subject")) {
+        //   let obj = {};
+        //   obj[key] = analysis[key];
+        //   subjects.push(obj);
+        // }
+        if (key.includes("dificulty")) {
+          let obj = {};
+          obj[key] = analysis[key];
+          lvl.push(obj);
+        }
+      }
+      setLevels(lvl);
+      let acc = ((correctQ / totalQ) * 100).toFixed(2);
+      setAccuracy(acc);
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -132,26 +169,30 @@ function Report() {
           </div>
           <div className="marks-card">
             <p className="rank-des">Marks Obtained:</p>
-            <p className="rank-rank">115/300 (+128-13)</p>
+            <p className="rank-rank">{`${marksObtained}/`}</p>
           </div>
         </div>
         <div className="txt">
           <p className="score-txt">
-            In this test , you have scored 115 marks and a Rank between 3001 and
+            {`In this test , you have scored ${marksObtained} marks and a Rank between 3001 and
             4000. The Test paper had a medium difficulty level. Your score in
             the test was Okay. Other metrics of your performance on Difficulty
-            level, Subjects and the like are available below.{" "}
+            level, Subjects and the like are available below.`}{" "}
           </p>
         </div>
         <div className="accuracy">
           <p className="accuracy-1">
             Accuracy:
-            <span style={{ color: "#214786", fontWeight: "600" }}>62%</span>
+            <span
+              style={{ color: "#214786", fontWeight: "600" }}
+            >{`${accuracy}`}</span>
           </p>
           <p className="attempted">
             Total attempted questions:
             <span style={{ color: "#214786", fontWeight: "700" }}>
-              43 out of 60 (Correct: 27, Incorrect: 16)
+              {`Total attempted Questions: ${
+                correctQ + incorrectQ
+              } of ${totalQ} (Correct:${correctQ} Incorrect:${incorrectQ})`}
             </span>
           </p>
         </div>
@@ -160,19 +201,33 @@ function Report() {
             <Chart
               width={"600px"}
               height={"300px"}
-              style={{paddingRight:"-3vw"}}
               chartType="Bar"
               loader={<div>Loading Chart</div>}
               data={[
                 ["", "Easy", "Medium", "Hard"],
-                ["Correct", 24, 11, 35],
-                ["Incorrect", 30, 40, 70],
-                ["Total", 60, 10, 70],
+                [
+                  "Correct",
+                  levels[0]["dificulty: Easy"]["correct_questions"],
+                  levels[1]["dificulty: Medium"]["correct_questions"],
+                  levels[2]["dificulty: Hard"]["correct_questions"],
+                ],
+                [
+                  "Incorrect/Unattempted",
+                  levels[0]["dificulty: Easy"]["incorrect_or_not_attempted"],
+                  levels[1]["dificulty: Medium"]["incorrect_or_not_attempted"],
+                  levels[2]["dificulty: Hard"]["incorrect_or_not_attempted"],
+                ],
+                [
+                  "Total",
+                  levels[0]["dificulty: Easy"]["total_questions"],
+                  levels[1]["dificulty: Medium"]["total_questions"],
+                  levels[2]["dificulty: Hard"]["total_questions"],
+                ],
               ]}
               options={{
                 chart: {
-                  title: `Accuracy:45%`,
-                  subtitle: "Total attempted Questions",
+                  title: "",
+                  subtitle: "",
                 },
               }}
             />
@@ -184,9 +239,10 @@ function Report() {
               chartType="PieChart"
               loader={<div>Loading Chart</div>}
               data={[
-                ["Task", "Hours per Day"],
-                ["Correct", 45],
-                ["Incorrect/Unattempted", 20],
+                ["Quiz", "Types of Questions"],
+                ["Correct", correctQ],
+                ["Incorrect", incorrectQ],
+                ["unattempted", unattemptedQ],
               ]}
               options={{
                 title: "Attempt Summary",
