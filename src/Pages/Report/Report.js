@@ -196,7 +196,7 @@ function Report() {
               </div>
               <div className="marks-card">
                 <p className="rank-des">Marks Obtained:</p>
-                <p className="rank-rank">{`${marksObtained}/`}</p>
+                <p className="rank-rank">{`${marksObtained}`}</p>
               </div>
             </div>
             <div className="txt">
