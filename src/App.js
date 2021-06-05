@@ -22,6 +22,7 @@ import PreviewFeedBack from "./Pages/CustomFeedback/PreviewFeedBack";
 import Report from "./Pages/Report/Report";
 import SubjectReport from "./Pages/Report/SubjectReport";
 import Comparative from "./Pages/Report/Comparative";
+import AllScores from "./Pages/AllScores/AllScores";
 
 const App = () => {
   const { userDetails, isTestSubmitted } = useContext(UserContext);
@@ -82,6 +83,18 @@ const App = () => {
             {userDetails ? (
               userDetails.role === "Student" ? (
                 <FeedBack />
+              ) : (
+                <Redirect to="/404" />
+              )
+            ) : (
+              <Redirect to="/login" />
+            )}
+          </Route>
+
+          <Route exact path="/allscores/:username">
+            {userDetails ? (
+              userDetails.role === "Student" ? (
+                <AllScores />
               ) : (
                 <Redirect to="/404" />
               )
