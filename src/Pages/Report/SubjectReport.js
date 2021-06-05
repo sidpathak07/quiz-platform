@@ -5,6 +5,7 @@ import { useParams, useHistory, Redirect } from "react-router-dom";
 import UserContext from "../../Context/UserContext";
 import { Chart } from "react-google-charts";
 import axios from "../../axios/axios";
+import Loader from "../../Components/Loader/LoadingBar";
 
 function SubjectReport() {
   const { username, id } = useParams();
@@ -87,13 +88,17 @@ function SubjectReport() {
         `/api/getresult/${username}/${id}`,
         config
       );
+      if(data){
+        setIsLoading(false);
+      }
+      console.log(isLoading);
       setResponseData(data);
-      setIsLoading(false);
+      
     } catch (error) {
       console.log(error);
     }
   };
-
+  // console.log(Object.keys(subjects[0]));
   useEffect(() => {
     fetchResult();
   }, []);
@@ -131,128 +136,140 @@ function SubjectReport() {
 
   return (
     <div className="report">
-      <p className="head">Subject Report</p>
-      <p className="time">
-        {day} , {ISTTime.getDate()} {month} {hoursIST} : {minutesIST} {ampm}
-      </p>
-      <div className="report-card">
-        <div className="nav">
-          <p
-            className="nav-item scorecard"
-            onClick={() =>
-              history.push(`/report/${userDetails.username}/${id}`)
-            }
-          >
-            Scorecard
-          </p>
-          <p
-            className="nav-item subject-report"
-            onClick={() =>
-              history.push(`/report/subjectreport/${username}/${id}`)
-            }
-          >
-            Subject Report
-          </p>
-          <p
-            className="nav-item comparative-report"
-            onClick={() =>
-              history.push(`/report/comparativereport/${username}/${id}`)
-            }
-          >
-            Comparative Report
-          </p>
-        </div>
-        <div className="subject">
-          <div className="text">
-            {/* <p className="h-2">
-              Marks Obtained :{" "}
-              <span style={{ color: "#214786", fontWeight: "600" }}>
-                33/125 (+40 -7)
-              </span>
-            </p> */}
+          {!isLoading && (
+            <>
+            <p className="head">Subject Report</p>
+            <p className="time">
+              {day} , {ISTTime.getDate()} {month} {hoursIST} : {minutesIST} {ampm}
+            </p>
+            <div className="report-card">
+              <div className="nav">
+                <p
+                  className="nav-item scorecard"
+                  onClick={() =>
+                    history.push(`/report/${userDetails.username}/${id}`)
+                  }
+                >
+                  Scorecard
+                </p>
+                <p
+                  className="nav-item subject-report"
+                  onClick={() =>
+                    history.push(`/report/subjectreport/${username}/${id}`)
+                  }
+                >
+                  Subject Report
+                </p>
+                <p
+                  className="nav-item comparative-report"
+                  onClick={() =>
+                    history.push(`/report/comparativereport/${username}/${id}`)
+                  }
+                >
+                  Comparative Report
+                </p>
+              </div>
+              
+                <div className="text">
+                  {/* <p className="h-2">
+                    Marks Obtained :{" "}
+                    <span style={{ color: "#214786", fontWeight: "600" }}>
+                      33/125 (+40 -7)
+                    </span>
+                  </p> */}
+                </div>
+                <div className="subject">
+                  {subjects.map((subject, index) => {
+                    for (const key in subject) {
+                      return (
+                        <>
+                          {console.log(key)}
+                          <p className="h-1">
+                            <span style={{ color: "#214786", fontWeight: "600" }}>
+                              {key.slice(9,20)}
+                            </span>
+                          </p>
+                          <p className="h-2">
+                            Accuracy :
+                            <span style={{ color: "#214786", fontWeight: "600" }}>
+                              {`${(
+                                subject[key].correct_questions /
+                                (subject[key].correct_questions +
+                                  subject[key].incorrect_or_not_attempted)
+                              ).toFixed(2)}`}
+                            </span>
+                          </p>
+                          <p className="h-2">
+                            Total Attempted Questions :{" "}
+                            <span style={{ color: "#214786", fontWeight: "600" }}>
+                              {`${
+                                subject[key].correct_questions +
+                                subject[key].incorrect_or_not_attempted
+                              }`}{" "}
+                              (Correct:{`${subject[key].correct_questions}`} ,
+                              Incorrect:{`${subject[key].incorrect_or_not_attempted}`}
+                              )
+                            </span>
+                          </p>
+                          <div className="graph">
+                          <div className="bar-graph-2">
+                            <Chart
+                              width={"600px"}
+                              height={"300px"}
+                              chartType="Bar"
+                              loader={<div>Loading Chart</div>}
+                              data={[
+                                ["", "Attempts"],
+                                ["Correct", subject[key].correct_questions],
+                                [
+                                  "Incorrect/Unattempted",
+                                  subject[key].incorrect_or_not_attempted,
+                                ],
+                                ["Total", subject[key].total_questions],
+                              ]}
+                              options={{
+                                chart: {
+                                  title: ``,
+                                  subtitle: ``,
+                                },
+                              }}
+                            />
+                          </div>
+                          <div className="pie-chart-2">
+                            <Chart
+                              width={"475px"}
+                              height={"300px"}
+                              chartType="PieChart"
+                              loader={<div>Loading Chart</div>}
+                              data={[
+                                ["Quiz", "Types of Questions"],
+                                ["Correct", subject[key].correct_questions],
+                                [
+                                  "Incorrect/Unattempted",
+                                  subject[key].incorrect_or_not_attempted,
+                                ],
+                              ]}
+                              options={{
+                                title: "Attempt Summary",
+                              }}
+                            />
+                          </div>
+                          </div>
+                        </>
+                      );
+                    }
+                  })}
+                </div>
+              </div>
+              </>
+          )}
+          {isLoading && (
+          <div className="quizquestion-loader">
+            <Loader />
           </div>
-          <div className="graph">
-            {subjects.map((subject, index) => {
-              for (const key in subject) {
-                return (
-                  <>
-                    <p className="h-1">
-                      <span style={{ color: "#214786", fontWeight: "600" }}>
-                        {key}
-                      </span>
-                    </p>
-                    <p className="h-2">
-                      Accuracy :
-                      <span style={{ color: "#214786", fontWeight: "600" }}>
-                        {`${(
-                          subject[key].correct_questions /
-                          (subject[key].correct_questions +
-                            subject[key].incorrect_or_not_attempted)
-                        ).toFixed(2)}`}
-                      </span>
-                    </p>
-                    <p className="h-2">
-                      Total Attempted Questions :{" "}
-                      <span style={{ color: "#214786", fontWeight: "600" }}>
-                        {`${
-                          subject[key].correct_questions +
-                          subject[key].incorrect_or_not_attempted
-                        }`}{" "}
-                        (Correct:{`${subject[key].correct_questions}`} ,
-                        Incorrect:{`${subject[key].incorrect_or_not_attempted}`}
-                        )
-                      </span>
-                    </p>
-                    <div className="bar-graph-2">
-                      <Chart
-                        width={"600px"}
-                        height={"300px"}
-                        chartType="Bar"
-                        loader={<div>Loading Chart</div>}
-                        data={[
-                          ["", "Attempts"],
-                          ["Correct", subject[key].correct_questions],
-                          [
-                            "Incorrect/Unattempted",
-                            subject[key].incorrect_or_not_attempted,
-                          ],
-                          ["Total", subject[key].total_questions],
-                        ]}
-                        options={{
-                          chart: {
-                            title: ``,
-                            subtitle: ``,
-                          },
-                        }}
-                      />
-                    </div>
-                    <div className="pie-chart-2">
-                      <Chart
-                        width={"500px"}
-                        height={"300px"}
-                        chartType="PieChart"
-                        loader={<div>Loading Chart</div>}
-                        data={[
-                          ["Quiz", "Types of Questions"],
-                          ["Correct", subject[key].correct_questions],
-                          [
-                            "Incorrect/Unattempted",
-                            subject[key].incorrect_or_not_attempted,
-                          ],
-                        ]}
-                        options={{
-                          title: "Attempt Summary",
-                        }}
-                      />
-                    </div>
-                  </>
-                );
-              }
-            })}
-          </div>
-        </div>
+        )}
       </div>
-    </div>
+    
   );
 }
 
