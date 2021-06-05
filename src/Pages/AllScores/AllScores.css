@@ -1,0 +1,50 @@
+.all-scores {
+  background: #f3f3f3;
+  padding-bottom: 6vh;
+  font-family: "Montserrat", sans-serif;
+  height: 120vh;
+}
+
+.all-scores-title {
+  font-size: 5vh;
+  font-family: "Montserrat", sans-serif;
+  padding-top: 5vh;
+  font-weight: 800;
+  margin-left: 42vw;
+}
+
+.tests {
+  margin-top: 8vh;
+  display: flex;
+  margin-left: 18vw;
+  margin-right: 18vw;
+  justify-content: space-between;
+  font-family: "Montserrat", sans-serif;
+}
+
+.tests > p {
+  font-family: "Montserrat", sans-serif;
+  font-weight: bolder;
+}
+
+.tests-card {
+  box-sizing: border-box;
+  box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.4);
+  margin-left: 16vw;
+  margin-right: 12vw;
+  margin-top: 3vh;
+  background: white;
+  height: 8vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 3.5vw;
+  padding-right: 5.5vw;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.tests-card > p {
+  font-family: "Montserrat", sans-serif;
+  background: white;
+}
