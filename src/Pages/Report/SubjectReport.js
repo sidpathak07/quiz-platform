@@ -189,6 +189,14 @@ function SubjectReport() {
                               {key.slice(9,20)}
                             </span>
                           </p>
+                          <div className="text">
+                            <p className="h-2">
+                              Marks Obtained :{" "}
+                              <span style={{ color: "#214786", fontWeight: "600" }}>
+                                {(subject[key].correct_questions*(4)) - (subject[key].incorrect_or_not_attempted*(-1))}
+                              </span>
+                            </p>
+                          </div>
                           <p className="h-2">
                             Accuracy :
                             <span style={{ color: "#214786", fontWeight: "600" }}>
