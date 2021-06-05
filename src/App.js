@@ -22,7 +22,10 @@ import PreviewFeedBack from "./Pages/CustomFeedback/PreviewFeedBack";
 import Report from "./Pages/Report/Report";
 import SubjectReport from "./Pages/Report/SubjectReport";
 import Comparative from "./Pages/Report/Comparative";
+
 import AllScores from "./Pages/AllScores/AllScores";
+
+import GenerateExcel from "./Pages/QuizQuestions/GenerateExcel";
 
 const App = () => {
   const { userDetails, isTestSubmitted } = useContext(UserContext);
@@ -150,6 +153,19 @@ const App = () => {
               <Redirect to="/login" />
             )}
           </Route>
+
+          <Route exact path="/generateresult/:id">
+            {userDetails ? (
+              userDetails.role === "Teacher" ? (
+                <GenerateExcel />
+              ) : (
+                <Redirect to="/404" />
+              )
+            ) : (
+              <Redirect to="/login" />
+            )}
+          </Route>
+
           <Route exact path="/previewfeedback/:id">
             {userDetails ? (
               userDetails.role === "Teacher" ? (
