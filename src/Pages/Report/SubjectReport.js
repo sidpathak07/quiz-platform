@@ -91,7 +91,6 @@ function SubjectReport() {
       if (data) {
         setIsLoading(false);
       }
-      console.log(isLoading);
       setResponseData(data);
     } catch (error) {
       console.log(error);
@@ -104,11 +103,8 @@ function SubjectReport() {
 
   const setChartData = () => {
     setIsLoading(true);
-    console.log("Setting chart data");
-    console.log(responseData);
     let sub = [];
     const { analysis } = responseData.data;
-    console.log(analysis);
     setAnalysis(analysis);
     for (const key in analysis) {
       if (key.includes("subject")) {

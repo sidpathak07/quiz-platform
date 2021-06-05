@@ -8,7 +8,6 @@ import UserContext from "../../Context/UserContext";
 import { useHistory } from "react-router-dom";
 function Report() {
   const { username, id } = useParams();
-  console.log("USERNAME:", username, "ID:", id);
   const [responseData, setResponseData] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { userDetails } = useContext(UserContext);
@@ -126,14 +125,7 @@ function Report() {
       not_attempted,
       analysis,
     } = responseData.data;
-    console.log(
-      attempted,
-      correctquestion,
-      incorrectquestion,
-      marks_obtained,
-      not_attempted,
-      analysis
-    );
+
     setAttempted(attempted);
     setCorrectQ(correctquestion);
     setIncorrectQ(incorrectquestion);
@@ -192,7 +184,7 @@ function Report() {
             <div className="rank">
               <div className="rank-card">
                 <p className="rank-des">Rank Obtained:</p>
-                <p className="rank-rank">3000 to 4000</p>
+                <p className="rank-rank">NIL</p>
               </div>
               <div className="marks-card">
                 <p className="rank-des">Marks Obtained:</p>
@@ -201,9 +193,7 @@ function Report() {
             </div>
             <div className="txt">
               <p className="score-txt">
-                {`In this test , you have scored ${marksObtained} marks and a Rank between 3001 and
-               4000. The Test paper had a medium difficulty level. Your score in
-               the test was Okay. Other metrics of your performance on Difficulty
+                {`In this test , you have scored ${marksObtained} marks Other metrics of your performance on Difficulty
                level, Subjects and the like are available below.`}{" "}
               </p>
             </div>
