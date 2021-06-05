@@ -99,7 +99,7 @@ const QuizQuestions = () => {
             <button
               className="enrollment-course-btn"
               onClick={() => history.push(`/allquizzes`)}
-              style={{marginRight:"1vw"}}
+              style={{ marginRight: "1vw" }}
             >
               Back to Quiz
             </button>
@@ -114,6 +114,12 @@ const QuizQuestions = () => {
               onClick={() => history.push(`/customfeedback/${id}`)}
             >
               Custom Feedback
+            </button>
+            <button
+              className="enrollment-course-btn"
+              onClick={() => history.push(`/generateresult/${id}`)}
+            >
+              Generate Result
             </button>
           </div>
         </div>
