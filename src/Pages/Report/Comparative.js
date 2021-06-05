@@ -6,12 +6,15 @@ import axios from "../../axios/axios";
 import UserContext from "../../Context/UserContext";
 import { useHistory } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
+import ReactHtmlParser from "react-html-parser";
 
 function Comparative() {
   const { username, id } = useParams();
   console.log("USERNAME:", username, "ID:", id);
   const [isLoading, setIsLoading] = useState(false);
   const { userDetails } = useContext(UserContext);
+  const [resultData, setResultData] = useState("");
+  const [quiz, setQuiz] = useState([]);
   const history = useHistory();
   var currentTime = new Date();
   var currentOffset = currentTime.getTimezoneOffset();
@@ -85,20 +88,36 @@ function Comparative() {
         user: username,
         quiz: id,
       };
-      const { data } = await axios.post(
+      const { data } = await axios.get(
         `/api/getresult/${username}/${id}`,
         postData,
         config
       );
       console.log(data);
+      setResultData(data);
       setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
 
+  const fetchQuestions = async () => {
+    try {
+      const config = {
+        headers: { Authorization: `Bearer ${userDetails.access}` },
+      };
+      const { data } = await axios.get(`/api/get-quiz/${id}`, config);
+      setQuiz(data?.quiz_questions);
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err.message);
+      history.push("/404");
+    }
+  };
+
   useEffect(() => {
     fetchResult();
+    fetchQuestions();
   }, []);
   return (
     <div className="report">
@@ -190,6 +209,18 @@ function Comparative() {
               <td className="col-4">144</td>
             </tr>
           </table>
+        </div>
+        <div className="answerkey">
+          <h3>Answer Key</h3>
+          {quiz.map((question, index) => {
+            return (
+              <div key={index}>
+                <h3>Q {index + 1}</h3>
+                <h3>{ReactHtmlParser(question?.question)}</h3>
+                <p>Correct Answer:{`${question?.answer["1"]}`}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
