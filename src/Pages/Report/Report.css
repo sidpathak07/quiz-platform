@@ -7,6 +7,11 @@
   font-weight: 600;
 }
 
+.active {
+  background-color: white;
+  color: #214786;
+}
+
 .time {
   font-size: 3vh;
   color: gray;

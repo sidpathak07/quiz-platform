@@ -8,6 +8,11 @@
   margin-left: 5.5vw;
 }
 
+.active {
+  background-color: white;
+  color: #214786;
+}
+
 .col-1 {
   width: 30vw;
   border-top: 2px solid lightgray;

@@ -165,7 +165,7 @@ function Report() {
           <div className="report-card">
             <div className="nav">
               <p
-                className="nav-item scorecard"
+                className="nav-item scorecard active"
                 onClick={() =>
                   history.push(`/report/${userDetails.username}/${id}`)
                 }
@@ -210,9 +210,10 @@ function Report() {
             <div className="accuracy">
               <p className="accuracy-1">
                 Accuracy:
-                <span
-                  style={{ color: "#214786", fontWeight: "600" }}
-                >{`${accuracy}`}</span>
+                <span style={{ color: "#214786", fontWeight: "600" }}>{`${(
+                  (correctQ / totalQ) *
+                  100
+                ).toFixed(2)}`}</span>
               </p>
               <p className="attempted">
                 Total attempted questions:
