@@ -112,6 +112,7 @@ const QuizQuestions = () => {
             <button
               className="enrollment-course-btn"
               onClick={() => history.push(`/customfeedback/${id}`)}
+              style={{ marginLeft: "10px" }}
             >
               Custom Feedback
             </button>
