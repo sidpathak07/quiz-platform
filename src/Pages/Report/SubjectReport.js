@@ -200,7 +200,7 @@ function SubjectReport() {
                             subject[key].correct_questions /
                             (subject[key].correct_questions +
                               subject[key].incorrect_or_not_attempted)
-                          ).toFixed(2)}`}
+                          ).toFixed(2)*100}`} %
                         </span>
                       </p>
                       <p className="h-2">
