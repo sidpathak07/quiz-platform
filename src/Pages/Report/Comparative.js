@@ -211,13 +211,15 @@ function Comparative() {
           </table>
         </div>
         <div className="answerkey">
-          <h3>Answer Key</h3>
+          <h3 className="answer-key-title">Answer Key</h3>
           {quiz.map((question, index) => {
             return (
-              <div key={index}>
-                <h3>Q {index + 1}</h3>
-                <h3>{ReactHtmlParser(question?.question)}</h3>
-                <p>Correct Answer:{`${question?.answer["1"]}`}</p>
+              <div  className="answer" key={index}>
+                <div className="answer-key-question">
+                    <h3 className="number">Q - {index + 1}</h3>
+                    <h3 className="ques-img">{ReactHtmlParser(question?.question)}</h3>
+                    <p className="correct-answer">Correct Answer : {`${question?.answer["1"]}`}</p>
+                </div>
               </div>
             );
           })}
