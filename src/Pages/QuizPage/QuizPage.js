@@ -29,6 +29,7 @@ const QuizPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showSubmit, setShowSubmit] = useState(false);
   const [responses, setResponses] = useState(getResponses);
+  const [quizData, setQuizData] = useState("");
   const {
     userDetails,
     removeUser,
@@ -131,6 +132,33 @@ const QuizPage = () => {
     history.push(`/feedback/`);
   };
 
+  const submitAndLogout = (e) => {
+    e.preventDefault();
+    submitAndLogoutTest();
+  };
+
+  const submitAndLogoutTest = async () => {
+    setIsLoading(true);
+    try {
+      const config = {
+        headers: { Authorization: `Bearer ${userDetails.access}` },
+      };
+      const res = {
+        quiz: id,
+        user: userDetails?.user_id,
+        response: responses.map((res) => ({
+          key: res.key,
+          answer: res.selectetedAnswer,
+        })),
+      };
+      await axios.post("/api/create-response", res, config);
+      submitTest();
+      removeUser();
+    } catch (err) {
+      console.log(err.message);
+    }
+    setIsLoading(false);
+  };
   useEffect(() => {
     const fetchQuestion = async () => {
       try {
@@ -140,6 +168,7 @@ const QuizPage = () => {
         const { data } = await axios.get(`/api/get-quiz/${id}`, config);
         if (!mountedRef.current) return null;
         setQuiz(data?.quiz_questions);
+        setQuizData(data);
         timeUpdate();
         setResponses(
           data?.quiz_questions.map((quiz) => ({
@@ -278,17 +307,22 @@ const QuizPage = () => {
               </div>
               <div className="navigation-btn">
                 <button
+                  style={{ display: "block" }}
                   disabled={index === 0 ? true : false}
                   onClick={handlePrevious}
                 >
                   Previous
                 </button>
                 {index === quiz.length - 1 && (
-                  <button onClick={() => setShowSubmit(true)}>
+                  <button
+                    style={{ display: "block" }}
+                    onClick={() => setShowSubmit(true)}
+                  >
                     Submit test
                   </button>
                 )}
                 <button
+                  style={{ display: "block" }}
                   disabled={index === quiz.length - 1 ? true : false}
                   onClick={handleNext}
                 >
@@ -311,8 +345,13 @@ const QuizPage = () => {
                     <button onClick={() => setShowSubmit(false)}>
                       Back to Test
                     </button>
-                    <button onClick={handleTestSubmit} type="submit">
-                      Proceed and Submit
+                    {quizData.feedback && (
+                      <button onClick={handleTestSubmit} type="submit">
+                        Submit Test and Give Feedback
+                      </button>
+                    )}
+                    <button type="submit" onClick={submitAndLogout}>
+                      Submit Test and Logout
                     </button>
                   </div>
                 </div>
