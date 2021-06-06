@@ -63,11 +63,13 @@ const rating = [
 const PreviewFeedBack = () => {
   const { userDetails } = useContext(UserContext);
   const [questions, setQuestions] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { id } = useParams();
   const history = useHistory();
   const classes = useStyles();
 
   const fetchQuestion = async () => {
+    setLoading(true);
     try {
       const config = {
         headers: { Authorization: `Bearer ${userDetails.access}` },
@@ -81,6 +83,7 @@ const PreviewFeedBack = () => {
     } catch (err) {
       console.log(err);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -107,6 +110,12 @@ const PreviewFeedBack = () => {
           Back
         </button>
       </div>
+
+      {loading && (
+        <>
+          <h3>Getting FeedBack Questions!!</h3>
+        </>
+      )}
 
       <div className="feedback-page">
         {questions.map((question, index) => {
