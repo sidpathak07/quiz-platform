@@ -141,14 +141,6 @@ const FeedBack = () => {
     setAnswers(arr);
   };
 
-  // function valuetext(value) {
-  //   return `${value}`;
-  // }
-
-  // function valueLabelFormat(value) {
-  //   return rating.findIndex((rating) => rating.value === value);
-  // }
-
   return (
     <>
       {submitted ? (
