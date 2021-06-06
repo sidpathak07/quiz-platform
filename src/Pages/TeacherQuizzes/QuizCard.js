@@ -61,16 +61,16 @@ const QuizCard = (props) => {
         </div>
       )}
       <div className="title-1">
-            <h2 className="title">{title}</h2>
+        <h2 className="title">{title}</h2>
       </div>
       <div className="description-1">
-            <p className="desc">{ReactHtmlParser(desc)}</p>
+        <p className="desc">{ReactHtmlParser(desc)}</p>
       </div>
       <p className="duration">
         <span>Duration: </span>
         {duration}
       </p>
-      <p className="time">
+      <p className="time" style={{ color: "#000000", marginLeft: 0 }}>
         <span>Start Time: </span>
         {getTime(starttime)}
       </p>
