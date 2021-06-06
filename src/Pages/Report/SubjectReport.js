@@ -189,7 +189,7 @@ function SubjectReport() {
                           Marks Obtained :{" "}
                           <span style={{ color: "#214786", fontWeight: "600" }}>
                             {subject[key].correct_questions * 4 -
-                              subject[key].incorrect_or_not_attempted * -1}
+                              subject[key].incorrect_or_not_attempted * 1}
                           </span>
                         </p>
                       </div>
