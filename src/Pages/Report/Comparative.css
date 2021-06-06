@@ -8,11 +8,6 @@
   margin-left: 5.5vw;
 }
 
-.active {
-  background-color: white;
-  color: #214786;
-}
-
 .col-1 {
   width: 30vw;
   border-top: 2px solid lightgray;
@@ -89,4 +84,35 @@
   background: #214786;
   color: white;
   font-size: 2.3vh;
+}
+
+.answer-key-question {
+  display: flex;
+  align-items: center;
+}
+
+.answer-key-title {
+  font-family: "Montserrat", sans-serif;
+  margin-top: 10vh;
+  font-size: 4vh;
+  margin-left: 38vw;
+}
+.number {
+  font-family: "Montserrat", sans-serif;
+  margin-right: 1vw;
+  font-weight: bolder;
+}
+.answer {
+  display: flex;
+  margin: 20px 0;
+  border: 1px solid rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.correct-answer {
+  background: #66ff33;
+  padding: 0.5vw;
+  border-radius: 15px;
+  margin-left: 5vw;
 }
