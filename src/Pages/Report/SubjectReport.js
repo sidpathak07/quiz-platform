@@ -152,6 +152,7 @@ function SubjectReport() {
                 onClick={() =>
                   history.push(`/report/subjectreport/${username}/${id}`)
                 }
+                style={{ backgroundColor: "#ffffff", color: "#214786" }}
               >
                 Subject Report
               </p>
@@ -196,11 +197,14 @@ function SubjectReport() {
                       <p className="h-2">
                         Accuracy :
                         <span style={{ color: "#214786", fontWeight: "600" }}>
-                          {`${(
-                            subject[key].correct_questions /
-                            (subject[key].correct_questions +
-                              subject[key].incorrect_or_not_attempted)
-                          ).toFixed(2)*100}`} %
+                          {`${
+                            (
+                              subject[key].correct_questions /
+                              (subject[key].correct_questions +
+                                subject[key].incorrect_or_not_attempted)
+                            ).toFixed(2) * 100
+                          }`}{" "}
+                          %
                         </span>
                       </p>
                       <p className="h-2">

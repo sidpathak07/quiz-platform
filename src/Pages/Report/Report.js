@@ -157,6 +157,7 @@ function Report() {
           <div className="report-card">
             <div className="nav">
               <p
+                style={{ backgroundColor: "#ffffff", color: "#214786" }}
                 className="nav-item scorecard active"
                 onClick={() =>
                   history.push(`/report/${userDetails.username}/${id}`)
