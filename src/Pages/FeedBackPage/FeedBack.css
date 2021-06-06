@@ -22,9 +22,10 @@
 }
 .feedback-page-header {
   font-size: 1.6em;
-  position: absolute;
-  top: -30px;
-  margin-left: 27vw;
+  /* position: absolute; */
+  /* top: -30px; */
+  margin-left: 22vw;
+  text-align: center;
   transform: translateX(-50%);
   background: white;
   padding: 10px;

@@ -107,6 +107,7 @@ const FeedBack = () => {
   }
 
   const fetchQuestion = async () => {
+    setLoading(true);
     try {
       const config = {
         headers: { Authorization: `Bearer ${userDetails.access}` },
@@ -122,6 +123,7 @@ const FeedBack = () => {
     } catch (err) {
       console.log(err.message);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -135,7 +137,6 @@ const FeedBack = () => {
     let arr = answers;
     let obj = {};
     obj[`${e.target.className}`] = e.target.value;
-    console.log(obj);
     arr[e.target.id] = obj;
     setAnswers(arr);
   };
@@ -162,83 +163,97 @@ const FeedBack = () => {
               <Loader />
             </div>
           )}
-          <h1 className="quiz-submitted-header">
-            Your test has been submitted
-          </h1>
-          <h1 className="feedback-page-header">Give Us Some Feedback</h1>
-          <div className="feedback-input-sliders">
-            {/* <button onClick={() => console.log(answers)}>Show Answers</button> */}
-            {questions.map((question, index) => {
-              return (
-                <div key={question.id} className="whole">
-                  <h3 className="student-feedback-question">
-                    {question.question}
-                  </h3>
-                  {question.responseType === "range" ? (
-                    <input
-                      type="range"
-                      name=""
-                      id={index}
-                      max="10"
-                      min="1"
-                      className={question.id}
-                      onChange={(e) => handleChange(e)}
-                    />
-                  ) : (
-                    ""
-                  )}
-                  {question.responseType === "text" ? (
-                    <input
-                      type="text"
-                      name=""
-                      id={index}
-                      className={question.id}
-                      onChange={(e) => handleChange(e)}
-                    />
-                  ) : (
-                    ""
-                  )}
-                  {question.responseType === "radio" ? (
-                    <div className="rad">
-                      <div className="input-radio">
+          {!loading && (
+            <>
+              <h1 className="quiz-submitted-header">
+                Your test has been submitted
+              </h1>
+              <h1 className="feedback-page-header">Give Us Some Feedback</h1>
+              <div className="feedback-input-sliders">
+                {/* <button onClick={() => console.log(answers)}>
+                  Show Answers
+                </button> */}
+                {questions.map((question, index) => {
+                  return (
+                    <div key={question.id} className="whole">
+                      <h3 className="student-feedback-question">
+                        {question.question}
+                      </h3>
+                      {question.responseType === "range" ? (
                         <input
-                          type="radio"
-                          name="resRadio"
+                          type="range"
+                          name=""
                           id={index}
-                          value="Yes"
+                          max="10"
+                          min="1"
                           className={question.id}
                           onChange={(e) => handleChange(e)}
                         />
-                        <p className="rad-1">Yes</p>
-                      </div>
-                      <div className="input-radio">
+                      ) : (
+                        ""
+                      )}
+                      {question.responseType === "text" ? (
                         <input
-                          type="radio"
-                          name="resRadio"
+                          type="text"
+                          name=""
                           id={index}
-                          value="No"
                           className={question.id}
                           onChange={(e) => handleChange(e)}
                         />
-                        <p className="rad-1">No</p>
-                      </div>
+                      ) : (
+                        ""
+                      )}
+                      {question.responseType === "radio" ? (
+                        <div className="rad">
+                          <div className="input-radio">
+                            <input
+                              type="radio"
+                              name="resRadio"
+                              id={index}
+                              value="Yes"
+                              className={question.id}
+                              onChange={(e) => handleChange(e)}
+                            />
+                            <p className="rad-1">Yes</p>
+                          </div>
+                          <div className="input-radio">
+                            <input
+                              type="radio"
+                              name="resRadio"
+                              id={index}
+                              value="No"
+                              className={question.id}
+                              onChange={(e) => handleChange(e)}
+                            />
+                            <p className="rad-1">No</p>
+                          </div>
+                        </div>
+                      ) : (
+                        ""
+                      )}
                     </div>
-                  ) : (
-                    ""
-                  )}
-                </div>
-              );
-            })}
-          </div>
+                  );
+                })}
+                <button
+                  className=""
+                  style={{
+                    color: "#ffffff",
+                    backgroundColor: "rgb(0, 140, 255)",
+                    cursor: "pointer",
+                    padding: "10px",
+                    fontSize: "1.1em",
+                    fontWeight: "700",
+                  }}
+                  type="submit"
+                  onClick={handleSubmit}
+                >
+                  Submit Feedback
+                </button>
+              </div>
+            </>
+          )}
 
           {error && <Error msg={error} />}
-          <button
-            className="feedback-submit"
-            type="submit"
-            onClick={handleSubmit}
-          >
-            Submit Feedback
-          </button>
         </div>
       )}
     </>
