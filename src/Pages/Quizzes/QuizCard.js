@@ -41,32 +41,6 @@ const QuizCard = (props) => {
     }
   };
 
-  const handleCheckResult = async () => {
-    setIsLoading(true);
-    try {
-      // addQuiz(id, duration, test_time, instructions);
-      const config = {
-        headers: { Authorization: `Bearer ${userDetails.access}` },
-      };
-      const postData = {
-        user: userDetails.user_id,
-        quiz: id,
-      };
-      const { data } = await axios.post(
-        "/api/check-quiz-assigned",
-        postData,
-        config
-      );
-      console.log(data);
-      setIsLoading(false);
-      // history.push(`/instruction/${id}`);
-      alert("Please Attempt Test To Check Result");
-    } catch (err) {
-      setIsLoading(false);
-      history.push(`/report/${userDetails.username}/${id}`);
-      console.log(err.message);
-    }
-  };
   return (
     <div className="quiz-card">
       {isLoading && (
@@ -95,9 +69,6 @@ const QuizCard = (props) => {
       </div>
       <div className="quiz-start-button">
         <button onClick={handleClick}>Start test</button>
-      </div>
-      <div className="quiz-start-button">
-        <button onClick={handleCheckResult}>Check Result</button>
       </div>
     </div>
   );
