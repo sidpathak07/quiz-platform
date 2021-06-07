@@ -21,9 +21,14 @@ const NavBar = () => {
           />
         </div>
         {userDetails.role === "Student" && (
-          <div className="user-name-nav scores" >
-          <p onClick={() => history.push(`/allscores/${userDetails.username}`)}>View All Scores</p>
-        </div>
+          <div className="user-name-nav scores ">
+            <p
+              className="viewall"
+              onClick={() => history.push(`/allscores/${userDetails.username}`)}
+            >
+              View All Scores
+            </p>
+          </div>
         )}
         <div className="user-name-nav">
           <p>Hello, {userDetails.first_name}</p>
