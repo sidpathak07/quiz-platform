@@ -62,7 +62,7 @@ const StudentReport = () => {
         </div>
       ) : (
         <>
-          <button onClick={showData}>Show Data</button>
+          {/* <button onClick={showData}>Show Data</button> */}
           <div className="report-card">
             <div className="nav">
               <p
