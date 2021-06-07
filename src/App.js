@@ -19,13 +19,13 @@ import TeacherHomePage from "./Pages/TeacherHomePage/TeacherHomePage";
 import FeedBack from "./Pages/FeedBackPage/FeedBack";
 import CustomFeedback from "./Pages/CustomFeedback/CustomFeedback";
 import PreviewFeedBack from "./Pages/CustomFeedback/PreviewFeedBack";
-import Report from "./Pages/Report/Report";
 import SubjectReport from "./Pages/Report/SubjectReport";
 import Comparative from "./Pages/Report/Comparative";
 
 import AllScores from "./Pages/AllScores/AllScores";
 
 import GenerateExcel from "./Pages/QuizQuestions/GenerateExcel";
+import StudentReport from "./Pages/Report/StudentReport";
 
 const App = () => {
   const { userDetails, isTestSubmitted } = useContext(UserContext);
@@ -106,10 +106,10 @@ const App = () => {
             )}
           </Route>
 
-          <Route exact path="/report/:username/:id">
+          <Route exact path="/studentreport/:testid">
             {userDetails ? (
               userDetails.role === "Student" ? (
-                <Report />
+                <StudentReport />
               ) : (
                 <Redirect to="/404" />
               )
