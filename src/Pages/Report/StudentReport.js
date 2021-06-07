@@ -7,6 +7,7 @@ import Loader from "../../Components/Loader/LoadingBar";
 //CSS FILES
 import "./Report.css";
 import "./SubjectReport.css";
+import "./Comparative.css";
 
 const StudentReport = () => {
   const { testid } = useParams();
