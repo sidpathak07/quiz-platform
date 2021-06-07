@@ -6,6 +6,7 @@ import axios from "../../axios/axios";
 import Loader from "../../Components/Loader/LoadingBar";
 //CSS FILES
 import "./Report.css";
+import "./SubjectReport.css";
 
 const StudentReport = () => {
   const { testid } = useParams();
@@ -175,12 +176,145 @@ const StudentReport = () => {
           )}
           {isSubjectReport && (
             <div>
-              <h3>Subject Report {userData["Quiz Name"]}</h3>
+              <p className="head">Subject Report</p>
+              <div className="report-card">
+                <div className="text">
+                  {/* <p className="h-2">
+                    Marks Obtained :{" "}
+                    <span style={{ color: "#214786", fontWeight: "600" }}>
+                      33/125 (+40 -7)
+                    </span>
+                  </p> */}
+                </div>
+                <div className="subject">
+                  <p className="h-1">
+                    <span style={{ color: "#214786", fontWeight: "600" }}>
+                      Chemistry
+                    </span>
+                  </p>
+                  <div className="text">
+                    <p className="h-2">
+                      Marks Obtained :{" "}
+                      <span style={{ color: "#214786", fontWeight: "600" }}>
+                        30
+                      </span>
+                    </p>
+                  </div>
+                  <p className="h-2">
+                    Accuracy :
+                    <span style={{ color: "#214786", fontWeight: "600" }}>
+                      8 %
+                    </span>
+                  </p>
+                  <p className="h-2">
+                    Total Attempted Questions :{" "}
+                    <span style={{ color: "#214786", fontWeight: "600" }}>
+                      10 (Correct:{`8`} , Incorrect:
+                      {`2`})
+                    </span>
+                  </p>
+                  <div className="graph">
+                    <div className="bar-graph-2">
+                      <Chart
+                        width={"600px"}
+                        height={"300px"}
+                        chartType="Bar"
+                        loader={<div>Loading Chart</div>}
+                        data={[
+                          ["", "Attempts"],
+                          ["Correct", 8],
+                          ["Incorrect/Unattempted", 22],
+                          ["Total", 30],
+                        ]}
+                        options={{
+                          chart: {
+                            title: ``,
+                            subtitle: ``,
+                          },
+                        }}
+                      />
+                    </div>
+                    <div className="pie-chart-2">
+                      <Chart
+                        width={"475px"}
+                        height={"300px"}
+                        chartType="PieChart"
+                        loader={<div>Loading Chart</div>}
+                        data={[
+                          ["Quiz", "Types of Questions"],
+                          ["Correct", 8],
+                          ["Incorrect/Unattempted", 22],
+                        ]}
+                        options={{
+                          title: "Attempt Summary",
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
           {isComparativeReport && (
             <div>
-              <h3>Comparative Report {userData["Quiz Name"]}</h3>
+              <p className="head">Comparative Report</p>
+              <div className="report-card">
+                <div className="table">
+                  <table>
+                    <tr>
+                      <th className="col1"> </th>
+                      <th className="col2">Your Detail</th>
+                      <th className="col3">Average</th>
+                      <th className="col4">Topper Details</th>
+                    </tr>
+                    <tr>
+                      <td className="col-1">Rank</td>
+                      <td className="col-2">20</td>
+                      <td className="col-3">N/A</td>
+                      <td className="col-4">1</td>
+                    </tr>
+                    <tr>
+                      <td className="col-1">Total Score</td>
+                      <td className="col-2">10</td>
+                      <td className="col-3">20</td>
+                      <td className="col-4">30</td>
+                    </tr>
+                    <tr>
+                      <td className="col-1">Accuracy</td>
+                      <td className="col-2">{`${(10 / 30) * 100}`} %</td>
+                      <td className="col-3">{`${(10 / 30) * 100}`} %</td>
+                      <td className="col-4">{`${(10 / 30) * 100}`} %</td>
+                    </tr>
+                    <tr>
+                      <td className="col-1">Attempted Ques</td>
+                      <td className="col-2">10</td>
+                      <td className="col-3">20</td>
+                      <td className="col-4">30</td>
+                    </tr>
+                    <tr>
+                      <td className="col-1">Unattempted Ques</td>
+                      <td className="col-2">10</td>
+                      <td className="col-3">20</td>
+                      <td className="col-4">30</td>
+                    </tr>
+                    <tr>
+                      <td className="col-1">Correct Ques</td>
+                      <td className="col-2">10</td>
+                      <td className="col-3">20</td>
+                      <td className="col-4">30</td>
+                    </tr>
+                    <tr>
+                      <td className="col-1">Incorrect Ques</td>
+                      <td className="col-2">10</td>
+                      <td className="col-3">20</td>
+                      <td className="col-4">30</td>
+                    </tr>
+                  </table>
+                </div>
+                <div className="answerkey">
+                  <h3 className="answer-key-title">Answer Key</h3>
+                </div>
+              </div>
             </div>
           )}
         </>
