@@ -167,7 +167,7 @@ const StudentReport = () => {
           </div>
           {isScoreCard && (
             <div className="container">
-              <p className="head">Result Analysis - Scorecard</p>
+              <p className="head_">Result Analysis - Scorecard</p>
               <div className="rank" style={{ display: "flex" }}>
                 <div className="rank-card">
                   <p className="rank-des">Rank Obtained:</p>
@@ -180,7 +180,7 @@ const StudentReport = () => {
               </div>
               <div className="txt">
                 <p className="score-txt">
-                  {`In this test , you have scored ${userData.marks_obtained} marks and rank is ${userData.rank} Other metrics of your performance on Difficulty
+                  {`In this test , you have scored ${userData.marks_obtained} marks and your rank is ${userData.rank}. Other metrics of your performance on Difficulty
                level, Subjects and the like are available below.`}{" "}
                 </p>
               </div>
@@ -264,8 +264,8 @@ const StudentReport = () => {
           )}
           {isSubjectReport && (
             <div>
-              <p className="head">Subject Report</p>
-              <div className="report-card">
+              <p className="subject-report-title">Subject Report</p>
+              <div className="report-card-2">
                 <div className="text">
                   {/* <p className="h-2">
                     Marks Obtained :{" "}
@@ -274,12 +274,12 @@ const StudentReport = () => {
                     </span>
                   </p> */}
                 </div>
-                <div>
+                <div className="subject">
                   {subjectwiseDifficulty.map((subject, index) => {
                     for (const key in subject) {
                       return (
                         <div>
-                          <h3>SUBJECT: {key}</h3>
+                          <h3 className="subject-title">{key}</h3>
                           <p className="h-2">
                             Accuracy :
                             <span
@@ -467,8 +467,8 @@ const StudentReport = () => {
           )}
           {isComparativeReport && (
             <div>
-              <p className="head">Comparative Report</p>
-              <div className="report-card">
+              <p className="subject-report-title">Comparative Report</p>
+              <div className="report-card-2">
                 <div className="table">
                   <table>
                     <tr>
@@ -557,21 +557,21 @@ const StudentReport = () => {
                     return (
                       <div
                         key={index}
-                        style={{
-                          boxShadow: "-1px 4px 20px -6px rgba(0, 0, 0, 0.4)",
-                          marginBottom: "5px",
-                        }}
+                        className="answer"
                       >
-                        <h3 style={{ marginLeft: "2px" }}>
-                          Question {response?.question_number}
-                        </h3>
-                        {ReactHtmlParser(response?.question)}
-                        <h3 style={{ marginLeft: "2px" }}>
-                          Your Answer:{response["your answer"]}
-                        </h3>
-                        <h3 style={{ marginLeft: "2px" }}>
-                          Correct Answer:{response["correct answer"]}
-                        </h3>
+                        <div className="answer-key-question">
+                            <h3 className="number">
+                              Question - {response?.question_number}
+                            </h3>
+                            <h3 className="ques-img">{ReactHtmlParser(response?.question)}</h3>
+                            <h3 className="correct-answer" style={{background:response["your answer"].slice(7,8) === response["correct answer"].slice(7,8) ? "#66ff33" : "red",
+                                                                  color:response["your answer"].slice(7,8) === response["correct answer"].slice(7,8) ? "black" : "white"}}>
+                              Your Answer : {response["your answer"].slice(7,8)}
+                            </h3>
+                            <h3 className="correct-answer">
+                              Correct Answer : {response["correct answer"].slice(7,8)}
+                            </h3>
+                        </div>
                       </div>
                     );
                   })}
