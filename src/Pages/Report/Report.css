@@ -51,6 +51,11 @@
   color: #214786;
 }
 
+.container {
+  margin: 0 auto;
+  width: 80%;
+}
+
 .rank {
   display: flex;
   margin-top: 4vh;
