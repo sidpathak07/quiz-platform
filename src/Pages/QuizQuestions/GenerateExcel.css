@@ -1,0 +1,58 @@
+.generate-result {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 100vh;
+  background: #0fb3ff;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  margin-top: -5vw;
+}
+
+.generate-result input[type="email"] {
+  width: 60%;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  padding-top: 0.5vh;
+  padding-bottom: 0.5vh;
+  height: 6vh;
+  border-radius: 15px;
+  font-size: 2.3vh;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+}
+
+.generate-result-btn {
+  background: #0000ff;
+  padding: 1vw;
+  border-width: 0;
+  border-radius: 15px;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  margin-left: -15vw;
+}
+
+.generate-result-1 {
+  background: #0fb3ff;
+}
+
+.generate-result-head {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  margin-left: 36vw;
+  padding-top: 4vh;
+  font-size: 4vh;
+  font-weight: bolder;
+}
+
+#response {
+  margin-top: -40vh;
+  margin-left: 13vw;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+}
