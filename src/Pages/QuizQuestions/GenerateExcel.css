@@ -3,7 +3,6 @@
   align-items: center;
   justify-content: space-around;
   height: 100vh;
-  background: #0fb3ff;
   padding-left: 2vw;
   padding-right: 2vw;
   margin-top: -5vw;
@@ -35,10 +34,6 @@
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
   margin-left: -15vw;
-}
-
-.generate-result-1 {
-  background: #0fb3ff;
 }
 
 .generate-result-head {
