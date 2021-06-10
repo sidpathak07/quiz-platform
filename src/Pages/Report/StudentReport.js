@@ -338,13 +338,6 @@ const StudentReport = () => {
                                   ? subject[key]?.Medium?.incorrect
                                   : 0 + subject[key]?.Hard?.incorrect
                                   ? subject[key]?.Hard?.incorrect
-                                  : 0) +
-                                (subject[key]?.Easy?.not_attempted
-                                  ? subject[key]?.Easy?.not_attempted
-                                  : 0 + subject[key]?.Medium?.not_attempted
-                                  ? subject[key]?.Medium?.not_attempted
-                                  : 0 + subject[key]?.Hard?.not_attempted
-                                  ? subject[key]?.Hard?.not_attempted
                                   : 0)
                               }`}{" "}
                               (Correct:
@@ -555,22 +548,35 @@ const StudentReport = () => {
                   <h3 className="answer-key-title">Answer Key</h3>
                   {quizResponses.map((response, index) => {
                     return (
-                      <div
-                        key={index}
-                        className="answer"
-                      >
+                      <div key={index} className="answer">
                         <div className="answer-key-question">
-                            <h3 className="number">
-                              Question - {response?.question_number}
-                            </h3>
-                            <h3 className="ques-img">{ReactHtmlParser(response?.question)}</h3>
-                            <h3 className="correct-answer" style={{background:response["your answer"].slice(7,8) === response["correct answer"].slice(7,8) ? "#66ff33" : "red",
-                                                                  color:response["your answer"].slice(7,8) === response["correct answer"].slice(7,8) ? "black" : "white"}}>
-                              Your Answer : {response["your answer"].slice(7,8)}
-                            </h3>
-                            <h3 className="correct-answer">
-                              Correct Answer : {response["correct answer"].slice(7,8)}
-                            </h3>
+                          <h3 className="number">
+                            Question - {response?.question_number}
+                          </h3>
+                          <h3 className="ques-img">
+                            {ReactHtmlParser(response?.question)}
+                          </h3>
+                          <h3
+                            className="correct-answer"
+                            style={{
+                              background:
+                                response["your answer"].slice(7, 8) ===
+                                response["correct answer"].slice(7, 8)
+                                  ? "#66ff33"
+                                  : "red",
+                              color:
+                                response["your answer"].slice(7, 8) ===
+                                response["correct answer"].slice(7, 8)
+                                  ? "black"
+                                  : "white",
+                            }}
+                          >
+                            Your Answer : {response["your answer"].slice(7, 8)}
+                          </h3>
+                          <h3 className="correct-answer">
+                            Correct Answer :{" "}
+                            {response["correct answer"].slice(7, 8)}
+                          </h3>
                         </div>
                       </div>
                     );
