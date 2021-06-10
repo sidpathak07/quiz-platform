@@ -116,6 +116,7 @@
 .graph {
   margin-top: 4vh;
   display: flex;
+  margin-bottom: 4vh;
 }
 
 .bar-graph {
@@ -126,4 +127,17 @@
 
 .pie-chart {
   border: 2px solid lightgray;
+}
+
+.head_ {
+  margin-left: 0vw;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  font-size: 4vh;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+}
+
+.container {
+  margin-left: 4vw;
 }

@@ -109,6 +109,7 @@
   padding-top: 2vh;
   padding-bottom: 2vh;
   margin-top: 2vh;
+  margin-bottom: 5vh;
 }
 
 .h-1 {
@@ -135,4 +136,30 @@
 
 .pie-chart-2 {
   border: 2px solid lightgray;
+}
+
+.subject-title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 4vh;
+  margin-bottom: 2vh;
+}
+
+.subject-report-title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 4vh;
+  margin-left: 3.3vw;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+.sub {
+  margin-left: 4vw;
+}
+
+.report-card-2 {
+  border-top: 1.5px solid lightgray;
+  margin-left: 3vw;
+  margin-right: 3vw;
+  margin-top: 2vh;
 }
