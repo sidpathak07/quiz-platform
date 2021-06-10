@@ -35,13 +35,27 @@ const GenerateExcel = () => {
   };
 
   return (
-    <div>
+    <div style={{ width: "80%", margin: "10px auto", textAlign: "center" }}>
       <input
         type="text"
         value={email}
+        placeholder="Enter Email to get excel sheet of result"
         onChange={(e) => setEmail(e.target.value)}
+        style={{ display: "block", width: "50%", margin: "10px auto" }}
       />
-      <button onClick={generateExcel}>Generate Result</button>
+      <button
+        style={{
+          margin: "10px auto",
+          padding: "5px",
+          backgroundColor: "#4fc3f7",
+          color: "#ffffff",
+          border: "none",
+          outline: "none",
+        }}
+        onClick={generateExcel}
+      >
+        Generate Result
+      </button>
       <p id="response">{responseData}</p>
     </div>
   );
