@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import UserContext from "../../Context/UserContext";
 import axios from "../../axios/axios";
+import './GenerateExcel.css';
 
 const GenerateExcel = () => {
   const { id } = useParams();
@@ -35,27 +36,17 @@ const GenerateExcel = () => {
   };
 
   return (
-    <div style={{ width: "80%", margin: "10px auto", textAlign: "center" }}>
-      <input
-        type="text"
-        value={email}
-        placeholder="Enter Email to get excel sheet of result"
-        onChange={(e) => setEmail(e.target.value)}
-        style={{ display: "block", width: "50%", margin: "10px auto" }}
-      />
-      <button
-        style={{
-          margin: "10px auto",
-          padding: "5px",
-          backgroundColor: "#4fc3f7",
-          color: "#ffffff",
-          border: "none",
-          outline: "none",
-        }}
-        onClick={generateExcel}
-      >
-        Generate Result
-      </button>
+    <div className="generate-result-1">
+      <p className="generate-result-head">Generate Result</p>
+      <div className="generate-result">
+          <input
+            type="email"
+            value={email}
+            placeholder="Enter your E-mail to get excel sheet of result."
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <button onClick={generateExcel} className="generate-result-btn">Generate Result</button>
+      </div>
       <p id="response">{responseData}</p>
     </div>
   );
