@@ -327,28 +327,34 @@ const StudentReport = () => {
                               {`${
                                 (subject[key]?.Easy?.correct
                                   ? subject[key]?.Easy?.correct
-                                  : 0 + subject[key]?.Medium?.correct
+                                  : 0) +
+                                (subject[key]?.Medium?.correct
                                   ? subject[key]?.Medium?.correct
-                                  : 0 + subject[key]?.Hard?.correct
+                                  : 0) +
+                                (subject[key]?.Hard?.correct
                                   ? subject[key]?.Hard?.correct
                                   : 0) +
                                 (subject[key]?.Easy?.incorrect
                                   ? subject[key]?.Easy?.incorrect
-                                  : 0 + subject[key]?.Medium?.incorrect
+                                  : 0) +
+                                (subject[key]?.Medium?.incorrect
                                   ? subject[key]?.Medium?.incorrect
-                                  : 0 + subject[key]?.Hard?.incorrect
+                                  : 0) +
+                                (subject[key]?.Hard?.incorrect
                                   ? subject[key]?.Hard?.incorrect
                                   : 0)
                               }`}{" "}
                               (Correct:
                               {`${
-                                subject[key]?.Easy?.correct
+                                (subject[key]?.Easy?.correct
                                   ? subject[key]?.Easy?.correct
-                                  : 0 + subject[key]?.Medium?.correct
+                                  : 0) +
+                                (subject[key]?.Medium?.correct
                                   ? subject[key]?.Medium?.correct
-                                  : 0 + subject[key]?.Hard?.correct
+                                  : 0) +
+                                (subject[key]?.Hard?.correct
                                   ? subject[key]?.Hard?.correct
-                                  : 0
+                                  : 0)
                               }`}{" "}
                               , Incorrect:
                               {`${
