@@ -9,7 +9,6 @@ import "./NavBar.css";
 const NavBar = () => {
   const { removeUser, userDetails } = useContext(UserContext);
   const history = useHistory();
-  console.log(userDetails);
 
   return (
     <div className="navbar">
