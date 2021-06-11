@@ -37,9 +37,7 @@ function AllScores() {
       if (data) {
         setIsLoading(false);
       }
-      console.log(isLoading);
       setData(data);
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
