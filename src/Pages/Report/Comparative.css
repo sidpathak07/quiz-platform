@@ -105,7 +105,10 @@
 }
 .answer {
   display: flex;
-  margin: 20px 0;
+  margin-left: 3vw;
+  margin-right: 3vw;
+  margin-top: 3vh;
+  margin-bottom: 4vh;
   border: 1px solid rgba(0, 0, 0, 0.7);
   padding: 10px;
   border-radius: 8px;
