@@ -27,14 +27,14 @@
   margin-top: 8vh;
 }
 
-.nav {
+.report-nav {
   display: flex;
   align-items: center;
   margin-left: 0.3vw;
   margin-top: 0.5vh;
 }
 
-.nav-item {
+.nav-item-2 {
   background: #214786;
   color: white;
   padding-right: 1vw;
