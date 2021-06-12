@@ -20,7 +20,7 @@ const StudentReport = () => {
   const [isScoreCard, setIsScoreCard] = useState(true);
   const [isSubjectReport, setIsSubjectReport] = useState(false);
   const [isComparativeReport, setIsComparativeReport] = useState(false);
-  const [answerkey, setAnswerkey] = useState(false);
+  const [answerkey,setAnswerkey] = useState(false);
 
   //Data Handling
   const [userData, setUserData] = useState([]);
@@ -40,6 +40,7 @@ const StudentReport = () => {
         `/api/getstudentreport/${testid}`,
         config
       );
+      console.log("DATA", data);
       setUserData(data.data);
       setAverageData(data.average);
       setTopperData(data.topper);
@@ -51,34 +52,46 @@ const StudentReport = () => {
   };
 
   const handleOverallDifficulty = () => {
+    // console.log("USER DATA ANALYSIS:", userData.analysis[`Question 1`]);
+    console.log("HANDLEOVERALLDIFFICULTY");
     let diff = new Array(3);
     const { analysis } = userData;
+    console.log(analysis);
     for (const key in analysis) {
+      // console.log(`${key}: ${analysis[key]}`);
       if (key.includes("dificulty")) {
         if (key.includes("Easy")) {
+          console.log(analysis[key]);
           diff[0] = analysis[key];
         }
         if (key.includes("Medium")) {
+          console.log(analysis[key]);
           diff[1] = analysis[key];
         }
         if (key.includes("Hard")) {
+          console.log(analysis[key]);
           diff[2] = analysis[key];
         }
         // diff.push(userData.analysis[key]);
       }
     }
+    console.log(diff);
     setOverallDifficulty(diff);
   };
 
   const handleQuizResponses = () => {
+    console.log("USER RESPONSES:", userData.responses);
     setQuizResponses(userData.responses);
   };
 
   const handleSubjectwiseDifficulty = () => {
+    console.log("SUBJECTWISE DIFFICULTY:", userData.subjectwise_difficulty);
     const { subjectwise_difficulty } = userData;
+    console.log(subjectwise_difficulty);
     setSubjectwiseDifficulty(subjectwise_difficulty);
   };
 
+  console.log(answerkey);
   //Hooks
   useEffect(() => {
     fetchStudentReport();
@@ -101,7 +114,7 @@ const StudentReport = () => {
       ) : (
         <>
           <div className="report-card">
-            <div className="nav">
+            <div className="report-nav">
               <button
                 style={{
                   backgroundColor: isScoreCard ? "#ffffff" : "#214786",
@@ -110,7 +123,7 @@ const StudentReport = () => {
                   border: "none",
                   marginRight: "2px",
                 }}
-                className="nav-item scorecard active"
+                className="nav-item-2 scorecard "
                 onClick={() => {
                   setIsScoreCard(true);
                   setIsSubjectReport(false);
@@ -121,7 +134,7 @@ const StudentReport = () => {
                 Scorecard
               </button>
               <button
-                className="nav-item subject-report"
+                className="nav-item-2 subject-report"
                 style={{
                   backgroundColor: isSubjectReport ? "#ffffff" : "#214786",
                   color: isSubjectReport ? "#214786" : "#ffffff",
@@ -139,13 +152,13 @@ const StudentReport = () => {
                 Subject Report
               </button>
               <button
-                className="nav-item comparative-report"
+                className="nav-item-2 comparative-report"
                 style={{
                   backgroundColor: isComparativeReport ? "#ffffff" : "#214786",
                   color: isComparativeReport ? "#214786" : "#ffffff",
                   outline: "none",
                   border: "none",
-                  marginRight: "2px",
+                  marginRight: "2px"
                 }}
                 onClick={() => {
                   setIsComparativeReport(true);
@@ -157,7 +170,7 @@ const StudentReport = () => {
                 Comparative Report
               </button>
               <button
-                className="nav-item comparative-report"
+                className="nav-item-2 comparative-report"
                 style={{
                   backgroundColor: answerkey ? "#ffffff" : "#214786",
                   color: answerkey ? "#214786" : "#ffffff",
@@ -273,49 +286,33 @@ const StudentReport = () => {
             </div>
           )}
           {answerkey && (
-            <div className="answerkey">
-              <h3 className="answer-key-title">Answer Key</h3>
-              {quizResponses.map((response, index) => {
-                return (
-                  <div key={index} className="answer">
-                    <div
-                      className="answer-key-question"
-                      style={{ marginLeft: "4vw" }}
-                    >
-                      <h3 className="number">
-                        Question - {response?.question_number}
-                      </h3>
-                      <h3 className="ques-img">
-                        {ReactHtmlParser(response?.question)}
-                      </h3>
-                      <h3
-                        className="correct-answer"
-                        style={{
-                          background:
-                            response["your answer"].slice(7, 8) ===
-                            response["correct answer"].slice(7, 8)
-                              ? "#66ff33"
-                              : "red",
-                          color:
-                            response["your answer"].slice(7, 8) ===
-                            response["correct answer"].slice(7, 8)
-                              ? "black"
-                              : "white",
-                        }}
+                  <div className="answerkey">
+                  <h3 className="answer-key-title">Answer Key</h3>
+                  {quizResponses.map((response, index) => {
+                    return (
+                      <div
+                        key={index}
+                        className="answer"
                       >
-                        Your Answer : {response["your answer"].slice(7, 8)}
-                      </h3>
-                      <h3 className="correct-answer">
-                        Correct Answer :{" "}
-                        {response["correct answer"].slice(7, 8)}
-                      </h3>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-
+                        <div className="answer-key-question" style={{marginLeft:"4vw"}}>
+                            <h3 className="number">
+                              Question - {response?.question_number}
+                            </h3>
+                            <h3 className="ques-img">{ReactHtmlParser(response?.question)}</h3>
+                            <h3 className="correct-answer" style={{background:response["your answer"].slice(7,8) === response["correct answer"].slice(7,8) ? "#66ff33" : "red",
+                                                                  color:response["your answer"].slice(7,8) === response["correct answer"].slice(7,8) ? "black" : "white"}}>
+                              Your Answer : {response["your answer"].slice(7,8)}
+                            </h3>
+                            <h3 className="correct-answer">
+                              Correct Answer : {response["correct answer"].slice(7,8)}
+                            </h3>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                )}
+            
           {isSubjectReport && (
             <div>
               <p className="subject-report-title">Subject Report</p>
@@ -605,8 +602,9 @@ const StudentReport = () => {
                     </tr>
                   </table>
                 </div>
+                
               </div>
-            </div>
+              </div>
           )}
         </>
       )}
