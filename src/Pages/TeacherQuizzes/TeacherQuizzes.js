@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import UserContext from "../../Context/UserContext";
-import Navbar from "../../Components/NavBar/NavBar";
+import TeacherNavbar from "../../Components/NavBar/TeacherNavbar";
 import CreateQuizModal from "./CreateQuizModal";
 import Loader from "../../Components/Loader/LoadingBar";
 import QuizCard from "./QuizCard";
@@ -43,7 +43,7 @@ const TeacherQuizzes = () => {
   if (!allquizzes) {
     return (
       <div className="Loading--div">
-        <Navbar />
+        <TeacherNavbar />
         <div className="loader">
           <Loader />
         </div>
@@ -53,7 +53,7 @@ const TeacherQuizzes = () => {
 
   return (
     <div className="Teacher-Quizzes">
-      <Navbar />
+      <TeacherNavbar />
       <div className="teacher-quizzes-header">
         <h1>Your Quizzes</h1>
         <button onClick={() => setShowCreateModal(!showCreateModal)}>
