@@ -121,11 +121,11 @@
 
 .side-bar-item-advanced-1 {
   display: flex;
-  background: #f2f2f2;
+  background: #008cff;
   font-family: "Montserrat", sans-serif;
-  color: black;
+  color: white;
   justify-content: space-around;
-  border-left: 4px solid #5abcff;
+  /* border-left: 4px solid #5abcff; */
   font-size: 2vh;
   font-weight: 800;
   margin-top: 0.2vh;
@@ -182,11 +182,16 @@
   font-family: "Montserrat", sans-serif;
   font-weight: 800;
   padding-top: 2vh;
-  padding-left: 10vw;
+  padding-left: 25vw;
+  color: white;
 }
 
 .active-active {
   border-bottom: 1px solid lightgray;
+  background: #008cff;
+  margin-top: 1vh;
+  border-radius: 15px;
+  padding-bottom: 1vh;
 }
 
 .active-quiz {
