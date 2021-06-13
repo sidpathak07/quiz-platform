@@ -100,7 +100,7 @@ function Quizzes() {
     fetchquizzes();
     
   }, []);
-
+  console.log(data[index].name);
   useEffect(() => {
     
     setgroups();
@@ -120,10 +120,10 @@ function Quizzes() {
                 <div className="content-home">
                           
                   <div className="side-bar">
-                          <div className="title-side">
+                          {/* <div className="title-side">
                             <p className="title-5">2022 JEE Main</p>
                             <LockIcon />
-                          </div>
+                          </div> */}
                       {
                         
                         groupnames.map((group,index) => {
@@ -173,7 +173,7 @@ function Quizzes() {
                     {(activequiz.length > 0 && upcoming == false && attempted == false && missed == false) && (
                       <div className="active">
                       <div className="active-active">
-                          <p className="active-title">2022 JEE Main - Active</p>
+                          <p className="active-title">{data[index].name} - Active</p>
                       </div>
                       {activequiz.map((quiz,index) => {
                         return (
@@ -221,7 +221,7 @@ function Quizzes() {
                     {(activequiz.length == 0 && upcoming == false && attempted == false && missed == false) && (
                              <div className="active">
                              <div className="active-active">
-                                 <p className="active-title">2022 JEE Main - Active</p>
+                                 <p className="active-title">{data[index].name} - Active</p>
                              </div>
                              <div className="active-quiz">
                                    <p className="empty">Currently no active quizzes to show.</p>
@@ -234,7 +234,7 @@ function Quizzes() {
                     {(upcomingquiz.length > 0 && active == false && attempted == false && missed == false)  && (
                       <div className="active">
                       <div className="active-active">
-                          <p className="active-title">2022 JEE Main - Upcoming</p>
+                          <p className="active-title">{data[index].name} - Upcoming</p>
                       </div>
                       {upcomingquiz.map((quiz,index) => {
                         return (
@@ -273,7 +273,7 @@ function Quizzes() {
                       {(upcomingquiz.length == 0 && active == false && attempted == false && missed == false) && (
                             <div className="active">
                               <div className="active-active">
-                                  <p className="active-title">2022 JEE Main - Upcoming</p>
+                                  <p className="active-title">{data[index].name} - Upcoming</p>
                               </div>
                               <div className="active-quiz">
                                     <p className="empty">Currently no upcoming quizzes to show.</p>
@@ -288,7 +288,7 @@ function Quizzes() {
                     {(missedquiz.length > 0 && active == false && attempted == false && upcoming == false) && (
                       <div className="active">
                       <div className="active-active">
-                          <p className="active-title">2022 JEE Main - Missed</p>
+                          <p className="active-title">{data[index].name} - Missed</p>
                       </div>
                       {missedquiz.map((quiz,index) => {
                         return (
@@ -329,7 +329,7 @@ function Quizzes() {
                       {(missedquiz.length == 0 && active == false && attempted == false && upcoming == false) && (
                              <div className="active">
                               <div className="active-active">
-                                  <p className="active-title">2022 JEE Main - Missed</p>
+                                  <p className="active-title">{data[index].name} - Missed</p>
                               </div>
                               <div className="active-quiz">
                                     <p className="empty">Currently no missed quizzes to show.</p>
@@ -341,7 +341,7 @@ function Quizzes() {
                     {(attemptedquiz.length > 0 && active == false && missed == false && upcoming == false) && (
                       <div className="active">
                       <div className="active-active">
-                          <p className="active-title">2022 JEE Main - Attempted</p>
+                          <p className="active-title">{data[index].name} - Attempted</p>
                       </div>
                       {attemptedquiz.map((quiz,index) => {
                         return (
@@ -383,7 +383,7 @@ function Quizzes() {
                       {(attemptedquiz.length == 0 && active == false && missed == false && upcoming == false) && (
                              <div className="active">
                                 <div className="active-active">
-                                    <p className="active-title">2022 JEE Main - Attempted</p>
+                                    <p className="active-title">{data[index].name} - Attempted</p>
                                 </div>
                                 <div className="active-quiz">
                                       <p className="empty">Currently no attempted quizzes to show.</p>
