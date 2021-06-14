@@ -33,6 +33,7 @@ function Quizzes() {
   const [data,setdata] = useState([]);
   const [groupnames,setGroupnames] = useState([]);
   const [index,setindex] = useState(0);
+  const [quizCounts,setQuizCounts] = useState([]);
   const history = useHistory();
   
   
@@ -56,11 +57,24 @@ function Quizzes() {
       setUpcoming(data[groupnumber]["upcoming"]);
       setActiveQuiz(data[groupnumber]["active"]);
       setdata(data);
+
       
       for(let x = 0; x < data.length;x++){
         setGroupnames([...groupnames,data[x].name])
         
       }
+      let counts = [];
+      if(data.length > 0){
+        for(let h = 0; h < data.length;h++){
+          counts[h] = {
+            active:data[h]["active"].length,
+            upcoming:data[h]["upcoming"].length,
+            attempted:data[h]["attempted"].length,
+            missed:data[h]["missed"].length
+          }
+        }
+      }
+      setQuizCounts(counts);
       console.log(data);
       
       setLoading(false);
@@ -81,6 +95,7 @@ function Quizzes() {
       setMissed(data[index]["missed"]);
       setUpcoming(data[index]["upcoming"]);
       setActiveQuiz(data[index]["active"]);
+      
     }
     
   }
@@ -108,8 +123,13 @@ function Quizzes() {
 
   useEffect(() => {
     setGroupdata();
-  },[index])
+  },[index]);
 
+  // useEffect(() => {
+  //   setCounts();
+  // },[quizCounts.length]);
+
+  console.log(quizCounts);
   console.log(upcomingquiz);
   return (
     <div>
@@ -118,55 +138,67 @@ function Quizzes() {
                 <NavBar />
                 
                 <div className="content-home">
+                
                           
                   <div className="side-bar">
-                          {/* <div className="title-side">
-                            <p className="title-5">2022 JEE Main</p>
-                            <LockIcon />
-                          </div> */}
-                      {
-                        
-                        groupnames.map((group,index) => {
-                          return (
-                            <>
-                          
-                            <div className="side-bar-item-advanced-1" >
-                              {group}
+                      
+                      {  groupnames.length > 0 && (
+                            groupnames.map((group,index) => {
+                              return (
+                                <>
                               
-                            </div>
-                            <div className="tabs" onClick={() => setGroupdata(group)}>
-                                <p className="side-bar-item" onClick={() => {
-                                  setactive(true);
-                                  setupcoming(false);
-                                  setattempted(false);
-                                  setmissed(false);
-                                }}>Active</p>
-                                <p className="side-bar-item" onClick={() => {
-                                  setactive(false);
-                                  setupcoming(true);
-                                  setattempted(false);
-                                  setmissed(false);
-                                }}>Upcoming</p>
-                                <p className="side-bar-item" onClick={() => {
-                                  setactive(false);
-                                  setupcoming(false);
-                                  setattempted(true);
-                                  setmissed(false);
-                                }}>Attempted</p>
-                                <p className="side-bar-item" onClick={() => {
-                                  setactive(false);
-                                  setupcoming(false);
-                                  setattempted(false);
-                                  setmissed(true);
-                                }}>Missed</p>
-                            </div>
-                          </>
-                            
-                            
-                            
-                          )
-                        })
-                      }
+                                <div className="side-bar-item-advanced-1" >
+                                  {group}
+                                  
+                                </div>
+                                <div className="tabs" onClick={() => setGroupdata(group)}>
+                                    <div className="type-count">
+                                        <p className="side-bar-item" onClick={() => {
+                                          setactive(true);
+                                          setupcoming(false);
+                                          setattempted(false);
+                                          setmissed(false);
+                                        }}>Active  </p>
+                                        <p className="side-bar-item">{quizCounts[index].active}</p>
+                                    </div>
+                                    <div className="type-count">
+                                        <p className="side-bar-item" onClick={() => {
+                                          setactive(false);
+                                          setupcoming(true);
+                                          setattempted(false);
+                                          setmissed(false);
+                                        }}>Upcoming</p>
+                                         <p className="side-bar-item">{quizCounts[index].upcoming}</p>
+                                    </div>
+    
+                                    <div className="type-count">
+                                        <p className="side-bar-item" onClick={() => {
+                                          setactive(false);
+                                          setupcoming(false);
+                                          setattempted(true);
+                                          setmissed(false);
+                                        }}>Attempted</p>
+                                        <p className="side-bar-item">{quizCounts[index].attempted}</p>
+                                    </div>
+    
+                                    <div className="type-count">
+                                        
+                                        <p className="side-bar-item" onClick={() => {
+                                          setactive(false);
+                                          setupcoming(false);
+                                          setattempted(false);
+                                          setmissed(true);
+                                        }}>Missed</p>
+                                        <p className="side-bar-item">{quizCounts[index].missed}</p>
+                                    </div>
+                                    
+                                    
+                                    
+                                </div>
+                              </>
+                              )
+                            })
+                      )}
                       
                   </div>
                   <div className="main-bar">
