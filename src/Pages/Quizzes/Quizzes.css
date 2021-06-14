@@ -263,6 +263,13 @@
   border-width: 0px;
   font-family: "Montserrat", sans-serif;
   border-radius: 15px;
-
   margin-left: 1vw;
+}
+
+.type-count {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #d4e7f7;
+  width: 100%;
 }
