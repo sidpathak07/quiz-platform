@@ -100,7 +100,7 @@ function Quizzes() {
     fetchquizzes();
     
   }, []);
-  console.log(data[index].name);
+  // console.log(data[index].name);
   useEffect(() => {
     
     setgroups();
@@ -170,7 +170,7 @@ function Quizzes() {
                       
                   </div>
                   <div className="main-bar">
-                    {(activequiz.length > 0 && upcoming == false && attempted == false && missed == false) && (
+                    {(activequiz.length > 0 && upcoming == false && attempted == false && missed == false && data.length > 0) && (
                       <div className="active">
                       <div className="active-active">
                           <p className="active-title">{data[index].name} - Active</p>
@@ -194,10 +194,10 @@ function Quizzes() {
                                 Duration :  {quiz.duration} 
                               </p>
                               <p className="start">
-                                Start Date : {quiz.starttime.slice(0,10) + "   " + quiz.starttime.slice(11,25)}
+                                Start Date : {quiz.starttime.slice(0,10) + "     " + quiz.starttime.slice(11,16) + " GMT"}
                               </p>
                               <p className="end">
-                                End Date : {quiz.endtime.slice(0,10) + "   " + quiz.endtime.slice(11,25)}
+                                End Date : {quiz.endtime.slice(0,10) + "     " + quiz.endtime.slice(11,16)+ " GMT"}
                               </p>
                           </div>
                                 <StartTest 
@@ -218,7 +218,7 @@ function Quizzes() {
                     </div>
                     )}
         
-                    {(activequiz.length == 0 && upcoming == false && attempted == false && missed == false) && (
+                    {(activequiz.length == 0 && upcoming == false && attempted == false && missed == false && data.length > 0) && (
                              <div className="active">
                              <div className="active-active">
                                  <p className="active-title">{data[index].name} - Active</p>
@@ -231,7 +231,7 @@ function Quizzes() {
         
                    
         
-                    {(upcomingquiz.length > 0 && active == false && attempted == false && missed == false)  && (
+                    {(upcomingquiz.length > 0 && active == false && attempted == false && missed == false && data.length > 0)  && (
                       <div className="active">
                       <div className="active-active">
                           <p className="active-title">{data[index].name} - Upcoming</p>
@@ -254,10 +254,10 @@ function Quizzes() {
                                   Duration :  {quiz.duration} 
                                 </p>
                                 <p className="start">
-                                  Start Date : {quiz.starttime.slice(0,10) + "   " + quiz.starttime.slice(11,25)}
+                                  Start Date : {quiz.starttime.slice(0,10) + "     " + quiz.starttime.slice(11,16) + " GMT"}
                                 </p>
                                 <p className="end">
-                                  End Date : {quiz.endtime.slice(0,10) + "   " + quiz.endtime.slice(11,25)}
+                                  End Date : {quiz.endtime.slice(0,10) + "     " + quiz.endtime.slice(11,16)+ " GMT"}
                                 </p>
                             </div>
                             {/* <div className="view-result">
@@ -270,7 +270,7 @@ function Quizzes() {
                     </div>
                     )}
         
-                      {(upcomingquiz.length == 0 && active == false && attempted == false && missed == false) && (
+                      {(upcomingquiz.length == 0 && active == false && attempted == false && missed == false && data.length > 0) && (
                             <div className="active">
                               <div className="active-active">
                                   <p className="active-title">{data[index].name} - Upcoming</p>
@@ -285,7 +285,7 @@ function Quizzes() {
                    
         
         
-                    {(missedquiz.length > 0 && active == false && attempted == false && upcoming == false) && (
+                    {(missedquiz.length > 0 && active == false && attempted == false && upcoming == false && data.length > 0) && (
                       <div className="active">
                       <div className="active-active">
                           <p className="active-title">{data[index].name} - Missed</p>
@@ -308,10 +308,10 @@ function Quizzes() {
                                   Duration :  {quiz.duration} 
                                 </p>
                                 <p className="start">
-                                  Start Date : {quiz.starttime.slice(0,10) + "   " + quiz.starttime.slice(11,25)}
+                                  Start Date : {quiz.starttime.slice(0,10) + "     " + quiz.starttime.slice(11,16)+ " GMT"}
                                 </p>
                                 <p className="end">
-                                  End Date : {quiz.endtime.slice(0,10) + "   " + quiz.endtime.slice(11,25)}
+                                  End Date : {quiz.endtime.slice(0,10) + "     " + quiz.endtime.slice(11,16)+ " GMT"}
                                 </p>
                             </div>
                                 <StartTest 
@@ -326,7 +326,7 @@ function Quizzes() {
                     </div>
                     )}
         
-                      {(missedquiz.length == 0 && active == false && attempted == false && upcoming == false) && (
+                      {(missedquiz.length == 0 && active == false && attempted == false && upcoming == false && data.length > 0) && (
                              <div className="active">
                               <div className="active-active">
                                   <p className="active-title">{data[index].name} - Missed</p>
@@ -338,7 +338,7 @@ function Quizzes() {
                        )}
         
                     
-                    {(attemptedquiz.length > 0 && active == false && missed == false && upcoming == false) && (
+                    {(attemptedquiz.length > 0 && active == false && missed == false && upcoming == false && data) && (
                       <div className="active">
                       <div className="active-active">
                           <p className="active-title">{data[index].name} - Attempted</p>
@@ -361,10 +361,10 @@ function Quizzes() {
                                 Duration :  {quiz.duration} 
                               </p>
                               <p className="start">
-                                Start Date : {quiz.starttime.slice(0,10) + "   " + quiz.starttime.slice(11,25)}
+                                Start Date : {quiz.starttime.slice(0,10) + "     " + quiz.starttime.slice(11,16)+ " GMT"}
                               </p>
                               <p className="end">
-                                End Date : {quiz.endtime.slice(0,10) + "   " + quiz.endtime.slice(11,25)}
+                                End Date : {quiz.endtime.slice(0,10) + "     " + quiz.endtime.slice(11,16)+ " GMT"}
                               </p>
                             </div>
                             {quiz.resultid && (
@@ -380,7 +380,7 @@ function Quizzes() {
                     </div>
                     )}
         
-                      {(attemptedquiz.length == 0 && active == false && missed == false && upcoming == false) && (
+                      {(attemptedquiz.length == 0 && active == false && missed == false && upcoming == false && data.length > 0) && (
                              <div className="active">
                                 <div className="active-active">
                                     <p className="active-title">{data[index].name} - Attempted</p>
@@ -397,7 +397,7 @@ function Quizzes() {
             </div>
       )}
 
-                {loading && (
+                {loading  && (
                   <div className="quizquestion-loader">
                     <Loader />
                   </div>
