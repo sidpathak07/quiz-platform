@@ -34,6 +34,7 @@ function Quizzes() {
   const [groupnames,setGroupnames] = useState([]);
   const [index,setindex] = useState(0);
   const [quizCounts,setQuizCounts] = useState([]);
+  const [open,setopen] = useState(true);
   const history = useHistory();
   
   
@@ -86,19 +87,25 @@ function Quizzes() {
   
   const setGroupdata = (group) => {
     console.log(group);
+    
     for(let y = 0; y < data.length ; y++){
       if(data[y].name === group){
           setindex(y);
       }
       console.log(index);
+      
       setAttemptedQuiz(data[index]["attempted"]);
       setMissed(data[index]["missed"]);
       setUpcoming(data[index]["upcoming"]);
       setActiveQuiz(data[index]["active"]);
       
+      
     }
-    
   }
+  
+  // const setCounts = () => {
+    
+  // }
 
   const setgroups = () => {
     let groups = [];
@@ -110,6 +117,8 @@ function Quizzes() {
   console.log(groupnames);
 
   
+
+
 
   useEffect(() => {
     fetchquizzes();
@@ -143,15 +152,19 @@ function Quizzes() {
                   <div className="side-bar">
                       
                       {  groupnames.length > 0 && (
-                            groupnames.map((group,index) => {
+                            groupnames.map((group,idx) => {
                               return (
                                 <>
-                              
-                                <div className="side-bar-item-advanced-1" >
+                                
+                                <div className="side-bar-item-advanced-1" onClick={() => {
+                                  setopen(!open);
+                                  setopen(!open);
+                                  setGroupdata(group);
+                                }}>
                                   {group}
                                   
                                 </div>
-                                <div className="tabs" onClick={() => setGroupdata(group)}>
+                                <div className="tabs"  style={{display:(data[index].name === group && open) ? "block":"none"}}>
                                     <div className="type-count">
                                         <p className="side-bar-item" onClick={() => {
                                           setactive(true);
@@ -159,7 +172,7 @@ function Quizzes() {
                                           setattempted(false);
                                           setmissed(false);
                                         }}>Active  </p>
-                                        <p className="side-bar-item">{quizCounts[index].active}</p>
+                                        <p className="side-bar-item">{quizCounts[idx].active}</p>
                                     </div>
                                     <div className="type-count">
                                         <p className="side-bar-item" onClick={() => {
@@ -168,7 +181,7 @@ function Quizzes() {
                                           setattempted(false);
                                           setmissed(false);
                                         }}>Upcoming</p>
-                                         <p className="side-bar-item">{quizCounts[index].upcoming}</p>
+                                         <p className="side-bar-item">{quizCounts[idx].upcoming}</p>
                                     </div>
     
                                     <div className="type-count">
@@ -178,7 +191,7 @@ function Quizzes() {
                                           setattempted(true);
                                           setmissed(false);
                                         }}>Attempted</p>
-                                        <p className="side-bar-item">{quizCounts[index].attempted}</p>
+                                        <p className="side-bar-item">{quizCounts[idx].attempted}</p>
                                     </div>
     
                                     <div className="type-count">
@@ -189,7 +202,7 @@ function Quizzes() {
                                           setattempted(false);
                                           setmissed(true);
                                         }}>Missed</p>
-                                        <p className="side-bar-item">{quizCounts[index].missed}</p>
+                                        <p className="side-bar-item">{quizCounts[idx].missed}</p>
                                     </div>
                                     
                                     
