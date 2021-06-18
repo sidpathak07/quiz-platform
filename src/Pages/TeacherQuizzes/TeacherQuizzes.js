@@ -31,7 +31,7 @@ const TeacherQuizzes = () => {
       );
       setAllquizzes(data);
     } catch (err) {
-      console.log(err.message);
+      // console.log(err);
     }
   };
 
