@@ -7,13 +7,14 @@ import axios from "../../axios/axios";
 import ReactHtmlParser from "react-html-parser";
 
 const getTime = (time) => {
-  const t = time.split("T")[1].split("+")[0];
-  const d = time.split("T")[0].split("-")[2];
-  const m = time.split("T")[0].split("-")[1];
-  const y = time.split("T")[0].split("-")[0];
-  return `${d} ${
-    m < 10 ? months[m.split("")[1] - 1] : months[m - 1]
-  } ${y} ${t}`;
+  // const t = time.split("T")[1].split("+")[0];
+  // const d = time.split("T")[0].split("-")[2];
+  // const m = time.split("T")[0].split("-")[1];
+  // const y = time.split("T")[0].split("-")[0];
+  // return `${d} ${
+  //   m < 10 ? months[m.split("")[1] - 1] : months[m - 1]
+  // } ${y} ${t}`;
+  console.log(time);
 };
 
 const QuizCard = (props) => {

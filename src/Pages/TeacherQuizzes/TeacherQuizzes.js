@@ -29,6 +29,7 @@ const TeacherQuizzes = () => {
         `/api/get-all-quizzes/${userDetails.user_id}`,
         config
       );
+      console.log(data);
       setAllquizzes(data);
     } catch (err) {
       console.log(err.message);
